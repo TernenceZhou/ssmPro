@@ -11,4 +11,11 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
 		 t.t_name as name
 		FROM t_teacher t WHERE t.t_id = '1'
 	</select>
+
+	<select id="getUserList" parameterType="com.ssm.qo.UserInfoQO"  resultType="com.ssm.vo.UserInfoVO">
+		SELECT
+		t.t_id AS id ,
+		t.t_name as name
+		FROM t_teacher t
+	</select>
 </mapper>
