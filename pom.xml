@@ -17,6 +17,7 @@
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
       <poi.version>3.14</poi.version>
+      <hutool-poi.version>4.1.20</hutool-poi.version>
       <spring.version>4.3.18.RELEASE</spring.version>
       <lucene.version>5.3.1</lucene.version>
     </properties>
@@ -277,6 +278,18 @@
         <artifactId>lucene-highlighter</artifactId>
         <version>${lucene.version}</version>
       </dependency>
+      <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+      <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi</artifactId>
+        <version>${poi.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool-poi.version}</version>
+      </dependency>
+
     </dependencies>
     <!-- Build Settings -->
     <!--http://maven.apache.org/pom.html#Build_Settings -->
