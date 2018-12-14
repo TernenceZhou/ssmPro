@@ -6,6 +6,8 @@ package com.ssm.hutool.excel.test;
 import java.util.*;
 
 import cn.hutool.poi.excel.style.StyleUtil;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.IndexedColors;
@@ -36,13 +38,18 @@ public class ExcelWriteTest {
 		List<?> row5 = CollUtil.newArrayList("aa4", "bb4", "cc4", "dd4", DateUtil.date(), 28.00);
 
 		List<List<?>> rows = CollUtil.newArrayList(row1, row2, row3, row4, row5);
-		for(int i=0; i < 4000; i++) {
+		for(int i=0; i < 100; i++) {
 			//超大列表写出测试
 			rows.add(ObjectUtil.clone(row1));
 		}
 
 		// 通过工具类创建writer
-		ExcelWriter writer = ExcelUtil.getWriter("d:/writeTest.xlsx");
+		ExcelWriter writer = ExcelUtil.getWriter("d:/writeTest4.xlsx");
+		CellStyle style = writer.getStyleSet().getHeadCellStyle();//标题背景色
+		CellStyle cellStyle = writer.getStyleSet().getCellStyle();//内容背景色
+
+		StyleUtil.setColor(style, IndexedColors.RED, FillPatternType.SOLID_FOREGROUND);
+		StyleUtil.setColor(cellStyle,IndexedColors.DARK_GREEN,FillPatternType.SOLID_FOREGROUND);
 		// 通过构造方法创建writer
 		// ExcelWriter writer = new ExcelWriter("d:/writeTest.xls");
 

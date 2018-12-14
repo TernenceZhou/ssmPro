@@ -16,10 +16,11 @@
     <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
-      <poi.version>3.14</poi.version>
+      <poi.version>3.17</poi.version>
       <hutool-poi.version>4.1.20</hutool-poi.version>
       <spring.version>4.3.18.RELEASE</spring.version>
       <lucene.version>5.3.1</lucene.version>
+      <xerces.version>2.9.1</xerces.version>
     </properties>
 
     <dependencies>
@@ -279,10 +280,20 @@
         <version>${lucene.version}</version>
       </dependency>
       <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
-      <dependency>
+      <!--<dependency>
         <groupId>org.apache.poi</groupId>
         <artifactId>poi</artifactId>
         <version>${poi.version}</version>
+      </dependency>-->
+      <dependency>
+        <groupId>org.apache.poi</groupId>
+        <artifactId>poi-ooxml</artifactId>
+        <version>${poi.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>xerces</groupId>
+        <artifactId>xercesImpl</artifactId>
+        <version>${xerces.version}</version>
       </dependency>
       <dependency>
         <groupId>cn.hutool</groupId>
@@ -308,8 +319,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>2.3.2</version>
           <configuration>
-            <source>1.7</source>
-            <target>1.7</target>
+            <source>1.8</source>
+            <target>1.8</target>
           </configuration>
         </plugin>
         <plugin>
@@ -317,6 +328,14 @@
           <artifactId>maven-war-plugin</artifactId>
           <version>2.6</version>
         </plugin>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>1.8</source>
+                  <target>1.8</target>
+              </configuration>
+          </plugin>
       </plugins>
     </build>
 

@@ -1,5 +1,7 @@
 package com.ssm.test;
 
+import org.junit.Test;
+
 import java.util.*;
 
 public class TestCollections {
@@ -30,5 +32,21 @@ public class TestCollections {
             list.add(map);
         }
         return list;
+    }
+
+    @Test
+    public void HashSet(){
+        HashSet<String> a = new HashSet<String>();
+        a.add(null);
+        a.add(null);
+        Integer i = new Integer(100);
+        Integer ii = 100;
+        String s  = "str";
+        System.out.println( i == ii);
+        System.out.println(s.hashCode()+"   "+i.hashCode()+"  "+ii.hashCode()+"  ");
+        System.out.println(a.size());
+        if(a.contains(null)){
+            System.out.println("true");
+        }
     }
 }
