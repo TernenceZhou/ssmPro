@@ -1,10 +1,9 @@
 package com.ssm.test.paixu;
 
-import org.springframework.beans.BeanUtils;
-
 /**
  * 插入排序
  */
+@SuppressWarnings("METHOD")
 public class InsertionSort {
 
 
@@ -16,6 +15,7 @@ public class InsertionSort {
             System.out.println(ints[i]);
 
         }
+
     }
 
 
@@ -44,6 +44,7 @@ public class InsertionSort {
             System.out.println(arr[i]+"     ");
         }
     }
+
     //lianxi 测试
     public static int[] sort(int arr[],int n){
         for (int i = 1; i < n; i++) {

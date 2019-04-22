@@ -1,7 +1,5 @@
 package com.ssm.test.paixu;
 
-import org.junit.Test;
-
 /**
  * 冒泡排序
  */
@@ -33,6 +31,23 @@ public class BubbleSort {
 
         for (int i = 0; i < arr.length; i++) {
             System.out.println(arr[i]);
+        }
+    }
+
+    public static void sort2(int arr[]){
+        int  len = arr.length;
+        int tmp = 0;
+        for (int i = 0; i < len; i++) {
+            boolean flg  = false;
+            for (int j = 0; j < len - i -1; j++) {
+                if(arr[j] >arr[j+1]){//后一个大于前者
+                    tmp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = tmp;
+                    flg = true;
+                }
+            }
+            if(!flg){break;}
         }
     }
 }

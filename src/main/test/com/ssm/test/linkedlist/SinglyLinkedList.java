@@ -1,4 +1,4 @@
-package com.ssm.test.Linkedlist;
+package com.ssm.test.linkedlist;
 
 import com.sun.tools.javac.util.List;
 
