@@ -5,17 +5,30 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * 二叉树的遍历 先 中 后
+ * 二叉树的遍历 先 中 后序遍历
  */
 public class BinarySearchTree {
 
     public static void main(String[] args) {
 //        List<Integer> integers = preorderTraversalTree(new Node(5));
         List<Integer> integers = postorderTraversal(new Node(5));
-        preTraverseBTree(new Node(5));
-        for (Integer integer : integers) {
+        Node n = new Node(100);
+        n.right = new Node(120);
+        n.left = new Node(5);
+//        n.left.left = new Node(3);
+//        n.left.right = new Node(8);
+
+//        List<Integer> list = preorderTraversalTree(n);
+        List<Integer> list = inorderTraversal(n);
+
+
+        for (Integer integer : list) {
             System.out.println(integer);
         }
+       /* preTraverseBTree(new Node(5));
+        for (Integer integer : integers) {
+            System.out.println(integer);
+        }*/
     }
 
     /**
@@ -60,6 +73,24 @@ public class BinarySearchTree {
         return list;
     }
 
+
+
+    public static List<Integer> preSort(Node root){
+        List<Integer> result = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+        Node cur =  root;
+        while (cur != null || !stack.isEmpty()){
+            if(cur == null){
+                cur = stack.pop();
+            }else if(cur.right != null){
+                stack.push(cur.right);
+            }
+            result.add(cur.data);
+            cur = cur.left;
+        }
+        return result;
+    }
+
     // ---------------------------------------中序遍历
     /**
      * 递归版本的中序遍历
@@ -83,7 +114,7 @@ public class BinarySearchTree {
      * @param root
      * @return
      */
-    public List<Integer> inorderTraversal(Node root) {
+    public static List<Integer> inorderTraversal(Node root) {
         List<Integer> list = new ArrayList<>();
         Stack<Node> s = new Stack<>();
         Node curr = root;
