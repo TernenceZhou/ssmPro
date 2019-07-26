@@ -2,10 +2,14 @@ package com.ssm.test;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public final class TestBase {
     String a = "";
@@ -66,6 +70,42 @@ public final class TestBase {
     public void t1(){
         String a = "";
         String intern = a.intern();
+    }
+
+    @Test
+    public void bigDecimal(){
+        //传递double数值会发生精度丢失问题，建议double->字符串后传递
+        //BigDecimal decimal = new BigDecimal(0.1);
+        BigDecimal valueOf = BigDecimal.valueOf(0.1);
+        BigDecimal decimal = new BigDecimal(String.valueOf(0.1));
+        System.out.println(decimal);
+        BigDecimal decimal12 = new BigDecimal("0.1");
+        System.out.println(decimal12);
+
+    }
+
+    @Test
+    public void lock(){
+        Lock lock = new ReentrantLock();
+       // Condition condition = lock.newCondition();
+        boolean tryLock = lock.tryLock();
+        if(tryLock){
+            try {
+                //do something
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
+                lock.unlock();
+            }
+        }
+
+        /*try {
+            //lock.tryLock();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            lock.unlock();
+        }*/
     }
 
 

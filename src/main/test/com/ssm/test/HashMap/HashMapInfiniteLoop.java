@@ -6,6 +6,7 @@ import java.util.HashMap;
  * 多线程死循环问题
  */
 public class HashMapInfiniteLoop {
+    //private static HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(2,0.75f);
     private static HashMap<Integer, Integer> map = new HashMap<Integer, Integer>(2,0.75f);
 
     public static void main(String[] args) {
