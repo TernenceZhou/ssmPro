@@ -2,11 +2,17 @@ package com.ssm.test;
 
 import org.junit.Test;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -108,5 +114,51 @@ public final class TestBase {
         }*/
     }
 
+
+    /**
+     * 换行（‘\n’）的另类写法System.getProperty("line.separator")
+     */
+    @Test
+    public void testlineSeparator(){
+        StringBuffer buffer  =new StringBuffer();
+        buffer.append("123");
+        buffer.append(System.getProperty("line.separator"));
+        buffer.append("123");
+        buffer.append(System.getProperty("line.separator"));
+        buffer.append("123");
+        buffer.append(("\n"));
+        buffer.append("123");
+        System.out.println(buffer.toString());
+    }
+
+    /**
+     * 读取项目文件内容
+     * @throws IOException
+     */
+    @Test
+    public void load() throws IOException {
+        String classpath = "";
+        InputStream is = null;
+        InputStreamReader isr = null;
+
+        //is = TestBase.class.getClassLoader().getResourceAsStream("  RULE_CODE_CANGO_LOANEDT.ini");
+        is = new FileInputStream("D:\\java\\intellij_workSpace_2018_2.7\\ssmPro\\src\\main\\test\\com\\ssm\\test\\RULE_CODE_CANGO_LOANEDT.ini");
+
+        System.out.println(is);
+        isr = new InputStreamReader(is,"UTF-8");
+
+        BufferedReader br  = new BufferedReader(isr);
+        String line = null;
+        StringBuffer sb = new StringBuffer();
+
+        while ((line = br.readLine()) != null) {
+            line = line.trim();
+            sb.append(line);
+            sb.append(System.getProperty("line.separator"));
+
+        }
+        System.out.println(sb.toString());
+
+    }
 
 }

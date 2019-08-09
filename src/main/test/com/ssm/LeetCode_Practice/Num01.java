@@ -9,9 +9,13 @@ import java.util.Map;
  * @author
  * @description
  * 给定一个数组和一个目标和，从数组中找两个数字相加等于目标和，输出这两个数字的下标。
+ * 给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。
+ * 你可以假设每种输入只会对应一个答案。但是，你不能重复利用这个数组中同样的元素。
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/two-sum
  * @date 2019/7/25
  */
-public class Num_01 {
+public class Num01 {
 
     @Test
     public void test(){
@@ -57,7 +61,7 @@ public class Num_01 {
         for (int i = 0; i < arr.length; i++) {
             map.put(arr[i],i);
             int sub = target - arr[i];
-            if(map.containsKey(sub) && map.get(sub) != i ){
+            if(map.containsKey(sub) && map.get(sub) != i ){//!=i 元素只能用一次
                 return new int[]{i,map.get(sub)};
             }
         }
