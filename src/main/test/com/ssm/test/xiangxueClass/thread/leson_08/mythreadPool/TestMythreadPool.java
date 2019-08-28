@@ -1,4 +1,4 @@
-package com.ssm.test.xiangxueClass.thread.leson_08;
+package com.ssm.test.xiangxueClass.thread.leson_08.mythreadPool;
 
 import java.util.Random;
 

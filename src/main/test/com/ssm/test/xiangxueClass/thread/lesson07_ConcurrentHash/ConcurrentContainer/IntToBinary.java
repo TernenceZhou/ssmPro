@@ -1,4 +1,4 @@
-package com.ssm.test.xiangxueClass.thread.ConcurrentContainer;
+package com.ssm.test.xiangxueClass.thread.lesson07_ConcurrentHash.ConcurrentContainer;
 
 import org.junit.Test;
 
