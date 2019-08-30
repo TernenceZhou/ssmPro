@@ -6,7 +6,7 @@ import java.util.concurrent.BlockingQueue;
 
 /**
  *
- * 实现线程池
+ * 自己实现线程池
  */
 public class MythreadPool {
 
@@ -70,7 +70,7 @@ public class MythreadPool {
     private class WorkThread extends Thread{
         @Override
         public void run() {
-            Runnable r =null;
+            Runnable r = null;
             try {
                 while (!isInterrupted()){
                     r = taskQueue.take();

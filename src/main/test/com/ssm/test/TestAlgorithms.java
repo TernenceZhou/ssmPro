@@ -52,6 +52,10 @@ public class TestAlgorithms {
 
 
     }
+
+    /**
+     * 数组转换asList
+     */
     @Test
     public void test(){
         String s[]={"aa","bb","cc"};
@@ -84,9 +88,9 @@ public class TestAlgorithms {
         }
 
         System.out.println("- - - - - - - - - - -");
-
-//        objList.remove(0);//asList()返回的是arrays中私有的终极ArrayList类型，它有set,get，contains方法，但没有增加和删除元素的方法，所以大小固定,会报错
-//        objList.add(0);//由于asList返回的list的实现类中无add方法，所以会报错
+          /**坑点。**/
+        objList.remove(0);//asList()返回的是arrays中私有的终极ArrayList类型，它有set,get，contains方法，但没有增加和删除元素的方法，所以大小固定,会报错
+        objList.add(0);//由于asList返回的list的实现类中无add方法，所以会报错
     }
 /*
     public static void main(String[] args) throws Exception{

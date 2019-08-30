@@ -1,8 +1,12 @@
-package com.ssm.test.xiangxueClass.thread.lesson07_ConcurrentHash.ConcurrentContainer;
+package com.ssm.test.xiangxueClass.thread.lesson07_ConcurrentHash.ConcurrentContainer.delayQueue;
 
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 延时订单
+ * @param <T>
+ */
 public class ItemVo<T> implements Delayed {
 
     private long activeTime;
