@@ -64,7 +64,7 @@ public class MythreadPool {
     // 覆盖toString方法，返回线程池信息：工作线程个数和已完成任务个数
     @Override
     public String toString() {
-        return "WorkThread number:" + worker_num
+        return "WorkTask number:" + worker_num
                 + "  wait task number:" + taskQueue.size();
     }
     private class WorkThread extends Thread{
