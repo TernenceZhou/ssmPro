@@ -3,6 +3,13 @@ package com.ssm.test.xiangxueClass.thread.lesson_09.safeClass;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *   不可变的类 类和变量设置为final,类中不提供set方法、
+ *   返回结果使用深拷贝，或者返回副本，比如String返回对应的对象copy，不是对象的直接引用
+ *  优点：安全、效率
+ *  不可变类天生线程安全，所以不用使用 synchronized关键字修饰
+ *
+ */
 public class ImmutetableList {
 
     //要么使用线程安全的list

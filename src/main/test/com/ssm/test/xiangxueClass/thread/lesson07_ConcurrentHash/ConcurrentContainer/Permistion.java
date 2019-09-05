@@ -1,5 +1,7 @@
 package com.ssm.test.xiangxueClass.thread.lesson07_ConcurrentHash.ConcurrentContainer;
 
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * 用位运算表示一个类含有的权限
  */

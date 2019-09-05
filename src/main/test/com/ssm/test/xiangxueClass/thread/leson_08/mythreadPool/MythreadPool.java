@@ -89,7 +89,20 @@ public class MythreadPool {
         }
     }
 
+    public static void main(String[] args) {
+        System.out.println(t());;
+    }
+    public static boolean t(){
+        try{
+            System.out.println("try ");
+            return true;
+        }catch (Exception e){
 
+        }finally {
+            System.out.println("finally");
+            return false;
+        }
+    }
 
 
 
