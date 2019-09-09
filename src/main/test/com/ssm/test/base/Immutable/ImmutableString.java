@@ -26,6 +26,7 @@ public class ImmutableString {
         String s = ImmutableString.appendStr(a);
         System.out.println(a);
 
+        //StringBuilder 可变的类
         StringBuilder builder = new StringBuilder("aaa");
         StringBuilder appendBuilder = ImmutableString.appendBuilder(builder);
         System.out.println(builder.toString()); //结果是aaabbb 可以的类 发生了改变。会导致线程不安全
@@ -48,7 +49,6 @@ public class ImmutableString {
         StringBuilder sb3 = sb1;
         sb3.append("bbb");//这时候HashSet里是{"aaabbb","aaabbb"}
         System.out.println(hs);
-
 
 
         HashSet<String> hstr = new HashSet<String>();

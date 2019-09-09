@@ -1,5 +1,6 @@
 package com.ssm.test;
 
+import com.ssm.model.UserInfo;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -12,8 +13,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Properties;
-import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -159,6 +158,14 @@ public final class TestBase {
         }
         System.out.println(sb.toString());
 
+    }
+
+    @Test
+    public void objectCompare(){
+        UserInfo us = new UserInfo();
+        UserInfo us2 = new UserInfo();
+        System.out.println(us.equals(us2));
+        System.out.println(us == us2);
     }
 
 }
