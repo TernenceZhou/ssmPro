@@ -19,7 +19,8 @@ public class Dead_Lock {
                 Thread.sleep(1000);
             }catch (InterruptedException e){
                 e.printStackTrace();
-            }            synchronized (secondLock){
+            }
+            synchronized (secondLock){
                 System.out.println(threadName+" get second");
             }
         }

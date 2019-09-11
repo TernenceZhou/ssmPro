@@ -1,8 +1,5 @@
 package com.ssm.jikeLive.即可时间并发编程.lesson05;
 
-import com.ssm.jikeLive.即可时间并发编程.StaticSingle;
-import com.ssm.jikeLive.即可时间并发编程.lesson04.Accout;
-
 import java.util.ArrayList;
 import java.util.List;
 
