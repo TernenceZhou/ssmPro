@@ -16,7 +16,7 @@ public class CheckJobProcesser {
     private DelayQueue<ItemVo<String>> delayQueue = new DelayQueue<>();
 
     //放入队列，指定时间之后清除队列
-    public void pubJob(String jobName,long expireTime) {
+    public void putJob(String jobName,long expireTime) {
         ItemVo<String> itemVo = new ItemVo(expireTime,jobName);
         delayQueue.offer(itemVo);
         System.out.println("Job["+jobName+"已经放入了过期检查缓存，过期时长："+expireTime);

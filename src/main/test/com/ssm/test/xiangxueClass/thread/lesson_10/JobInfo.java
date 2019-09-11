@@ -86,7 +86,7 @@ public class JobInfo<R> {
         taskQueue.addLast(taskResult);
         //任务完成，需要移除队列
         if(processCount.get() == jobLength){
-            checkJobProcesser.pubJob(jobName,expireTime);
+            checkJobProcesser.putJob(jobName,expireTime);
         }
     }
 
