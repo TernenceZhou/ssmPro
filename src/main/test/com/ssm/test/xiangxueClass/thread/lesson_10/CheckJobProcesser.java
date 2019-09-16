@@ -1,6 +1,7 @@
 package com.ssm.test.xiangxueClass.thread.lesson_10;
 
 import com.ssm.test.xiangxueClass.thread.lesson07_ConcurrentHash.ConcurrentContainer.delayQueue.ItemVo;
+import com.sun.tools.javac.comp.Check;
 
 import java.util.concurrent.DelayQueue;
 
@@ -12,8 +13,37 @@ import java.util.concurrent.DelayQueue;
  */
 public class CheckJobProcesser {
 
+    private static DelayQueue<ItemVo<String>> delayQueue = new DelayQueue<>();
 
-    private DelayQueue<ItemVo<String>> delayQueue = new DelayQueue<>();
+    // ---------------单例模式
+    private CheckJobProcesser(){}
+
+    private static class ProcesserHolder{
+        public static CheckJobProcesser checkJobProcesser =
+                new CheckJobProcesser();
+    }
+
+    public static CheckJobProcesser getInstance(){
+        return ProcesserHolder.checkJobProcesser;
+    }
+    // ---------------
+
+    //处理队列中到期任务的实行
+    public static class FetchJob implements Runnable{
+        @Override
+        public void run() {
+            while (true){
+                try {
+                    //拿到过期数据
+                    ItemVo<String> item = delayQueue.take();
+                    String jobName =  item.getDate();
+                    PendingJobPool.getMap().remove(jobName);
+                }catch (Exception e){
+
+                }
+            }
+        }
+    }
 
     //放入队列，指定时间之后清除队列
     public void putJob(String jobName,long expireTime) {
