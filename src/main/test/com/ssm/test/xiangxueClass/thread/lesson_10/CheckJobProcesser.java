@@ -52,4 +52,11 @@ public class CheckJobProcesser {
         System.out.println("Job["+jobName+"已经放入了过期检查缓存，过期时长："+expireTime);
     }
 
+    //初始化
+    static {
+        Thread thread = new Thread(new FetchJob());
+        thread.setDaemon(true);
+        thread.start();
+        System.out.println("开启任务过期检查守护线程............");
+    }
 }

@@ -7,7 +7,7 @@ package com.ssm.test.xiangxueClass.thread.lesson_10;
  * 由于任务接口只有在调用时才知道，所以类使用泛型修饰
  * @date 2019/9/11
  */
-public interface ITaskProcess<R,T> {
+public interface ITaskProcess<T,R> {
 
     /**
      * 方法需要使用的业务数据
