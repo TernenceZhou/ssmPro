@@ -33,16 +33,21 @@ public class VectorConcurrentFragment {
     public static void main(String[] args) throws InterruptedException {
         Vector vector = new Vector();
         Object object = new Object();
-        Thread t1 = new Thread(() -> {
-            vect(vector, object);
-        });
-        Thread t2 = new Thread(() -> {
-            vect(vector, object);
-        });
-        t1.start();
-        t2.start();
-        t1.join();
-        t2.join();
+        for (int i = 0; i < 10; i++) {
+            Thread t1 = new Thread(() -> {
+                vect(vector, object);
+            });
+            object.wait(100);
+            Thread t2 = new Thread(() -> {
+                vect(vector, object);
+            });
+            object.notifyAll();
+
+            t1.start();
+            t2.start();
+        }
+//        t1.join();
+//        t2.join();
         int size = vector.size();
         System.out.println(size);
     }
