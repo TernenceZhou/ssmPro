@@ -1,9 +1,9 @@
 package com.ssm.xiangxueClass.thread.lesson_11;
 
-import com.xiangxue.ch8b.assist.CreatePendingDocs;
-import com.xiangxue.ch8b.assist.SL_QuestionBank;
-import com.xiangxue.ch8b.service.ProduceDocService;
-import com.xiangxue.ch8b.vo.SrcDocVo;
+import com.ssm.xiangxueClass.thread.lesson_11.assist.CreatePendingDocs;
+import com.ssm.xiangxueClass.thread.lesson_11.assist.SL_QuestionBank;
+import com.ssm.xiangxueClass.thread.lesson_11.service.ProduceDocService;
+import com.ssm.xiangxueClass.thread.lesson_11.vo.SrcDocVo;
 
 import java.util.List;
 
