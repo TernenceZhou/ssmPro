@@ -34,4 +34,8 @@ public class ItemVo<T> implements Delayed {
         long d = getDelay(TimeUnit.NANOSECONDS) - o.getDelay(TimeUnit.NANOSECONDS);
         return (d == 0) ? 0: ((d > 0) ? 1 : -1);
     }
+
+    public T getDate() {
+        return date;
+    }
 }
