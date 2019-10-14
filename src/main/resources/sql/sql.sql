@@ -1,3 +1,6 @@
+DROP DATABASE  IF EXISTS test;
+CREATE DATABASE test;
+
 -- 创建图书表
 CREATE TABLE `book` (
   `book_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '图书ID',
