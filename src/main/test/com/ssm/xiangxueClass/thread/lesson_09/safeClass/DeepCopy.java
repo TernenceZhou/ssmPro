@@ -72,6 +72,9 @@ public class DeepCopy  {
         }
     }
 
+    /**
+     * clone方式实现深拷贝
+     */
     private static class User2 implements Cloneable{
         private String name;
         private UserChild2 child;
