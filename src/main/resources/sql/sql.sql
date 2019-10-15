@@ -1,3 +1,6 @@
+DROP DATABASE  IF EXISTS test;
+CREATE DATABASE test;
+
 -- 创建图书表
 CREATE TABLE `book` (
   `book_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '图书ID',
@@ -22,3 +25,11 @@ CREATE TABLE `appointment` (
   PRIMARY KEY (`book_id`, `student_id`),
   INDEX `idx_appoint_time` (`appoint_time`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='预约图书表';
+
+CREATE TABLE  t_teacher(
+	ID int(10) not null  AUTO_INCREMENT,
+  t_id int(10) DEFAULT NULL COMMENT '教师id',
+  t_name VARCHAR(20) DEFAULT NULL COMMENT '教师名称',
+	PRIMARY KEY (ID),
+	KEY INDEX_TID(t_id) USING BTREE
+)ENGINE= INNODB DEFAULT CHARSET = utf8 COMMENT = '教师表';
