@@ -12,6 +12,10 @@ public class ItemVo<T> implements Delayed {
     private long activeTime;
     private T date;
 
+    public T getDate() {
+        return date;
+    }
+
     public ItemVo(long activeTime, T date) {
         this.activeTime = TimeUnit.MILLISECONDS.convert(activeTime,TimeUnit.MILLISECONDS)
         +System.nanoTime();
@@ -33,9 +37,5 @@ public class ItemVo<T> implements Delayed {
     public int compareTo(Delayed o) {
         long d = getDelay(TimeUnit.NANOSECONDS) - o.getDelay(TimeUnit.NANOSECONDS);
         return (d == 0) ? 0: ((d > 0) ? 1 : -1);
-    }
-
-    public T getDate() {
-        return date;
     }
 }

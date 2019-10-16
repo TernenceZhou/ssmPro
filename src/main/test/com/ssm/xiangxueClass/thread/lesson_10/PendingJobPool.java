@@ -2,6 +2,7 @@ package com.ssm.xiangxueClass.thread.lesson_10;
 
 import org.apache.poi.ss.formula.functions.T;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
 
@@ -13,16 +14,16 @@ public class PendingJobPool {
     //保守估计 定义线程数量 这儿我们定位CPU核心数
     private static final int THREAD_COUNTS = Runtime.getRuntime().availableProcessors();
     //存放任务的队列
-    private static BlockingQueue<Runnable> blockingQueue = new ArrayBlockingQueue<>(500);
+    private static BlockingQueue<Runnable> taskQueue = new ArrayBlockingQueue<>(5000);
 
     //线程池
-    private static ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(
+    private static ExecutorService poolExecutor = new ThreadPoolExecutor(
             THREAD_COUNTS,
             THREAD_COUNTS,
             60,
              TimeUnit.SECONDS,
-            blockingQueue);
-    private static ConcurrentHashMap<String,JobInfo<?>> jobInfoMap
+            taskQueue);
+    private static ConcurrentHashMap<String, JobInfo<?>> jobInfoMap
             = new ConcurrentHashMap();
 
     //获得CheckJobProcesser实例
@@ -50,6 +51,7 @@ public class PendingJobPool {
         private T processData;
 
         public PendingTask(JobInfo<R> jobInfo, T processData) {
+            super();
             this.jobInfo = jobInfo;
             this.processData = processData;
         }
@@ -57,7 +59,7 @@ public class PendingJobPool {
         @Override
         public void run() {
             R r = null;
-            ITaskProcess<T, R>  process = (ITaskProcess<T, R>) jobInfo.getTaskProcess();
+            ITaskProcess<T, R> process = (ITaskProcess<T, R>) jobInfo.getTaskProcess();
             TaskResult<R> result = null;
             try{
                //调用业务人员实现的具体方法
@@ -100,15 +102,15 @@ public class PendingJobPool {
         return jobInfo;
     }
 
-    public void putTask(String jobName,T t){
-        JobInfo<Object> jobInfo = getJob(jobName);
-        PendingTask task = new PendingTask(jobInfo,t);
+    public <T,R> void putTask(String jobName,T t){
+        JobInfo<R> jobInfo = getJob(jobName);
+        PendingTask<T,R> task = new PendingTask<T,R>(jobInfo,t);
         poolExecutor.execute(task);
     }
 
     //调用者注册工作，如工作名 任务的处理器等
     public <R> void registerJob(String jobName, int jobLength,
-                          ITaskProcess<R,T> taskProcess, long expireTime){
+                          ITaskProcess<?,?> taskProcess, long expireTime){
 
         JobInfo jobInfo = new JobInfo(jobName,jobLength,taskProcess,expireTime);
         if(jobInfoMap.putIfAbsent(jobName,jobInfo) != null){//已经存在
@@ -116,4 +118,27 @@ public class PendingJobPool {
         }
 
     }
+
+    /**
+     * 获得每个任务的详情
+     * @param jobName
+     * @param <R>
+     * @return
+     */
+    public <R> List<TaskResult<R>> getDetail(String jobName){
+        JobInfo<R> jobInfo =  getJob(jobName);
+        return jobInfo.getTaskDetail();
+    }
+
+    /**
+     * 获得工作的整体处理进度
+     * @param jobName
+     * @param <R>
+     * @return
+     */
+    public <R> String getProcess(String jobName){
+        JobInfo<R> jobInfo =  getJob(jobName);
+        return jobInfo.getTotalProcess();
+    }
+
 }
