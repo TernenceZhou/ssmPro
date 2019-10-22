@@ -4,10 +4,10 @@ import com.ssm.xiangxueClass.spring.class01.cap1.Person;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//ÅäÖÃÀà====ÅäÖÃÎÄ¼ş
+//é…ç½®ç±»====é…ç½®æ–‡ä»¶
 @Configuration
 public class MainConfig {
-	//¸øÈİÆ÷ÖĞ×¢²áÒ»¸öbean, ÀàĞÍÎª·µ»ØÖµµÄÀàĞÍ, 
+	//ç»™å®¹å™¨ä¸­æ³¨å†Œä¸€ä¸ªbean, ç±»å‹ä¸ºè¿”å›å€¼çš„ç±»å‹,
 	@Bean("abcPerson")
 	public Person person01(){
 		return new Person("james",20);
