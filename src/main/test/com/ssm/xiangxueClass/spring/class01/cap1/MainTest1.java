@@ -1,5 +1,6 @@
 package com.ssm.xiangxueClass.spring.class01.cap1;
 
+import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
