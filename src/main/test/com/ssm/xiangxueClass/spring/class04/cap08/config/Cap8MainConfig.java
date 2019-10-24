@@ -1,10 +1,8 @@
-package com.ssm.xiangxueClass.spring.class04.config;
+package com.ssm.xiangxueClass.spring.class04.cap08.config;
 
-import com.ssm.xiangxueClass.spring.class04.bean.Bird;
+import com.ssm.xiangxueClass.spring.class04.cap08.bean.Bird;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.test.context.ContextConfiguration;
 
 
 /**

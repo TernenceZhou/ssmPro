@@ -1,7 +1,6 @@
-package com.ssm.xiangxueClass.spring.class04.bean;
+package com.ssm.xiangxueClass.spring.class04.cap08.bean;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 
 public class Bird {
 	//使用@Value进行赋值:1,基本字符  2,springEL表达式, 3,可以读取 我们的配置文件
