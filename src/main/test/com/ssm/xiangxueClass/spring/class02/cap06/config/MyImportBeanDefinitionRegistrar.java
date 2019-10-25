@@ -17,8 +17,8 @@ public class MyImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegi
     @Override
     public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
 
-        boolean catBean = beanDefinitionRegistry.containsBeanDefinition("com.ssm.xiangxueClass.spring.class02.cap06.bean.Cat");
-        boolean dogBean = beanDefinitionRegistry.containsBeanDefinition("com.ssm.xiangxueClass.spring.class02.cap06.bean.Dog");
+        boolean catBean = beanDefinitionRegistry.containsBeanDefinition("com.ssm.xiangxueClass.spring.class02.cap06.aop.Cat");
+        boolean dogBean = beanDefinitionRegistry.containsBeanDefinition("com.ssm.xiangxueClass.spring.class02.cap06.aop.Dog");
         if( catBean && dogBean){
             RootBeanDefinition beanDefinition = new RootBeanDefinition(Pig.class);
             //注册对象到IOc容器
