@@ -15,7 +15,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @date 2019/10/24
  */
 @Configuration
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy //注解方式开启aop的注解类
 //@ComponentScan(value = {"com.ssm.xiangxueClass.spring.class05.aop"})
 public class Cap10MainAopConfig {
 

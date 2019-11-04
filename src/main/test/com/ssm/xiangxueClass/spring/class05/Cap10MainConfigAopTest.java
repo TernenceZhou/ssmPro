@@ -1,8 +1,5 @@
 package com.ssm.xiangxueClass.spring.class05;
 
-import com.ssm.xiangxueClass.spring.class04.cap09.config.Cap9MainConfig;
-import com.ssm.xiangxueClass.spring.class04.cap09.dao.TestDao;
-import com.ssm.xiangxueClass.spring.class04.cap09.service.TestService;
 import com.ssm.xiangxueClass.spring.class05.aop.Calculator;
 import com.ssm.xiangxueClass.spring.class05.config.Cap10MainAopConfig;
 import org.junit.Test;
@@ -20,6 +17,11 @@ public class Cap10MainConfigAopTest {
         AnnotationConfigApplicationContext anno = new AnnotationConfigApplicationContext(Cap10MainAopConfig.class);
         Calculator calculator = anno.getBean(Calculator.class);
         System.out.println(calculator.div(2,1));
+
+        String[] definitionNames = anno.getBeanDefinitionNames();
+        for (String definitionName : definitionNames) {
+            System.out.println(definitionName);
+        }
     }
 
 

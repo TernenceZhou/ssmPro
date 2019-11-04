@@ -1,8 +1,10 @@
 package com.ssm.xiangxueClass.spring.class01.cap3.config;
 
 import com.ssm.xiangxueClass.spring.class01.cap1.Person;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 @Configuration
 public class Cap3MainConfig {
@@ -14,6 +16,7 @@ public class Cap3MainConfig {
 	 * session:同一个session创建一个实例
 	 */
 	//@Scope("prototype")
+	//@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 	@Bean
 	public Person person(){
 		return new Person("james",20);
