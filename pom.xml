@@ -306,6 +306,14 @@
         <artifactId>lombok</artifactId>
         <version>1.16.16</version><!--版本号自己选一个就行-->
       </dependency>
+      <!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+      <!--用于测试享学class08事务所加-->
+      <dependency>
+        <groupId>com.mchange</groupId>
+        <artifactId>c3p0</artifactId>
+        <version>0.9.5.2</version>
+      </dependency>
+
     </dependencies>
     <!-- Build Settings -->
     <!--http://maven.apache.org/pom.html#Build_Settings -->

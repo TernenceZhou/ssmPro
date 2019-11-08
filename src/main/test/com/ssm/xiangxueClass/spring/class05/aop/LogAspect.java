@@ -1,6 +1,5 @@
 package com.ssm.xiangxueClass.spring.class05.aop;
 
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;
@@ -11,7 +10,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /**
