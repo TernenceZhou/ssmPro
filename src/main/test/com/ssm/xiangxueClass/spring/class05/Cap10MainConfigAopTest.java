@@ -16,6 +16,7 @@ public class Cap10MainConfigAopTest {
     public void test(){
         AnnotationConfigApplicationContext anno = new AnnotationConfigApplicationContext(Cap10MainAopConfig.class);
         Calculator calculator = anno.getBean(Calculator.class);
+        calculator.div(2,1);
         System.out.println(calculator.div(2,1));
 
         String[] definitionNames = anno.getBeanDefinitionNames();

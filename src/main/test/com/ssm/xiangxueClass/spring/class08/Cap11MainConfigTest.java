@@ -1,6 +1,5 @@
 package com.ssm.xiangxueClass.spring.class08;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.ssm.xiangxueClass.spring.class08.service.OrderService;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

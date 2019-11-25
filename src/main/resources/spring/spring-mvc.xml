@@ -14,14 +14,14 @@
     <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
     <context:component-scan base-package="com.ssm.controller"/>
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
-    <!--<bean id="mappingJacksonHttpMessageConverter"
+    <!--<aop id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
         <property name="supportedMediaTypes">
             <list>
                 <value>text/html;charset=UTF-8</value>
             </list>
         </property>
-    </bean>-->
+    </aop>-->
     <!-- 激活组件扫描功能,扫描aop的相关组件组件 -->
     <!--<context:component-scan base-package="com.ssmop"/>-->
     <!-- 启动对@AspectJ注解的支持 -->
@@ -47,7 +47,7 @@
     </bean>
 
     <!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
-   <!-- <bean id="multipartResolver"
+   <!-- <aop id="multipartResolver"
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         &lt;!&ndash; 默认编码 &ndash;&gt;
         <property name="defaultEncoding" value="utf-8" />
@@ -55,7 +55,7 @@
         <property name="maxUploadSize" value="10485760000" />
         &lt;!&ndash; 内存中的最大值 &ndash;&gt;
         <property name="maxInMemorySize" value="40960" />
-    </bean>-->
+    </aop>-->
     <!-- 配置拦截器 -->
     <!--<mvc:interceptors>
         <mvc:interceptor>
@@ -65,11 +65,11 @@
             <mvc:mapping path="/function/**"/>
             <mvc:mapping path="/news/**"/>
             <mvc:mapping path="/img/**"/>
-            <bean class="com.crossoverJie.intercept.Intercept"></bean>
+            <aop class="com.crossoverJie.intercept.Intercept"></aop>
         </mvc:interceptor>
     </mvc:interceptors>-->
 
     <!--全局异常捕捉 -->
-    <!--<bean class="com.ssmlobalExceptionResolver" />-->
+    <!--<aop class="com.ssmlobalExceptionResolver" />-->
 
 </beans>

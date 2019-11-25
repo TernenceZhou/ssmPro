@@ -1,6 +1,7 @@
 package com.ssm.xiangxueClass.spring.class03.bean;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyBeanPostProcessor implements BeanPostProcessor {
 
+    @Autowired
     //在初始化之前进行后置处理
     //什么时候调用 在init-method=init之前调用
     @Override
