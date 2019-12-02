@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * 后置处理器
  * @date 2019/10/23
  */
-@Component
+@Component //如果在Config中声明了@Bean 就不需要用@Component注解
 public class MyBeanPostProcessor implements BeanPostProcessor {
 
     @Autowired
@@ -19,13 +19,14 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
     //什么时候调用 在init-method=init之前调用
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("postProcessBeforeInitialization...."+beanName+"..."+bean);
+        System.out.println("后置处理器的前置");
+        System.out.println("postProcessBeforeInitialization------->beanName："+beanName+"------->bean："+bean);
         return beanName;
     }
 
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        System.out.println("postProcessAfterInitialization...."+beanName+"..."+bean);
+        System.out.println("postProcessAfterInitialization------->beanName："+beanName+"------->bean："+bean);
         return beanName;
     }
 }
