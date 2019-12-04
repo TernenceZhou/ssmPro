@@ -99,7 +99,7 @@ public class DeepCopy  {
             //深拷贝：子类和父类都要实现cloneable接口，调用clone方法
             User2 user2 = (User2)super.clone();
             //user2.child = (UserChild2) this.child.clone();
-            user2.child = new UserChild2("child2");
+            user2.child = new UserChild2(user2.getName());
             return user2;
         }
 
