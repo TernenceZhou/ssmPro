@@ -24,7 +24,7 @@
     </aop>-->
     <!-- 激活组件扫描功能,扫描aop的相关组件组件 -->
     <!--<context:component-scan base-package="com.ssmop"/>-->
-    <!-- 启动对@AspectJ注解的支持 -->
+    <!-- 启动对@AspectJ注解的支持  为true表示使用cglib针对类做代理 默认false表示使用jdk动态代理-->
     <aop:aspectj-autoproxy proxy-target-class="true" />
 
     <!--简化配置:
