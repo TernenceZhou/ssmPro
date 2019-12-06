@@ -16,7 +16,7 @@
         <properties>
           <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
           <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
-          <poi.version>3.17</poi.version>
+          <poi.version>3.14</poi.version>
           <hutool-poi.version>4.1.20</hutool-poi.version>
           <spring.version>4.3.18.RELEASE</spring.version>
           <lucene.version>5.3.1</lucene.version>
