@@ -7,7 +7,7 @@ package com.ssm.test.base.enumPart;
  * @date 2019/9/9
  */
 public enum InfoCode {
-    SUCCESS("123","SUCCESS"),FAILURE("123","FAILURE");
+    SUCCESS("0000","SUCCESS"),FAILURE("0004","FAILURE");
 
     private String code;
     private String msg;

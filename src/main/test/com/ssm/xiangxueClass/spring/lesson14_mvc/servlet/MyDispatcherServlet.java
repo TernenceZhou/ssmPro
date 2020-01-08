@@ -58,10 +58,6 @@ public class MyDispatcherServlet extends HttpServlet {
         for (Field field : declaredFields) {
             System.out.println(field);
         }
-        Method[] methods = this.getClass().getMethods();
-        for (Method method : methods) {
-            //System.out.println(method);
-        }
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
