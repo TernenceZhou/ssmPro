@@ -1,11 +1,12 @@
 package com.ssm.xiangxueClass.thread.leson_08;
 
-import org.junit.Test;
-
 import java.lang.reflect.ParameterizedType;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Future;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import org.junit.Test;
 
 /**
  * @author
@@ -20,7 +21,7 @@ public class TestThreadPoolExecutor<T> {
                 TimeUnit.SECONDS,new ArrayBlockingQueue<>(6));
         //new ThreadPoolTaskExecutor
         poolExecutor.execute(new WorkThread());
-        poolExecutor.submit(new WorkThread());
+        Future<?> submit = poolExecutor.submit(new WorkThread());
         poolExecutor.shutdown(); //设置线程池的状态，中断 没有执行任务的线程
         poolExecutor.shutdownNow();// 中断所有执行或者没有执行的线程
     }
@@ -45,7 +46,7 @@ public class TestThreadPoolExecutor<T> {
     }
 
 
-    static class WorkThread implements Runnable{
+    static class WorkThread implements Runnable {
 
         private String name;
 
@@ -53,5 +54,14 @@ public class TestThreadPoolExecutor<T> {
         public void run() {
 
         }
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            new Thread(() -> {
+                System.out.println("当前线程名称：" +Thread.currentThread().getName());
+            },"threadName").start();
+        }
+
     }
 }

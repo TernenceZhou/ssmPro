@@ -1,11 +1,10 @@
 package com.ssm.test;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.junit.Test;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.lang.ArrayUtils;
+import org.junit.Test;
 
 public class TestAlgorithms {
     /*给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。

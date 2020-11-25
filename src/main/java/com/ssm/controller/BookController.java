@@ -1,27 +1,27 @@
 package com.ssm.controller;
 
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.ssm.common.enums.AppointStateEnum;
 import com.ssm.common.exception.NoNumberException;
 import com.ssm.common.exception.RepeatAppointException;
-import com.ssm.common.exception.SsmAplException;
 import com.ssm.controller.base.BaseController;
 import com.ssm.model.result.ResponseResult;
 import com.ssm.service.BookService;
 import com.ssm.vo.AppointExecution;
 import com.ssm.vo.AppointmentVO;
 import com.ssm.vo.BookVO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
 
 @Controller
 @RequestMapping("/book") // url:/模块/资源/{id}/细分 /seckill/list

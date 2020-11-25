@@ -1,13 +1,5 @@
 package com.ssm.test;
 
-import cn.hutool.core.date.DateField;
-import cn.hutool.core.date.DateTime;
-import cn.hutool.core.date.DateUtil;
-import com.ssm.common.util.StringUtil;
-import com.ssm.model.UserInfo;
-import org.junit.Test;
-
-import javax.servlet.annotation.WebServlet;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,9 +13,24 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
+
+import org.junit.Test;
+
+import com.ssm.model.UserInfo;
+
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
 
 public final class TestBase {
     String a = "";
@@ -76,9 +83,15 @@ public final class TestBase {
         if (i == 11 & i <= 10) {
             System.out.println("ttttt");
         }
-        System.arraycopy(aa, 2, aa, 2, 1);
+        //System.arraycopy(aa, 2, aa, 2, 1);
         System.out.println(System.currentTimeMillis() - start);
         System.out.println("------------------");
+
+        System.out.println("-------------------------");
+        Scanner in = new Scanner(System.in);
+        System.out.println("请输入数值：");
+        int ii = in.nextInt();
+        System.out.println("输入结果："+ii);
     }
 
     @Test
@@ -399,5 +412,136 @@ public final class TestBase {
         }
 
     }
+
+    @Test
+    public void lambdaTest(){
+        List<UserInfo> list = new ArrayList<>();
+        UserInfo u1 = new UserInfo();
+        u1.setName("name");
+        u1.setId("1");
+        UserInfo u2 = new UserInfo();
+        u1.setName("name2");
+        u2.setId("2");
+        UserInfo u3 = new UserInfo();
+        u3.setName("name3");
+        list.add(u1);list.add(u2);list.add(u3);
+
+        Map<String,Object> map = new LinkedHashMap();
+        map.put("1","a");
+
+        //lambda 过滤集合数据 并且返回对应的主键集合
+        List<String> collect = list.stream().filter(o -> o.getId() != null).map(UserInfo::getId).collect(Collectors.toList());
+        for (String s : collect) {
+            System.out.println("id集合："+s);
+        }
+
+        Set set = map.keySet();
+        Iterator iterator = set.iterator();
+        while (iterator.hasNext()) {
+            Object next = iterator.next();
+            System.out.println(next+ "---" + map.get(next));
+        }
+
+        for (Map.Entry<String,Object> entry: map.entrySet()) {
+            System.out.println(entry.getKey() + " -- " + entry.getValue());
+        }
+
+        map.forEach((k,v)->{
+            System.out.println(k + " ----  " + v);
+        });
+    }
+
+    /**
+     * String  源码 compareTo方法计算方式
+     */
+    @Test
+    public void testStr() {
+        char c1[] = {'a','b','c'};
+        char c2[] = {'a','b','d'};
+        //如果字符相同相减就是0 否则就是 -1 大于就是1
+        System.out.println(c1[0]-c2[1]);
+
+        System.out.println(c1[1]-c2[0]);// 1
+
+        String a = "abc";
+
+        a.compareTo("");
+        a.equals("");
+
+
+        String s1 = new String("a");
+        String s2 = new String("a");
+        String s3 = s1;
+        System.out.println(a.equals(s2));
+        System.out.println( s1 == s3);
+        System.out.println(s1.compareTo(s2));
+        //Assert.assertEquals(s1,s2);
+
+        String aa = "java";
+        String aaa = "java";
+        System.out.println(aa == aaa);
+
+        aaa = "javaa";
+        String bbb = "javaa";
+        System.out.println( aaa == bbb);
+    }
+
+   @Test
+    public void lambda聚合计算() {
+//           List<ClaimDto> claimDto = new ArrayList<>();
+//           ClaimDto a = new ClaimDto();
+//           a.setClaimFlag("0806");
+//           a.setClaimNo("1111");
+//           ClaimDto b = new ClaimDto();
+//           b.setClaimFlag("0812");
+//           b.setClaimNo("11112");
+//
+//           ClaimDto c = new ClaimDto();
+//           c.setClaimFlag("0812");
+//           c.setClaimNo("11113");
+//
+//           ClaimDto d = new ClaimDto();
+//           d.setClaimFlag("0812");
+//           d.setClaimNo("11114");
+//           claimDto.add(a);
+//           claimDto.add(b);
+//           claimDto.add(c);
+//           claimDto.add(d);
+//           Map<String, Long> collect = claimDto.stream().collect(Collectors.groupingBy(x -> x.getClaimFlag(), Collectors.counting()));
+//
+//
+//
+//           Stream<ClaimDto> claimDtoStream = claimDto.stream().filter(x -> "0806".equals(x.getClaimFlag()));
+//           long count = claimDto.stream().filter(x -> "0806".equals(x.getClaimFlag())).count();
+//           Stream<ClaimDto> claimDtoStream2 = claimDto.stream().filter(x -> "0812".equals(x.getClaimFlag()));
+//           long count1 = claimDto.stream().filter(x -> "0812".equals(x.getClaimFlag())).count();
+//
+//           System.out.println(count);
+//           System.out.println(count1);
+
+       List<UserInfo> users = new ArrayList<>();
+       //按照分组后返回 key count
+       Map<String, Long> collect = users.stream().collect(Collectors.groupingBy(x -> x.getName(), Collectors.counting()));
+
+       users.stream().filter(x->x.getName().equals("aaa")).count();
+
+       users.stream().filter(x->x.getId() == "123").findFirst().ifPresent(userInfo -> {
+
+       });
+       //非空
+       Optional.ofNullable(users).orElse(new ArrayList<>()).forEach(userInfo -> {
+
+       });
+
+    }
+
+    @Test
+    public void hashMap() {
+
+        boolean equals = Objects.equals("a", "a");
+        System.out.println(equals);
+
+    }
+
 
 }

@@ -1,11 +1,5 @@
 package com.ssm.xiangxueClass.thread.lesson_11;
 
-import com.ssm.xiangxueClass.thread.lesson_11.assist.Consts;
-import com.ssm.xiangxueClass.thread.lesson_11.assist.CreatePendingDocs;
-import com.ssm.xiangxueClass.thread.lesson_11.assist.SL_QuestionBank;
-import com.ssm.xiangxueClass.thread.lesson_11.service.ProduceDocService;
-import com.ssm.xiangxueClass.thread.lesson_11.vo.SrcDocVo;
-
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletionService;
@@ -14,6 +8,12 @@ import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+
+import com.ssm.xiangxueClass.thread.lesson_11.assist.Consts;
+import com.ssm.xiangxueClass.thread.lesson_11.assist.CreatePendingDocs;
+import com.ssm.xiangxueClass.thread.lesson_11.assist.SL_QuestionBank;
+import com.ssm.xiangxueClass.thread.lesson_11.service.ProduceDocService;
+import com.ssm.xiangxueClass.thread.lesson_11.vo.SrcDocVo;
 
 /**
  *类说明：rpc服务端，采用生产者消费者模式，生产者消费者还会级联

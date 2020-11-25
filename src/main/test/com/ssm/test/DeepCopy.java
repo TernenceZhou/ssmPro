@@ -1,9 +1,9 @@
 package com.ssm.test;
 
-import org.apache.commons.lang.ArrayUtils;
-
 import java.util.Arrays;
 import java.util.List;
+
+import org.apache.commons.lang.ArrayUtils;
 
 public class DeepCopy implements Cloneable{
     String id;

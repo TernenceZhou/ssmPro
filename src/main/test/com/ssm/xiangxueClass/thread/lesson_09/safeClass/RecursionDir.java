@@ -1,13 +1,13 @@
 package com.ssm.xiangxueClass.thread.lesson_09.safeClass;
 
-import org.junit.Test;
-
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.Test;
 
 /**
  * @author

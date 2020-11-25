@@ -1,10 +1,10 @@
 package com.ssm.service;
 
+import java.util.List;
+
 import com.ssm.model.UserInfo;
 import com.ssm.qo.UserInfoQO;
 import com.ssm.vo.UserInfoVO;
-
-import java.util.List;
 
 public interface UserService {
 

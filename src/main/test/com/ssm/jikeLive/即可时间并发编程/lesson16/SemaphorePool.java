@@ -1,15 +1,12 @@
 package com.ssm.jikeLive.即可时间并发编程.lesson16;
 
-
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.Semaphore;
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Function;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * @author

@@ -1,8 +1,13 @@
 package com.ssm.test;
 
-import org.junit.Test;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-import java.util.*;
+import org.junit.Test;
 
 public class TestCollections {
     public static void main(String[] args) {

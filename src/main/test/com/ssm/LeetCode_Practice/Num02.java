@@ -14,7 +14,7 @@ import org.junit.Test;
 public class Num02 {
 
     @Test
-    public void test(){
+    public void test() {
         ListNode l1 = new ListNode(444);
         ListNode l2 = new ListNode(555);
         ListNode node = addTwoNumbers(l1,l2);

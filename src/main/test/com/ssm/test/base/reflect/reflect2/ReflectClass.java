@@ -1,13 +1,13 @@
 package com.ssm.test.base.reflect.reflect2;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.junit.Test;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.junit.Test;
 
 /**
  * 反射读取类 查看类属性.

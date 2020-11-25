@@ -1,14 +1,5 @@
 package com.ssm.controller;
 
-import com.ssm.common.util.ExportExcel;
-import com.ssm.vo.UserInfoVO;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.junit.Test;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -20,6 +11,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.ssm.common.util.ExportExcel;
+import com.ssm.vo.UserInfoVO;
 
 /**
  * @author

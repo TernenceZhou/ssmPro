@@ -1,10 +1,10 @@
 package com.ssm.xiangxueClass.thread.lesson_11.assist;
 
-import com.ssm.xiangxueClass.thread.lesson_11.vo.SrcDocVo;
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+
+import com.ssm.xiangxueClass.thread.lesson_11.vo.SrcDocVo;
 
 
 /**
