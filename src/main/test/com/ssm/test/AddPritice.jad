@@ -1,0 +1,26 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+// Source File Name:   AddPritice.java
+
+package com.ssm.test;
+
+import java.io.PrintStream;
+
+public class AddPritice
+{
+
+    public AddPritice()
+    {
+    }
+
+    public static void main(String args[])
+    {
+        int i = 100;
+        i = i++ + i;
+        System.out.println(i);
+        int j = 100;
+        j += j++;
+        System.out.println(j);
+    }
+}

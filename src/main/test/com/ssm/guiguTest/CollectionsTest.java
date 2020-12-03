@@ -61,6 +61,7 @@ public class CollectionsTest {
      *   Collections.synchronizedList(xxx)
      * 2.如果不用以上的相关类
      * 使用 CopyOnWriteArrayList
+     * 实现原理是用ReentrantLock 实现 ，变量用volatile修饰
      *
      */
 
