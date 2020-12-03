@@ -63,7 +63,7 @@ public class IntegerCompare {
         //原文链接：https://blog.csdn.net/teacher_lee_zzsxt/article/details/79230501
 
         /**
-         * 反编译结果
+         * 编译结果
          *  public static void main(String args[])
          *     {
          *         Integer integer = Integer.valueOf(1);

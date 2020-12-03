@@ -1,0 +1,45 @@
+// Decompiled by Jad v1.5.8g. Copyright 2001 Pavel Kouznetsov.
+// Jad home page: http://www.kpdus.com/jad.html
+// Decompiler options: packimports(3) 
+// Source File Name:   SwitchDemoString.java
+
+package com.ssm.lagou;
+
+import java.io.PrintStream;
+
+public class SwitchDemoString
+{
+
+    public SwitchDemoString()
+    {
+    }
+
+    public static void main(String args[])
+    {
+        String s = "world";
+        String s1 = s;
+        byte byte0 = -1;
+        switch(s1.hashCode())
+        {
+        case 99162322: 
+            if(s1.equals("hello"))
+                byte0 = 0;
+            break;
+
+        case 113318802: 
+            if(s1.equals("world"))
+                byte0 = 1;
+            break;
+        }
+        switch(byte0)
+        {
+        case 0: // '\0'
+            System.out.println("hello");
+            break;
+
+        case 1: // '\001'
+            System.out.println("world");
+            break;
+        }
+    }
+}

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -63,7 +64,7 @@ public final class TestBase {
         }
         int aaa[] = new int[5];
         int aa[] = {};
-        int aaaa[] = new int[]{23};
+        int aaaa[] = new int[] { 23 };
 
         int i = 11;
         System.out.println(i / 3);
@@ -91,7 +92,7 @@ public final class TestBase {
         Scanner in = new Scanner(System.in);
         System.out.println("请输入数值：");
         int ii = in.nextInt();
-        System.out.println("输入结果："+ii);
+        System.out.println("输入结果：" + ii);
     }
 
     @Test
@@ -135,7 +136,6 @@ public final class TestBase {
             lock.unlock();
         }*/
     }
-
 
     /**
      * 换行（‘\n’）的另类写法System.getProperty("line.separator")
@@ -204,9 +204,9 @@ public final class TestBase {
         Date date3 = simpleDateFormat.parse("2019-07-25");
         System.out.println(date1.getTime() <= date3.getTime());
         System.out.println(date2.getTime() >= date3.getTime());
-//        if(date1.getTime()<=date3.getTime() && date2.getTime()>=date3.getTime()){
-//            System.out.println("date3在date1和date2日期范围内！");
-//        }
+        //        if(date1.getTime()<=date3.getTime() && date2.getTime()>=date3.getTime()){
+        //            System.out.println("date3在date1和date2日期范围内！");
+        //        }
     }
 
     @Test
@@ -218,8 +218,6 @@ public final class TestBase {
         System.out.println(isEffectiveDate(nowTime, startTime, endTime));
 
     }
-
-
 
     @Test
     public void test33() {
@@ -250,23 +248,25 @@ public final class TestBase {
         //常用偏移，结果：2017-03-01 19:33:23
         DateTime newDate3 = DateUtil.offsetHour(date, -3);
 
-        DateUtil.offsetHour(new Date(),24);
+        DateUtil.offsetHour(new Date(), 24);
     }
 
     @Test
-    public void add(){
+    public void add() {
         String s = addDateMinut("2019-12-17 13:55:04", -24);
         System.out.println(s);
         System.out.println(DateField.DAY_OF_MONTH.getValue());
         System.out.println(DateField.DAY_OF_MONTH);
     }
+
     /**
      * 给时间加上几个小时
-     * @param day 当前时间 格式：yyyy-MM-dd HH:mm:ss
+     *
+     * @param day  当前时间 格式：yyyy-MM-dd HH:mm:ss
      * @param hour 需要加的时间
      * @return
      */
-    public static String addDateMinut(String day, int hour){
+    public static String addDateMinut(String day, int hour) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = null;
         try {
@@ -286,33 +286,35 @@ public final class TestBase {
         return format.format(date);
 
     }
+
     @Test
-    public  void testDDD() throws ParseException {
+    public void testDDD() throws ParseException {
         String date = "2019-12-18 10:04:04";
-        String from  = "2019-12-16 09:51:37";
-        String to  = "2019-12-21 09:51:38";
+        String from = "2019-12-16 09:51:37";
+        String to = "2019-12-21 09:51:38";
         int toRes = date.compareTo(to);
         int fromRes = date.compareTo(from);
         System.out.println(toRes);
         System.out.println(fromRes);
 
-        System.out.println(String.format("网商VID接口处理逻辑，未找到贷款申请，传入参数：%s","123"));
+        System.out.println(String.format("网商VID接口处理逻辑，未找到贷款申请，传入参数：%s", "123"));
         //挡板测试
-//        String resobj = "{\"body\":{\"mybank_credit_sceneprod_vid_get_response\":{\"code\":\"10000\",\"msg\":\"Success\"," +
-//                "\"verify_id\":\"componentVerify_a8e\",\"retry\":true,\"trace_id\":\"0b21b50615755184045104022e61d4\"},\"sign\":\"P4leuEsYiVf5BDjH8rF6wT9OnkT6x1mdPzVZbNIC2QhHOl+Kz66UYyKy2MGaezBT82eFTmGFclDEz8uLpXoIv21iNJs2Sy5PI1Xn30jxQzrOd4pb376gtAJ0Z+/jWbp3yp/GCVAMHXPPODiKg522sXLIP2lcCcEHJYR4sd2mGy5Rj395M62TMnGz/pylnH87Ahp4Y9DUhTd2qK7OrFcHJAMlUwADeCYJh1gnLlHfTimMNg6Cw38L1xoOP1xf8jbzBdQsUDmgzP/ElwqVTlFolGSfUM9NTLOk5C+gLhXveMScPkD+Z0GeZdyJbGocvav8lEXNfAqEEQdPlU6qcHukgA==\"},\"code\":\"10000\",\"errorCode\":\"10000\",\"verify_id\":\"componentVerify_a8e\",\"msg\":\"Success\",\"params\":{\"biz_content\":{\"alipayVersion\":\"4.7.12.ALL\",\"metaInfo\":\"默认内容\",\"orgCode\":\"CANGO\",\"site\":\"ALIPAY\",\"siteUserId\":\"20881234567890\",\"verifyType\":\"FACE\"}}," +
-//                "\"retry\":\"true\",\"success\":true,\"traceId\":\"0b21b50615755184045104022e61d4\"}";
-//        Result outResult =  new Result("0000","处理成功！！！", JSONObject.parseObject(resobj));
+        //        String resobj = "{\"body\":{\"mybank_credit_sceneprod_vid_get_response\":{\"code\":\"10000\",\"msg\":\"Success\"," +
+        //                "\"verify_id\":\"componentVerify_a8e\",\"retry\":true,\"trace_id\":\"0b21b50615755184045104022e61d4\"},\"sign\":\"P4leuEsYiVf5BDjH8rF6wT9OnkT6x1mdPzVZbNIC2QhHOl+Kz66UYyKy2MGaezBT82eFTmGFclDEz8uLpXoIv21iNJs2Sy5PI1Xn30jxQzrOd4pb376gtAJ0Z+/jWbp3yp/GCVAMHXPPODiKg522sXLIP2lcCcEHJYR4sd2mGy5Rj395M62TMnGz/pylnH87Ahp4Y9DUhTd2qK7OrFcHJAMlUwADeCYJh1gnLlHfTimMNg6Cw38L1xoOP1xf8jbzBdQsUDmgzP/ElwqVTlFolGSfUM9NTLOk5C+gLhXveMScPkD+Z0GeZdyJbGocvav8lEXNfAqEEQdPlU6qcHukgA==\"},\"code\":\"10000\",\"errorCode\":\"10000\",\"verify_id\":\"componentVerify_a8e\",\"msg\":\"Success\",\"params\":{\"biz_content\":{\"alipayVersion\":\"4.7.12.ALL\",\"metaInfo\":\"默认内容\",\"orgCode\":\"CANGO\",\"site\":\"ALIPAY\",\"siteUserId\":\"20881234567890\",\"verifyType\":\"FACE\"}}," +
+        //                "\"retry\":\"true\",\"success\":true,\"traceId\":\"0b21b50615755184045104022e61d4\"}";
+        //        Result outResult =  new Result("0000","处理成功！！！", JSONObject.parseObject(resobj));
         String format = "yyyy-MM-dd HH:mm:ss";
         Date startTime = new SimpleDateFormat(format).parse(from);
         Date endTime = new SimpleDateFormat(format).parse(to);
         Date nowTime = new SimpleDateFormat(format).parse(date);
-        System.out.println(nowTime.after(startTime) );
-        System.out.println(nowTime.before(endTime) );
+        System.out.println(nowTime.after(startTime));
+        System.out.println(nowTime.before(endTime));
 
         boolean b = isEffectiveDate(nowTime, startTime, endTime);
         System.out.println(b);
 
     }
+
     /**
      * 判断当前时间是否在[startTime, endTime]区间，注意时间格式要一致
      *
@@ -323,8 +325,7 @@ public final class TestBase {
      * @author jqlin
      */
     public static boolean isEffectiveDate(Date nowTime, Date startTime, Date endTime) {
-        if (nowTime.getTime() == startTime.getTime()
-                || nowTime.getTime() == endTime.getTime()) {
+        if (nowTime.getTime() == startTime.getTime() || nowTime.getTime() == endTime.getTime()) {
             return true;
         }
 
@@ -337,14 +338,12 @@ public final class TestBase {
         Calendar end = Calendar.getInstance();
         end.setTime(endTime);
 
-
         if (date.after(begin) && date.before(end)) {
             return true;
         } else {
             return false;
         }
     }
-
 
     /**
      * 当前时间在核身开始和失效时间内.
@@ -365,7 +364,7 @@ public final class TestBase {
     }
 
     @Test
-    public void atomit(){
+    public void atomit() {
         int i = 1;
         i = i++;
         i++;
@@ -376,7 +375,7 @@ public final class TestBase {
     }
 
     @Test
-    public void printtangle(){
+    public void printtangle() {
         for (int i = 1; i < 10; i++) {
             for (int j = 1; j <= i; j++) {
                 System.out.print("*");
@@ -387,7 +386,7 @@ public final class TestBase {
     }
 
     @Test
-    public void printtangle2(){
+    public void printtangle2() {
         for (int i = 1; i < 10; i++) {
             for (int j = 10; j > i; j--) {
                 System.out.print("*");
@@ -398,13 +397,13 @@ public final class TestBase {
     }
 
     @Test
-    public void butto(){
-        int arr[] = {1,3,6,2};
+    public void butto() {
+        int arr[] = { 1, 3, 6, 2 };
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length - 1; j++) {
-                if(arr[j] >arr[j+1]){
-                    int tmp = arr[j+1];
-                    arr[j+1] = arr[j];
+                if (arr[j] > arr[j + 1]) {
+                    int tmp = arr[j + 1];
+                    arr[j + 1] = arr[j];
                     arr[j] = tmp;
                 }
             }
@@ -414,7 +413,7 @@ public final class TestBase {
     }
 
     @Test
-    public void lambdaTest(){
+    public void lambdaTest() {
         List<UserInfo> list = new ArrayList<>();
         UserInfo u1 = new UserInfo();
         u1.setName("name");
@@ -424,29 +423,31 @@ public final class TestBase {
         u2.setId("2");
         UserInfo u3 = new UserInfo();
         u3.setName("name3");
-        list.add(u1);list.add(u2);list.add(u3);
+        list.add(u1);
+        list.add(u2);
+        list.add(u3);
 
-        Map<String,Object> map = new LinkedHashMap();
-        map.put("1","a");
+        Map<String, Object> map = new LinkedHashMap();
+        map.put("1", "a");
 
         //lambda 过滤集合数据 并且返回对应的主键集合
         List<String> collect = list.stream().filter(o -> o.getId() != null).map(UserInfo::getId).collect(Collectors.toList());
         for (String s : collect) {
-            System.out.println("id集合："+s);
+            System.out.println("id集合：" + s);
         }
 
         Set set = map.keySet();
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
             Object next = iterator.next();
-            System.out.println(next+ "---" + map.get(next));
+            System.out.println(next + "---" + map.get(next));
         }
 
-        for (Map.Entry<String,Object> entry: map.entrySet()) {
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
             System.out.println(entry.getKey() + " -- " + entry.getValue());
         }
 
-        map.forEach((k,v)->{
+        map.forEach((k, v) -> {
             System.out.println(k + " ----  " + v);
         });
     }
@@ -456,24 +457,23 @@ public final class TestBase {
      */
     @Test
     public void testStr() {
-        char c1[] = {'a','b','c'};
-        char c2[] = {'a','b','d'};
+        char c1[] = { 'a', 'b', 'c' };
+        char c2[] = { 'a', 'b', 'd' };
         //如果字符相同相减就是0 否则就是 -1 大于就是1
-        System.out.println(c1[0]-c2[1]);
+        System.out.println(c1[0] - c2[1]);
 
-        System.out.println(c1[1]-c2[0]);// 1
+        System.out.println(c1[1] - c2[0]);// 1
 
         String a = "abc";
 
         a.compareTo("");
         a.equals("");
 
-
         String s1 = new String("a");
         String s2 = new String("a");
         String s3 = s1;
         System.out.println(a.equals(s2));
-        System.out.println( s1 == s3);
+        System.out.println(s1 == s3);
         System.out.println(s1.compareTo(s2));
         //Assert.assertEquals(s1,s2);
 
@@ -483,55 +483,55 @@ public final class TestBase {
 
         aaa = "javaa";
         String bbb = "javaa";
-        System.out.println( aaa == bbb);
+        System.out.println(aaa == bbb);
     }
 
-   @Test
+    @Test
     public void lambda聚合计算() {
-//           List<ClaimDto> claimDto = new ArrayList<>();
-//           ClaimDto a = new ClaimDto();
-//           a.setClaimFlag("0806");
-//           a.setClaimNo("1111");
-//           ClaimDto b = new ClaimDto();
-//           b.setClaimFlag("0812");
-//           b.setClaimNo("11112");
-//
-//           ClaimDto c = new ClaimDto();
-//           c.setClaimFlag("0812");
-//           c.setClaimNo("11113");
-//
-//           ClaimDto d = new ClaimDto();
-//           d.setClaimFlag("0812");
-//           d.setClaimNo("11114");
-//           claimDto.add(a);
-//           claimDto.add(b);
-//           claimDto.add(c);
-//           claimDto.add(d);
-//           Map<String, Long> collect = claimDto.stream().collect(Collectors.groupingBy(x -> x.getClaimFlag(), Collectors.counting()));
-//
-//
-//
-//           Stream<ClaimDto> claimDtoStream = claimDto.stream().filter(x -> "0806".equals(x.getClaimFlag()));
-//           long count = claimDto.stream().filter(x -> "0806".equals(x.getClaimFlag())).count();
-//           Stream<ClaimDto> claimDtoStream2 = claimDto.stream().filter(x -> "0812".equals(x.getClaimFlag()));
-//           long count1 = claimDto.stream().filter(x -> "0812".equals(x.getClaimFlag())).count();
-//
-//           System.out.println(count);
-//           System.out.println(count1);
+        //           List<ClaimDto> claimDto = new ArrayList<>();
+        //           ClaimDto a = new ClaimDto();
+        //           a.setClaimFlag("0806");
+        //           a.setClaimNo("1111");
+        //           ClaimDto b = new ClaimDto();
+        //           b.setClaimFlag("0812");
+        //           b.setClaimNo("11112");
+        //
+        //           ClaimDto c = new ClaimDto();
+        //           c.setClaimFlag("0812");
+        //           c.setClaimNo("11113");
+        //
+        //           ClaimDto d = new ClaimDto();
+        //           d.setClaimFlag("0812");
+        //           d.setClaimNo("11114");
+        //           claimDto.add(a);
+        //           claimDto.add(b);
+        //           claimDto.add(c);
+        //           claimDto.add(d);
+        //           Map<String, Long> collect = claimDto.stream().collect(Collectors.groupingBy(x -> x.getClaimFlag(), Collectors.counting()));
+        //
+        //
+        //
+        //           Stream<ClaimDto> claimDtoStream = claimDto.stream().filter(x -> "0806".equals(x.getClaimFlag()));
+        //           long count = claimDto.stream().filter(x -> "0806".equals(x.getClaimFlag())).count();
+        //           Stream<ClaimDto> claimDtoStream2 = claimDto.stream().filter(x -> "0812".equals(x.getClaimFlag()));
+        //           long count1 = claimDto.stream().filter(x -> "0812".equals(x.getClaimFlag())).count();
+        //
+        //           System.out.println(count);
+        //           System.out.println(count1);
 
-       List<UserInfo> users = new ArrayList<>();
-       //按照分组后返回 key count
-       Map<String, Long> collect = users.stream().collect(Collectors.groupingBy(x -> x.getName(), Collectors.counting()));
+        List<UserInfo> users = new ArrayList<>();
+        //按照分组后返回 key count
+        Map<String, Long> collect = users.stream().collect(Collectors.groupingBy(x -> x.getName(), Collectors.counting()));
 
-       users.stream().filter(x->x.getName().equals("aaa")).count();
+        users.stream().filter(x -> x.getName().equals("aaa")).count();
 
-       users.stream().filter(x->x.getId() == "123").findFirst().ifPresent(userInfo -> {
+        users.stream().filter(x -> x.getId() == "123").findFirst().ifPresent(userInfo -> {
 
-       });
-       //非空
-       Optional.ofNullable(users).orElse(new ArrayList<>()).forEach(userInfo -> {
+        });
+        //非空
+        Optional.ofNullable(users).orElse(new ArrayList<>()).forEach(userInfo -> {
 
-       });
+        });
 
     }
 
@@ -543,5 +543,32 @@ public final class TestBase {
 
     }
 
+    /**
+     * 做这个题目需要知道底层的i++是怎么操作的
+     * 可以用反编译查看代码执行过程
+     * javac xxx.java
+     * 然后
+     * jad xxx.class
+     */
+    @Test
+    public void testPractice() {
+        int b = 100;
+        b += (++b);// i  =  i +  (++i)   201
+        System.out.println(b);
+
+        int i = 100;
+        i += (i++);// i  =  i +  (i++)   200
+        System.out.println(i);
+    }
+
+    /**
+     * 把数组转换为集合时，用返回的集合类去add 等集合操作会报 UnSupportedOperationException
+     */
+    @Test
+    public void testArrToList() {
+        String arr[] = {"1","2","3"};
+        List<String> list = Arrays.asList(arr);
+        list.add("444");
+    }
 
 }

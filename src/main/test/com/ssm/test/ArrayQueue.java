@@ -1,7 +1,6 @@
 package com.ssm.test;
 
 /**
- *
  * 队列
  */
 public class ArrayQueue {
@@ -9,25 +8,28 @@ public class ArrayQueue {
     private int n = 0; // 数组大小
     private int head = 0; // 队头下标
     private int trail = 0; // 队尾下标
-    public ArrayQueue(int capacity){
+
+    public ArrayQueue(int capacity) {
         items = new String[capacity];
         n = capacity;
     }
+
     // 入队
     public boolean inqueue(String item) {
-        if(trail == n){ // trail == n 队列已满
+        if (trail == n) { // trail == n 队列已满
             return false;
-        }else {
+        } else {
             items[trail] = item;
             ++trail;
             return true;
         }
     }
+
     // 出队
     public boolean outqueue() {
-        if(head == trail){
+        if (head == trail) {
             return false;
-        }else {
+        } else {
             String rest = items[head];
             ++head;
             return true;
