@@ -3,7 +3,9 @@ package com.ssm.lagou;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 死锁.
+ * 死锁demo.
+ * 查看死锁 需要先 jps -l 查看进程id
+ * 然后就          jstack pid
  */
 public class DeadLock {
 
@@ -12,9 +14,9 @@ public class DeadLock {
     }
 
     public static void deadLock() {
-         final Object lock1 = new Object();
-         final Object lock2 = new Object();
-        new Thread( ()-> {
+        final Object lock1 = new Object();
+        final Object lock2 = new Object();
+        new Thread(() -> {
             synchronized (lock1) {
                 System.out.println("获取 lock1 成功------------");
                 try {
@@ -26,10 +28,9 @@ public class DeadLock {
                     System.out.println(Thread.currentThread().getName());
                 }
             }
-        },"线程1").start();
+        }, "线程1").start();
 
-
-        new Thread( ()-> {
+        new Thread(() -> {
             synchronized (lock2) {
                 System.out.println("获取 lock2 成功");
                 try {
@@ -41,7 +42,7 @@ public class DeadLock {
                     System.out.println(Thread.currentThread().getName());
                 }
             }
-        },"线程2").start();
+        }, "线程2").start();
 
     }
 }
