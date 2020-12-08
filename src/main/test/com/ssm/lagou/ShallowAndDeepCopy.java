@@ -1,13 +1,18 @@
 package com.ssm.lagou;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+import org.apache.commons.lang.SerializationUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ssm.lagou.深浅克隆.Address;
 import com.ssm.lagou.深浅克隆.MyUser;
-import com.sun.xml.internal.messaging.saaj.client.p2p.HttpSOAPConnectionFactory;
-import org.apache.commons.lang.SerializationUtils;
-
-import java.io.*;
 
 /**
  * 深拷贝和浅拷贝实现.
@@ -198,6 +203,7 @@ public class ShallowAndDeepCopy {
             ObjectOutputStream os = null;
             ObjectInputStream ois = null;
             try {
+                //write Object
                 ByteArrayOutputStream bao = new ByteArrayOutputStream();
                 os = new ObjectOutputStream(bao);
                 os.writeObject(obj);
