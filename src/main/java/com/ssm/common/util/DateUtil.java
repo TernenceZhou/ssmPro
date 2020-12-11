@@ -7,6 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUnit;
+
 /**
  * 日期工具类.
  */
@@ -334,5 +338,13 @@ public class DateUtil extends DateUtilCango {
                 "2020-11-09 13:10:10",DateUtil.YYYY_MM_DD), Calendar.MONTH, 12), DateUtil.YYYY_MM_DD);
         String b = DateUtil.getDayBeforeNDay(a, 1, DateUtil.YYYY_MM_DD);
         //System.out.println( a + "\n" + b);
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(DateUtil.strToDate("20201221000000", DateUtil.YYYYMMDDHHMMSS));
+        cal.add(DateField.SECOND.getValue(), -1);
+        DateTime dateTime1 = new DateTime(cal.getTime());
+
+        DateTime dateTime = cn.hutool.core.date.DateUtil.offsetSecond(DateUtil.strToDate("20201221000000", DateUtil.YYYYMMDDHHMMSS), -1);
+        System.out.println(dateTime);
     }
 }
