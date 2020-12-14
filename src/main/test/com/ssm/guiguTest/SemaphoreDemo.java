@@ -24,6 +24,7 @@ public class SemaphoreDemo {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
+                    //释放
                     semaphore.release();
                 }
             }, String.valueOf(i)).start();

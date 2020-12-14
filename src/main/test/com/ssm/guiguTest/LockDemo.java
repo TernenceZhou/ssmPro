@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 公平锁、非公平锁
  * 自旋锁
  * 偏向锁
- * ReentrantLock 和 Synchronized 都是非公平的的可重入锁
+ * ReentrantLock 和 Synchronized 都是 非公平的 的可重入锁
  */
 public class LockDemo {
 

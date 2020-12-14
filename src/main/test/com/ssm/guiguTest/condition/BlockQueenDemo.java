@@ -1,8 +1,7 @@
-package com.ssm.guiguTest;
+package com.ssm.guiguTest.condition;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -79,7 +78,7 @@ public class BlockQueenDemo {
          * Exception in thread "main" java.lang.IllegalStateException: Queue full
          * 	at java.util.AbstractQueue.add(AbstractQueue.java:98)
          * 	at java.util.concurrent.ArrayBlockingQueue.add(ArrayBlockingQueue.java:312)
-         * 	at com.ssm.guiguTest.BlockQueenDemo.main(BlockQueenDemo.java:21)
+         * 	at com.ssm.guiguTest.condition.BlockQueenDemo.main(BlockQueenDemo.java:21)
          */
     }
 
