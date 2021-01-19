@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 定义 advisor -->
+    <bean id="myAdvice" class="com.ssm.lagou.AOP.MyAdvice"></bean>
+    <!-- 配置规则，拦截方法名称为 find* -->
+    <bean class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="myAdvice"></property>
+        <property name="pattern" value="org.springframework.beans.*.find.*"></property>
+    </bean>
+    <!-- 定义 DefaultAdvisorAutoProxyCreator 使所有的 advisor 配置自动生效 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
+</beans>

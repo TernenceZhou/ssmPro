@@ -1,14 +1,19 @@
 package com.ssm.guiguTest;
 
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.context.annotation.Scope;
 
 /**
  * @author
  * @description
  * @date 2020/11/23
  */
+@Scope(value = "prototype")
 public class VolatileTest {
 
     public static void main(String[] args) {

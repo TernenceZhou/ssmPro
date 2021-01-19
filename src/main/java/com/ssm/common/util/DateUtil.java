@@ -1,15 +1,14 @@
 package com.ssm.common.util;
 
-import org.apache.commons.lang.StringUtils;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
+
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
-import cn.hutool.core.date.DateUnit;
 
 /**
  * 日期工具类.
@@ -346,5 +345,33 @@ public class DateUtil extends DateUtilCango {
 
         DateTime dateTime = cn.hutool.core.date.DateUtil.offsetSecond(DateUtil.strToDate("20201221000000", DateUtil.YYYYMMDDHHMMSS), -1);
         System.out.println(dateTime);
+    }
+
+    public void dateT() {
+        System.out.println(DateUtil.getCurrentDate(DateUtil.YYYYMMDDHHMMSS));
+        String format = DateUtil.format(DateUtil.dateAdd(DateUtil.getCurrentDate(), Calendar.SECOND, -1), DateUtil.YYYYMMDDHHMMSS);
+        System.out.println(format);
+
+        final Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.HOUR_OF_DAY, 2);
+        System.out.println( String.format("%s%s%s", calendar.get(Calendar.HOUR_OF_DAY),"00","00"));
+        //商业险投保日期：
+        //非即时起保，结束时间是起保时间（00:00:00) +1年-1秒
+        //即时起保，结束时间是起保时间对应日+1年 的23:59:59
+        Date date = DateUtil.strToDate("20201212000000", DateUtil.YYYYMMDDHHMMSS);
+        String format2 = DateUtil.format(DateUtil.dateAdd(date, Calendar.YEAR, 1), DateUtil.YYYYMMDDHHMMSS);
+        String rest = DateUtil.format(DateUtil.dateAdd(DateUtil.dateAdd(date, Calendar.YEAR, 1), Calendar.SECOND, -1), DateUtil.YYYYMMDDHHMMSS);
+        System.out.println(format2);
+        System.out.println(rest);
+
+        System.out.println(String.format("%s%s",DateUtil.format(DateUtil.dateAdd(DateUtil.getCurrentDate(), Calendar.WEEK_OF_YEAR, 1),DateUtil.YYYYMMDD),"235959"));
+
+        String format1 = String.format("%s%s", DateUtil.dateToYYYMMDD(DateUtil.dateAdd(DateUtil.getCurrentDate(), Calendar.YEAR, 1)), "000000");
+        System.out.println(format1);
+
+        String format3 = DateUtil.format(DateUtil
+            .dateAdd(DateUtil.strToDate(String.format("%s%s", DateUtil.dateToYYYMMDD(DateUtil.dateAdd(DateUtil.getCurrentDate(), Calendar.YEAR, 1)), "000000"), DateUtil.YYYYMMDDHHMMSS),
+                Calendar.SECOND, -1), DateUtil.YYYYMMDDHHMMSS);
+        System.out.println(format3);
     }
 }
