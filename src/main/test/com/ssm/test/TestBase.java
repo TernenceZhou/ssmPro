@@ -435,12 +435,19 @@ public final class TestBase {
         for (String s : collect) {
             System.out.println("id集合：" + s);
         }
-
+        //hashmap遍历几种方法
         Set set = map.keySet();
         Iterator iterator = set.iterator();
         while (iterator.hasNext()) {
             Object next = iterator.next();
             System.out.println(next + "---" + map.get(next));
+        }
+
+        Set<Map.Entry<String, Object>> entries = map.entrySet();
+        Iterator<Map.Entry<String, Object>> entryIterator = entries.iterator();
+        while (entryIterator.hasNext()) {
+            Map.Entry<String, Object> next = entryIterator.next();
+            System.out.println(next.getKey()  + " ----" + next.getValue());
         }
 
         for (Map.Entry<String, Object> entry : map.entrySet()) {
@@ -450,7 +457,14 @@ public final class TestBase {
         map.forEach((k, v) -> {
             System.out.println(k + " ----  " + v);
         });
+
+        map.entrySet().stream().forEach(entry -> {
+            System.out.println(entry.getKey() + " ---"  + entry.getValue());
+        });
+
+
     }
+
 
     /**
      * String  源码 compareTo方法计算方式

@@ -1,5 +1,6 @@
 package com.ssm.test.IO;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -44,6 +45,25 @@ public class IOTest {
         int len = isr.read(data);//读取字符流中的数据，用char[]数组一次性接收
         System.err.println(new String(data, 0, len));
         isr.close();
+    }
+
+
+
+    @Test
+    public void byteArrayInput() {
+        String hello = "hello world";
+        byte[] bytes = hello.getBytes();
+
+        try (final ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes)) {
+            int c;
+            inputStream.read();
+            while ((c = inputStream.read()) != -1) {
+                System.out.print((char) c);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

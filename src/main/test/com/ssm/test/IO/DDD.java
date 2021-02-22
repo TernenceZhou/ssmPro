@@ -1,6 +1,6 @@
 package com.ssm.test.IO;
 
-/**
+/** 查看jad文件操作步骤
  * javac xxx.java
  * javap -c xxx.class
  * jad xxx.class
