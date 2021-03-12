@@ -1,5 +1,7 @@
 package com.ssm.test.base.interviewQues;
 
+import org.junit.Test;
+
 /**
  * @author
  * @description
@@ -55,8 +57,8 @@ public class IntegerCompare {
         Long h = 2L;
         System.out.println(c == d);
         System.out.println(e == f);
-        System.out.println(c == (a + b));// (a+b)、== 过程发生了自动拆箱intValue()
-        System.out.println(c.equals((a+b)));//equals是比较两个对象内容 对象之间比较 (a+b)整体是装箱，想加是拆箱
+        System.out.println(c == (a + b));// (a+b)、== 过程发生了自动拆箱intValue() System.out.println(integer2.intValue() == integer.intValue() + integer1.intValue());
+        System.out.println(c.equals((a+b)));//equals是比较两个对象内容 对象之间比较 (a+b)整体是装箱，想加是拆箱 System.out.println(integer2.equals(Integer.valueOf(integer.intValue() + integer1.intValue())));
         System.out.println(g == (a+b));//g.longValue()
         System.out.println(g.equals(a+b));
         System.out.println(g.equals(a+h));
@@ -83,5 +85,21 @@ public class IntegerCompare {
          *         System.out.println(long1.equals(Long.valueOf((long)integer.intValue() + long2.longValue())));
          *     }
          */
+    }
+
+    @Test
+    public void compareInteger() {
+        int a = 1215;
+        Integer i1 = new Integer(1215);
+        Integer i2 = new Integer(1215);
+        System.out.println(i1.equals(i2));
+        System.out.println( i1 == i2);
+        System.out.println( a == i1); //会拆箱比较
+
+        String str = "a,b,c,,";
+        String[] ary = str.split(",");
+        // 预期大于 3，结果是 3
+        System.out.println(ary.length);
+
     }
 }

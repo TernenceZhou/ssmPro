@@ -7,7 +7,7 @@ import java.util.List;
  *   不可变的类 类和变量设置为final,类中不提供set方法、
  *   返回结果使用深拷贝，或者返回副本，比如String返回对应的对象copy，不是对象的直接引用
  *  优点：安全、效率
- *  不可变类天生线程安全，所以不用使用 synchronized关键字修饰
+ *  不可变类天生线程安全，所以不用使用 synchronized 关键字修饰
  *
  */
 public class ImmutetableList {
@@ -28,7 +28,7 @@ public class ImmutetableList {
     }
 
     /**
-     *提供了以下方法 后 当前类就不是安全的 因为外部可以改变list值
+     * 提供了以下方法 后 当前类就不是安全的 因为外部可以改变list值
      * 所以不是一个线程安全的类
      */
     public List getList() {

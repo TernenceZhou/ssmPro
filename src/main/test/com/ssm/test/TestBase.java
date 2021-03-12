@@ -21,6 +21,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
@@ -583,6 +584,29 @@ public final class TestBase {
         String arr[] = {"1","2","3"};
         List<String> list = Arrays.asList(arr);
         list.add("444");
+    }
+
+    @Test
+    public void longTest() {
+        Long long1 = 127L;
+        Long long2 = Long.valueOf(127L);
+        Long long3 = new Long(127L);
+        System.out.println(long1 == long2);
+        System.out.println(long1 == long3);
+    }
+
+    /**
+     * 集合转数组时 正确的操作
+     * 创建对应的数组 大小是 collection.size()
+     */
+    @Test
+    public void arrayList() {
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        String arr[] = new String[list.size()];
+        arr = (String[]) list.toArray();
     }
 
 }
