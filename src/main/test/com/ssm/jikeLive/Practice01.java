@@ -60,6 +60,7 @@ public class Practice01 {
                 Thread th1 = new Thread(()->{
                     test.add10K();
                 });
+                System.out.println("");
                 Thread th2 = new Thread(()->{
                     test.add10K();
                 });

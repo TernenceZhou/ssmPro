@@ -85,7 +85,7 @@ public class ITransferImpl_safe01 implements ITransfer{
          *
          * 2、str1和str2的identityHashCode不一样，虽然String重写了hashCode方法，identityHashCode永远返回根据对象物理内存地址产生的hash值，所以每个String对象的物理地址不一样，identityHashCode也会不一样。
          *
-         * 3、User对象没重写hashCode方法，所以hashCode和identityHashCode返回的值一样。
+         * 3、User对象没重写hashCode方法，所以hashCode和 identityHashCode 返回的值一样。
          */
 
     }

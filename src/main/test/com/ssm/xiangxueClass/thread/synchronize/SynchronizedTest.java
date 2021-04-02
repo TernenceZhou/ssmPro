@@ -18,8 +18,6 @@ public class SynchronizedTest {
 
 
 
-
-
     static class WorkThread extends Thread{
         private SynchronizedTest sy;
         public WorkThread(SynchronizedTest sy){

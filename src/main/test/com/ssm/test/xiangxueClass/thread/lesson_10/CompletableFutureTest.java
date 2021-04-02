@@ -1,9 +1,9 @@
 package com.ssm.test.xiangxueClass.thread.lesson_10;
 
-import org.junit.Test;
-
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+
+import org.junit.Test;
 
 /**
  * @author
@@ -14,7 +14,6 @@ public class CompletableFutureTest {
 
     @Test
     public void com() throws ExecutionException, InterruptedException {
-
         // 在 Java8 中，推荐使用 Lambda 来替代匿名 Supplier 实现类
         CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
             try {

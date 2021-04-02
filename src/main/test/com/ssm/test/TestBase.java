@@ -114,6 +114,9 @@ public final class TestBase {
 
     }
 
+    /**
+     *  lock demo
+     */
     @Test
     public void lock() {
         Lock lock = new ReentrantLock();

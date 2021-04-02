@@ -20,7 +20,7 @@ public class SynClzAndInst {
 
         @Override
         public void run() {
-            System.out.println("TestClass is running...");
+            System.out.println(Thread.currentThread().getName() + "TestClass is running...");
             synClass();
         }
     }
@@ -80,7 +80,7 @@ public class SynClzAndInst {
     }
 
     public static void main(String[] args) {
-        //对象锁针对的 SynClzAndInst实例 如果线程
+        //对象锁针对的 SynClzAndInst 实例 如果线程
         SynClzAndInst synClzAndInst = new SynClzAndInst();
         Thread t1 = new Thread(new InstanceSyn(synClzAndInst));
 

@@ -2,6 +2,7 @@ package com.ssm.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.junit.Test;
 
@@ -20,12 +21,17 @@ public class ArrayListTest {
             add("1");add("22");
         }};
 
+
+        //随机数代替 Math.random();
+        ThreadLocalRandom current = ThreadLocalRandom.current();
+        Math.random();
         for (String item : list) {
-            if ("3".equals(item)) {
+            if ("2".equals(item)) {
                 list.remove(item);
             }
         }
         list.forEach(x->{
+//            list.remove(x);
             System.out.println(x);
         });
     }

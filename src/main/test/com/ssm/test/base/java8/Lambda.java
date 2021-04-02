@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -94,5 +96,22 @@ public class Lambda {
 
 
 
+    }
+
+    @Test
+    public void option() {
+        String a = null;
+        String b = "BBB";
+
+        Optional<String> a2 = Optional.ofNullable(a);
+        Optional<String> a3= Optional.ofNullable(b);
+
+        // Optional<String> a1 = Optional.of(a);
+        Optional.ofNullable(b).ifPresent(new Consumer<String>() {
+            @Override
+            public void accept(String s) {
+
+            }
+        });
     }
 }

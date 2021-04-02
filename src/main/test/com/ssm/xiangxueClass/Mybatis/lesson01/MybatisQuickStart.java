@@ -40,6 +40,7 @@ public class MybatisQuickStart {
     public void start(){
         SqlSession sqlSession = sqlSessionFactory.openSession();
         UserDao userDao = sqlSession.getMapper(UserDao.class);
+        sqlSession.selectOne("");
         UserInfo user = userDao.getUser();
         System.out.println(user.toString());
     }

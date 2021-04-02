@@ -7,6 +7,9 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.junit.Test;
 
+/**
+ * 可重入锁
+ */
 public class ReentrantLockTest {
 
     public static void main(String[] args) {
