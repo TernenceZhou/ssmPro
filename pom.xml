@@ -353,6 +353,39 @@
             <artifactId>bcpkix-jdk15on</artifactId>
             <version>1.54</version>
         </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-generator</artifactId>
+                <version>3.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.3.1</version>
+            </dependency>
+            <!--代码生成器-->
+            <!-- MP 核心库 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>3.0.5</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.velocity</groupId>
+                <artifactId>velocity-engine-core</artifactId>
+                <version>2.2</version>
+            </dependency>
+
+
+            <!-- https://mvnrepository.com/artifact/org.openjdk.jol/jol-cli -->
+            <!--查看mardWord对象头工具-->
+            <dependency>
+                <groupId>org.openjdk.jol</groupId>
+                <artifactId>jol-cli</artifactId>
+                <version>0.6</version>
+            </dependency>
+
+
         </dependencies>
 
         <profiles>

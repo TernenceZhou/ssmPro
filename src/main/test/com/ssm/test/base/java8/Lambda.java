@@ -21,18 +21,20 @@ import com.ssm.model.UserInfo;
  * @author
  * @description
  * @date 2020/9/11
+ * java8 lambda表达式集合操作常见用法大全
+ * https://blog.csdn.net/u013795157/article/details/106241173
  */
 public class Lambda {
 
     @Test
-    public void lam(){
+    public void lam() {
 
         // 1. Individual values
         Stream stream = Stream.of("a", "b", "c");
         // 2. Arrays
-        String [] strArray = new String[] {"a", "b", "c"};
+        String[] strArray = new String[] { "a", "b", "c" };
 
-        IntStream.of(new int[]{1, 2, 3}).forEach(System.out::println);
+        IntStream.of(new int[] { 1, 2, 3 }).forEach(System.out::println);
 
         List<AppLog> list = new ArrayList<>();
         AppLog appLog = new AppLog();
@@ -43,10 +45,12 @@ public class Lambda {
         AppLog appLog3 = new AppLog();
         appLog3.setLogId("3");
 
-        list.add(appLog);list.add(appLog2);list.add(appLog3);
+        list.add(appLog);
+        list.add(appLog2);
+        list.add(appLog3);
 
         List<String> collect = list.stream().map(AppLog::getLogId).collect(Collectors.toList());
-        collect.forEach(o->{
+        collect.forEach(o -> {
             System.out.println(o);
         });
 
@@ -72,12 +76,12 @@ public class Lambda {
         u1.setId("3");
         u1.setName("bbb");
         List<UserInfo> list = new ArrayList();
-        list.add(u1);list.add(u2);
+        list.add(u1);
+        list.add(u2);
 
-
-//        final Map<String, Long> groupMap = list.stream().collect(Collectors.groupingBy(UserInfo::getName,Collectors.counting()));
-//        Long aaa = groupMap.get("aaa");
-//        System.out.println(aaa);
+        //        final Map<String, Long> groupMap = list.stream().collect(Collectors.groupingBy(UserInfo::getName,Collectors.counting()));
+        //        Long aaa = groupMap.get("aaa");
+        //        System.out.println(aaa);
     }
 
     @Test
@@ -89,12 +93,10 @@ public class Lambda {
 
         System.out.println(i);
         Map map = new HashMap();
-        map.put("1",1);
+        map.put("1", 1);
         map.remove("2");
 
-        map.put("","");
-
-
+        map.put("", "");
 
     }
 
@@ -104,7 +106,7 @@ public class Lambda {
         String b = "BBB";
 
         Optional<String> a2 = Optional.ofNullable(a);
-        Optional<String> a3= Optional.ofNullable(b);
+        Optional<String> a3 = Optional.ofNullable(b);
 
         // Optional<String> a1 = Optional.of(a);
         Optional.ofNullable(b).ifPresent(new Consumer<String>() {
@@ -113,5 +115,31 @@ public class Lambda {
 
             }
         });
+    }
+
+    @Test
+    public void sort() {
+
+        List<FileList> fileLists = new ArrayList<>();
+        FileList a = new FileList();
+        a.setFileId("123");
+        FileList b = new FileList();
+        b.setFileId("234");
+        FileList c = new FileList();
+        c.setFileId("555");
+        fileLists.add(a);
+        fileLists.add(b);
+        fileLists.add(c);
+        //倒叙排列
+        fileLists.stream().sorted((o1, o2) -> o2.getFileId().compareTo(o1.getFileId())).collect(Collectors.toList()).stream().findFirst();
+
+    }
+
+
+    @Test
+    public void hash() {
+        HashMap map = new HashMap();
+        map.put("","");
+        System.out.println();
     }
 }

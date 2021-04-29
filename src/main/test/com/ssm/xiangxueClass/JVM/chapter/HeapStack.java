@@ -23,8 +23,8 @@ public class HeapStack {
     public static void main(String[] args) {
         HeapStack stack = new HeapStack();
         try {
-            //stack.digui(); //调用后显示的栈帧深度为.3393
-            stack.digui2(30,"小周");//显示栈帧深度为2105
+            stack.digui(); //调用后显示的栈帧深度为.3393
+            //stack.digui2(30,"小周");//显示栈帧深度为2105
             /**
              * 由上可得java.lang.StackOverflowError 可以考虑是不是由于程序递归深度没有得到控制
              *

@@ -1,11 +1,10 @@
-package com.ssm.xiangxueClass.thread.synchronize;/**
- * @author
- */
+package com.ssm.xiangxueClass.thread.synchronize;
 
 /**
  * @author
  * @description
  * @date 2021/3/31
+ * sync(this|obj)都是针对的代码块 底层是现实moniter
  */
 public class SyncBlock {
 
@@ -16,9 +15,12 @@ public class SyncBlock {
     }
 
         public static void main(String[] args) {
-            SyncBlock syncBlock = new SyncBlock("");
+            Object o1 = new Object();
+            SyncBlock syncBlock = new SyncBlock(o1);
 //            syncBlock.synObj();
-            syncBlock.synShili();
+//            syncBlock.synShili();
+            //syncBlock.synthis();
+            syncBlock.synObj();
 
         }
 
@@ -26,6 +28,18 @@ public class SyncBlock {
     private void synObj() {
         synchronized (o1) {
             System.out.println("this is sync o1");
+        }
+    }
+
+    private void synthis() {
+        synchronized (this) {
+            System.out.println("this is sync o1");
+        }
+    }
+
+    private synchronized void synStatic() {
+        synchronized (SyncBlock.class) {
+            System.out.println("this is sync class");
         }
     }
 

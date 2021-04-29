@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.atomic.LongAdder;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.stream.Collectors;
@@ -611,5 +612,42 @@ public final class TestBase {
         String arr[] = new String[list.size()];
         arr = (String[]) list.toArray();
     }
+
+    @Test
+    public void byteAdd() {
+//        byte b1 = 1;
+//        byte b2 = 2;
+//        byte b3 = b1 + b2;
+//        System.out.println( b3);
+
+        final byte b1 = 1;
+        final byte b2 = 2;
+        final byte b3 = b1 + b2;
+        System.out.println( b3);
+        System.out.println(System.getProperty("user.dir"));
+    }
+
+    @Test
+    public void testInern() {
+        String s1 = new StringBuilder("计算机").append("科学").toString();
+        String s2 = new StringBuilder("ja").append("va").toString();
+
+        System.out.println(s1.intern() == s1);
+        System.out.println(s2.intern() == s2);
+
+
+    }
+
+    @Test
+    public void longAdder() {
+        LongAdder longAdder = new LongAdder();
+        longAdder.add(2);
+        //在低速情况下比atomicInteger慢 多线程情况中LongAdder快 使用的是 Cell 数组 通过hash定位到位置然后
+
+
+    }
+
+
+
 
 }

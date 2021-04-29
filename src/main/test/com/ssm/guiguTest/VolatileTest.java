@@ -1,10 +1,7 @@
 package com.ssm.guiguTest;
 
-import java.util.ArrayList;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.annotation.Scope;
 
