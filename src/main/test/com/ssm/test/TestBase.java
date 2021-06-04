@@ -21,7 +21,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.Set;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.LongAdder;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -116,7 +115,7 @@ public final class TestBase {
     }
 
     /**
-     *  lock demo
+     * lock demo
      */
     @Test
     public void lock() {
@@ -452,7 +451,7 @@ public final class TestBase {
         Iterator<Map.Entry<String, Object>> entryIterator = entries.iterator();
         while (entryIterator.hasNext()) {
             Map.Entry<String, Object> next = entryIterator.next();
-            System.out.println(next.getKey()  + " ----" + next.getValue());
+            System.out.println(next.getKey() + " ----" + next.getValue());
         }
 
         for (Map.Entry<String, Object> entry : map.entrySet()) {
@@ -464,12 +463,10 @@ public final class TestBase {
         });
 
         map.entrySet().stream().forEach(entry -> {
-            System.out.println(entry.getKey() + " ---"  + entry.getValue());
+            System.out.println(entry.getKey() + " ---" + entry.getValue());
         });
 
-
     }
-
 
     /**
      * String  源码 compareTo方法计算方式
@@ -568,9 +565,11 @@ public final class TestBase {
      * javac xxx.java
      * 然后
      * jad xxx.class
+     *
+     * https://blog.csdn.net/qq_31807385/article/details/83988732
      */
     @Test
-    public void testPractice() {
+    public void testAtomicPractice() {
         int b = 100;
         b += (++b);// i  =  i +  (++i)   201
         System.out.println(b);
@@ -585,7 +584,7 @@ public final class TestBase {
      */
     @Test
     public void testArrToList() {
-        String arr[] = {"1","2","3"};
+        String arr[] = { "1", "2", "3" };
         List<String> list = Arrays.asList(arr);
         list.add("444");
     }
@@ -615,15 +614,15 @@ public final class TestBase {
 
     @Test
     public void byteAdd() {
-//        byte b1 = 1;
-//        byte b2 = 2;
-//        byte b3 = b1 + b2;
-//        System.out.println( b3);
+        //        byte b1 = 1;
+        //        byte b2 = 2;
+        //        byte b3 = b1 + b2;
+        //        System.out.println( b3);
 
         final byte b1 = 1;
         final byte b2 = 2;
         final byte b3 = b1 + b2;
-        System.out.println( b3);
+        System.out.println(b3);
         System.out.println(System.getProperty("user.dir"));
     }
 
@@ -635,7 +634,6 @@ public final class TestBase {
         System.out.println(s1.intern() == s1);
         System.out.println(s2.intern() == s2);
 
-
     }
 
     @Test
@@ -644,10 +642,29 @@ public final class TestBase {
         longAdder.add(2);
         //在低速情况下比atomicInteger慢 多线程情况中LongAdder快 使用的是 Cell 数组 通过hash定位到位置然后
 
-
     }
 
+    @Test
+    public void StringCompile1() {
+        //字符串编译器优化
+        String a = "a";
+        String b = a + "b";
+        String c = "ab";
+        System.out.println(b == c); //这里返回false 因为a是变量 不是常量 如果要让 b==c 就需要把a加上final
 
+        final String a1 = "a";
+        String b1 = a1 + "b";
+        String c1 = "ab";
+        System.out.println("a1 改为final" + b1 == c1);
+    }
 
+    @Test
+    public void StringCompile2() {
+        //字符串编译器优化
+        String a = "a" + "b" + "1";
+        String b = "ab1";
+        System.out.println(a == b); //编译器优化会把 a加载到常量池中 所以b 会直接使用 a的引用
+
+    }
 
 }

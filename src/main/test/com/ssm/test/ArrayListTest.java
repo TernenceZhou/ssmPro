@@ -17,10 +17,10 @@ public class ArrayListTest {
         list.add("1");
         list.add("2");
         list.add("3");
-        List<String> list2 = new ArrayList<String>(){{
-            add("1");add("22");
+        List<String> list2 = new ArrayList<String>() {{
+            add("1");
+            add("22");
         }};
-
 
         //随机数代替 Math.random();
         ThreadLocalRandom current = ThreadLocalRandom.current();
@@ -30,9 +30,18 @@ public class ArrayListTest {
                 list.remove(item);
             }
         }
-        list.forEach(x->{
-//            list.remove(x);
+        list.forEach(x -> {
+            //            list.remove(x);
             System.out.println(x);
         });
     }
+
+    //    @Test
+    //    public void compareLambda() {
+    //        List<UserInfo> list = new ArrayList<>();
+    //        list.sort((user1,user2)-> {
+    //
+    //            return user1
+    //        });
+    //    }
 }

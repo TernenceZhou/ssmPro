@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
+import org.junit.Test;
 
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
@@ -32,9 +33,9 @@ public class DateUtil extends DateUtilCango {
         final SimpleDateFormat dateFormat = new SimpleDateFormat(format);
         return dateFormat.format(date);
     }
-    
+
     /**
-     * 日期转换为Date类型. 
+     * 日期转换为Date类型.
      */
     public static Date parse(String date, String format) {
         try {
@@ -44,13 +45,13 @@ public class DateUtil extends DateUtilCango {
             final SimpleDateFormat dateFormat = new SimpleDateFormat(format);
             return dateFormat.parse(date);
         } catch (Exception e) {
-//            LogUtil.error("日期转换异常", e);
+            //            LogUtil.error("日期转换异常", e);
         }
         return null;
     }
-    
+
     /**
-     * 亚太返回时间转换. 
+     * 亚太返回时间转换.
      */
     public static Date parseYtDate(String date) {
         try {
@@ -65,7 +66,7 @@ public class DateUtil extends DateUtilCango {
             }
             return dateFormat.parse(date);
         } catch (Exception e) {
-//            LogUtil.error("日期转换异常", e);
+            //            LogUtil.error("日期转换异常", e);
         }
         return null;
     }
@@ -147,6 +148,7 @@ public class DateUtil extends DateUtilCango {
 
     /**
      * 格式化今天日期.
+     *
      * @param format 日期格式
      */
     public static String getToday(String format) {
@@ -157,8 +159,8 @@ public class DateUtil extends DateUtilCango {
     /**
      * 获取N天前后的日期.
      *
-     * @param date 当前时间
-     * @param i 加减长度
+     * @param date   当前时间
+     * @param i      加减长度
      * @param format 格式
      * @return 结果
      */
@@ -175,7 +177,7 @@ public class DateUtil extends DateUtilCango {
      *
      * @param dateStr1 日期
      * @param dateStr2 日期
-     * @param format 格式
+     * @param format   格式
      * @return string 转换后结果
      */
     public static Boolean getCompareDate(String dateStr1, String dateStr2, String format) throws ParseException {
@@ -190,7 +192,7 @@ public class DateUtil extends DateUtilCango {
      *
      * @param dateStr1 日期
      * @param dateStr2 日期
-     * @param format 格式
+     * @param format   格式
      * @return string 转换后结果
      */
     public static Boolean getCompareDateGt(String dateStr1, String dateStr2, String format) throws ParseException {
@@ -203,10 +205,10 @@ public class DateUtil extends DateUtilCango {
     /**
      * 日期 + N.
      *
-     * @param date 日期
-     * @param type 维度 年月日
+     * @param date   日期
+     * @param type   维度 年月日
      * @param amount N
-     * */
+     */
     public static Date dateAdd(Date date, int type, int amount) {
         final Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -216,47 +218,44 @@ public class DateUtil extends DateUtilCango {
 
     /**
      * date2比date1多的天数
+     *
      * @param date1
      * @param date2
      * @return
      */
-    public static int differentDays(Date date1, Date date2)
-    {
+    public static int differentDays(Date date1, Date date2) {
         Calendar cal1 = Calendar.getInstance();
         cal1.setTime(date1);
 
         Calendar cal2 = Calendar.getInstance();
         cal2.setTime(date2);
-        int day1= cal1.get(Calendar.DAY_OF_YEAR);
+        int day1 = cal1.get(Calendar.DAY_OF_YEAR);
         int day2 = cal2.get(Calendar.DAY_OF_YEAR);
 
         int year1 = cal1.get(Calendar.YEAR);
         int year2 = cal2.get(Calendar.YEAR);
-        if(year1 != year2)   //不同一年
+        if (year1 != year2)   //不同一年
         {
-            int timeDistance = 0 ;
-            for(int i = year1 ; i < year2 ; i ++)
-            {
-                if(i%4==0 && i%100!=0 || i%400==0)    //闰年
+            int timeDistance = 0;
+            for (int i = year1; i < year2; i++) {
+                if (i % 4 == 0 && i % 100 != 0 || i % 400 == 0)    //闰年
                 {
                     timeDistance += 366;
-                }
-                else    //不是闰年
+                } else    //不是闰年
                 {
                     timeDistance += 365;
                 }
             }
 
-            return timeDistance + (day2-day1) ;
-        }
-        else    //同一年
+            return timeDistance + (day2 - day1);
+        } else    //同一年
         {
-            System.out.println("判断day2 - day1 : " + (day2-day1));
-            return day2-day1;
+            System.out.println("判断day2 - day1 : " + (day2 - day1));
+            return day2 - day1;
         }
     }
 
-    public static int getAgeByBirth(Date birthday){
+    public static int getAgeByBirth(Date birthday) {
         if (birthday == null) {
             return 0;
         }
@@ -267,7 +266,7 @@ public class DateUtil extends DateUtilCango {
         Calendar bir = Calendar.getInstance();
         bir.setTime(birthday);
         /*如果生日大于当前日期，则抛出异常：出生日期不能大于当前日期*/
-        if(cal.before(birthday)){
+        if (cal.before(birthday)) {
             return 0;
         }
         /*取出当前年月日*/
@@ -281,9 +280,9 @@ public class DateUtil extends DateUtilCango {
         /*大概年龄是当前年减去出生年*/
         int age = yearNow - yearBirth;
         /*如果出当前月小与出生月，或者当前月等于出生月但是当前日小于出生日，那么年龄age就减一岁*/
-        if(monthNow < monthBirth || (monthNow == monthBirth && dayNow < dayBirth)){
-                 age--;
-             }
+        if (monthNow < monthBirth || (monthNow == monthBirth && dayNow < dayBirth)) {
+            age--;
+        }
         return age;
     }
 
@@ -319,6 +318,12 @@ public class DateUtil extends DateUtilCango {
         return dateString;
     }
 
+    @Test
+    public void testDiff() {
+        int i = DateUtil.differentDays(DateUtil.strToDate("2021-05-01", DateUtil.YYYY_MM_DD), DateUtil.getCurrentDate());
+        System.out.println(i);
+    }
+
     public static void main(String[] args) throws ParseException {
         final Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR_OF_DAY, 2);
@@ -326,15 +331,14 @@ public class DateUtil extends DateUtilCango {
         String format = String.format("%s:%s", calendar.get(Calendar.HOUR_OF_DAY), "00");
         System.out.println(format);
         String currentDate = DateUtil.getCurrentDate(DateUtil.YYYY_MM_DD);
-        System.out.println(currentDate+" " + format);
+        System.out.println(currentDate + " " + format);
         System.out.println(DateUtil.getCurrentDate(DateUtil.YYYYMMDD_HHMMSS));
         String format1 = DateUtil.format(DateUtil.dateAdd(DateUtil.getCurrentDate(), Calendar.SECOND, -1), DateUtil.YYYY_MM_DD);
         String dayBeforeNDay = DateUtil.getDayBeforeNDay(format1, 1, DateUtil.YYYY_MM_DD);
         System.out.println(format1);
         System.out.println(dayBeforeNDay);
 
-        String a = DateUtil.format(DateUtil.dateAdd(DateUtil.parse(
-                "2020-11-09 13:10:10",DateUtil.YYYY_MM_DD), Calendar.MONTH, 12), DateUtil.YYYY_MM_DD);
+        String a = DateUtil.format(DateUtil.dateAdd(DateUtil.parse("2020-11-09 13:10:10", DateUtil.YYYY_MM_DD), Calendar.MONTH, 12), DateUtil.YYYY_MM_DD);
         String b = DateUtil.getDayBeforeNDay(a, 1, DateUtil.YYYY_MM_DD);
         //System.out.println( a + "\n" + b);
 
@@ -354,7 +358,7 @@ public class DateUtil extends DateUtilCango {
 
         final Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.HOUR_OF_DAY, 2);
-        System.out.println( String.format("%s%s%s", calendar.get(Calendar.HOUR_OF_DAY),"00","00"));
+        System.out.println(String.format("%s%s%s", calendar.get(Calendar.HOUR_OF_DAY), "00", "00"));
         //商业险投保日期：
         //非即时起保，结束时间是起保时间（00:00:00) +1年-1秒
         //即时起保，结束时间是起保时间对应日+1年 的23:59:59
@@ -364,7 +368,7 @@ public class DateUtil extends DateUtilCango {
         System.out.println(format2);
         System.out.println(rest);
 
-        System.out.println(String.format("%s%s",DateUtil.format(DateUtil.dateAdd(DateUtil.getCurrentDate(), Calendar.WEEK_OF_YEAR, 1),DateUtil.YYYYMMDD),"235959"));
+        System.out.println(String.format("%s%s", DateUtil.format(DateUtil.dateAdd(DateUtil.getCurrentDate(), Calendar.WEEK_OF_YEAR, 1), DateUtil.YYYYMMDD), "235959"));
 
         String format1 = String.format("%s%s", DateUtil.dateToYYYMMDD(DateUtil.dateAdd(DateUtil.getCurrentDate(), Calendar.YEAR, 1)), "000000");
         System.out.println(format1);

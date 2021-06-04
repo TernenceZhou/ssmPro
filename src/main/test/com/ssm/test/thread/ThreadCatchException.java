@@ -4,7 +4,6 @@ package com.ssm.test.thread;/**
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -49,6 +48,11 @@ public class ThreadCatchException {
 
         ThreadPoolExecutor poolExecutor = new ThreadPoolExecutor(2, 10, 20, TimeUnit.SECONDS, blockingQueue, threadFactory, userRejectHandler);
 
+        //启动一个核心线程预创建
+        poolExecutor.prestartCoreThread();
+        //启动所有核心线程
+        poolExecutor.prestartAllCoreThreads();
+
         Thread t = new Work();
         for (int i = 0; i < 400; i++) {
             poolExecutor.execute(t);
@@ -67,6 +71,7 @@ public class ThreadCatchException {
             super.beforeExecute(t, r);
         }
     }
+
     /**
      * 自定义拒绝策略.
      */

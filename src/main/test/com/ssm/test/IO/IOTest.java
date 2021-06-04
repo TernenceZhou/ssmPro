@@ -1,5 +1,7 @@
 package com.ssm.test.IO;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,8 +49,6 @@ public class IOTest {
         isr.close();
     }
 
-
-
     @Test
     public void byteArrayInput() {
         String hello = "hello world";
@@ -66,4 +66,49 @@ public class IOTest {
 
     }
 
+    /**
+     * 传统方式 读写文件.
+     * 时间20+ ms
+     */
+    @Test
+    public void NoBufferInputStream() {
+        long begin = System.currentTimeMillis();
+        try (FileInputStream input = new FileInputStream("E:/a.png"); FileOutputStream output = new FileOutputStream("E:/aa.png")) {
+            byte[] bytes = new byte[1024];
+            int i;
+            while ((i = input.read(bytes)) != -1) {
+                output.write(bytes, 0, i);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("复制文件发生异常");
+        }
+        System.out.println("常规流读写，总共耗时ms：" + (System.currentTimeMillis() - begin));
+    }
+
+    /**
+     * 用缓冲流去复制  减少IO次数，提高读写效率。
+     * 只有个位数的ms
+     * 不带缓冲流 当读取到一个字符或一个字节的时候 就会直接输出数据了
+     * 而缓冲流 当达到了缓冲区的最大值 才会一次性输出数据
+     */
+    @Test
+    public void bufferIoCopy() {
+        long start = System.currentTimeMillis();
+        try {
+            FileInputStream fi = new FileInputStream("E:/a.png");
+            FileOutputStream fo = new FileOutputStream("E:/aaa.png");
+            BufferedInputStream bis = new BufferedInputStream(fi);
+            BufferedOutputStream bos = new BufferedOutputStream(fo);
+            byte b[] = new byte[1024];
+            int i;
+            while ((i = bis.read(b)) != -1) {
+                bos.write(b,0,i);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("常规流读写，总共耗时ms：" + (System.currentTimeMillis() - start));
+
+    }
 }

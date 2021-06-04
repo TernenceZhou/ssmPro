@@ -10,7 +10,9 @@ import java.util.LinkedHashMap;
  * -Xms5M -Xmx5M -XX:+PrintGC 设置jvm启动参数
  * 出现OutofMemeryError 需要用Throwable来捕获
  * java.lang.OutOfMemoryError: Java heap space 一般是由于巨型对象的存在比如大数组String str[] = new String[100000000];
- * java.lang.OutOfMemoryError: GC overhead limit exceeded 由于GC
+ * java.lang.OutOfMemoryError: GC overhead limit exceeded 由于每次GC垃圾收集的东西太少导致
+ * young GC eden from to
+ * Full GC
  */
 public class HeapOOME {
 
