@@ -30,6 +30,9 @@ public class TestThreadPoolExecutor<T> {
         Future<?> submit = poolExecutor.submit(new WorkThread());
         poolExecutor.shutdown(); //设置线程池的状态，中断 没有执行任务的线程
         poolExecutor.shutdownNow();// 中断所有执行或者没有执行的线程
+        //关闭线程原理
+        //遍历线程池中的工作线程 去调用它的interrupt方法 内部打印了一个标识来
+
     }
 
     /**

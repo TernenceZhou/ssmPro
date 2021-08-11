@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Console;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.sax.Excel03SaxReader;
 import cn.hutool.poi.excel.sax.Excel07SaxReader;
@@ -29,7 +30,7 @@ public class ExcelSaxReadTest {
 		reader.read("aaa.xlsx", 0);
 		
 		//工具化快速读取
-		ExcelUtil.read07BySax("aaa.xlsx", 0, createRowHandler());
+		ExcelUtil.readBySax("aaa.xlsx", 0, createRowHandler());
 	}
 	
 	@Test
@@ -37,20 +38,19 @@ public class ExcelSaxReadTest {
 		Excel03SaxReader reader = new Excel03SaxReader(createRowHandler());
 		reader.read("aaa.xls", 1);
 //		Console.log("Sheet index: [{}], Sheet name: [{}]", reader.getSheetIndex(), reader.getSheetName());
-		ExcelUtil.read03BySax("aaa.xls", 1, createRowHandler());
+		ExcelUtil.readBySax("aaa.xls", 1, createRowHandler());
 	}
 	
 	private RowHandler createRowHandler() {
 		return new RowHandler() {
-
-			@Override
-			public void handle(int sheetIndex, int rowIndex, List<Object> rowlist) {
-//				Console.log("[{}] [{}] {}", sheetIndex, rowIndex, rowlist);
-				if(5 != rowIndex && 6 != rowIndex) {
-					//测试样例中除第五行、第六行都为非空行
-					Assert.assertTrue(CollUtil.isNotEmpty(rowlist));
-				}
-			}
-		};
+            @Override
+            public void handle(int i, long l, List<Object> list) {
+                Console.log("[{}] [{}] {}", i, l, list);
+                if(5 != i && 6 != i) {
+                    //测试样例中除第五行、第六行都为非空行
+                    Assert.assertTrue(CollUtil.isNotEmpty(list));
+                }
+            }
+        };
 	}
 }

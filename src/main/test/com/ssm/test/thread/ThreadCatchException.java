@@ -22,6 +22,7 @@ import org.junit.Test;
  */
 public class ThreadCatchException {
 
+    //直接 重写异常Handler
     @Test
     public void caugh() {
 
@@ -56,6 +57,7 @@ public class ThreadCatchException {
         Thread t = new Work();
         for (int i = 0; i < 400; i++) {
             poolExecutor.execute(t);
+            poolExecutor.submit(t);
         }
 
     }

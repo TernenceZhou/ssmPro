@@ -41,7 +41,7 @@ public class JavaProxyDemo {
     public static void main(String[] args) {
         JDKProxy proxy = new JDKProxy();
         Car carInstance = (Car) proxy.getInstance(new Taxi());
-        //carInstance.runing();
+        carInstance.runing();
 
         Bus bus = new Bus();
         Runnable runnable = bus::runing;
@@ -51,6 +51,7 @@ public class JavaProxyDemo {
         new Thread(runnable).start();
 
         //car.runing();
+
     }
 
     static class JDKProxy implements InvocationHandler {

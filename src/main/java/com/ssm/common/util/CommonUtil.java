@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Administrator on 2016/8/30.
@@ -92,4 +93,14 @@ public class CommonUtil {
         }
     }
 
+    /**
+     * 线程睡眠.
+     */
+    public static void commonSleep(long i) {
+        try {
+            TimeUnit.MILLISECONDS.sleep(i);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

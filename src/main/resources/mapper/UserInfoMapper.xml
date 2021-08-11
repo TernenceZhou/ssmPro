@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>    
 <!DOCTYPE mapper    
-PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"    
-"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
 
 <mapper namespace="com.ssm.dao.UserDao">
     <!--自定义resultMap可以尽可能的解耦-->
     <resultMap id="userMap" type="com.ssm.model.UserInfo">
         <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="id"/>
-        <association columnPrefix="user_">
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+
+        <!--<association property="books" resultMap="bookResult"/>-->
+        <!--<association columnPrefix="user_">-->
             <!--association 一对一 嵌套结果 针对于userInfo有另外一个实体类-->
             <!-- property ：对应实体类中的属性名，必填项。-->
             <!-- javaType ： 属性对应的 Java 类型 。  resultMap ： 可以直接使用现有的 resultMap ，而不需要在这里配置映射关系。-->
@@ -22,12 +23,12 @@ PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
             <!-- select ：另 一个映射查询的 id, MyBatis 会额外执行这个查询获取嵌套对象的结果 。  column ：列名（或别名），将主查询中列的结果作为嵌套查询的 参数。-->
             <!-- fetchType ：数据加载方式，可选值为 lazy 和 eager，分别为延迟加载和积极加载 ，这个配置会覆盖全-->
             <!--局的 lazyLoadingEnabled 配置；-->
-        </association>
+        <!--</association>-->
         <!--一个人有多本书-->
         <collection property="books" ofType="Book" resultMap = "bookResult"/>
     </resultMap>
 
-    <resultMap id="bookResult" type="BookVO">
+    <resultMap id="bookResult" type="com.ssm.vo.BookVO">
         <id property="bookId" column="bookId"/>
         <result property="name" column="name"/>
         <result property="number" column="number"/>

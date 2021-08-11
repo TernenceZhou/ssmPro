@@ -18,7 +18,8 @@ public class MpGenerator {
 
     public static void main(String[] args) {
         // jdbc配置
-        final String dbUrl = "jdbc:mysql://10.42.0.147:3306/fushun_insurance";
+        //final String dbUrl = "jdbc:mysql://10.42.0.147:3306/fushun_insurance";
+        final String dbUrl = "jdbc:mysql://10.42.0.147:3306/insurance_data";
         final String dbUsername = "root";
         final String dbPassword = "cango";
         final String driverName = "com.mysql.jdbc.Driver";
