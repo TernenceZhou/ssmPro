@@ -1,4 +1,4 @@
-package com.ssm.jikeLive.设计模式.lesson41;
+package com.ssm.jikeLive.designPatterns.lesson41;
 
 import java.util.concurrent.atomic.AtomicLong;
 

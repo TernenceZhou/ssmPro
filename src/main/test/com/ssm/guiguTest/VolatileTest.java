@@ -3,7 +3,10 @@ package com.ssm.guiguTest;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.Test;
+import org.springframework.aop.framework.AopContext;
 import org.springframework.context.annotation.Scope;
+
+import com.ssm.xiangxueClass.spring.lesson14_mvc.service.UserService;
 
 /**
  * @author

@@ -1,4 +1,4 @@
-package com.ssm.jikeLive.设计模式;
+package com.ssm.jikeLive.designPatterns;
 
 /**
  * 鸵鸟

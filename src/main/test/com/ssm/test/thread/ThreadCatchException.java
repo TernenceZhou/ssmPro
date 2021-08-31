@@ -110,6 +110,13 @@ public class ThreadCatchException {
         public Thread newThread(Runnable r) {
             String name = this.namePrefix + nexId.getAndIncrement();
             Thread t = new Thread(null, r, name, 0);
+            //异常情况捕获
+            t.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+                @Override
+                public void uncaughtException(Thread t, Throwable e) {
+                    System.out.println("线程出现异常~");
+                }
+            });
             System.out.println(t.getName());
             return t;
         }

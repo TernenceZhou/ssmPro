@@ -1,11 +1,12 @@
 package com.ssm.xiangxueClass.spring.class04.cap08.config;
 
-import com.ssm.xiangxueClass.spring.class04.cap08.bean.Bird;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.ssm.xiangxueClass.spring.class04.cap08.bean.Bird;
 
 /**
+ * @PropertySource 可以直接导入资源文件
  * @author
  * @description
  * @date 2019/10/23
@@ -17,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 public class Cap8MainConfig {
 
     @Bean
-    public Bird bird(){
+    public Bird bird() {
         return new Bird();
     }
 }

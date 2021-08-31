@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import javax.swing.text.html.Option;
+
 import org.junit.Test;
 
 import com.ssm.model.AppLog;
@@ -141,5 +143,14 @@ public class Lambda {
         HashMap map = new HashMap();
         map.put("","");
         System.out.println();
+    }
+
+    @Test
+    public void ofNullable() {
+        String a = null;
+        String b = "";
+        String s = Optional.ofNullable(b).orElse("2");
+        String ss = Optional.of(b).orElse("2");
+        System.out.println(ss);
     }
 }
