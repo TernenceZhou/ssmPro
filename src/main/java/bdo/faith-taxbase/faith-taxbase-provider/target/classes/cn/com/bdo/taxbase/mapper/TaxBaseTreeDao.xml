@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxbase.dao.TaxBaseTreeDao">
+
+    <select id="queryDgTreeList" resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+        SELECT a.autoId autoId,
+               a.nodeId AS value,
+               a.nodeName AS lable,
+               a.nodeName AS text,
+               IF(a.parentId = 'P000',NULL,a.parentId) parentId,
+               a.nodeId,
+               a.nodeType,
+               a.nodeLevel AS nodeLevel,
+               a.isLeaf as leaf,
+               IF( a.isLeaf = '1', 'true', 'false' ) AS isLeaf,
+            IF( a.isLeaf = '1', '', 'closed' ) AS state,
+            a.CREATED_BY createUser
+        FROM bdo_taxbase.tax_base_projectnode a
+    </select>
+
+    <select id="querySubjectTreeList" resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+        SELECT a.autoId autoId,
+               a.subjectId AS VALUE,
+            a.subjectName AS lable,
+            a.autoId nodeId,
+            a.parentId AS parentId,
+            a.subjectName text,
+            a.isLeaf leaf,
+            IF ( a.isLeaf = '1', 'true', 'false' ) AS isLeaf,
+            IF ( a.isLeaf = '1', '', 'closed' ) AS state,
+            a.CREATED_BY createUser
+        FROM bdo_taxbase.tax_base_subject a
+    </select>
+    <select id="queryAuditTreeList" resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+        SELECT autoId,
+            RIGHT(nodeId ,1) as value,
+            nodeName as label,
+            nodename as text,
+            NULL AS parentId,
+            RIGHT(nodeId ,1) AS nodeId,
+            '0' AS nodeLevel,
+            '0' AS leaf,
+            'false' as isLeaf
+        FROM bdo_taxbase.tax_base_projectnode
+        WHERE showAudit = 1
+        UNION
+        SELECT autoId,
+               indexId as value,
+               programName as label,
+               programName as text,
+               parentIndexId as parentId,
+               <!-- IF(parentIndexId IN('A','B','C','D','G', 'S', 'Z'),concat_ws('-','P002',parentIndexId),parentIndexId) parentId,-->
+               indexId as nodeid,
+               programLevel AS nodeLevel,
+               isleaf as leaf,
+               'true' as isleaf
+        FROM bdo_taxbase.tax_base_auditprogram
+    </select>
+
+    <select id="industryTree" resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+        SELECT a.value                                               AS autoId,
+               IF(LEFT(a.value, 4) = a.VALUE,NULL, LEFT(a.value, 4)) AS parentId,
+               a.name                                                AS text,
+               a.name                                                AS label,
+               a.value AS value,
+               a.value                                               AS nodeId,
+               IF(a.level = '1', 'false', 'true')                    AS isLeaf
+        FROM bdo_taxbase.tax_base_industry a
+        WHERE a.type = 1
+        ORDER BY a.value
+    </select>
+    <select id="queryDicListByAttributeType" parameterType="java.lang.String"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+        SELECT id autoId, attributeName label, attributeName value
+        FROM bdo_taxbase.tax_base_dic
+        WHERE attributetype = #{attributetype}
+        ORDER BY attributeValue1
+    </select>
+
+    <select id="queryTemplateNodesTree" resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+        SELECT autoId,
+        RIGHT (nodeid, 1) as value,
+        nodeName as label,
+        nodename as text,
+        NULL AS parentId,
+        nodeid AS nodeId,
+        '0' AS nodeLevel,
+        '0' AS leaf,
+        'false' as isLeaf,
+        '' as isRequired,
+        '' as isDirectory
+        FROM bdo_taxbase.tax_base_projectnode
+        WHERE nodeName in
+        <foreach collection="list" index="index" item="nameCode" open="(" close=")" separator=",">
+            #{nameCode}
+        </foreach>
+        UNION
+        SELECT autoId,
+        indexId as value,
+        programName as label,
+        programName as text,
+        IF(parentIndexId IN('G', 'S', 'Z'),concat_ws('-','P002',parentIndexId),parentIndexId) parentId,
+        indexId as nodeid,
+        programLevel AS nodeLevel,
+        isleaf as leaf,
+        'true' as isleaf,
+        isRequired,
+        isDirectory
+        FROM bdo_taxbase.tax_base_auditprogram
+        <!-- WHERE LEFT (indexId, 1) IN ('G', 'S', 'Z')-->
+        <!-- WHERE parentIndexId IN('G', 'S', 'Z') -->
+        WHERE SUBSTRING_INDEX(fullIndexId,'/',1) IN('G', 'S', 'Z')
+    </select>
+
+    <select id="querySubjectTypeTree" resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+        SELECT
+            a.autoId AS autoId,
+            a.subjectTypeId AS nodeId,
+            a.subjectTypeId AS  VALUE ,
+            a.subjectTypeName AS label,
+            a.subjectTypeName AS text,
+            parentId AS parentId,
+            IF ( a.isLeaf = 0, 'false', 'true' ) AS isLeaf
+        FROM
+            bdo_taxbase.tax_base_subjecttype a
+        WHERE
+            a.subjectType = 1
+          AND isTrue = 1
+        UNION
+        SELECT
+            a.autoId AS autoId,
+            a.subjectTypeId AS nodeId,
+            a.subjectTypeId AS  VALUE ,
+            a.subjectTypeName AS label,
+            a.subjectTypeName AS text,
+            a.parentId AS parentId,
+          IF ( a.isLeaf = 0, 'false', 'true' ) AS isLeaf
+                FROM
+                    bdo_taxbase.tax_base_subjecttype a
+                WHERE
+            a.parentId IS NOT NULL
+    </select>
+
+    <select id="queryTemplateReportSubject" resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+        SELECT
+            a.attributeValue1 AS id,
+            a.attributeValue1 AS nodeId,
+            a.attributeName AS label,
+            a.attributeName AS text,
+            a.id AS VALUE,
+            '' AS parentid,
+            'false' AS leaf
+        FROM bdo_taxbase.tax_base_dic a WHERE a.attributetype = '报表模板类型'
+        UNION
+        SELECT
+            aa.autoid AS id,
+            aa.autoid AS nodeId,
+            aa.ruleName AS label,
+            aa.ruleName AS text,
+            aa.autoId AS VALUE,
+            aa.templateType AS parentId,
+            'true' AS leaf
+        <!-- FROM bdo_taxbase.tax_base_k_ruleacc AS aa -->
+        FROM bdo_taxbase.tax_base_reporttemplate AS aa
+        WHERE aa.ACTIVE_FLAG = '1'
+    </select>
+<!--    <select id="">-->
+<!--    报表科目分类-->
+<!--        SELECT a.attributeValue1 AS id,-->
+<!--               a.attributeName AS text,-->
+<!--               a.attributeName AS label,-->
+<!--               a.attributeName AS nodeId,-->
+<!--               'templateType' AS typeName, '' AS parentid, a.id AS VALUE, 'false' AS leaf-->
+<!--        FROM bdo_base.base_dic a-->
+<!--        WHERE a.attributetype = '报表模板类型'-->
+<!--        UNION-->
+<!--        SELECT a.autoid AS id,-->
+<!--               a.ruleName AS text,-->
+<!--               a.ruleName AS label,-->
+<!--               a.ruleName AS nodeId,-->
+<!--               a.reportType AS typeName,-->
+<!--               a.templateType AS parentId,-->
+<!--               a.autoId AS VALUE,-->
+<!--         'true' AS leaf-->
+<!--        FROM bdo_taxbase.tax_base_k_ruleacc AS a-->
+<!--        WHERE 1 = 1-->
+<!--          AND a.ACTIVE_FLAG = '1'-->
+
+<!--    </select>-->
+
+    <select id="queryReportSubjectTree" parameterType="java.lang.String" resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+        SELECT a.autoId AS autoId,
+               a.subjectTypeName AS label,
+               a.subjectTypeId AS VALUE,
+               a.subjectTypeId AS nodeId,
+               a.subjectTypeName AS text,
+               '' AS parentid,
+               'false' AS leaf
+        FROM bdo_taxbase.tax_base_subjecttype a
+        WHERE a.subjectType = 1 AND isTrue = 1 AND a.subjectTypeId NOT IN('Y','G','F')
+        UNION
+        SELECT a.autoId AS autoId,
+               b.colName AS label,
+               a.colCode AS VALUE,
+               <!-- a.colCode AS nodeId, -->
+               b.colName AS nodeId,
+               b.colName AS text,
+               LEFT (a.subjectType,1) AS parentid,
+               'true' AS leaf
+                <!-- FROM bdo_taxbase.tax_base_k_reporttemplate a -->
+                FROM bdo_taxbase.tax_base_reporttemplatenode a
+                LEFT JOIN bdo_taxbase.tax_base_k_reportcolumn b ON a.colCode = b.colCode
+        WHERE b.isSubject= 1
+              AND a.vocationId = #{vocationId}
+              AND LEFT(a.colCode,1) NOT IN ('Y','G','F')
+            <!-- 单体 -->
+            <if test="reportType == '1'.toString() and reportType != null and reportType != ''">
+                AND a.tableDiv IN (1,3,4,5)
+            </if>
+           <!-- 合并 -->
+            <if test="reportType == '2'.toString() and reportType != null and reportType != ''">
+                AND a.tableDiv IN (7,9,10,11)
+            </if>
+
+    </select>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgAnnotationDao">
+    <select id="queryList" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgAnnotationDto"
+            resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgAnnotationDto">
+        SELECT autoId,
+               indexId,
+               CREATION_DATE,
+               cellContent,
+               content,
+               postilLevel,
+               ACTIVE_FLAG,
+               createUser,
+               indexIdSeq,
+               type,
+               indexIdSeq
+        FROM bdo_taxdg.tax_dg_annotation
+        WHERE customerId = #{customerId}
+          AND projectId = #{projectId}
+          AND auditState = #{auditState}
+    </select>
+
+</mapper>

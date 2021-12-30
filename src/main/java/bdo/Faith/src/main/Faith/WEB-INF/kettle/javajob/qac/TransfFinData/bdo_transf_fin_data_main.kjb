@@ -1,0 +1,1307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>bdo_transf_fin_data_main</name>
+  <description />
+  <extended_description />
+  <job_version />
+  <directory>/</directory>
+  <created_user>-</created_user>
+  <created_date>2020/05/14 20:20:32.129</created_date>
+  <modified_user>-</modified_user>
+  <modified_date>2020/05/14 20:20:32.129</modified_date>
+  <parameters>
+    </parameters>
+  <connection>
+    <name>db_demo</name>
+    <server>${demoDbUrl}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>${demoDbName}?autoReconnect=true</database>
+    <port>${demoDbPort}</port>
+    <username>${demoDbUser}</username>
+    <password>${demoDbPwd}</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${demoDbPort}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>db_fin_new</name>
+    <server>${newDbUrl}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>bdo_fin?autoReconnect=true</database>
+    <port>${newDbPort}</port>
+    <username>${newDbUser}</username>
+    <password>${newDbPwd}</password>
+    <servername />
+    <data_tablespace />
+    <index_tablespace />
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>${newDbPort}</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>STREAM_RESULTS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <slaveservers>
+    </slaveservers>
+  <job-log-table>
+    <connection />
+    <schema />
+    <table />
+    <size_limit_lines />
+    <interval />
+    <timeout_days />
+    <field>
+      <id>ID_JOB</id>
+      <enabled>Y</enabled>
+      <name>ID_JOB</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>JOBNAME</name>
+    </field>
+    <field>
+      <id>STATUS</id>
+      <enabled>Y</enabled>
+      <name>STATUS</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>STARTDATE</id>
+      <enabled>Y</enabled>
+      <name>STARTDATE</name>
+    </field>
+    <field>
+      <id>ENDDATE</id>
+      <enabled>Y</enabled>
+      <name>ENDDATE</name>
+    </field>
+    <field>
+      <id>LOGDATE</id>
+      <enabled>Y</enabled>
+      <name>LOGDATE</name>
+    </field>
+    <field>
+      <id>DEPDATE</id>
+      <enabled>Y</enabled>
+      <name>DEPDATE</name>
+    </field>
+    <field>
+      <id>REPLAYDATE</id>
+      <enabled>Y</enabled>
+      <name>REPLAYDATE</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>Y</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>EXECUTING_SERVER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_SERVER</name>
+    </field>
+    <field>
+      <id>EXECUTING_USER</id>
+      <enabled>N</enabled>
+      <name>EXECUTING_USER</name>
+    </field>
+    <field>
+      <id>START_JOB_ENTRY</id>
+      <enabled>N</enabled>
+      <name>START_JOB_ENTRY</name>
+    </field>
+    <field>
+      <id>CLIENT</id>
+      <enabled>N</enabled>
+      <name>CLIENT</name>
+    </field>
+  </job-log-table>
+  <jobentry-log-table>
+    <connection />
+    <schema />
+    <table />
+    <timeout_days />
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>JOBNAME</id>
+      <enabled>Y</enabled>
+      <name>TRANSNAME</name>
+    </field>
+    <field>
+      <id>JOBENTRYNAME</id>
+      <enabled>Y</enabled>
+      <name>STEPNAME</name>
+    </field>
+    <field>
+      <id>LINES_READ</id>
+      <enabled>Y</enabled>
+      <name>LINES_READ</name>
+    </field>
+    <field>
+      <id>LINES_WRITTEN</id>
+      <enabled>Y</enabled>
+      <name>LINES_WRITTEN</name>
+    </field>
+    <field>
+      <id>LINES_UPDATED</id>
+      <enabled>Y</enabled>
+      <name>LINES_UPDATED</name>
+    </field>
+    <field>
+      <id>LINES_INPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_INPUT</name>
+    </field>
+    <field>
+      <id>LINES_OUTPUT</id>
+      <enabled>Y</enabled>
+      <name>LINES_OUTPUT</name>
+    </field>
+    <field>
+      <id>LINES_REJECTED</id>
+      <enabled>Y</enabled>
+      <name>LINES_REJECTED</name>
+    </field>
+    <field>
+      <id>ERRORS</id>
+      <enabled>Y</enabled>
+      <name>ERRORS</name>
+    </field>
+    <field>
+      <id>RESULT</id>
+      <enabled>Y</enabled>
+      <name>RESULT</name>
+    </field>
+    <field>
+      <id>NR_RESULT_ROWS</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_ROWS</name>
+    </field>
+    <field>
+      <id>NR_RESULT_FILES</id>
+      <enabled>Y</enabled>
+      <name>NR_RESULT_FILES</name>
+    </field>
+    <field>
+      <id>LOG_FIELD</id>
+      <enabled>N</enabled>
+      <name>LOG_FIELD</name>
+    </field>
+    <field>
+      <id>COPY_NR</id>
+      <enabled>N</enabled>
+      <name>COPY_NR</name>
+    </field>
+  </jobentry-log-table>
+  <channel-log-table>
+    <connection />
+    <schema />
+    <table />
+    <timeout_days />
+    <field>
+      <id>ID_BATCH</id>
+      <enabled>Y</enabled>
+      <name>ID_BATCH</name>
+    </field>
+    <field>
+      <id>CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>LOG_DATE</id>
+      <enabled>Y</enabled>
+      <name>LOG_DATE</name>
+    </field>
+    <field>
+      <id>LOGGING_OBJECT_TYPE</id>
+      <enabled>Y</enabled>
+      <name>LOGGING_OBJECT_TYPE</name>
+    </field>
+    <field>
+      <id>OBJECT_NAME</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_NAME</name>
+    </field>
+    <field>
+      <id>OBJECT_COPY</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_COPY</name>
+    </field>
+    <field>
+      <id>REPOSITORY_DIRECTORY</id>
+      <enabled>Y</enabled>
+      <name>REPOSITORY_DIRECTORY</name>
+    </field>
+    <field>
+      <id>FILENAME</id>
+      <enabled>Y</enabled>
+      <name>FILENAME</name>
+    </field>
+    <field>
+      <id>OBJECT_ID</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_ID</name>
+    </field>
+    <field>
+      <id>OBJECT_REVISION</id>
+      <enabled>Y</enabled>
+      <name>OBJECT_REVISION</name>
+    </field>
+    <field>
+      <id>PARENT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>PARENT_CHANNEL_ID</name>
+    </field>
+    <field>
+      <id>ROOT_CHANNEL_ID</id>
+      <enabled>Y</enabled>
+      <name>ROOT_CHANNEL_ID</name>
+    </field>
+  </channel-log-table>
+  <pass_batchid>N</pass_batchid>
+  <shared_objects_file />
+  <entries>
+    <entry>
+      <name>START</name>
+      <description />
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>96</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>成功</name>
+      <description />
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>544</xloc>
+      <yloc>464</yloc>
+    </entry>
+    <entry>
+      <name>fin_account</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_account.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>544</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>fin_accountall</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_accountall.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>704</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>fin_accpkgsubject</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_accpkgsubject.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>880</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>fin_assitem</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_assitem.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1040</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>fin_assitementry</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_assitementry.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1040</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>fin_assitementryacc</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_assitementryacc.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>880</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>fin_assitementryaccall</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_assitementryaccall.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>704</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>fin_subjectassitem</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_subjectassitem.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>544</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>fin_subjectentry</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_subjectentry.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>fin_subjectvoucher</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_subjectvoucher.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>建库建表</name>
+      <description />
+      <type>SQL</type>
+      <sql>CREATE DATABASE IF NOT EXISTS ${newDbName} CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
+CREATE TABLE IF NOT EXISTS ${newDbName}.fin_account (autoId int(10) NOT NULL AUTO_INCREMENT COMMENT '自增ID',customerId int(10) NOT NULL DEFAULT '0' COMMENT '客户ID',yyyy int(10) NOT NULL DEFAULT '0' COMMENT '年',subMonth int(10) NOT NULL DEFAULT '0' COMMENT '月',subjectId varchar(50) NOT NULL DEFAULT '0' COMMENT '科目编号',subjectName varchar(500) DEFAULT NULL COMMENT '科目名称',direction int(2) DEFAULT '0' COMMENT '借贷方向',currency varchar(30) DEFAULT NULL COMMENT '币种',debitRemain decimal(30,4) DEFAULT '0.0000' COMMENT '借方期初',creditRemain decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期初',remain decimal(30,4) DEFAULT '0.0000' COMMENT '期初数',debitOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额',creditOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额',tranDebitOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方损益结转数',tranCreditOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方损益结转数',debitOccNoTran decimal(30,4) DEFAULT '0.0000' COMMENT '借方剔除结转发生额',creditOccNoTran decimal(30,4) DEFAULT '0.0000' COMMENT '贷方剔除结转发生额',debitTotalOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额累计数',creditTotalOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额累计数',debitBalance decimal(30,4) DEFAULT '0.0000' COMMENT '借方期末',creditBalance decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期末',balance decimal(30,4) DEFAULT '0.0000' COMMENT '期末数',isLeaf1 int(1) DEFAULT '0' COMMENT '是否末级科目',level1 int(1) DEFAULT '0' COMMENT '科目级别',subjectFullName varchar(800) DEFAULT NULL COMMENT '科目全路径',hasAssItem int(1) DEFAULT '0' COMMENT '是否含辅助核算',s1 varchar(500) DEFAULT NULL COMMENT '备用字段',s2 varchar(500) DEFAULT NULL COMMENT '备用字段',s3 varchar(500) DEFAULT NULL COMMENT '备用字段',s4 varchar(500) DEFAULT NULL COMMENT '备用字段',s5 varchar(500) DEFAULT NULL COMMENT '备用字段',s6 int(10) DEFAULT NULL COMMENT '备用字段',s7 int(10) DEFAULT NULL COMMENT '备用字段',s8 int(10) DEFAULT NULL COMMENT '备用字段',s9 int(10) DEFAULT NULL COMMENT '备用字段',s10 int(10) DEFAULT NULL COMMENT '备用字段',s11 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s12 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s13 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s14 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s15 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s16 datetime DEFAULT NULL COMMENT '备用字段',s17 datetime DEFAULT NULL COMMENT '备用字段',s18 datetime DEFAULT NULL COMMENT '备用字段',s19 datetime DEFAULT NULL COMMENT '备用字段',s20 datetime DEFAULT NULL COMMENT '备用字段',s21 text COMMENT '备用字段',s22 text COMMENT '备用字段',s23 text COMMENT '备用字段',s24 text COMMENT '备用字段',s25 text COMMENT '备用字段',CREATION_DATE datetime DEFAULT NULL COMMENT '创建日',CREATED_BY varchar(20) DEFAULT NULL COMMENT '创建人ID',LAST_UPDATE_DATE datetime DEFAULT NULL COMMENT '最后更新日',LAST_UPDATED_BY varchar(20) DEFAULT NULL COMMENT '最后更新人ID',ABOLITION_DATE datetime DEFAULT NULL COMMENT '删除日',ABOLISHED_BY varchar(20) DEFAULT NULL COMMENT '删除人ID',PROGRAM_APPLICATION_ID varchar(20) DEFAULT NULL COMMENT '从哪个系统操作的数据',PROGRAM_ID varchar(20) DEFAULT NULL COMMENT '哪个程序操作的数据',ACTIVE_FLAG varchar(1) DEFAULT '1' COMMENT '0:无效数据；1：有效数据',PRIMARY KEY (autoId) USING BTREE,UNIQUE KEY UniqueKey (customerId,yyyy,subMonth,subjectId) USING BTREE COMMENT '唯一key') ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='科目余额表';
+CREATE TABLE IF NOT EXISTS ${newDbName}.fin_accountall (autoId int(10) NOT NULL AUTO_INCREMENT COMMENT '自增ID',customerId int(10) NOT NULL DEFAULT '0' COMMENT '客户ID',yyyy int(10) NOT NULL DEFAULT '0' COMMENT '年',subMonth int(10) NOT NULL DEFAULT '0' COMMENT '月',subjectId varchar(50) NOT NULL DEFAULT '0' COMMENT '科目编号',subjectName varchar(500) DEFAULT NULL COMMENT '科目名称',direction int(2) DEFAULT '0' COMMENT '借贷方向',currency varchar(30) NOT NULL DEFAULT '0' COMMENT '币种',debitRemain decimal(30,4) DEFAULT '0.0000' COMMENT '借方期初',creditRemain decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期初',remain decimal(30,4) DEFAULT '0.0000' COMMENT '期初数',debitOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额',creditOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额',tranDebitOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方损益结转数',tranCreditOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方损益结转数',debitOccNoTran decimal(30,4) DEFAULT '0.0000' COMMENT '借方剔除结转发生额',creditOccNoTran decimal(30,4) DEFAULT '0.0000' COMMENT '贷方剔除结转发生额',debitTotalOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额累计数',creditTotalOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额累计数',debitBalance decimal(30,4) DEFAULT '0.0000' COMMENT '借方期末',creditBalance decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期末',balance decimal(30,4) DEFAULT '0.0000' COMMENT '期末数',debitRemainF decimal(30,4) DEFAULT '0.0000' COMMENT '借方期初(外币)',creditRemainF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期初(外币)',remainF decimal(30,4) DEFAULT '0.0000' COMMENT '期初数(外币)',debitOccF decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额(外币)',creditOccF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额(外币)',tranDebitOccF decimal(30,4) DEFAULT '0.0000' COMMENT '借方损益结转数(外币)',tranCreditOccF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方损益结转数(外币)',debitOccNoTranF decimal(30,4) DEFAULT '0.0000' COMMENT '借方剔除结转发生额(外币)',creditOccNoTranF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方剔除结转发生额(外币)',debitTotalOccF decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额累计数(外币)',creditTotalOccF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额累计数(外币)',debitBalanceF decimal(30,4) DEFAULT '0.0000' COMMENT '借方期末(外币)',creditBalanceF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期末(外币)',balanceF decimal(30,4) DEFAULT '0.0000' COMMENT '期末数(外币)',isLeaf1 int(1) DEFAULT '0' COMMENT '是否末级科目',level1 int(1) DEFAULT '0' COMMENT '科目级别',subjectFullName varchar(800) DEFAULT NULL COMMENT '科目全路径',hasAssItem int(1) DEFAULT '0' COMMENT '是否含辅助核算',s1 varchar(500) DEFAULT NULL COMMENT '备用字段',s2 varchar(500) DEFAULT NULL COMMENT '备用字段',s3 varchar(500) DEFAULT NULL COMMENT '备用字段',s4 varchar(500) DEFAULT NULL COMMENT '备用字段',s5 varchar(500) DEFAULT NULL COMMENT '备用字段',s6 int(10) DEFAULT NULL COMMENT '备用字段',s7 int(10) DEFAULT NULL COMMENT '备用字段',s8 int(10) DEFAULT NULL COMMENT '备用字段',s9 int(10) DEFAULT NULL COMMENT '备用字段',s10 int(10) DEFAULT NULL COMMENT '备用字段',s11 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s12 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s13 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s14 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s15 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s16 datetime DEFAULT NULL COMMENT '备用字段',s17 datetime DEFAULT NULL COMMENT '备用字段',s18 datetime DEFAULT NULL COMMENT '备用字段',s19 datetime DEFAULT NULL COMMENT '备用字段',s20 datetime DEFAULT NULL COMMENT '备用字段',s21 text COMMENT '备用字段',s22 text COMMENT '备用字段',s23 text COMMENT '备用字段',s24 text COMMENT '备用字段',s25 text COMMENT '备用字段',CREATION_DATE datetime DEFAULT NULL COMMENT '创建日',CREATED_BY varchar(20) DEFAULT NULL COMMENT '创建人ID',LAST_UPDATE_DATE datetime DEFAULT NULL COMMENT '最后更新日',LAST_UPDATED_BY varchar(20) DEFAULT NULL COMMENT '最后更新人ID',ABOLITION_DATE datetime DEFAULT NULL COMMENT '删除日',ABOLISHED_BY varchar(20) DEFAULT NULL COMMENT '删除人ID',PROGRAM_APPLICATION_ID varchar(20) DEFAULT NULL COMMENT '从哪个系统操作的数据',PROGRAM_ID varchar(20) DEFAULT NULL COMMENT '哪个程序操作的数据',ACTIVE_FLAG varchar(1) DEFAULT '1' COMMENT '0:无效数据；1：有效数据',PRIMARY KEY (autoId) USING BTREE,UNIQUE KEY UniqueKey (customerId,yyyy,subMonth,subjectId,currency) USING BTREE COMMENT '唯一key') ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='外币科目余额表';
+CREATE TABLE IF NOT EXISTS ${newDbName}.fin_accpkgsubject (autoId int(10) NOT NULL AUTO_INCREMENT COMMENT '自增ID',customerId int(10) NOT NULL DEFAULT '0' COMMENT '客户ID',yyyy int(10) NOT NULL DEFAULT '0' COMMENT '年',subjectId varchar(50) NOT NULL COMMENT '科目编号',parentSubjectId varchar(50) DEFAULT NULL COMMENT '科目编号',subjectFullId varchar(200) DEFAULT '' COMMENT '科目编号全路径',subjectName varchar(500) DEFAULT '' COMMENT '科目名称',direction int(2) DEFAULT '0' COMMENT '借贷方向',currency varchar(30) DEFAULT '' COMMENT '币种',isLeaf1 int(1) DEFAULT NULL COMMENT '是否末级科目',level1 int(1) DEFAULT '1' COMMENT '科目级别',subjectFullName varchar(800) DEFAULT NULL COMMENT '科目名称全路径',s1 varchar(500) DEFAULT NULL COMMENT '备用字段',s2 varchar(500) DEFAULT NULL COMMENT '备用字段',s3 varchar(500) DEFAULT NULL COMMENT '备用字段',s4 varchar(500) DEFAULT NULL COMMENT '备用字段',s5 varchar(500) DEFAULT NULL COMMENT '备用字段',s6 int(10) DEFAULT NULL COMMENT '备用字段',s7 int(10) DEFAULT NULL COMMENT '备用字段',s8 int(10) DEFAULT NULL COMMENT '备用字段',s9 int(10) DEFAULT NULL COMMENT '备用字段',s10 int(10) DEFAULT NULL COMMENT '备用字段',s11 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s12 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s13 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s14 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s15 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s16 datetime DEFAULT NULL COMMENT '备用字段',s17 datetime DEFAULT NULL COMMENT '备用字段',s18 datetime DEFAULT NULL COMMENT '备用字段',s19 datetime DEFAULT NULL COMMENT '备用字段',s20 datetime DEFAULT NULL COMMENT '备用字段',s21 text COMMENT '备用字段',s22 text COMMENT '备用字段',s23 text COMMENT '备用字段',s24 text COMMENT '备用字段',s25 text COMMENT '备用字段',CREATION_DATE datetime DEFAULT NULL COMMENT '创建日',CREATED_BY varchar(20) DEFAULT NULL COMMENT '创建人ID',LAST_UPDATE_DATE datetime DEFAULT NULL COMMENT '最后更新日',LAST_UPDATED_BY varchar(20) DEFAULT NULL COMMENT '最后更新人ID',ABOLITION_DATE datetime DEFAULT NULL COMMENT '删除日',ABOLISHED_BY varchar(20) DEFAULT NULL COMMENT '删除人ID',PROGRAM_APPLICATION_ID varchar(20) DEFAULT NULL COMMENT '从哪个系统操作的数据',PROGRAM_ID varchar(20) DEFAULT NULL COMMENT '哪个程序操作的数据',ACTIVE_FLAG varchar(1) DEFAULT '1' COMMENT '0:无效数据；1：有效数据',PRIMARY KEY (autoId) USING BTREE,UNIQUE KEY UniqueKey (customerId,yyyy,subjectId) USING BTREE COMMENT '唯一key') ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='科目表'; 
+CREATE TABLE IF NOT EXISTS ${newDbName}.fin_assitem (autoId int(10) NOT NULL AUTO_INCREMENT COMMENT '自增ID',customerId int(10) NOT NULL DEFAULT '0' COMMENT '客户ID',yyyy int(10) NOT NULL DEFAULT '0' COMMENT '年',subjectId varchar(50) NOT NULL DEFAULT '0' COMMENT '科目编号',subjectName varchar(500) DEFAULT NULL COMMENT '科目名称',assItemId varchar(50) NOT NULL DEFAULT '0' COMMENT '核算名编号',assItemName varchar(500) DEFAULT NULL COMMENT '核算项名',direction int(2) DEFAULT '0' COMMENT '借贷方向',currency varchar(30) DEFAULT NULL COMMENT '币种',parentAssItemId varchar(50) DEFAULT NULL COMMENT '上级核算项编号',assItemFullId varchar(200) DEFAULT NULL COMMENT '核算编号全路径',assTotalName varchar(800) DEFAULT NULL COMMENT '核算项全称',subjectFullId varchar(200) DEFAULT NULL COMMENT '科目编号全路径',subjectFullName varchar(800) DEFAULT NULL COMMENT '科目全路径',isLeaf1 int(1) DEFAULT '0' COMMENT '是否末级核算',level1 int(1) DEFAULT '0' COMMENT '核算级别',s1 varchar(500) DEFAULT NULL COMMENT '备用字段',s2 varchar(500) DEFAULT NULL COMMENT '备用字段',s3 varchar(500) DEFAULT NULL COMMENT '备用字段',s4 varchar(500) DEFAULT NULL COMMENT '备用字段',s5 varchar(500) DEFAULT NULL COMMENT '备用字段',s6 int(10) DEFAULT NULL COMMENT '备用字段',s7 int(10) DEFAULT NULL COMMENT '备用字段',s8 int(10) DEFAULT NULL COMMENT '备用字段',s9 int(10) DEFAULT NULL COMMENT '备用字段',s10 int(10) DEFAULT NULL COMMENT '备用字段',s11 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s12 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s13 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s14 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s15 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s16 datetime DEFAULT NULL COMMENT '备用字段',s17 datetime DEFAULT NULL COMMENT '备用字段',s18 datetime DEFAULT NULL COMMENT '备用字段',s19 datetime DEFAULT NULL COMMENT '备用字段',s20 datetime DEFAULT NULL COMMENT '备用字段',s21 text COMMENT '备用字段',s22 text COMMENT '备用字段',s23 text COMMENT '备用字段',s24 text COMMENT '备用字段',s25 text COMMENT '备用字段',CREATION_DATE datetime DEFAULT NULL COMMENT '创建日',CREATED_BY varchar(20) DEFAULT NULL COMMENT '创建人ID',LAST_UPDATE_DATE datetime DEFAULT NULL COMMENT '最后更新日',LAST_UPDATED_BY varchar(20) DEFAULT NULL COMMENT '最后更新人ID',ABOLITION_DATE datetime DEFAULT NULL COMMENT '删除日',ABOLISHED_BY varchar(20) DEFAULT NULL COMMENT '删除人ID',PROGRAM_APPLICATION_ID varchar(20) DEFAULT NULL COMMENT '从哪个系统操作的数据',PROGRAM_ID varchar(20) DEFAULT NULL COMMENT '哪个程序操作的数据',ACTIVE_FLAG varchar(1) DEFAULT '1' COMMENT '0:无效数据；1：有效数据',PRIMARY KEY (autoId),UNIQUE KEY UniqueKey (customerId,yyyy,subjectId,assItemId) USING BTREE COMMENT '唯一key') ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='核算科目表'; 
+CREATE TABLE IF NOT EXISTS ${newDbName}.fin_assitementry (autoId int(10) NOT NULL AUTO_INCREMENT COMMENT '自增ID',customerId int(10) NOT NULL DEFAULT '0' COMMENT '客户ID',yyyy int(10) NOT NULL DEFAULT '0' COMMENT '年',month int(2) DEFAULT '0' COMMENT '月',subjectId varchar(50) NOT NULL DEFAULT '0' COMMENT '科目编号',assItemId varchar(100) NOT NULL DEFAULT '0' COMMENT '核算项编号',oldVoucherId varchar(50) DEFAULT NULL COMMENT '原始数据凭证ID',voucherId varchar(50) DEFAULT NULL COMMENT '系统生成凭证ID',vchDate varchar(10) DEFAULT NULL COMMENT '凭证日期',vchTime varchar(15) DEFAULT NULL COMMENT '凭证时间',typeId varchar(200) DEFAULT NULL COMMENT '凭证类型',serail int(10) DEFAULT '0' COMMENT '分录号',summary varchar(200) DEFAULT NULL COMMENT '摘要',direction int(2) DEFAULT '0' COMMENT '借贷方向',currency varchar(30) DEFAULT NULL COMMENT '币种',occurValue decimal(30,4) DEFAULT '0.0000' COMMENT '发生额(本位币)',currRate decimal(30,4) DEFAULT '0.0000' COMMENT '汇率',currValue decimal(30,4) DEFAULT '0.0000' COMMENT '发生额(原币)',voucherFillUser varchar(50) DEFAULT NULL COMMENT '制单人',voucherKeepUser varchar(50) DEFAULT NULL COMMENT '记账人',voucherAuditUser varchar(50) DEFAULT NULL COMMENT '审核人',quantity decimal(30,4) DEFAULT '0.0000' COMMENT '数量',unitPrice decimal(30,4) DEFAULT '0.0000' COMMENT '单价',unitName varchar(20) DEFAULT NULL COMMENT '单位',subjectName varchar(500) DEFAULT '' COMMENT '科目名称',subjectFullName varchar(800) DEFAULT NULL COMMENT '科目全路径',assItemName varchar(500) DEFAULT NULL COMMENT '核算项名',assTotalName varchar(800) DEFAULT NULL COMMENT '核算项全称',isTransferVoucher int(1) DEFAULT '0' COMMENT '是否结转凭证 0:否; 1:是',subjectEntryId int(10) DEFAULT '0' COMMENT '指向fin_sunjectentry主键',s1 varchar(500) DEFAULT NULL COMMENT '备用字段',s2 varchar(500) DEFAULT NULL COMMENT '备用字段',s3 varchar(500) DEFAULT NULL COMMENT '备用字段',s4 varchar(500) DEFAULT NULL COMMENT '备用字段',s5 varchar(500) DEFAULT NULL COMMENT '备用字段',s6 int(10) DEFAULT NULL COMMENT '备用字段',s7 int(10) DEFAULT NULL COMMENT '备用字段',s8 int(10) DEFAULT NULL COMMENT '备用字段',s9 int(10) DEFAULT NULL COMMENT '备用字段',s10 int(10) DEFAULT NULL COMMENT '备用字段',s11 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s12 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s13 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s14 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s15 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s16 datetime DEFAULT NULL COMMENT '备用字段',s17 datetime DEFAULT NULL COMMENT '备用字段',s18 datetime DEFAULT NULL COMMENT '备用字段',s19 datetime DEFAULT NULL COMMENT '备用字段',s20 datetime DEFAULT NULL COMMENT '备用字段',s21 text COMMENT '备用字段',s22 text COMMENT '备用字段',s23 text COMMENT '备用字段',s24 text COMMENT '备用字段',s25 text COMMENT '备用字段',CREATION_DATE datetime DEFAULT NULL COMMENT '创建日',CREATED_BY varchar(20) DEFAULT NULL COMMENT '创建人ID',LAST_UPDATE_DATE datetime DEFAULT NULL COMMENT '最后更新日',LAST_UPDATED_BY varchar(20) DEFAULT NULL COMMENT '最后更新人ID',ABOLITION_DATE datetime DEFAULT NULL COMMENT '删除日',ABOLISHED_BY varchar(20) DEFAULT NULL COMMENT '删除人ID',PROGRAM_APPLICATION_ID varchar(20) DEFAULT NULL COMMENT '从哪个系统操作的数据',PROGRAM_ID varchar(20) DEFAULT NULL COMMENT '哪个程序操作的数据',ACTIVE_FLAG varchar(1) DEFAULT '1' COMMENT '0:无效数据；1：有效数据',PRIMARY KEY (autoId),KEY SearchKey (customerId,yyyy,month,subjectId,assItemId,oldVoucherId,voucherId,vchDate),KEY SubjectEntryKey (customerId,yyyy,vchDate,voucherId,serail)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='核算分录表'; 
+CREATE TABLE IF NOT EXISTS ${newDbName}.fin_assitementryacc (autoId int(10) NOT NULL AUTO_INCREMENT COMMENT '自增ID',customerId int(10) NOT NULL DEFAULT '0' COMMENT '客户ID',yyyy int(10) NOT NULL DEFAULT '0' COMMENT '年',subMonth int(10) NOT NULL DEFAULT '0' COMMENT '月',subjectId varchar(50) NOT NULL DEFAULT '0' COMMENT '科目编号',subjectName varchar(500) DEFAULT NULL COMMENT '科目名称',assItemId varchar(50) NOT NULL DEFAULT '0' COMMENT '核算项编号',assItemName varchar(500) DEFAULT NULL COMMENT '核算项名称',direction int(2) DEFAULT '0' COMMENT '借贷方向',currency varchar(30) DEFAULT NULL COMMENT '币种',debitRemain decimal(30,4) DEFAULT '0.0000' COMMENT '借方期初',creditRemain decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期初',remain decimal(30,4) DEFAULT '0.0000' COMMENT '期初数',debitOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额',creditOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额',tranDebitOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方损益结转数',tranCreditOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方损益结转数',debitOccNoTran decimal(30,4) DEFAULT '0.0000' COMMENT '借方剔除结转发生额',creditOccNoTran decimal(30,4) DEFAULT '0.0000' COMMENT '贷方剔除结转发生额',debitTotalOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额累计数',creditTotalOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额累计数',debitBalance decimal(30,4) DEFAULT '0.0000' COMMENT '借方期末',creditBalance decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期末',balance decimal(30,4) DEFAULT '0.0000' COMMENT '期末数',isLeaf1 int(1) DEFAULT '0' COMMENT '是否末级核算',level1 int(1) DEFAULT '0' COMMENT '核算级别',subjectFullName varchar(800) DEFAULT NULL COMMENT '科目全路径',assTotalName varchar(800) DEFAULT NULL COMMENT '核算项全称',s1 varchar(500) DEFAULT NULL COMMENT '备用字段',s2 varchar(500) DEFAULT NULL COMMENT '备用字段',s3 varchar(500) DEFAULT NULL COMMENT '备用字段',s4 varchar(500) DEFAULT NULL COMMENT '备用字段',s5 varchar(500) DEFAULT NULL COMMENT '备用字段',s6 int(10) DEFAULT NULL COMMENT '备用字段',s7 int(10) DEFAULT NULL COMMENT '备用字段',s8 int(10) DEFAULT NULL COMMENT '备用字段',s9 int(10) DEFAULT NULL COMMENT '备用字段',s10 int(10) DEFAULT NULL COMMENT '备用字段',s11 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s12 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s13 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s14 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s15 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s16 datetime DEFAULT NULL COMMENT '备用字段',s17 datetime DEFAULT NULL COMMENT '备用字段',s18 datetime DEFAULT NULL COMMENT '备用字段',s19 datetime DEFAULT NULL COMMENT '备用字段',s20 datetime DEFAULT NULL COMMENT '备用字段',s21 text COMMENT '备用字段',s22 text COMMENT '备用字段',s23 text COMMENT '备用字段',s24 text COMMENT '备用字段',s25 text COMMENT '备用字段',CREATION_DATE datetime DEFAULT NULL COMMENT '创建日',CREATED_BY varchar(20) DEFAULT NULL COMMENT '创建人ID',LAST_UPDATE_DATE datetime DEFAULT NULL COMMENT '最后更新日',LAST_UPDATED_BY varchar(20) DEFAULT NULL COMMENT '最后更新人ID',ABOLITION_DATE datetime DEFAULT NULL COMMENT '删除日',ABOLISHED_BY varchar(20) DEFAULT NULL COMMENT '删除人ID',PROGRAM_APPLICATION_ID varchar(20) DEFAULT NULL COMMENT '从哪个系统操作的数据',PROGRAM_ID varchar(20) DEFAULT NULL COMMENT '哪个程序操作的数据',ACTIVE_FLAG varchar(1) DEFAULT '1' COMMENT '0:无效数据；1：有效数据',PRIMARY KEY (autoId) USING BTREE,UNIQUE KEY UniqueKey (customerId,yyyy,subMonth,subjectId,assItemId) USING BTREE COMMENT '唯一key') ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='科目核算余额表'; 
+CREATE TABLE IF NOT EXISTS ${newDbName}.fin_assitementryaccall (autoId int(10) NOT NULL AUTO_INCREMENT COMMENT '自增ID',customerId int(10) NOT NULL DEFAULT '0' COMMENT '客户ID',yyyy int(10) NOT NULL DEFAULT '0' COMMENT '年',subMonth int(10) NOT NULL DEFAULT '0' COMMENT '月',subjectId varchar(50) NOT NULL DEFAULT '0' COMMENT '科目编号',subjectName varchar(500) DEFAULT NULL COMMENT '科目名称',assItemId varchar(50) NOT NULL DEFAULT '0' COMMENT '核算项编号',assItemName varchar(500) DEFAULT NULL COMMENT '核算项名称',direction int(2) DEFAULT '0' COMMENT '借贷方向',currency varchar(30) DEFAULT NULL COMMENT '币种',debitRemain decimal(30,4) DEFAULT '0.0000' COMMENT '借方期初',creditRemain decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期初',remain decimal(30,4) DEFAULT '0.0000' COMMENT '期初数',debitOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额',creditOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额',tranDebitOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方损益结转数',tranCreditOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方损益结转数',debitOccNoTran decimal(30,4) DEFAULT '0.0000' COMMENT '借方剔除结转发生额',creditOccNoTran decimal(30,4) DEFAULT '0.0000' COMMENT '贷方剔除结转发生额',debitTotalOcc decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额累计数',creditTotalOcc decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额累计数',debitBalance decimal(30,4) DEFAULT '0.0000' COMMENT '借方期末',creditBalance decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期末',balance decimal(30,4) DEFAULT '0.0000' COMMENT '期末数',debitRemainF decimal(30,4) DEFAULT '0.0000' COMMENT '借方期初(外币)',creditRemainF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期初(外币)',remainF decimal(30,4) DEFAULT '0.0000' COMMENT '期初数(外币)',debitOccF decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额(外币)',creditOccF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额(外币)',tranDebitOccF decimal(30,4) DEFAULT '0.0000' COMMENT '借方损益结转数(外币)',tranCreditOccF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方损益结转数(外币)',debitOccNoTranF decimal(30,4) DEFAULT '0.0000' COMMENT '借方剔除结转发生额(外币)',creditOccNoTranF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方剔除结转发生额(外币)',debitTotalOccF decimal(30,4) DEFAULT '0.0000' COMMENT '借方发生额累计数(外币)',creditTotalOccF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方发生额累计数(外币)',debitBalanceF decimal(30,4) DEFAULT '0.0000' COMMENT '借方期末(外币)',creditBalanceF decimal(30,4) DEFAULT '0.0000' COMMENT '贷方期末(外币)',balanceF decimal(30,4) DEFAULT '0.0000' COMMENT '期末数(外币)',isLeaf1 int(1) DEFAULT '0' COMMENT '是否末级核算',level1 int(1) DEFAULT '0' COMMENT '核算级别',subjectFullName varchar(800) DEFAULT NULL COMMENT '科目全路径',assTotalName varchar(800) DEFAULT NULL COMMENT '核算项全称',s1 varchar(500) DEFAULT NULL COMMENT '备用字段',s2 varchar(500) DEFAULT NULL COMMENT '备用字段',s3 varchar(500) DEFAULT NULL COMMENT '备用字段',s4 varchar(500) DEFAULT NULL COMMENT '备用字段',s5 varchar(500) DEFAULT NULL COMMENT '备用字段',s6 int(10) DEFAULT NULL COMMENT '备用字段',s7 int(10) DEFAULT NULL COMMENT '备用字段',s8 int(10) DEFAULT NULL COMMENT '备用字段',s9 int(10) DEFAULT NULL COMMENT '备用字段',s10 int(10) DEFAULT NULL COMMENT '备用字段',s11 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s12 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s13 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s14 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s15 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s16 datetime DEFAULT NULL COMMENT '备用字段',s17 datetime DEFAULT NULL COMMENT '备用字段',s18 datetime DEFAULT NULL COMMENT '备用字段',s19 datetime DEFAULT NULL COMMENT '备用字段',s20 datetime DEFAULT NULL COMMENT '备用字段',s21 text COMMENT '备用字段',s22 text COMMENT '备用字段',s23 text COMMENT '备用字段',s24 text COMMENT '备用字段',s25 text COMMENT '备用字段',CREATION_DATE datetime DEFAULT NULL COMMENT '创建日',CREATED_BY varchar(20) DEFAULT NULL COMMENT '创建人ID',LAST_UPDATE_DATE datetime DEFAULT NULL COMMENT '最后更新日',LAST_UPDATED_BY varchar(20) DEFAULT NULL COMMENT '最后更新人ID',ABOLITION_DATE datetime DEFAULT NULL COMMENT '删除日',ABOLISHED_BY varchar(20) DEFAULT NULL COMMENT '删除人ID',PROGRAM_APPLICATION_ID varchar(20) DEFAULT NULL COMMENT '从哪个系统操作的数据',PROGRAM_ID varchar(20) DEFAULT NULL COMMENT '哪个程序操作的数据',ACTIVE_FLAG varchar(1) DEFAULT '1' COMMENT '0:无效数据；1：有效数据',PRIMARY KEY (autoId) USING BTREE,UNIQUE KEY UniqueKey (customerId,yyyy,subMonth,subjectId,assItemId,currency) USING BTREE COMMENT '唯一key') ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='外币科目核算余额表'; 
+CREATE TABLE IF NOT EXISTS ${newDbName}.fin_subjectassitem (autoId int(10) NOT NULL AUTO_INCREMENT COMMENT '自增ID',customerId int(10) NOT NULL DEFAULT '0' COMMENT '客户ID',yyyy int(10) NOT NULL DEFAULT '0' COMMENT '年',subjectId varchar(50) NOT NULL DEFAULT '0' COMMENT '科目编号',subjectName varchar(500) DEFAULT NULL COMMENT '科目名称',assItemId varchar(50) NOT NULL DEFAULT '0' COMMENT '核算名编号',assItemName varchar(500) DEFAULT NULL COMMENT '核算项名',subjectFullId varchar(200) DEFAULT NULL COMMENT '科目编号全路径',subjectFullName varchar(800) DEFAULT NULL COMMENT '科目全路径',assItemFullId varchar(200) DEFAULT NULL COMMENT '核算编号全路径',assTotalName varchar(800) DEFAULT NULL COMMENT '核算项全称',s1 varchar(500) DEFAULT NULL COMMENT '备用字段',s2 varchar(500) DEFAULT NULL COMMENT '备用字段',s3 varchar(500) DEFAULT NULL COMMENT '备用字段',s4 varchar(500) DEFAULT NULL COMMENT '备用字段',s5 varchar(500) DEFAULT NULL COMMENT '备用字段',s6 int(10) DEFAULT NULL COMMENT '备用字段',s7 int(10) DEFAULT NULL COMMENT '备用字段',s8 int(10) DEFAULT NULL COMMENT '备用字段',s9 int(10) DEFAULT NULL COMMENT '备用字段',s10 int(10) DEFAULT NULL COMMENT '备用字段',s11 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s12 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s13 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s14 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s15 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s16 datetime DEFAULT NULL COMMENT '备用字段',s17 datetime DEFAULT NULL COMMENT '备用字段',s18 datetime DEFAULT NULL COMMENT '备用字段',s19 datetime DEFAULT NULL COMMENT '备用字段',s20 datetime DEFAULT NULL COMMENT '备用字段',s21 text COMMENT '备用字段',s22 text COMMENT '备用字段',s23 text COMMENT '备用字段',s24 text COMMENT '备用字段',s25 text COMMENT '备用字段',CREATION_DATE datetime DEFAULT NULL COMMENT '创建日',CREATED_BY varchar(20) DEFAULT NULL COMMENT '创建人ID',LAST_UPDATE_DATE datetime DEFAULT NULL COMMENT '最后更新日',LAST_UPDATED_BY varchar(20) DEFAULT NULL COMMENT '最后更新人ID',ABOLITION_DATE datetime DEFAULT NULL COMMENT '删除日',ABOLISHED_BY varchar(20) DEFAULT NULL COMMENT '删除人ID',PROGRAM_APPLICATION_ID varchar(20) DEFAULT NULL COMMENT '从哪个系统操作的数据',PROGRAM_ID varchar(20) DEFAULT NULL COMMENT '哪个程序操作的数据',ACTIVE_FLAG varchar(1) DEFAULT '1' COMMENT '0:无效数据；1：有效数据',PRIMARY KEY (autoId),KEY AccKey (customerId,yyyy,subjectId,assItemId) USING BTREE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='核算科目表(暂不清楚)'; 
+CREATE TABLE IF NOT EXISTS ${newDbName}.fin_subjectentry (autoId int(10) NOT NULL AUTO_INCREMENT COMMENT '自增ID',customerId int(10) NOT NULL DEFAULT '0' COMMENT '客户ID',yyyy int(10) NOT NULL DEFAULT '0' COMMENT '年',month int(2) DEFAULT '0' COMMENT '月',subjectId varchar(50) NOT NULL DEFAULT '0' COMMENT '科目编号',oldVoucherId varchar(50) DEFAULT NULL COMMENT '原始数据凭证ID',voucherId varchar(50) DEFAULT NULL COMMENT '系统生成凭证ID',vchDate varchar(10) DEFAULT NULL COMMENT '凭证日期',vchTime varchar(15) DEFAULT NULL COMMENT '凭证时间',typeId varchar(200) DEFAULT NULL COMMENT '凭证类型',serail int(10) DEFAULT '0' COMMENT '分录号',summary varchar(200) DEFAULT NULL COMMENT '摘要',direction int(2) DEFAULT '0' COMMENT '借贷方向',currency varchar(30) DEFAULT NULL COMMENT '币种',occurValue decimal(30,4) DEFAULT '0.0000' COMMENT '发生额(本位币)',currRate decimal(30,4) DEFAULT '0.0000' COMMENT '汇率',currValue decimal(30,4) DEFAULT '0.0000' COMMENT '发生额(原币)',voucherFillUser varchar(50) DEFAULT NULL COMMENT '制单人',voucherKeepUser varchar(50) DEFAULT NULL COMMENT '记账人',voucherAuditUser varchar(50) DEFAULT NULL COMMENT '审核人',quantity decimal(30,4) DEFAULT '0.0000' COMMENT '数量',unitPrice decimal(30,4) DEFAULT '0.0000' COMMENT '单价',unitName varchar(20) DEFAULT NULL COMMENT '单位',subjectName varchar(500) DEFAULT NULL COMMENT '科目名称',subjectFullName varchar(800) DEFAULT NULL COMMENT '科目全路径',debitsubjects text COMMENT '借方科目',creditsubjects text COMMENT '贷方科目',drCount int(11) DEFAULT '0' COMMENT '凭证借方科目数',crCount int(11) DEFAULT '0' COMMENT '凭证贷方科目数',voucherDebitOcc decimal(30,4) DEFAULT NULL COMMENT '凭证借方发生额合计',voucherCreditOcc decimal(30,4) DEFAULT NULL COMMENT '凭证贷方发生额合计',oppositeAccountTop text COMMENT '对方科目一级',oppositeAccountLast text COMMENT '对方科目末级',correspondOccurValue decimal(30,4) DEFAULT '0.0000' COMMENT '对应发生额',voucherAffixCount int(10) DEFAULT '0' COMMENT '附件张数',voucherDirector varchar(20) DEFAULT NULL COMMENT '财务主管',isTransferVoucher int(1) DEFAULT '0' COMMENT '是否结转凭证 0:否; 1:是',s1 varchar(500) DEFAULT NULL COMMENT '备用字段',s2 varchar(500) DEFAULT NULL COMMENT '备用字段',s3 varchar(500) DEFAULT NULL COMMENT '备用字段',s4 varchar(500) DEFAULT NULL COMMENT '备用字段',s5 varchar(500) DEFAULT NULL COMMENT '备用字段',s6 int(10) DEFAULT NULL COMMENT '备用字段',s7 int(10) DEFAULT NULL COMMENT '备用字段',s8 int(10) DEFAULT NULL COMMENT '备用字段',s9 int(10) DEFAULT NULL COMMENT '备用字段',s10 int(10) DEFAULT NULL COMMENT '备用字段',s11 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s12 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s13 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s14 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s15 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s16 datetime DEFAULT NULL COMMENT '备用字段',s17 datetime DEFAULT NULL COMMENT '备用字段',s18 datetime DEFAULT NULL COMMENT '备用字段',s19 datetime DEFAULT NULL COMMENT '备用字段',s20 datetime DEFAULT NULL COMMENT '备用字段',s21 text COMMENT '备用字段',s22 text COMMENT '备用字段',s23 text COMMENT '备用字段',s24 text COMMENT '备用字段',s25 text COMMENT '备用字段',CREATION_DATE datetime DEFAULT NULL COMMENT '创建日',CREATED_BY varchar(20) DEFAULT NULL COMMENT '创建人ID',LAST_UPDATE_DATE datetime DEFAULT NULL COMMENT '最后更新日',LAST_UPDATED_BY varchar(20) DEFAULT NULL COMMENT '最后更新人ID',ABOLITION_DATE datetime DEFAULT NULL COMMENT '删除日',ABOLISHED_BY varchar(20) DEFAULT NULL COMMENT '删除人ID',PROGRAM_APPLICATION_ID varchar(20) DEFAULT NULL COMMENT '从哪个系统操作的数据',PROGRAM_ID varchar(20) DEFAULT NULL COMMENT '哪个程序操作的数据',ACTIVE_FLAG varchar(1) DEFAULT '1' COMMENT '0:无效数据；1：有效数据',PRIMARY KEY (autoId),KEY SearchKey (customerId,yyyy,month,subjectId,oldVoucherId,voucherId,vchDate) USING BTREE,KEY SubjectEntryKey (customerId,yyyy,vchDate,voucherId,serail)) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='凭证分录表'; 
+CREATE TABLE IF NOT EXISTS ${newDbName}.fin_subjectvoucher (autoId int(10) NOT NULL AUTO_INCREMENT COMMENT '自增ID',customerId int(10) NOT NULL DEFAULT '0' COMMENT '客户ID',yyyy int(10) NOT NULL DEFAULT '0' COMMENT '年',month int(2) DEFAULT '0' COMMENT '月',oldVoucherId varchar(50) DEFAULT NULL COMMENT '原始数据凭证ID',voucherId varchar(50) DEFAULT NULL COMMENT '系统生成凭证ID',vchDate varchar(10) DEFAULT NULL COMMENT '凭证日期',vchTime varchar(15) DEFAULT NULL COMMENT '凭证时间',typeId varchar(200) DEFAULT NULL COMMENT '凭证类型',voucherFillUser varchar(50) DEFAULT NULL COMMENT '制单人',voucherKeepUser varchar(50) DEFAULT NULL COMMENT '记账人',voucherAuditUser varchar(50) DEFAULT NULL COMMENT '审核人',voucherAffixCount int(10) DEFAULT '0' COMMENT '附件张数',voucherDirector varchar(20) DEFAULT NULL COMMENT '财务主管',debitocc decimal(30,4) DEFAULT NULL COMMENT '借方发生数',creditocc decimal(30,4) DEFAULT NULL COMMENT '贷方发生数',s1 varchar(500) DEFAULT NULL COMMENT '备用字段',s2 varchar(500) DEFAULT NULL COMMENT '备用字段',s3 varchar(500) DEFAULT NULL COMMENT '备用字段',s4 varchar(500) DEFAULT NULL COMMENT '备用字段',s5 varchar(500) DEFAULT NULL COMMENT '备用字段',s6 int(10) DEFAULT NULL COMMENT '备用字段',s7 int(10) DEFAULT NULL COMMENT '备用字段',s8 int(10) DEFAULT NULL COMMENT '备用字段',s9 int(10) DEFAULT NULL COMMENT '备用字段',s10 int(10) DEFAULT NULL COMMENT '备用字段',s11 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s12 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s13 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s14 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s15 decimal(30,4) DEFAULT NULL COMMENT '备用字段',s16 datetime DEFAULT NULL COMMENT '备用字段',s17 datetime DEFAULT NULL COMMENT '备用字段',s18 datetime DEFAULT NULL COMMENT '备用字段',s19 datetime DEFAULT NULL COMMENT '备用字段',s20 datetime DEFAULT NULL COMMENT '备用字段',s21 text COMMENT '备用字段',s22 text COMMENT '备用字段',s23 text COMMENT '备用字段',s24 text COMMENT '备用字段',s25 text COMMENT '备用字段',CREATION_DATE datetime DEFAULT NULL COMMENT '创建日',CREATED_BY varchar(20) DEFAULT NULL COMMENT '创建人ID',LAST_UPDATE_DATE datetime DEFAULT NULL COMMENT '最后更新日',LAST_UPDATED_BY varchar(20) DEFAULT NULL COMMENT '最后更新人ID',ABOLITION_DATE datetime DEFAULT NULL COMMENT '删除日',ABOLISHED_BY varchar(20) DEFAULT NULL COMMENT '删除人ID',PROGRAM_APPLICATION_ID varchar(20) DEFAULT NULL COMMENT '从哪个系统操作的数据',PROGRAM_ID varchar(20) DEFAULT NULL COMMENT '哪个程序操作的数据',ACTIVE_FLAG varchar(1) DEFAULT '1' COMMENT '0:无效数据；1：有效数据',PRIMARY KEY (autoId),KEY SearchKey (customerId,yyyy,month,oldVoucherId,voucherId,vchDate) USING BTREE) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='凭证表'; 
+INSERT INTO bdo_fin.fin_log(info,createDate) VALUE ('${oldDbUrl}',NOW());</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>db_fin_new</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>480</xloc>
+      <yloc>80</yloc>
+    </entry>
+    <entry>
+      <name>清空数据</name>
+      <description />
+      <type>SQL</type>
+      <sql>truncate table ${newDbName}.fin_account;
+truncate table ${newDbName}.fin_accountall;
+truncate table ${newDbName}.fin_accpkgsubject;
+truncate table ${newDbName}.fin_assitem;
+truncate table ${newDbName}.fin_assitementry;
+truncate table ${newDbName}.fin_assitementryacc;
+truncate table ${newDbName}.fin_assitementryaccall;
+truncate table ${newDbName}.fin_subjectassitem;
+truncate table ${newDbName}.fin_subjectentry;
+truncate table ${newDbName}.fin_subjectvoucher;</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>db_fin_new</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>176</yloc>
+    </entry>
+    <entry>
+      <name>设置参数</name>
+      <description />
+      <type>EVAL</type>
+      <script>
+
+parent_job.setVariable("oldDbName", "fin_" + "${oldCustomerId}");
+parent_job.setVariable("oldDbPort", "5188");
+parent_job.setVariable("oldDbUser", "bdo_man1");
+parent_job.setVariable("oldDbPwd", "Bd0ItMan");
+
+parent_job.setVariable("newDbUrl", "172.17.4.189");
+parent_job.setVariable("newDbName", "fin_" + "${newCustomerId}");
+parent_job.setVariable("newDbPort", "5188");
+parent_job.setVariable("newDbUser", "bdo_man1");
+parent_job.setVariable("newDbPwd", "Bd0ItMan");
+
+parent_job.setVariable("sacpDbUrl", "172.17.4.140");
+parent_job.setVariable("sacpDbName", "bdo_fin");
+parent_job.setVariable("sacpDbPort", "5188");
+parent_job.setVariable("sacpDbUser", "bdo_man1");
+parent_job.setVariable("sacpDbPwd", "Bd0ItMan");
+
+parent_job.setVariable("demoDbUrl", "172.17.4.184");
+parent_job.setVariable("demoDbName", "bdo_fin");
+parent_job.setVariable("demoDbPort", "5188");
+parent_job.setVariable("demoDbUser", "bdo_man1");
+parent_job.setVariable("demoDbPwd", "Bd0ItMan");
+
+true;
+</script>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>176</xloc>
+      <yloc>80</yloc>
+    </entry>
+    <entry>
+      <name>获取所有年度</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_getyyyys.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>yyyy</name>
+          <stream_name>${yyyy}</stream_name>
+          <value />
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>96</xloc>
+      <yloc>304</yloc>
+    </entry>
+    <entry>
+      <name>获取所有年度参数</name>
+      <description />
+      <type>EVAL</type>
+      <script>var prevRow=previous_result.getRows();
+if (prevRow == null || (prevRow.size()==0))
+{
+    false;
+}else{
+	parent_job.setVariable("size", prevRow.size());
+    parent_job.setVariable("i", new Number(0));
+
+	parent_job.setVariable("yyyy", prevRow.get(0).getString("yyyy","yyyy"));
+
+    true;
+}</script>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>96</xloc>
+      <yloc>464</yloc>
+    </entry>
+    <entry>
+      <name>检验字段的值</name>
+      <description />
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname />
+      <variablename>${i}</variablename>
+      <fieldtype>number</fieldtype>
+      <mask />
+      <comparevalue>${size}</comparevalue>
+      <minvalue />
+      <maxvalue />
+      <successcondition>equal</successcondition>
+      <successnumbercondition>smaller</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>464</yloc>
+    </entry>
+    <entry>
+      <name>生成控制表</name>
+      <description />
+      <type>SQL</type>
+      <sql>INSERT INTO bdo_fin.fin_control(customerId,yyyy,departmentId,poolName,dbName,connDriver,url,connUrl,connUser,connPwd,poolConfig,CREATION_DATE,CREATED_BY,LAST_UPDATE_DATE,LAST_UPDATED_BY) 
+SELECT a.customerId,a.yyyy,a.departmentId,a.poolName,a.dbName,a.connDriver,a.url,a.connUrl,a.connUser,a.connPwd,a.poolConfig,NOW() AS CREATION_DATE,'19' AS CREATED_BY,NOW() AS LAST_UPDATE_DATE,'19' AS LAST_UPDATED_BY  FROM (SELECT '${newCustomerId}' AS customerId,'${yyyy}' AS yyyy,departmentId,poolName,CONCAT('fin_','${newCustomerId}') AS  dbName,connDriver,url,connUrl,connUser,connPwd,poolConfig FROM bdo_fin.fin_control WHERE autoId = 1) a WHERE NOT EXISTS(SELECT customerId,yyyy,departmentId,poolName,dbName,connDriver,url,connUrl,connUser,connPwd,poolConfig FROM bdo_fin.fin_control WHERE customerId = '${newCustomerId}' AND yyyy = '${yyyy}') LIMIT 1</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>db_demo</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>608</yloc>
+    </entry>
+    <entry>
+      <name>循环获取参数</name>
+      <description />
+      <type>EVAL</type>
+      <script>var max_size = new Number(parent_job.getVariable("size"));
+var i_count = new Number(parent_job.getVariable("i"));
+var prevRow=previous_result.getRows();
+if (prevRow == null || (prevRow.size()==0))
+{
+    false;
+}else{
+if(i_count&lt;max_size){
+    parent_job.setVariable("yyyy", prevRow.get(i_count).getString("yyyy","yyyy"));
+}
+parent_job.setVariable("i",i_count + 1);
+true;
+}</script>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>96</xloc>
+      <yloc>608</yloc>
+    </entry>
+    <entry>
+      <name>更新控制表客户名称</name>
+      <description />
+      <type>SQL</type>
+      <sql>UPDATE bdo_fin.fin_control SET customerName = CONCAT('${newCustomerId}','-','${newCustomerName}') WHERE customerId = '${newCustomerId}'</sql>
+      <useVariableSubstitution>T</useVariableSubstitution>
+      <sqlfromfile>F</sqlfromfile>
+      <sqlfilename />
+      <sendOneStatement>F</sendOneStatement>
+      <connection>db_demo</connection>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>384</xloc>
+      <yloc>464</yloc>
+    </entry>
+    <entry>
+      <name>获取源数据DB</name>
+      <description />
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id />
+      <filename>${etl.directory}/TransfFinData/bdo_transf_fin_control.ktr</filename>
+      <transname />
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile />
+      <logext />
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name />
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+        <parameter>
+          <name>oldDbUrl</name>
+          <stream_name>${oldDbUrl}</stream_name>
+          <value />
+        </parameter>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>320</xloc>
+      <yloc>80</yloc>
+    </entry>
+    <entry>
+      <name>使用 JavaScript 脚本验证</name>
+      <description />
+      <type>EVAL</type>
+      <script>var prevRow=previous_result.getRows();
+if (prevRow == null || (prevRow.size() != 1)) {
+    false;
+} else { 
+
+	parent_job.setVariable("oldDbUrl", prevRow.get(0).getString("oldDbUrl","oldDbUrl"));
+
+    true;
+}</script>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>240</xloc>
+      <yloc>176</yloc>
+    </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>fin_account</from>
+      <to>fin_accountall</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fin_accountall</from>
+      <to>fin_accpkgsubject</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fin_accpkgsubject</from>
+      <to>fin_assitem</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fin_assitem</from>
+      <to>fin_assitementry</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fin_assitementry</from>
+      <to>fin_assitementryacc</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fin_assitementryacc</from>
+      <to>fin_assitementryaccall</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fin_assitementryaccall</from>
+      <to>fin_subjectassitem</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fin_subjectassitem</from>
+      <to>fin_subjectentry</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>fin_subjectentry</from>
+      <to>fin_subjectvoucher</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>建库建表</from>
+      <to>清空数据</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>清空数据</from>
+      <to>fin_account</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>设置参数</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>fin_subjectvoucher</from>
+      <to>获取所有年度</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>获取所有年度</from>
+      <to>获取所有年度参数</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>获取所有年度参数</from>
+      <to>检验字段的值</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>检验字段的值</from>
+      <to>循环获取参数</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>生成控制表</from>
+      <to>检验字段的值</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>循环获取参数</from>
+      <to>生成控制表</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>检验字段的值</from>
+      <to>更新控制表客户名称</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>更新控制表客户名称</from>
+      <to>成功</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>设置参数</from>
+      <to>获取源数据DB</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>获取源数据DB</from>
+      <to>使用 JavaScript 脚本验证</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>使用 JavaScript 脚本验证</from>
+      <to>建库建表</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+  </notepads>
+  <attributes>
+    <group>
+      <name>METASTORE.pentaho</name>
+      <attribute>
+        <key>Default Run Configuration</key>
+        <value>{"namespace":"pentaho","id":"Default Run Configuration","name":"Default Run Configuration","description":"Defines a default run configuration","metaStoreName":null}</value>
+      </attribute>
+    </group>
+    <group>
+      <name>{"_":"Embedded MetaStore Elements","namespace":"pentaho","type":"Default Run Configuration"}</name>
+      <attribute>
+        <key>Pentaho local</key>
+        <value>{"children":[{"children":[],"id":"server","value":null},{"children":[],"id":"clustered","value":"N"},{"children":[],"id":"name","value":"Pentaho local"},{"children":[],"id":"description","value":null},{"children":[],"id":"readOnly","value":"Y"},{"children":[],"id":"sendResources","value":"N"},{"children":[],"id":"logRemoteExecutionLocally","value":"N"},{"children":[],"id":"remote","value":"N"},{"children":[],"id":"local","value":"Y"},{"children":[],"id":"showTransformations","value":"N"}],"id":"Pentaho local","value":null,"name":"Pentaho local","owner":null,"ownerPermissionsList":[]}</value>
+      </attribute>
+    </group>
+  </attributes>
+</job>

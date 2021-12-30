@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxbase.dao.TaxBaseTbTemplateNodeDao">
+
+    <select id="queryTemplateContract" parameterType="cn.com.bdo.taxbase.dto.TaxBaseTbTemplateNodeDto"
+            resultType="java.util.Map">
+        SELECT
+            *
+        FROM
+            (
+                SELECT
+                    a.tbTemplateId,
+                    t1.tbTemplateName AS tbTemplateName,
+                    vocationId,
+                    t2.ruleName AS reportTemplateName,
+                    CONCAT( ROUND( COUNT( reportSubjectCode ) / t.tbCount * 100, 1 ), "%" ) compared,
+                    t1.departId
+                FROM
+                    bdo_taxbase.tax_base_k_subjecttb a
+                        INNER JOIN bdo_taxbase.tax_base_tbtemplatenode t3 ON t3.tbTmpNodeId = subjectCode
+                        AND t3.tbTemplateId = a.tbTemplateId
+                        LEFT JOIN ( SELECT tbTemplateId, COUNT( tbTmpNodeId ) AS tbCount FROM bdo_taxbase.tax_base_tbtemplatenode b WHERE isSubject = 1 GROUP BY b.tbTemplateId ) t ON t.tbTemplateId = a.tbTemplateId
+                        LEFT JOIN bdo_taxbase.tax_base_tbtemplate t1 ON a.tbTemplateId = t1.autoId
+                        LEFT JOIN bdo_taxbase.tax_base_reporttemplate t2 ON vocationId = t2.autoId
+                WHERE
+                    1 = 1
+                  <!-- AND t1.departId = 1054
+                  AND a.tbTemplateId = 827   -->
+                  <if test="departId != null and departId != ''">
+                      AND t1.departId = #{departId}
+                  </if>
+                  <if test="tbTemplateId != null and tbTemplateId != ''">
+                      AND a.tbTemplateId = #{tbTemplateId}
+                  </if>
+                GROUP BY
+                    a.tbTemplateId,
+                    vocationId
+                UNION
+                SELECT
+                    a.tbTemplateId,
+                    t1.tbTemplateName AS tbTemplateName,
+                    vocationId,
+                    t2.ruleName AS reportTemplateName,
+                    CONCAT( ROUND( COUNT( reportSubjectCode ) / t.tbCount * 100, 1 ), "%" ) compared,
+                    t1.departId
+                FROM
+                    bdo_taxbase.tax_base_k_subjecttb a
+                        INNER JOIN bdo_taxbase.tax_base_tbtemplatenode t3 ON t3.tbTmpNodeId = subjectCode
+                        AND t3.tbTemplateId = a.tbTemplateId
+                        LEFT JOIN ( SELECT tbTemplateId, COUNT( tbTmpNodeId ) AS tbCount FROM bdo_taxbase.tax_base_tbtemplatenode b WHERE isSubject = 1 GROUP BY b.tbTemplateId ) t ON t.tbTemplateId = a.tbTemplateId
+                        LEFT JOIN bdo_taxbase.tax_base_tbtemplate t1 ON a.tbTemplateId = t1.autoId
+                        LEFT JOIN bdo_taxbase.tax_base_reporttemplate t2 ON vocationId = t2.autoId
+                WHERE
+                    t1.departId = '555555'
+                    <!-- AND a.tbTemplateId = 827 -->
+                    <if test="tbTemplateId != null and tbTemplateId != ''">
+                        AND a.tbTemplateId = #{tbTemplateId}
+                    </if>
+                GROUP BY
+                    a.tbTemplateId,
+                    vocationId
+            ) a
+        WHERE
+            a.vocationId > ''
+    </select>
+
+    <select id="tbSubjectSearch" parameterType="cn.com.bdo.taxbase.dto.TaxBaseTbTemplateNodeDto"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseTbSubjectSearchDto">
+            SELECT
+                t2.autoId,
+                t1.tbTmpNodeId AS subjectCode,
+                t1.tbTmpNodeName AS subjectName,
+                t2.reportSubjectCode,
+                t2.reportSubName,
+                t2.reportcolName,
+                t2.subjectType1,
+                t2.subjectTypeName,
+                t2.departmentId,
+                t2.customerId,
+                t2.vocationId,
+                t2.ACTIVE_FLAG as activeFlg,
+                t1.sortNo,
+                t2.tbTemplateId,
+                t1.isSubject
+            FROM
+                bdo_taxbase.tax_base_tbtemplatenode t1
+                    LEFT JOIN (
+                    SELECT
+                        a.autoId,
+                        a.subjectCode,
+                        a.subjectName,
+                        a.reportSubjectCode,
+                        d.colDisp AS reportSubName,
+                        b.colName AS reportcolName,
+                        a.subjectType1,
+                        c.subjectTypeName,
+                        a.departmentId,
+                        a.customerId,
+                        a.vocationId,
+                        a.ACTIVE_FLAG,
+                        a.sortNo,
+                        a.tbTemplateId
+                    FROM
+                        bdo_taxbase.tax_base_k_subjecttb a
+                            LEFT JOIN bdo_taxbase.tax_base_reporttemplatenode d ON d.vocationId = a.vocationId
+                            AND a.reportSubjectCode = d.colCode
+                            LEFT JOIN bdo_taxbase.tax_base_k_reportcolumn b ON b.colCode = a.reportSubjectCode
+                            LEFT JOIN bdo_taxbase.tax_base_subjecttype c ON c.subjectTypeId = a.subjectType1
+                    WHERE
+                        1 = 1
+                      <!-- AND a.vocationId = 96
+                      AND tbTemplateId = 827
+                      AND a.departmentId IN ( 1596, 555555 )
+                      AND a.customerId IN ( 0 )  -->
+                      AND a.vocationId = #{vocationId}
+                      AND tbTemplateId = #{tbTemplateId}
+                      AND a.departmentId in
+                      <foreach collection="departIds" index="index" item="departmentId" open="(" close=")" separator=",">
+                           #{departmentId}
+                      </foreach>
+                      AND a.customerId IN (0)
+                ) t2 ON t1.tbTemplateId = t2.tbTemplateId
+                    AND t1.tbTmpNodeId = t2.subjectCode
+            WHERE
+                t1.tbTemplateId = #{tbTemplateId}
+            ORDER BY
+                t1.sortNo ASC
+    </select>
+</mapper>

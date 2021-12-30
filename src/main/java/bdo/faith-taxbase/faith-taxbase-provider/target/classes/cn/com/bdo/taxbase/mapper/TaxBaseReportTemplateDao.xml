@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxbase.dao.TaxBaseReportTemplateDao">
+
+    <select id="queryReportNameList" parameterType="cn.com.bdo.taxbase.dto.TaxBaseReportSubjectDto"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseKRuleAccDto">
+        SELECT
+        t.autoId,
+        t.ruleName,
+        t.qyColumn,
+        t.templateType,
+        t.reportType,
+        t.YEAR,
+        t.MONTH,
+        t.sortNo,
+        DATE_FORMAT( t.LAST_UPDATE_DATE, '%Y-%m-%d %T' ) AS LAST_UPDATE_DATE,
+        t.LAST_UPDATED_BY,
+        t.ACTIVE_FLAG
+        FROM
+        <!-- bdo_taxbase.tax_base_k_ruleacc AS t -->
+         bdo_taxbase.tax_base_reporttemplate AS t
+        <where>
+            <if test="param.activeFlg != null and param.activeFlg != ''">
+                AND t.ACTIVE_FLAG = #{param.activeFlg}
+            </if>
+            <if test="param.templateType != null and param.templateType != ''">
+                AND t.templateType = #{param.templateType}
+            </if>
+        </where>
+        ORDER BY
+        t.templateType ASC,
+        t.ruleName DESC
+    </select>
+    <select id="queryReportTemplateList" parameterType="cn.com.bdo.taxbase.dto.TaxBaseReportSubjectDto"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseKReportTemplateDto">
+        SELECT
+            a.autoId,
+            a.vocationId,
+            a.colCode,
+            a.qyReportColumn,
+            a.colDisp,
+            <!--a.columnName,-->
+            REPLACE(a.columnName,',','') as columnName,
+            a.profitReferences,
+            d.colName AS colName,
+            b.subjectTypeId,
+            b.subjectTypeName,
+            a.calFun,
+            a.sortNo,
+            c.TABLE_NAME AS tableName,
+            a.tableDiv
+        FROM
+            <!-- bdo_taxbase.tax_base_k_reporttemplate a -->
+            bdo_taxbase.tax_base_reporttemplatenode a
+                LEFT JOIN bdo_taxbase.tax_base_subjecttype b ON b.subjectTypeId = a.subjectType
+                LEFT JOIN bdo_taxbase.tax_base_k_report_table_code_tbl c ON a.tableDiv = c.tableDiv
+                LEFT JOIN bdo_taxbase.tax_base_k_reportcolumn d ON a.colCode = d.colCode
+        WHERE
+            a.vocationId = #{vocationId}
+            AND a.tableDiv IN
+          <foreach collection="tableDivList" item="tableDiv" index="index" open="(" close=")" separator=",">
+            #{tableDiv}
+          </foreach>
+        ORDER BY
+            a.sortNo,
+            a.sortCode
+
+    </select>
+
+    <select id="queryReportSubject" parameterType="cn.com.bdo.taxbase.dto.TaxBaseReportSubjectDto"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseKReportColumnDto">
+        SELECT a.autoId,
+               a.isShow,
+               a.departId,
+               a.customerId,
+               a.parentId        AS parentId,
+               a.colCode         AS subjectId,
+               a.colName         AS subjectName,
+               a.subjectType     AS subjectType1,
+               b.subjectTypeName AS subjectTypeName1,
+               a.direction,
+               a.ACTIVE_FLAG
+        FROM bdo_taxbase.tax_base_k_reportcolumn a
+                 LEFT JOIN bdo_taxbase.tax_base_subjecttype b ON b.subjectTypeId = a.subjectType
+        <where>
+            <if test="report.colCode != null and report.colCode != ''">
+                AND colCode LIKE concat('%',#{report.colCode},'%')
+            </if>
+            <if test="report.colName != null and report.colName != ''">
+                AND colName LIKE concat('%',#{report.colName},'%')
+            </if>
+        </where>
+          AND a.departId = 0
+          AND a.customerId = 0
+        ORDER BY a.subjectType,
+                 a.colCode
+    </select>
+
+
+
+    <select id="querySubjectType" resultType="cn.com.bdo.taxbase.dto.TaxBaseSubjectTypeDto">
+        SELECT
+            a.autoId,
+            IF( a.departmentId = 0, 'true', 'false' ) AS isCommon,
+            IF( a.departmentId = 0, '标准分类', '部门自定义分类' ) AS subjectClass,
+            a.subjectType,
+            CASE a.subjectType
+                WHEN 1 THEN
+                    '科目一级分类'
+                WHEN 2 THEN
+                    '科目二级分类'
+                END AS subjectTypeNm,
+            a.subjectTypeId,
+            a.subjectTypeName
+        FROM
+            bdo_taxbase.tax_base_subjecttype a
+        WHERE
+            a.departmentId = '0'
+            ORDER BY subjectTypeId
+
+    </select>
+
+    <select id="queryMaxIdFromSubjectType" parameterType="cn.com.bdo.taxbase.dto.TaxBaseReportSubjectDto" resultType="java.lang.Integer">
+        SELECT
+            MAX(SUBSTR(a.subjectTypeId,LENGTH( a.subjectTypeId ))) AS maxId
+        FROM
+            bdo_taxbase.tax_base_subjecttype a
+        WHERE
+            a.subjectTypeId LIKE concat('',#{typeId},'%')
+          AND a.subjectType = 2
+    </select>
+
+    <select id="queryDicInfoByAttributeType" resultType="cn.com.bdo.base.vo.BaseLabelValueVo" parameterType="java.lang.String">
+        SELECT
+            attributeName AS label,
+            attributeValue1 AS value
+        FROM
+            bdo_base.base_dic
+        WHERE
+            attributeType LIKE CONCAT( '%', #{attributeType}, '%' )
+        <if test="ccataLog != null and ccataLog  != ''">
+            and ccataLog = #{ccataLog}
+        </if>
+        ORDER BY
+            id ASC
+    </select>
+</mapper>

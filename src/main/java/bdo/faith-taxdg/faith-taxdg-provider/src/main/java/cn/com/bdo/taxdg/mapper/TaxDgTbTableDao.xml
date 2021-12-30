@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgTbTableDao">
+
+    <select id="queryByCondition" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgTbTableDto" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTbTableDto">
+        SELECT * FROM bdo_taxdg.tax_dg_tbtable
+        <where>
+            <if test="customerId != null and customerId != ''">
+                and customerId = #{customerId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and projectId = #{projectId}
+            </if>
+            <if test="yyyy != null and yyyy != ''">
+                and yyyy = #{yyyy}
+            </if>
+            <if test="tbSubjectId != null and tbSubjectId != ''">
+                and tbSubjectId = #{tbSubjectId}
+            </if>
+        </where>
+
+    </select>
+<!--    cn.com.bdo.taxdg.dto.projectset.TaxDgTbDto-->
+    <select id="queryTaxdgCheckList" resultType = "java.util.Map" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgTbTableDto">
+        SELECT a.tbSubjectId                           AS colCode,
+               concat(a.subjectType1, a.tbSubjectName) AS colKey,
+               a.tbSubjectName                         AS colDisp,
+               a.subjectType1,
+               a.subjectType2,
+               a.colType,
+               a.unAuditAmount                         AS unAuditAmount${auditFlg},
+               a.adjustCAmount                         AS adjustCAmount${auditFlg},
+               a.adjustAmount                          AS adjustAmount${auditFlg},
+               a.auditAmount                           AS auditAmount${auditFlg},
+               a.adjustFlag,
+               count(c.autoId)                            contractCount,
+               c.direction
+        FROM bdo_taxdg.tax_dg_tbtable a
+             LEFT JOIN bdo_taxdg.tax_dg_projecttb b ON a.customerId = b.customerId
+             AND a.projectId = b.projectId AND a.tbSubjectId = b.tbSubjectId
+             LEFT JOIN bdo_taxdg.tax_dg_tbsubjectcontract c ON a.customerId = c.customerId
+             AND a.projectId = c.projectId AND a.tbSubjectId = c.tbSubjectId
+        WHERE a.customerId = #{customerId}
+          AND a.yyyy = #{yyyy}
+          AND a.projectId = #{projectId}
+        GROUP BY a.tbSubjectId,
+                 a.sortNo
+        ORDER BY a.sortNo
+    </select>
+</mapper>

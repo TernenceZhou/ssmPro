@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgUnAuditReportDao">
+
+    <select id="queryUnAuditReportList" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgUnAuditReportConditionDto"
+            resultType="java.util.HashMap">
+        SELECT a.columnName,
+               a.finallyChangeReason,
+               a.contrastStatus,
+               a.colType,
+               a.colCode,
+               a.colDisp,
+               a.adjustedAmount,
+               a.adjustedRemain,
+               IFNULL(b.occurValue, 0)  AS adjustAmount,
+               IFNULL(b2.occurValue, 0) AS adjustRemain,
+               CASE
+                   a.contrastStatus
+                   WHEN 1 THEN IFNULL((a.adjustedAmount + IFNULL(b.occurValue, 0)), 0) ELSE NULL
+                   END                  AS auditedAmount,
+               CASE
+                   a.contrastStatus
+                   WHEN 1 THEN
+                   IFNULL((a.adjustedRemain + IFNULL(b2.occurValue, 0)), 0) ELSE NULL
+                   END                  AS auditedRemain,
+               tableDiv
+        FROM bdo_taxdg.tax_dg_unauditreport a
+                 <!-- INNER JOIN (SELECT colCode AS subjectId, tableDiv
+                             FROM bdo_taxdg.tax_dg_k_reporttemplate
+                             WHERE vocationId = #{vocationId}) AS t1 ON colCode = t1.subjectId -->
+                 LEFT JOIN (
+            SELECT SUM(adjustValue) AS occurValue,
+                   reportSubjectId,
+                   customerId,
+                   projectId
+            FROM bdo_taxdg.tax_dg_tbsubjectcontract
+            WHERE customerId = #{customerId}
+              AND projectId = #{projectId}
+              AND yyyy = #{yyyy}
+              AND ACTIVE_FLAG = 1
+            GROUP BY reportSubjectId
+        ) b ON a.customerId = b.customerId
+            AND a.projectId = b.projectId
+            AND a.colCode = b.reportSubjectId
+                 LEFT JOIN (
+            SELECT SUM(adjustValue) AS occurValue,
+                   reportSubjectId,
+                   customerId,
+                   projectId
+            FROM bdo_taxdg.tax_dg_tbsubjectcontract
+            WHERE customerId = #{customerId}
+              AND projectId = #{projectId}
+              AND yyyy = #{lastYear}
+              AND ACTIVE_FLAG = 1
+            GROUP BY reportSubjectId
+        ) b2 ON a.customerId = b2.customerId
+            AND a.projectId = b2.projectId
+            AND a.colCode = b2.reportSubjectId
+        WHERE a.customerId = #{customerId}
+          AND a.projectId = #{projectId}
+          AND a.yyyy = #{yyyy}
+        GROUP BY a.colCode
+        ORDER BY a.sortNo
+    </select>
+
+    <select id="queryUnAuditList" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgUnAuditReportConditionDto"
+            resultType="java.util.HashMap">
+        SELECT changeReason,
+               colCode,
+               colDisp,
+               colType,
+               customerAmount                                             AS customerAmount${unAuditFlg},
+               unAuditAmount                                              AS unAuditAmount${unAuditFlg},
+               adjustAmount                                               AS adjustAmount${unAuditFlg},
+               adjustedAmount                                             AS adjustedAmount${unAuditFlg},
+               (ifnull(customerAmount, 0) - ifnull(adjustedAmount, 0))    AS differenceAmount${unAuditFlg},
+               remain                                                     AS remain${unAuditFlg},
+               adjustRemain                                               AS adjustRemain${unAuditFlg},
+               adjustedRemain                                             AS adjustedRemain${unAuditFlg},
+               customerRemain                                             AS customerRemain${unAuditFlg},
+               (ifnull(customerRemain, 0) - ifnull(adjustedRemain, 0))    AS differenceRemain${unAuditFlg},
+               adjustFlag,
+               <!-- t1.tableDiv,-->
+               a.tableDiv,
+               a.calFun
+        FROM bdo_taxdg.tax_dg_unauditreport a
+                <!-- INNER JOIN (
+                     SELECT colCode AS subjectId, tableDiv, calFun
+                             FROM bdo_taxdg.tax_dg_k_reporttemplate
+                             WHERE vocationId = #{vocationId}
+                     ) AS t1 ON colCode = t1.subjectId -->
+        WHERE customerId = #{customerId}
+          AND yyyy = #{yyyy}
+          AND projectId = #{projectId}
+        ORDER BY sortNo
+
+    </select>
+    <select id="queryUnAuditInfoList" resultType="java.util.HashMap"
+            parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgUnAuditReportConditionDto">
+        SELECT
+            t.autoId,
+            t.customerId,
+            t.yyyy,
+            t.projectId,
+            t.colCode,
+            t.colDisp,
+            t.colType,
+            t.rowNum,
+            t.column1,
+            t.column2,
+            t.column3,
+            t.column4,
+            t.column5,
+            t.column6,
+            t.column7,
+            t.column8,
+            t.column9,
+            t.column10,
+            t.column11,
+            t.column12,
+            t.column13,
+            t.column14,
+            t.column15,
+            t.isPre,
+            t.columnDesc1,
+            t.columnDesc2,
+            t.columnDesc3,
+            t.columnDesc4,
+            t.columnDesc5,
+            t.columnDesc6,
+            t.columnDesc7,
+            t.columnDesc8,
+            t.columnDesc9,
+            t.columnDesc10,
+            t.columnDesc11,
+            t.columnDesc12,
+            t.columnDesc13,
+            t.columnDesc14,
+            t.columnDesc15
+        FROM
+            <!--bdo_dg.dg_auditreport_info t-->
+            bdo_taxdg.tax_dg_auditreport_info t
+        WHERE
+            t.customerId = #{customerId}
+          AND t.projectId = #{projectId}
+          AND t.isPre = #{isPre}
+          AND t.colType = 'G'
+
+    </select>
+
+    <select id="queryUnAuditNoContract"  parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgUnAuditReportConditionDto" resultType="java.util.HashMap">
+
+        SELECT
+            audit.colCode,
+            audit.colDisp,
+            audit.colType,
+            audit.customerAmount AS customerAmount${unAuditFlg},
+            audit.unAuditAmount AS unAuditAmount${unAuditFlg},
+            audit.adjustAmount AS adjustAmount${unAuditFlg},
+            audit.adjustedAmount AS adjustedAmount${unAuditFlg},
+            audit.remain AS remain${unAuditFlg},
+            audit.adjustRemain AS adjustRemain${unAuditFlg},
+            audit.adjustedRemain AS adjustedRemain${unAuditFlg},
+            audit.customerRemain AS customerRemain${unAuditFlg},
+            (ifnull( audit.customerAmount, 0 ) - ifnull( audit.adjustedAmount, 0 )) AS differenceAmount${unAuditFlg},
+            (ifnull( audit.customerRemain, 0 ) - ifnull( audit.adjustedRemain, 0 )) AS differenceRemain${unAuditFlg},
+            audit.adjustFlag
+        FROM
+            bdo_taxdg.tax_dg_unauditreport audit
+            <!-- LEFT JOIN bdo_taxdg.tax_dg_k_reporttemplate temp ON audit.colCode = temp.colCode -->
+        WHERE
+            audit.customerId = #{customerId}
+          AND audit.yyyy = #{yyyy}
+          AND audit.projectId = #{projectId}
+          AND audit.colType = 1
+          <!-- AND temp.vocationId = #{vocationId} -->
+          AND NOT EXISTS (
+            SELECT
+            contract.reportSubjectId
+            FROM
+            bdo_taxdg.tax_dg_tbsubjectcontract contract
+            WHERE
+            contract.customerId = #{customerId}
+          AND contract.yyyy = #{yyyy}
+          AND contract.projectId = #{projectId}
+          AND contract.reportSubjectId = audit.colCode
+            )
+        GROUP BY
+            audit.colCode
+    </select>
+
+
+    <select id="queryUnAuditReport" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgUnAuditReportConditionDto" resultType="java.util.HashMap">
+        SELECT
+            colCode,
+            colDisp,
+            colType,
+            TRUNCATE ( customerAmount, 2 ) AS customerAmount${unAuditYear},
+            TRUNCATE ( unAuditAmount, 2 ) AS unAuditAmount${unAuditYear},
+            TRUNCATE ( adjustAmount, 2 ) AS adjustAmount${unAuditYear},
+            TRUNCATE ( adjustedAmount, 2 ) AS adjustedAmount${unAuditYear},(
+            TRUNCATE ( IFNULL( customerAmount, 0 ), 2 ) - TRUNCATE ( IFNULL( adjustedAmount, 0 ), 2 )) AS differenceAmount${unAuditYear},
+            TRUNCATE ( remain, 2 ) AS remain${unAuditYear},
+            TRUNCATE ( adjustRemain, 2 ) AS adjustRemain${unAuditYear},
+            TRUNCATE ( adjustedRemain, 2 ) AS adjustedRemain${unAuditYear},
+            TRUNCATE ( customerRemain, 2 ) AS customerRemain${unAuditYear},(
+            TRUNCATE ( IFNULL( customerRemain, 0 ), 2 ) - TRUNCATE ( IFNULL( adjustedRemain, 0 ), 2 )) AS differenceRemain${unAuditYear},
+            adjustFlag
+        FROM
+            bdo_taxdg.tax_dg_unauditreport
+        WHERE
+            customerId = #{customerId}
+          AND yyyy = #{unAuditYear}
+          AND projectId = #{projectId}
+        ORDER BY
+            sortNo
+    </select>
+
+    <select id="queryCashFlowStatement" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgUnAuditReportConditionDto" resultType="java.util.HashMap">
+        SELECT a.colCode, a.colName, a.property FROM asdb.k_cashflowstatement_subject a
+        <where>
+            <if test="debitName != null and debitName != ''">
+                AND a.debitName = #{debitName}
+                OR a.debitName LIKE concat('',#{debitName},'%')
+                OR a.debitName LIKE concat('%',#{debitName},'')
+                OR a.debitName LIKE concat('%',#{debitName},'%')
+            </if>
+            <if test="creditName != null and creditName != ''">
+                AND a.creditName = #{creditName}
+                OR a.creditName LIKE concat('',#{debitName},'%')
+                OR a.creditName LIKE concat('%',#{debitName},'')
+                OR a.creditName LIKE concat('%',#{debitName},'%')
+            </if>
+        </where>
+    </select>
+
+</mapper>

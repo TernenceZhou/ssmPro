@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.cus.CusCustomerInfoBasicDao">
+    <select id="selectShareholderList" resultType="cn.com.bdo.taxdg.dto.cus.ShareHoldInfoDto" parameterType="java.lang.Integer">
+        SELECT
+            c.customerId,
+            IFNULL( d.customerName, c.customerName ) AS customerName,
+            d.customerEnName,
+            d.registerState,
+            b.stockType,
+            b.stockRate,
+            b.stockBreakRate
+        FROM
+            bdo_cus.cus_customerinfo_qccratedetail b
+                LEFT JOIN bdo_cus.cus_customerinfo_qcc c ON c.qccId = b.qccId
+                LEFT JOIN bdo_cus.cus_customerinfo_basic d ON d.customerId = c.customerId
+        WHERE
+            b.subQccId = (SELECT qccId FROM bdo_cus.cus_customerinfo_qcc WHERE customerId = #{customerId})
+            AND b.stockRate &gt;= '5'
+            AND b.stockRate &lt;= '100'
+        ORDER BY
+            b.stockRate DESC,
+            b.stockBreakRate DESC
+    </select>
+
+    <select id="selectRelatedList" resultType="cn.com.bdo.taxdg.dto.cus.RelatedInfoDto" parameterType="java.lang.Integer">
+        SELECT
+            c.customerId,
+            IFNULL( d.customerName, c.customerName ) AS customerName,
+            d.customerEnName,
+            d.areaPlace,
+            d.registerAddress,
+            d.registerState,
+            d.corporation,
+            b.stockType,
+            b.stockRate,
+            b.stockBreakRate
+        FROM
+            bdo_cus.cus_customerinfo_qccratedetail b
+                LEFT JOIN bdo_cus.cus_customerinfo_qcc c ON c.qccId = b.subQccId
+                LEFT JOIN bdo_cus.cus_customerinfo_basic d ON d.customerId = c.customerId
+                LEFT JOIN bdo_cus.cus_customerinfo_bdo e ON e.customerId = d.customerId
+                AND e.yyyy = YEAR (
+            NOW())
+        WHERE
+            b.qccId = (SELECT qccId FROM bdo_cus.cus_customerinfo_qcc WHERE customerId = #{customerId})
+            AND b.stockRate &gt;= '20.0001' AND b.stockRate &lt;= '49.9999'
+        ORDER BY
+            b.stockRate DESC,
+            b.stockBreakRate DESC
+    </select>
+</mapper>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="INFO" monitorInterval="30">
+	<properties>
+		<property name="LOG_HOME">${sys:work.log.dir}/bdofaithlog</property>
+		<!-- 日志备份目录 -->
+		<property name="BACKUP_HOME">backup</property>
+		<property name="SERVER_NAME">faith-admin</property>
+		<property name="OUTPUT_LOG_LEVEL">INFO</property><!-- 日志输出级别 -->
+		<property name="faith.host">${sys:web.server.host}</property>
+	</properties>
+	<appenders>
+		<!-- ================================= -->
+		<!-- 系统日志                               -->
+		<!-- ================================= -->
+
+		<RollingFile name="BDO_LOG"
+					 fileName="${LOG_HOME}/BDO.log"
+					 filePattern="${LOG_HOME}/${BACKUP_HOME}/BDO.%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout
+					pattern="${faith.host} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] [${SERVER_NAME}] [REQUEST_ID_%X{requestId}] [%c{1.}] %line %m%n"
+					charset="UTF-8"/>
+			<Policies>
+				<CronTriggeringPolicy schedule="0 0 * * * ?"/>
+				<SizeBasedTriggeringPolicy size="20MB"/>
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+			</Filters>
+			<DefaultRolloverStrategy>
+				<!-- 删除指定目录下7天之前的日志-->
+				<Delete basePath="${LOG_HOME}/${BACKUP_HOME}" maxDepth="1">
+					<IfFileName glob="BDO.*.log"/>
+					<IfLastModified age="168H"/>
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+		<RollingFile name="BDO_SQL_LOG"
+					 fileName="${LOG_HOME}/BDO_SQL.log"
+					 filePattern="${LOG_HOME}/${BACKUP_HOME}/BDO_SQL.%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout
+					pattern="${faith.host} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] [${SERVER_NAME}] [REQUEST_ID_%X{requestId}] [%c{1.}] %line %m%n"
+					charset="UTF-8"/>
+			<Policies>
+				<CronTriggeringPolicy schedule="0 0 * * * ?"/>
+				<SizeBasedTriggeringPolicy size="20MB"/>
+			</Policies>
+			<Filters>
+				<!--<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />-->
+				<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+			</Filters>
+			<DefaultRolloverStrategy>
+				<!-- 删除指定目录下7天之前的日志-->
+				<Delete basePath="${LOG_HOME}/${BACKUP_HOME}" maxDepth="1">
+					<IfFileName glob="BDO_SQL.*.log"/>
+					<IfLastModified age="168H"/>
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout
+					pattern="${faith.host} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] [${SERVER_NAME}] [REQUEST_ID_%X{requestId}] [%c{1.}] %line %m%n"
+					charset="UTF-8"/>
+			<Filters>
+				<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+			</Filters>
+		</Console>
+		<Kafka name="Kafka" topic="sacp-log-uat" syncSend="false">
+			<PatternLayout
+					pattern="${faith.host} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] [${SERVER_NAME}] [REQUEST_ID_%X{requestId}] [%c{1.}] %line %m%n"
+					charset="UTF-8"/>
+			<Property name="bootstrap.servers">172.16.3.92:9093,172.16.3.92:9094</Property>
+			<ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+		</Kafka>
+		<Async name="async">
+			<AppenderRef ref="BDO_LOG"/>
+			<AppenderRef ref="BDO_SQL_LOG"/>
+			<AppenderRef ref="Kafka"/>
+		</Async>
+	</appenders>
+
+	<Loggers>
+		<Logger name="cn.com.bdo.cusBase.service.CustomerUserService" level="OFF" includeLocation="true"/>
+		<Logger name="org.apache.commons.beanutils" level="ERROR" includeLocation="true"/>
+		<Logger name="org.apache.commons.digester3" level="ERROR" includeLocation="true"/>
+		<Logger name="org.apache.commons.digester" level="ERROR" includeLocation="true"/>
+		<Logger name="org.logicalcobwebs.proxool" level="ERROR" includeLocation="true"/>
+		<Logger name="org.springframework" level="ERROR" includeLocation="true"/>
+		<Logger name="org.springframework.session" level="ERROR" includeLocation="true"/>
+		<Logger name="io.lettuce.core" level="ERROR" includeLocation="true"/>
+		<Logger name="org.quartz" level="ERROR" includeLocation="true"/>
+		<Logger name="org.apache.axis" level="ERROR" includeLocation="true"/>
+		<Logger name="com.alibaba.nacos" level="error" includeLocation="true"/>
+		<Logger name="org.apache.kafka" level="INFO" includeLocation="true"/>
+		<Logger name="cn.com.bdo" level="INFO" includeLocation="true">
+			<AppenderRef ref="BDO_LOG"/>
+		</Logger>
+
+		<Root level="INFO" includeLocation="true">
+			<AppenderRef ref="Kafka"/>
+		</Root>
+	</Loggers>
+</configuration>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgTreeDao">
+
+    <select id="taxDgSubjectTree" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgTbDto" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTreeNodeDto">
+        SELECT a.autoId          AS autoId,
+               a.subjectTypeName AS text,
+               a.subjectTypeName AS label,
+               a.autoId AS value,
+               a.autoId AS nodeId,
+               '' AS parentId,
+               'false' AS isLeaf,
+               '0' AS nodeLevel
+        FROM bdo_taxdg.tax_dg_subjecttype a
+        WHERE a.subjectType = 1 AND isTrue = 1
+        UNION ALL
+        SELECT aa.id       autoId,
+               aa.label AS text,
+               aa.label,
+               aa.VALUE,
+               aa.VALUE AS nodeId,
+               aa.parentId,
+               aa.isleaf,
+               aa.nodeLevel
+        FROM (
+                 SELECT a.subjectId                                 AS id,
+                        CONCAT(a.subjectId, '-', a.subjectFullName) AS label,
+                        a.subjectId AS VALUE ,
+                        IF ( a.parentSubjectId = '' OR a.parentSubjectId IS NULL,
+                        LEFT ( a.subjectId, 1 ), a.parentSubjectId ) AS parentId,
+                        IF ( a.isLeaf = 0, 'false', 'true' ) AS isleaf,
+                        a.level1 AS nodeLevel,
+                        a.isLeaf as leaf
+                 FROM
+                     bdo_taxdg.tax_dg_customersubject a
+                 WHERE
+                     a.customerId = #{customerId}
+                   AND a.projectId = #{projectId}
+                   AND a.yyyy = #{yyyy}
+                 <if test="showSecondarySubjectFlg == '1'.toString() and showSecondarySubjectFlg != null and showSecondarySubjectFlg != ''">
+                     AND a.level1 &lt;= 2
+                 </if>
+             ) aa
+        WHERE 1 = 1
+          AND aa.parentId NOT IN ('42', '41', '40')
+        UNION ALL
+        SELECT aa.id       autoId,
+               aa.label AS text,
+               aa.label,
+               aa.VALUE,
+               aa.VALUE AS nodeId,
+               aa.parentId,
+               aa.isleaf,
+               aa.nodeLevel
+        FROM (
+                 SELECT a.subjectId                                 AS id,
+                        CONCAT(a.subjectId, '-', a.subjectFullName) AS label,
+                        a.subjectId AS VALUE,
+                        '14' AS parentId,
+                        IF ( a.isLeaf = 0, 'false', 'true' ) AS isleaf,
+                        a.level1 AS nodeLevel,
+                        a.isLeaf as leaf
+                 FROM
+                     bdo_taxdg.tax_dg_customersubject a
+                 WHERE
+                     a.customerId = #{customerId}
+                   AND projectId = #{projectId}
+                   AND a.yyyy = #{yyyy}
+                   AND LEFT ( a.subjectId, 1 )
+                   NOT IN ( 1, 2, 3, 4, 5, 6 )
+             ) aa
+        WHERE 1 = 1
+          AND aa.parentId NOT IN ('42', '41', '40')
+    </select>
+
+    <select id="findProjectTb" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgTbDto" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTreeNodeDto">
+
+        SELECT
+            a.autoId AS autoId,
+            a.subjectTypeName AS label,
+            a.subjectTypeName AS text,
+            a.subjectTypeId AS VALUE,
+            a.subjectTypeId AS nodeId,
+            '' AS parentid,
+            'false' AS leaf,
+            'subjectType' AS typeName
+        FROM
+            bdo_taxdg.tax_dg_subjecttype a
+        WHERE
+            a.subjectType = 1
+          AND isTrue = 1
+--           AND a.subjectTypeId NOT IN('Y','G','F')
+          AND a.subjectTypeId in ('A','B','C','D','Y','Z')
+        UNION
+        SELECT
+            a.autoId AS autoId,
+            CONCAT(a.tbSubjectId,'-',a.tbSubjectName) AS label,
+            CONCAT(a.tbSubjectId,'-',a.tbSubjectName) AS text,
+            a.tbSubjectId AS VALUE,
+            CONCAT(a.tbSubjectId, '-', a.tbSubjectName) AS nodeId,
+            LEFT(a.subjectType, 1) AS parentid,
+            'true' AS leaf,
+            'subject' AS typeName   FROM
+            bdo_taxdg.tax_dg_projecttb a
+        WHERE
+            customerId = #{customerId}
+          AND projectId = #{projectId}
+          AND a.isSubject = 1
+          and
+            LEFT(a.subjectType,1) IN('A','B','C','D','E','S','Y','Z')
+    </select>
+
+    <select id="findBaseSubjectType" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTreeNodeDto">
+        SELECT
+            a.autoId AS autoId,
+            a.autoId AS nodeId,
+            <!--a.SubjectId AS subjectId,-->
+            <!--a.SubjectName AS subjectName,-->
+            CONCAT( a.SubjectId, '-', a.SubjectName ) AS label,
+            CONCAT( a.SubjectId, '-', a.SubjectName ) AS text,
+            a.SubjectId AS VALUE,
+            a.parentId AS parentid,
+            <!-- CONCAT( a.SubjectId, '-', a.SubjectName ) AS VALUE, -->
+            'true' AS isLeaf
+            FROM
+                bdo_taxdg.tax_dg_subject a
+            WHERE
+                a.ACTIVE_FLAG = 1
+            ORDER BY
+                a.SubjectId
+    </select>
+
+    <select id="queryReportSubjectTree" parameterType="java.lang.String" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTreeNodeDto">
+        <!--SELECT a.autoId AS autoId,
+        a.subjectTypeName AS label,
+        a.subjectTypeId AS VALUE,
+        a.subjectTypeId AS nodeId,
+        a.subjectTypeName AS text,
+        '' AS parentid,
+        'false' AS leaf
+        FROM bdo_taxdg.tax_dg_subjecttype a
+        WHERE a.subjectType = 1 AND isTrue = 1
+        UNION
+        SELECT a.autoId AS autoId,
+        b.colName AS label,
+        a.colCode AS VALUE,
+        &lt;!&ndash; a.colCode AS nodeId, &ndash;&gt;
+        b.colName AS nodeId,
+        b.colName AS text,
+        LEFT (a.subjectType,1) AS parentid,
+        'true' AS leaf
+        FROM bdo_taxdg.tax_dg_k_reporttemplate a
+        LEFT JOIN bdo_taxdg.tax_dg_k_reportcolumn b ON a.colCode = b.colCode
+        WHERE b.isSubject= 1
+        AND a.vocationId = #{vocationId}
+        AND LEFT(a.colCode,1) NOT IN ('Y','G','F')
+        &lt;!&ndash; 单体 &ndash;&gt;
+        <if test="reportType == '1'.toString() and reportType != null and reportType != ''">
+            AND a.tableDiv IN (1,3,4,5)
+        </if>
+        &lt;!&ndash; 合并 &ndash;&gt;
+        <if test="reportType == '2'.toString() and reportType != null and reportType != ''">
+            AND a.tableDiv IN (7,9,10,11)
+        </if>-->
+
+    </select>
+</mapper>

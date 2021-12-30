@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {
+      "name": "faith.te.path",
+      "type": "cn.com.bdo.taxbase.config.FaithTePathProperties",
+      "sourceType": "cn.com.bdo.taxbase.config.FaithTePathProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "faith.te.path.base-dir-linux",
+      "type": "java.lang.String",
+      "sourceType": "cn.com.bdo.taxbase.config.FaithTePathProperties"
+    },
+    {
+      "name": "faith.te.path.base-dir-win",
+      "type": "java.lang.String",
+      "sourceType": "cn.com.bdo.taxbase.config.FaithTePathProperties"
+    },
+    {
+      "name": "faith.te.path.temp-dir",
+      "type": "java.lang.String",
+      "sourceType": "cn.com.bdo.taxbase.config.FaithTePathProperties"
+    }
+  ],
+  "hints": []
+}

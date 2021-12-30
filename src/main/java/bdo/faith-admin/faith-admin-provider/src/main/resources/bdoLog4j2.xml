@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN"  monitorInterval="30">
+	<properties>
+		<property name="LOG_HOME">${sys:work.log.dir}</property>
+		<!-- 日志备份目录 -->
+		<property name="BACKUP_HOME">backup</property>
+		<property name="SERVER_NAME">Faith</property>
+		<property name="OUTPUT_LOG_LEVEL">DEBUG</property><!-- 日志输出级别 -->
+		<property name="faith.host">${sys:web.server.host}</property>
+	</properties>
+	<appenders>
+		<!-- ================================= -->
+		<!-- 系统日志                           -->
+		<!-- ================================= -->
+		<RollingFile name="SYSTEM_LOG"
+					 fileName="${LOG_HOME}/BDO_SYS.log"
+					 filePattern="${LOG_HOME}/dev_${BACKUP_HOME}/BDO_SYS.%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout charset="UTF-8" pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level [%C{1.}.%M] - %msg%n" />
+			<Policies>
+				<CronTriggeringPolicy schedule="0 0 * * * ?"/>
+				<SizeBasedTriggeringPolicy size="20MB"/>
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="NEUTRAL" />
+			</Filters>
+			<DefaultRolloverStrategy >
+				<!-- 删除指定目录下7天之前的日志-->
+				<Delete basePath="${LOG_HOME}/dev_${BACKUP_HOME}" maxDepth="1">
+					<IfFileName glob="BDO_SYS.*.log">
+						<IfLastModified age="24H" />
+					</IfFileName>
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+		<RollingFile name="BDO_LOG"
+					 fileName="${LOG_HOME}/BDO.log"
+					 filePattern="${LOG_HOME}/dev_${BACKUP_HOME}/BDO.%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout charset="UTF-8" pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level [%C{1.}.%M] - %msg%n" />
+			<Policies>
+				<CronTriggeringPolicy schedule="0 0 * * * ?"/>
+				<SizeBasedTriggeringPolicy size="20MB"/>
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="NEUTRAL" />
+			</Filters>
+			<DefaultRolloverStrategy>
+				<!-- 删除指定目录下7天之前的日志-->
+				<Delete basePath="${LOG_HOME}/dev_${BACKUP_HOME}" maxDepth="1">
+					<IfFileName glob="BDO.*.log" />
+					<IfLastModified age="24H" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+		<RollingFile name="BDO_SQL_LOG"
+					 fileName="${LOG_HOME}/BDO_SQL.log"
+					 filePattern="${LOG_HOME}/dev_${BACKUP_HOME}/BDO_SQL.%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout charset="UTF-8" pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level [%C{1.}.%M] - %msg%n" />
+			<Policies>
+				<CronTriggeringPolicy schedule="0 0 * * * ?"/>
+				<SizeBasedTriggeringPolicy size="20MB"/>
+			</Policies>
+			<Filters>
+				<!--<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />-->
+				<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="NEUTRAL" />
+			</Filters>
+			<DefaultRolloverStrategy>
+				<!-- 删除指定目录下7天之前的日志-->
+				<Delete basePath="${LOG_HOME}/dev_${BACKUP_HOME}" maxDepth="1">
+					<IfFileName glob="BDO_SQL.*.log" />
+					<IfLastModified age="24H" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+		<RollingFile name="BDO_BATCH_RESULT_LOG"
+					 fileName="${LOG_HOME}/BDO_BATCH_RESULT.log"
+					 filePattern="${LOG_HOME}/dev_${BACKUP_HOME}/BDO_BATCH_RESULT.%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout charset="UTF-8" pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level [%C{1.}.%M] - %msg%n" />
+			<Policies>
+				<CronTriggeringPolicy schedule="0 0 * * * ?"/>
+				<SizeBasedTriggeringPolicy size="20MB"/>
+			</Policies>
+			<Filters>
+				<!--<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />-->
+				<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="NEUTRAL" />
+			</Filters>
+			<DefaultRolloverStrategy>
+				<!-- 删除指定目录下7天之前的日志-->
+				<Delete basePath="${LOG_HOME}/dev_${BACKUP_HOME}" maxDepth="1">
+					<IfFileName glob="BDO_BATCH_RESULT.*.log" />
+					<IfLastModified age="24H" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+		<RollingFile name="BDO_FAITH_ERROR_LOG"
+					 fileName="${LOG_HOME}/BDO_FAITH_ERROR.log"
+					 filePattern="${LOG_HOME}/dev_${BACKUP_HOME}/BDO_FAITH_ERROR.%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout charset="UTF-8" pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %level [%C{1.}.%M] - %msg%n" />
+			<Policies>
+				<CronTriggeringPolicy schedule="0 0 * * * ?"/>
+				<SizeBasedTriggeringPolicy size="20MB"/>
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY" />
+			</Filters>
+			<DefaultRolloverStrategy>
+				<Delete basePath="${LOG_HOME}/dev_${BACKUP_HOME}" maxDepth="1">
+					<IfFileName glob="BDO_FAITH_ERROR.*.log" />
+					<IfLastModified age="24H" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<!--<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
+			<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />-->
+			<!--<PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} [%c] %level [%C{1.}.%M] - %msg%n" />-->
+			<!--<Filters>
+				<ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL" />
+				<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />
+			</Filters>-->
+			<!-- %d %-5p [%c] %m%n-->
+			<!--<PatternLayout pattern="${sys:faith.host} %date{yyyy-MM-dd HH:mm:ss.SSS} [%c] %level [%logger{1.}.%M] - %msg%n" />-->
+			<PatternLayout charset="UTF-8" pattern="%highlight{${faith.host} %d %-5p [%t] [%c] %line %m%n}{STYLE=Logback}" />
+
+			<!--<JsonLayout locationInfo="true" charset="GBK" complete="true" includeStacktrace="true"/>-->
+			<Filters>
+				<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="NEUTRAL" />
+			</Filters>
+		</Console>
+		<!--<Kafka name="Kafka" topic="faith-dev-log" syncSend="false">
+			<PatternLayout pattern="${sys:faith.host} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%c{1.}] %m%n" charset="UTF-8"/>
+			<Property name="bootstrap.servers">172.16.3.92:9093,172.16.3.92:9094</Property>
+			<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="DENY" />
+		</Kafka>
+		<Async name="async">
+			<AppenderRef ref="Kafka"/>
+			<AppenderRef ref="CONSOLE"/>
+		</Async>-->
+	</appenders>
+
+	<Loggers>
+		<Logger name="cn.com.bdo.cusBase.service.CustomerUserService" level="OFF"/>
+		<Logger name="org.apache" level="DEBUG"/>
+		<Logger name="org.apache.commons.beanutils" level="off"/>
+		<Logger name="org.apache.commons.digester3" level="off"/>
+		<Logger name="org.apache.commons.digester" level="off"/>
+		<Logger name="org.apache.axis" level="error"/>
+		<Logger name="org.apache.kafka" level="off" />
+
+
+		<Logger name="org.logicalcobwebs" level="error"/>
+		<Logger name="org.springframework.data.redis" level="error"/>
+		<Logger name="org.springframework.session" level="error"/>
+		<Logger name="io.lettuce.core" level="error"/>
+		<Logger name="org.quartz" level="error"/>
+		<Logger name="org.springframework" level="trace" />
+		<Logger name="com.alibaba.nacos" level="info"/>
+
+		<Logger name="cn.com.bdo" level="debug"  />
+		<Logger name="BDO_CONSOLE" level="${OUTPUT_LOG_LEVEL}" >
+			<!--<AppenderRef ref="CONSOLE" />-->
+		</Logger>
+		<Logger name="BDO_SQL" level="${OUTPUT_LOG_LEVEL}" >
+			<!--<AppenderRef ref="BDO_SQL_LOG" />-->
+		</Logger>
+		<Logger name="BDO_BATCH_RESULT" level="${OUTPUT_LOG_LEVEL}" >
+			<AppenderRef ref="BDO_BATCH_RESULT_LOG" />
+		</Logger>
+		<Root level="${OUTPUT_LOG_LEVEL}">
+			<AppenderRef ref="CONSOLE" />
+			<!--<AppenderRef ref="Kafka"/>-->
+		</Root>
+		<Logger name="druid.sql.Statement" level="${OUTPUT_LOG_LEVEL}"/>
+	</Loggers>
+</configuration>

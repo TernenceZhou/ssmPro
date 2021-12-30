@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgCashFlowStatementDao">
+
+    <select id="queryCashFlowStatement" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgCashFlowStatementDto"
+            resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgCashFlowStatementDto">
+        SELECT a.*, b.calFun
+        FROM (SELECT a.customerId,
+                     projectId,
+                     a.year,
+                     a.colCode,
+                     a.colName,
+                     SUM(a.balance) AS amount
+              FROM bdo_taxdg.tax_dg_cashflowstatement a
+              WHERE a.customerId = #{customerId}
+                AND a.projectId = #{projectId}
+                AND a.year = #{year}
+                AND a.colCode IS NOT NULL
+                AND a.colCode <![CDATA[!= ]]> ''
+              GROUP BY a.customerId, a.projectId, a.year, a.colCode
+              ORDER BY a.autoId) a
+                 LEFT JOIN (SELECT a.*
+                            FROM bdo_taxdg.tax_dg_k_tbtemplate a
+                            WHERE a.subjectType = 'F'
+                              AND a.vocationId = #{vocationId}) b ON a.colCode = b.colCode
+    </select>
+</mapper>

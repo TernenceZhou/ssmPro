@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgCashFlowDao">
+
+    <select id="queryTaxdgCashFlow" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgCashFlowDto"
+            resultType="java.util.HashMap">
+        SELECT a.autoId,
+               a.customerId,
+               a.projectId,
+               a.year                                                 AS yyyy,
+               a.colCode,
+               a.colDisp,
+               CASE WHEN a.curAmount = '' THEN 0 ELSE a.curAmount END AS curAmount,
+               CASE WHEN a.preAmount = '' THEN 0 ELSE a.preAmount END AS preAmount,
+               b.calFun,
+               c.colType,
+               c.rowNum,
+               c.colNum,
+               c.tableType,
+               c.generateMethod
+        FROM bdo_taxdg.tax_dg_cashflow a
+                 LEFT JOIN bdo_taxdg.k_reporttemplate b ON b.vocationId = #{vocationId} AND b.colCode = a.colCode
+                 LEFT JOIN bdo_taxdg.tax_dg_auditreport_info c
+                           ON a.customerId = c.customerId AND a.projectId = c.projectId AND a.year = c.yyyy AND
+                              a.colCode = c.colCode AND c.colType = 'F'
+        WHERE a.customerId = #{customerId}
+          AND a.projectId = #{projectId}
+          AND a.year = #{yyyy}
+    </select>
+</mapper>

@@ -1,0 +1,179 @@
+spring:
+    main:
+        banner-mode: OFF
+        register-shutdown-hook: true
+    profiles:
+        active: dev
+    jndi:
+        ignore: true
+    freemarker:
+        enabled: false
+    application:
+        name: sacp-faith-admin
+server:
+    servlet:
+        context-parameters:
+            isLog4jAutoInitializationDisabled: true
+            log4jRefreshInterval: 1000
+#    error:
+#        path: /hasNoRight.jsp
+#jasypt:
+#    encryptor:
+#        bootstrap: true
+#        password: ${jasypt.password:bdoencrypt}
+#        property:
+#            prefix: 'bdoencrypt@'
+#            suffix: '|'
+#            resolver-bean: sacpEncryptablePropertyResolver
+
+---
+spring:
+    profiles: dev
+    cloud:
+        inetutils:
+            preferred-networks: 172.16
+        nacos:
+            config:
+                #server-addr: 192.168.1.7:8848
+                #namespace: e2ca0894-c43f-481b-b86c-208103da6f3a
+                server-addr: nacos-test.bdo.com.cn:80
+                namespace: 3e8ebcca-a104-4990-a096-31d40be11eaa
+                username: sacp
+                password: sacp
+                group: dev
+                max-retry: 5
+                refresh-enabled: true
+                file-extension: yml
+                encode: UTF-8
+                extension-configs:
+                    -   dataId: sacp-global-dir.yml
+                        group: dev
+                        refresh: true
+                    -   dataId: sacp-global-redis.yml
+                        group: dev
+                        refresh: true
+                    -   dataId: sacp-global-server.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+                    -   dataId: sacp-global-datasource.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+            discovery:
+                #server-addr: 192.168.1.7:8848
+                #namespace: e2ca0894-c43f-481b-b86c-208103da6f3a
+                server-addr: nacos-test.bdo.com.cn:80
+                namespace: 3e8ebcca-a104-4990-a096-31d40be11eaa
+                username: sacp
+                password: sacp
+                group: dev
+trace: true
+---
+spring:
+    profiles: uat
+    cloud:
+        nacos:
+            config:
+                server-addr: nacos-test.bdo.com.cn:80
+                namespace: 3e8ebcca-a104-4990-a096-31d40be11eaa
+                username: sacp
+                password: sacp
+                group: uat
+                max-retry: 5
+                refresh-enabled: true
+                file-extension: yml
+                encode: UTF-8
+                extension-configs:
+                    -   dataId: sacp-global-dir.yml
+                        group: uat
+                        refresh: true
+                    -   dataId: sacp-global-redis.yml
+                        group: uat
+                        refresh: true
+                    -   dataId: sacp-global-server.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+                    -   dataId: sacp-global-datasource.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+            discovery:
+                server-addr: nacos-test.bdo.com.cn:80
+                namespace: 3e8ebcca-a104-4990-a096-31d40be11eaa
+                username: sacp
+                password: sacp
+                group: uat
+
+---
+spring:
+    profiles: qac
+    cloud:
+        nacos:
+            config:
+                #server-addr: nacos-prod.bdo.com.cn:8848
+                #namespace: 6f9b4783-e7fa-479a-9c00-ab3e150a58e9
+                #username: sacp
+                #password: hjd1y_mvHBfsen6g
+                server-addr: nacos-test.bdo.com.cn:80
+                namespace: 3e8ebcca-a104-4990-a096-31d40be11eaa
+                username: sacp
+                password: sacp
+                group: qac
+                refresh-enabled: true
+                file-extension: yml
+                encode: UTF-8
+                extension-configs:
+                    -   dataId: sacp-global-dir.yml
+                        group: qac
+                        refresh: true
+                    -   dataId: sacp-global-redis.yml
+                        group: qac
+                        refresh: true
+                    -   dataId: sacp-global-server.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+                    -   dataId: sacp-global-datasource.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+            discovery:
+                #server-addr: nacos-prod.bdo.com.cn:8848
+                #namespace: 6f9b4783-e7fa-479a-9c00-ab3e150a58e9
+                #username: sacp
+                #password: hjd1y_mvHBfsen6g
+                server-addr: nacos-test.bdo.com.cn:80
+                namespace: 3e8ebcca-a104-4990-a096-31d40be11eaa
+                username: sacp
+                password: sacp
+                group: qac
+
+---
+spring:
+    profiles: prod
+    cloud:
+        nacos:
+            config:
+                server-addr: nacos-prod.bdo.com.cn:8848
+                namespace: 6f9b4783-e7fa-479a-9c00-ab3e150a58e9
+                username: sacp
+                password: hjd1y_mvHBfsen6g
+                group: prod
+                refresh-enabled: true
+                file-extension: yml
+                encode: UTF-8
+                extension-configs:
+                    -   dataId: sacp-global-dir.yml
+                        group: prod
+                        refresh: true
+                    -   dataId: sacp-global-redis.yml
+                        group: prod
+                        refresh: true
+                    -   dataId: sacp-global-server.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+                    -   dataId: sacp-global-datasource.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+            discovery:
+                server-addr: nacos-prod.bdo.com.cn:8848
+                namespace: 6f9b4783-e7fa-479a-9c00-ab3e150a58e9
+                username: sacp
+                password: hjd1y_mvHBfsen6g
+                group: prod

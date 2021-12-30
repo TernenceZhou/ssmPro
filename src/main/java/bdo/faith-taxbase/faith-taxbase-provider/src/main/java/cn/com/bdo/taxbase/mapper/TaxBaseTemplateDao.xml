@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxbase.dao.TaxBaseTemplateDao">
+
+    <select id="queryTaxBaseTemplateList" parameterType="cn.com.bdo.taxbase.dto.TaxBaseTemplateDto"
+            resultType="cn.com.bdo.taxbase.entity.TaxBaseTemplateEntity">
+        SELECT
+            autoId,
+            departId,
+            templateName,
+            templateDesc,
+            industryCode,
+            IF(industryCode IS NULL,'所有行业', (select GROUP_CONCAT(name) AS industryName from bdo_taxbase.tax_base_industry
+            where INSTR((select industryCode from bdo_taxbase.tax_base_template b where b.autoId = a.autoId),value)>0 AND LENGTH(value) = 7)) industryName,
+            userableArea,
+            customerType,
+            creatorName,
+            CREATION_DATE,
+            CREATED_BY,
+            LAST_UPDATE_DATE,
+            LAST_UPDATED_BY,
+            ABOLITION_DATE,
+            ABOLISHED_BY,
+            PROGRAM_APPLICATION_ID,
+            PROGRAM_ID,
+            ACTIVE_FLAG
+        FROM
+        bdo_taxbase.tax_base_template a
+        <where>
+            <if test="req.departIds != null">
+                and departId in
+                <foreach collection="req.departIds" index="index" item="departId" open="(" close=")" separator=",">
+                    #{departId}
+                </foreach>
+            </if>
+            <if test="req.templateName != null and req.templateName != ''">
+                and templateName like concat('%',#{req.templateName},'%')
+            </if>
+            <if test="req.templateDesc != null and req.templateDesc != ''">
+                and templateDesc like concat('%',#{req.templateDesc},'%')
+            </if>
+            <if test="req.creatorName != null and req.creatorName != ''">
+                and creatorName like concat('%',#{req.creatorName},'%')
+            </if>
+        </where>
+
+    </select>
+</mapper>

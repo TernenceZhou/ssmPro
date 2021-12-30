@@ -1,0 +1,160 @@
+spring:
+    jndi:
+        ignore: true
+    freemarker:
+        enabled: false
+    profiles:
+        active: dev
+    application:
+        name: sacp-faith-taxdg
+    cloud:
+        nacos:
+            config:
+                extension-configs:
+                    -   dataId: sacp-global-server.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+                    -   dataId: sacp-global-datasource.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+management:
+    health:
+        elasticsearch:
+            enabled: false
+---
+spring:
+    profiles: dev
+    cloud:
+        inetutils:
+            preferred-networks: 172.16
+        nacos:
+            config:
+                server-addr: nacos-test.bdo.com.cn:80
+                namespace: 3e8ebcca-a104-4990-a096-31d40be11eaa
+                username: sacp
+                password: sacp
+                group: dev
+                max-retry: 5
+                refresh-enabled: true
+                file-extension: yml
+                extension-configs:
+                    -   dataId: sacp-global-dir.yml
+                        group: dev
+                        refresh: true
+                    -   dataId: sacp-global-redis.yml
+                        group: dev
+                        refresh: true
+                    -   dataId: sacp-global-server.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+                    -   dataId: sacp-global-datasource.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+            discovery:
+                server-addr: nacos-test.bdo.com.cn:80
+                namespace: 3e8ebcca-a104-4990-a096-31d40be11eaa
+                username: sacp
+                password: sacp
+                group: dev
+---
+spring:
+    profiles: uat
+    cloud:
+        inetutils:
+            preferred-networks: 172.16
+        nacos:
+            config:
+                server-addr: nacos-test.bdo.com.cn:80
+                namespace: 3e8ebcca-a104-4990-a096-31d40be11eaa
+                username: sacp
+                password: sacp
+                group: uat
+                max-retry: 5
+                refresh-enabled: true
+                file-extension: yml
+                extension-configs:
+                    -   dataId: sacp-global-dir.yml
+                        group: uat
+                        refresh: true
+                    -   dataId: sacp-global-redis.yml
+                        group: uat
+                        refresh: true
+                    -   dataId: sacp-global-server.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+                    -   dataId: sacp-global-datasource.yml
+                        group: DEFAULT_GROUP
+                        refresh: true
+            discovery:
+                server-addr: nacos-test.bdo.com.cn:80
+                namespace: 3e8ebcca-a104-4990-a096-31d40be11eaa
+                username: sacp
+                password: sacp
+                group: uat
+---
+spring:
+    profiles: qac
+    cloud:
+        nacos:
+            config:
+                server-addr: nacos-prod.bdo.com.cn:8848
+                namespace: 6f9b4783-e7fa-479a-9c00-ab3e150a58e9
+                username: sacp
+                password: hjd1y_mvHBfsen6g
+                group: qac
+                refresh-enabled: true
+                file-extension: yml
+                encode: UTF-8
+                extension-configs:
+                    - dataId: sacp-global-dir.yml
+                      group: qac
+                      refresh: true
+                    - dataId: sacp-global-redis.yml
+                      group: qac
+                      refresh: true
+                    - dataId: sacp-global-server.yml
+                      group: DEFAULT_GROUP
+                      refresh: true
+                    - dataId: sacp-global-datasource.yml
+                      group: DEFAULT_GROUP
+                      refresh: true
+            discovery:
+                server-addr: nacos-prod.bdo.com.cn:8848
+                namespace: 6f9b4783-e7fa-479a-9c00-ab3e150a58e9
+                username: sacp
+                password: hjd1y_mvHBfsen6g
+                group: qac
+
+---
+spring:
+    profiles: prod
+    cloud:
+        nacos:
+            config:
+                server-addr: nacos-prod.bdo.com.cn:8848
+                namespace: 6f9b4783-e7fa-479a-9c00-ab3e150a58e9
+                username: sacp
+                password: hjd1y_mvHBfsen6g
+                group: prod
+                refresh-enabled: true
+                file-extension: yml
+                encode: UTF-8
+                extension-configs:
+                    - dataId: sacp-global-dir.yml
+                      group: prod
+                      refresh: true
+                    - dataId: sacp-global-redis.yml
+                      group: prod
+                      refresh: true
+                    - dataId: sacp-global-server.yml
+                      group: DEFAULT_GROUP
+                      refresh: true
+                    - dataId: sacp-global-datasource.yml
+                      group: DEFAULT_GROUP
+                      refresh: true
+            discovery:
+                server-addr: nacos-prod.bdo.com.cn:8848
+                namespace: 6f9b4783-e7fa-479a-9c00-ab3e150a58e9
+                username: sacp
+                password: hjd1y_mvHBfsen6g
+                group: prod

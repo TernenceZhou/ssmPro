@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgCustomerSubjectDao">
+
+
+    <select id="queryByConditon" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgCustomerSubjectDto"
+            resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgCustomerSubjectDto">
+        SELECT autoId,
+               customerId,
+               projectId,
+               yyyy,
+               subjectId,
+               subjectId as userSubjectId,
+               parentSubjectId,
+               level1,
+               subjectFullId,
+               subjectName,
+               subjectFullName,
+               isLeaf,
+               userDefined
+        FROM bdo_dg.dg_customersubject
+        WHERE customerId = #{customerId}
+          AND projectId = #{projectId}
+          AND yyyy = #{yyyy}
+          AND subjectId LIKE concat('', #{subjectId}, '%')
+    </select>
+
+    <select id="hasLeafData" resultType="java.lang.Integer" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgCustomerSubjectDto">
+        SELECT
+            COUNT(1)
+        FROM
+            bdo_taxdg.tax_dg_customersubject
+        WHERE
+            customerId = #{customerId}
+          AND projectId = #{projectId}
+          AND ( yyyy = #{yyyy} OR yyyy = #{yyyy} - 1 )
+          AND subjectId = #{subjectId}
+          AND isLeaf = '1'
+    </select>
+
+    <select id="queryTBSubjectType" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgCustomerSubjectDto" resultType="java.util.HashMap">
+        SELECT CONCAT(tbSubjectCode,'-', tbSubjectName) AS label,
+               CONCAT(reportSubjectId, ':', reportSubjectName, ':', tbSubjectCode) AS VALUE,
+               b.parentSubjectId AS parentSubjectId
+        FROM bdo_taxdg.tax_dg_customersubject b
+            LEFT JOIN bdo_taxdg.tax_dg_tbsubjectcontract a
+        ON a.customerId = b.customerId
+            AND a.projectId = b.projectId
+            AND a.yyyy = b.yyyy
+            AND a.userSubjectId = b.subjectId
+        WHERE b.subjectId = #{subjectId}
+          AND b.customerId = #{customerId}
+          AND b.projectId = #{projectId}
+          AND b.yyyy = #{yyyy}
+    </select>
+
+    <select id="queryAllSubjectContract" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgCustomerSubjectDto" resultType="java.util.HashMap">
+        SELECT
+            CONCAT( tbSubjectCode, '-', tbSubjectName ) AS label,
+            CONCAT( reportSubjectId, ':', reportSubjectName, ':', tbSubjectCode ) AS VALUE,
+	        t1.parentSubjectId AS parentSubjectId,
+            t1.subjectName,
+            t1.subjectId AS subjectId
+        FROM
+            bdo_taxdg.tax_dg_customersubject t1
+            LEFT JOIN bdo_taxdg.tax_dg_tbsubjectcontract t2 ON t1.customerId = t2.customerId
+            AND t1.projectId = t2.projectId
+            AND t1.subjectId = t2.userSubjectId
+            AND t1.yyyy = t2.yyyy
+        WHERE
+            t1.customerId = #{customerId}
+          AND t1.projectId = #{projectId}
+          AND t1.yyyy = #{yyyy}
+    </select>
+
+</mapper>

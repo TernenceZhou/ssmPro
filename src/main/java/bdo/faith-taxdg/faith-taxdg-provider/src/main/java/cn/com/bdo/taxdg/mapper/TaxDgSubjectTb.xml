@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgSubjectTbDao">
+    <resultMap id="subjectTbMap" type="cn.com.bdo.taxdg.dto.projectset.TaxDgSubjectTbDto">
+        <id column="subjectCode" property="subjectCode"></id>
+        <id column="subjectName" property="subjectName"></id>
+        <association property="taxDgSubjectTypeDto">
+            <id column="subjectTypeName" property="subjectTypeName"></id>
+        </association>
+    </resultMap>
+
+    <select id="queryList" resultMap="subjectTbMap">
+        SELECT subjectCode,
+               subjectName,
+               subjectTypeName
+        FROM tax_dg_subjecttb
+                 INNER JOIN tax_dg_subjecttype ON tax_dg_subjecttb.subjectType1 = tax_dg_subjecttype.subjectTypeId
+    </select>
+
+</mapper>

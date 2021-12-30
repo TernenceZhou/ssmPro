@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgProjectDao">
+
+    <select id="getCustomerListByDepartId" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgProjectDto">
+
+        SELECT customerId,
+               customerName
+        FROM bdo_taxdg.tax_dg_project
+        WHERE customerId IN
+              (SELECT customerId
+               FROM bdo_taxdg.tax_dg_tbsubjectkeyresult
+               WHERE departId = #{departId}
+               GROUP BY customerId)
+        GROUP BY customerId;
+    </select>
+
+    <select id="getProjectListByProjectId" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgProjectDto">
+        SELECT *
+        FROM bdo_taxdg.tax_dg_project
+        WHERE projectId = #{projectId}
+    </select>
+
+</mapper>

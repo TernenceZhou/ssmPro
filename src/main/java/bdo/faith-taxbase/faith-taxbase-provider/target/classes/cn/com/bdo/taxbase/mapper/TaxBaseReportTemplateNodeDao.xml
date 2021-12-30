@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxbase.dao.TaxBaseReportTemplateNodeDao">
+
+    <select id="queryReportTplNodeEntity" parameterType="cn.com.bdo.taxbase.dto.TaxBaseReportTemplateNodeDto"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseReportTemplateNodeDto">
+        SELECT t1.colCode AS reportSubjectId,
+               t2.colName AS reportSubjectName,
+               t1.tableDiv
+        FROM bdo_taxbase.tax_base_reporttemplatenode t1
+                 INNER JOIN bdo_taxbase.tax_base_k_reportcolumn t2 ON t1.colCode = t2.colCode
+        WHERE t1.vocationId = #{vocationId}
+          AND t1.tableDiv IN (#{tableDivs})
+    </select>
+    <select id="queryReportTbSubjectList" parameterType="cn.com.bdo.taxbase.dto.TaxBaseKSubjectTbDto"
+            resultType="java.util.Map">
+            SELECT
+                t1.colCode,
+                t1.colDisp,
+                GROUP_CONCAT( t2.tbSubject ) AS tbSubject,
+                t3.already,
+                t2.calFun
+            FROM
+                bdo_taxbase.tax_base_reporttemplatenode t1
+                    LEFT JOIN ( SELECT CONCAT( subjectCode, '-', subjectName ) tbSubject, reportSubjectCode, calFun FROM bdo_taxbase.tax_base_k_subjecttb
+                        WHERE vocationId = #{vocationId} AND tbTemplateId = #{tbTemplateId} ) t2 ON t1.colCode = t2.reportSubjectCode
+                    LEFT JOIN ( SELECT COUNT( reportSubjectCode ) already, vocationId FROM bdo_taxbase.tax_base_k_subjecttb
+                        WHERE vocationId = #{vocationId} AND tbTemplateId = #{tbTemplateId} ) t3 ON t1.vocationId = t3.vocationId
+            WHERE
+                t1.vocationId = #{vocationId}
+            GROUP BY
+                t1.colCode
+            ORDER BY
+                t1.sortNo
+
+    </select>
+</mapper>

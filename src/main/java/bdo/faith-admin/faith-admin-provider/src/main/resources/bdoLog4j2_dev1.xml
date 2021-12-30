@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN" monitorInterval="30">
+	<properties>
+		<property name="LOG_HOME">${sys:work.log.dir}</property>
+		<!-- 日志备份目录 -->
+		<property name="BACKUP_HOME">backup</property>
+		<property name="SERVER_NAME">Faith</property>
+		<!-- 日志输出级别 -->
+		<property name="OUTPUT_LOG_LEVEL">DEBUG</property>
+		<property name="faith.host">${sys:web.server.host}</property>
+	</properties>
+	<appenders>
+		<!-- ================================= -->
+		<!-- 系统日志                           -->
+		<!-- ================================= -->
+		<RollingFile name="BDO_SQL_LOG"
+					 fileName="${LOG_HOME}/BDO_SQL.log"
+					 filePattern="${LOG_HOME}/dev_${BACKUP_HOME}/BDO_SQL.%d{yyyy-MM-dd-HH}.log">
+			<PatternLayout
+					pattern="${faith.host} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] [${SERVER_NAME}] [REQUEST_ID_%X{requestId}] [%c{1.}] %line %m%n"
+					charset="UTF-8"/>
+			<Policies>
+				<CronTriggeringPolicy schedule="0 0 * * * ?"/>
+				<SizeBasedTriggeringPolicy size="20MB"/>
+			</Policies>
+			<Filters>
+				<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+			</Filters>
+			<DefaultRolloverStrategy>
+				<!-- 删除指定目录下7天之前的日志-->
+				<Delete basePath="${LOG_HOME}/dev_${BACKUP_HOME}" maxDepth="1">
+					<IfFileName glob="BDO_SQL.*.log"/>
+					<IfLastModified age="24H"/>
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<!--<PatternLayout pattern="${faith.host} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] [${SERVER_NAME}] [REQUEST_ID_%X{requestId}] [%c{1.}] %line %m%n" charset="UTF-8" />-->
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5p [%c{1.}] %line %m%n" charset="UTF-8"/>
+			<Filters>
+				<ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+			</Filters>
+		</Console>
+		<Async name="async">
+			<AppenderRef ref="CONSOLE"/>
+			<AppenderRef ref="BDO_SQL_LOG"/>
+		</Async>
+	</appenders>
+
+	<Loggers>
+		<Logger name="org.apache.commons.beanutils" level="off" includeLocation="true"/>
+		<Logger name="org.apache.commons.digester3" level="off" includeLocation="true"/>
+		<Logger name="org.apache.commons.digester" level="off" includeLocation="true"/>
+		<Logger name="org.apache.kafka" level="off" includeLocation="true"/>
+		<Logger name="org.apache" level="${OUTPUT_LOG_LEVEL}" includeLocation="true"/>
+		<Logger name="org.apache.axis" level="error" includeLocation="true"/>
+		<Logger name="org.logicalcobwebs" level="error" includeLocation="true"/>
+		<Logger name="io.lettuce.core" level="error" includeLocation="true"/>
+		<Logger name="org.quartz" level="error" includeLocation="true"/>
+
+		<Logger name="org.springframework" level="error" includeLocation="true"/>
+		<Logger name="org.springframework.jndi" level="off" includeLocation="false"/>
+		<!--<Logger name="org.springframework.data.redis" level="error"/>
+		<Logger name="org.springframework.session" level="error"/>
+		<Logger name="org.springframework.jndi" level="error"/>
+		<Logger name="org.springframework.context.annotation" level="error"/>
+		-->
+		<Logger name="com.alibaba.nacos" level="error" includeLocation="true"/>
+		<Logger name="org.mybatis.spring.mapper" level="error" includeLocation="true"/>
+		<Logger name="com.baomidou.mybatisplus.core" level="error" includeLocation="true"/>
+		<Logger name="druid.sql.Statement" level="${OUTPUT_LOG_LEVEL}" includeLocation="true"/>
+		<Logger name="com.netflix.loadbalancer" level="error" includeLocation="true"/>
+		<Logger name="cn.com.bdo" level="${OUTPUT_LOG_LEVEL}" includeLocation="true"/>
+		<Logger name="cn.com.bdo.base.support.spring" level="error" includeLocation="true"/>
+		<Logger name="BDO_CONSOLE" level="${OUTPUT_LOG_LEVEL}" includeLocation="true"/>
+		<Logger name="BDO_SQL" level="${OUTPUT_LOG_LEVEL}" includeLocation="true"/>
+		<Root level="${OUTPUT_LOG_LEVEL}" includeLocation="true">
+			<AppenderRef ref="CONSOLE"/>
+		</Root>
+	</Loggers>
+</configuration>

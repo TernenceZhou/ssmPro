@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgMerchantListDao">
+
+    <select id="queryMerchantList" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgMerchantListDto"
+            resultType="cn.com.bdo.taxdg.dto.projectset.RearrangeTreeDto">
+        SELECT oneSubjectName,
+        oneSubjectId,
+        direction,
+        autoId,
+        merchantFullId,
+        CASE
+        WHEN merchantType = '1' THEN ''
+        ELSE merchantId
+        END AS 'assItemId',
+        CASE
+        WHEN merchantType = '1' THEN '' ELSE merchantName
+        END AS 'assItemName',
+        balance,
+        subjectId,
+        subjectFullName AS subjectName ,
+        concat(subjectId,merchantName) AS 'mergeId'
+        FROM bdo_taxdg.tax_dg_merchantlist
+        WHERE customerId = #{customerId}
+        AND projectId = #{projectId}
+        AND yyyy = #{yyyy}
+        <if test="rearrangeType == 1.toString() and rearrangeType != null and rearrangeType != ''">
+            AND balance &lt; 0
+        </if>
+        <if test="subjectId != null and subjectId != ''">
+            and oneSubjectId = #{subjectId}
+        </if>
+        <if test="assItemId != null and assItemId != ''">
+            and merchantId in #{assItemId}
+        </if>
+        AND balance != 0
+        AND merchantType = #{merchantType}
+        AND isMerge = #{isMerge}
+        ORDER BY subjectId
+    </select>
+</mapper>

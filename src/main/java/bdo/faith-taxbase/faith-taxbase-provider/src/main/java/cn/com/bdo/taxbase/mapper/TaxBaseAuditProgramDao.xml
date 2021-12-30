@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxbase.dao.TaxBaseAuditProgramDao">
+
+    <select id="queryAuditPrograms" parameterType="cn.com.bdo.taxbase.dto.TaxBaseAuditProgramDto"
+            resultType="cn.com.bdo.taxbase.entity.TaxBaseAuditProgramEntity">
+        SELECT
+        a.autoId,
+        a.departmentId,
+        a.indexId,
+        a.programName,
+        a.programContent,
+        a.subjectId,
+        IF(a.subjectName IS NULL OR a.subjectName = '',c.subjectName,a.subjectName) subjectName,
+        a.programDesc,
+        a.industryCode,
+        IF(industryCode IS NULL,'所有行业', (select GROUP_CONCAT(name) AS industryName from bdo_taxbase.tax_base_industry
+        where INSTR((select industryCode from bdo_taxbase.tax_base_auditprogram b where b.autoId = a.autoId),value)>0
+        AND LENGTH(value) = 7)) industryName,
+        a.customerType,
+        a.userablePlate,
+        a.isAllPlate,
+        a.isAllIndustry,
+        a.userableArea,
+        a.isAllArea,
+        a.isRequired,
+        a.useCount,
+        a.parentIndexId,
+        a.fullIndexId,
+        a.fullProgramName,
+        a.programLevel,
+        a.isLeaf,
+        a.creatorName,
+        a.sortNo
+        FROM
+        bdo_taxbase.tax_base_auditprogram a
+        LEFT JOIN bdo_taxbase.tax_base_subject c ON a.subjectId = c.subjectId
+        <where>
+            <if test="program.autoId != null and program.autoId != ''">
+                and a.autoId = #{program.autoId}
+            </if>
+            <if test="program.programName != null and program.programName != ''">
+                and a.programName like concat('%',trim(#{program.programName}),'%')
+            </if>
+            <if test="program.programContent != null and program.programContent != ''">
+                and a.programContent like concat('%',trim(#{program.programContent}),'%')
+            </if>
+            <if test="program.indexId !=null and program.indexId != ''">
+                and a.indexId like concat('%',trim(#{program.indexId}),'%')
+            </if>
+            <if test="program.subjectName !=null and program.subjectName != ''">
+                and a.subjectName like concat('%',trim(#{program.subjectName}),'%')
+            </if>
+
+            <if test="program.industryCodes != null and program.industryCodes != ''">
+                and a.industryCode REGEXP REPLACE (trim(#{program.industryCodes}), ',', '|')
+            </if>
+            <if test="program.plates != null and program.plates != ''">
+                and userablePlate REGEXP REPLACE (#{program.plates}, ',', '|')
+                OR isAllPlate = '1'
+            </if>
+            <if test="program.areas != null and program.areas != ''">
+                and userableArea REGEXP REPLACE (#{program.areas}, ',', '|')
+            </if>
+            <!--潜在事项说明 -->
+            <if test="program.programDesc !=null and program.programDesc != ''">
+                and a.programDesc like concat('%',trim(#{program.programDesc}),'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getUseAblePlate" resultType="cn.com.bdo.base.dto.BaseDicDto">
+        SELECT *
+        FROM bdo_taxbase.tax_base_dic
+        WHERE attributeType
+                  LIKE '%适用板块%'
+        ORDER BY id ASC
+    </select>
+
+    <select id="queryList" parameterType="java.lang.String"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseAuditProgramDto">
+        select *
+        from bdo_taxbase.tax_base_auditprogram
+        where isRequired = #{isRequired}
+    </select>
+    <select id="queryChildByIndexId" parameterType="java.lang.String" resultType="cn.com.bdo.taxbase.dto.TaxBaseAuditProgramDto">
+        SELECT * FROM bdo_taxbase.tax_base_auditprogram
+        WHERE fullIndexId LIKE CONCAT('',#{currentFullIndexId},'%')
+        AND programLevel &gt; #{programLevel}
+
+    </select>
+
+    <select id="queryByParentIndexId" parameterType="java.lang.String" resultType="cn.com.bdo.taxbase.entity.TaxBaseProjectNodeEntity">
+        SELECT nodeName,RIGHT(nodeId ,1)  nodeId FROM bdo_taxbase.tax_base_projectnode
+        WHERE showAudit = 1
+        AND RIGHT(nodeId ,1) = #{parentIndexId}
+    </select>
+
+
+</mapper>

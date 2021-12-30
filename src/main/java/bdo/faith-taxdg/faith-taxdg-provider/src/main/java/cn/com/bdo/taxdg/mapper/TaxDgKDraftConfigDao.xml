@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgKDraftConfigDao">
+
+    <select id="getDraftConfigInfo" resultType="java.util.HashMap">
+       /* SELECT
+            a.autoId,
+            a.configType,
+            a.indexId,
+            a.nodeName,
+            a.parentId,
+            a.nodeType,
+            a.childPre,
+            a.childLength
+        FROM
+            bdo_taxdg.tax_dg_k_draftconfig a
+        WHERE
+            a.ACTIVE_FLAG = '1'*/
+    </select>
+</mapper>

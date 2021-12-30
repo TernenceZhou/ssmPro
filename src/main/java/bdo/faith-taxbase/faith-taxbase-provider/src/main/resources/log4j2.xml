@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN"  monitorInterval="30">
+	<properties>
+		<!-- 日志备份目录 -->
+		<property name="BACKUP_HOME">backup</property>
+		<property name="SERVER_NAME">sacp-faith-taxbase</property>
+		<property name="OUTPUT_LOG_LEVEL">OFF</property><!-- 日志输出级别 -->
+		<property name="faith.host">${sys:web.server.host}</property>
+	</properties>
+	<appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<!--<PatternLayout charset="UTF-8" pattern="${faith.host} %d %-5p [id:%X{requestId}] [%c{1.}] %line %m%n" />-->
+			<PatternLayout pattern="${faith.host} %d{yyyy-MM-dd HH:mm:ss.SSS} %-5p [%t] [${SERVER_NAME}] [REQUEST_ID_%X{requestId}] [%c{1.}] %line %m%n" charset="UTF-8" />
+			<Filters>
+				<ThresholdFilter level="${OUTPUT_LOG_LEVEL}" onMatch="ACCEPT" onMismatch="NEUTRAL" />
+			</Filters>
+		</Console>
+	</appenders>
+
+	<Loggers>
+		<Root level="${OUTPUT_LOG_LEVEL}">
+			<AppenderRef ref="CONSOLE" />
+		</Root>
+	</Loggers>
+</configuration>

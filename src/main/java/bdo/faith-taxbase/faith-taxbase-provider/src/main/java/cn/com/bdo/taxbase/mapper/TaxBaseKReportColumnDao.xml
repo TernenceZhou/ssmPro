@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxbase.dao.TaxBaseKReportColumnDao">
+
+    <select id="queryReportSubject" parameterType="cn.com.bdo.taxbase.dto.TaxBaseKReportColumnDto"
+            resultType="cn.com.bdo.taxbase.entity.TaxBaseKReportColumnEntity">
+        SELECT autoId,
+               colCode,
+               colName
+        FROM bdo_taxbase.tax_base_k_reportcolumn re
+        WHERE re.colName = #{colName}
+          AND re.colCode LIKE concat('', #{colCode},'%')
+          AND re.autoId <![CDATA[!= ]]> #{autoId}
+    </select>
+
+    <select id="queryReportColumnMaxColCode" resultType="java.lang.String"
+            parameterType="cn.com.bdo.taxbase.dto.TaxBaseKReportColumnDto">
+        SELECT MAX(colCode) AS colCode
+        FROM bdo_taxbase.tax_base_k_reportcolumn
+        WHERE colCode LIKE concat('', #{colCode}, '%')
+          AND parentId is null
+    </select>
+
+    <select id="queryMaxColCode" resultType="java.lang.String"
+            parameterType="cn.com.bdo.taxbase.dto.TaxBaseKReportColumnDto">
+        SELECT MAX(colCode) AS colCode
+        FROM bdo_taxbase.tax_base_k_reportcolumn
+        WHERE colCode LIKE concat('', #{colCode}, '%')
+    </select>
+
+    <select id="queryLastSubjects" parameterType="cn.com.bdo.taxbase.dto.TaxBaseReportSubjectDto"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+        SELECT '' AS value,'' AS label
+        UNION
+        SELECT colCode AS value, colName AS label
+        FROM bdo_taxbase.tax_base_k_reportcolumn
+        WHERE departId=0
+            AND customerId=0
+            AND colCode LIKE concat('',#{colCode},'%')
+    </select>
+
+    <select id="queryLastSubjectsForSubjectCom" parameterType="cn.com.bdo.taxbase.dto.TaxBaseReportSubjectDto"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseTreeNodeDto">
+            SELECT '' AS value,'' AS label
+            UNION
+            SELECT
+            a.colCode AS VALUE,
+	        a.colName AS label
+        FROM
+            bdo_taxbase.tax_base_k_reportcolumn a
+        WHERE
+            a.departId = 0
+          AND a.customerId = 0
+          AND a.colCode like CONCAT('',#{colCode},'%')
+    </select>
+
+    <select id="queryReportColumnByColCodes" resultType="cn.com.bdo.taxbase.dto.TaxBaseKReportColumnDto">
+        SELECT colCode, colName, direction, subjectType FROM bdo_taxbase.tax_base_k_reportcolumn
+        WHERE colCode IN
+        <foreach collection="array" index="index" item="colCode" open="(" close=")" separator=",">
+            #{colCode}
+        </foreach>
+    </select>
+</mapper>

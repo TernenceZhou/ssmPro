@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tableObjects>
+	<tableObject>
+		<tableName>base_dic</tableName>
+		<keys>id</keys>
+		<objectName>cn.com.bdo.base.dto.BaseDicDto</objectName>
+	</tableObject>
+</tableObjects>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgProjectTbDao">
+
+
+    <select id="queryTaxDgProjectTbList" parameterType="java.lang.String"
+            resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgProjectTbDto">
+
+        SELECT
+            a.tbSubjectId AS subjectCode,
+            a.tbSubjectName,
+            a.reportSubjectId,
+            a.reportSubjectName,
+            a.subjectType AS subjectType1,
+            '' AS subjectType2,
+            a.sortNo,
+            a.isSubject,
+            a.calFun,
+            a.userDefined,
+            a.autoId AS tbId
+        FROM
+            bdo_taxdg.tax_dg_projecttb a
+        WHERE
+            a.customerId = #{customerId}
+          AND a.projectId = #{projectId}
+    </select>
+
+    <select id="queryProjectTbList" parameterType="java.lang.String" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgProjectTbDto">
+        SELECT
+            autoId,
+            tbSubjectId,
+            MAX( autoId ) AS tbId,
+            tbsubjectName AS tbSubjectName,
+            tbSubjectId AS subjectCode,
+            calFun,
+            isSubject,
+            reportSubjectId,
+            reportSubjectName,
+            LEFT ( subjectType, 1 ) AS subjectType1,
+            IF( LENGTH( subjectType ) >= 3, LEFT ( subjectType, 3 ), '' ) AS subjectType2,
+            sortNo
+        FROM
+            bdo_taxdg.tax_dg_projecttb
+        WHERE
+            projectId = #{projectId}
+          AND customerId = #{customerId}
+        GROUP BY
+            tbSubjectId,
+            tbsubjectName
+        Order by sortNo
+    </select>
+    <select id="queryTbSubjectList" parameterType="java.lang.String" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgProjectTbDto">
+
+        SELECT
+            t.direction,
+            t.autoId,
+            t.vocationId,
+            t.customerId,
+            t.projectId,
+            t.departmentId,
+            t.tbSubjectId,
+            t.tbSubjectName,
+            t.reportSubjectId,
+            t.reportSubjectName,
+            t.subjectType1,
+            t.sortNo,
+            t.userDefined,
+            IFNULL( t.calFun, "" ) AS calFun,
+            t.isSubject,
+            t.ACTIVE_FLAG
+        FROM
+            bdo_taxdg.tax_dg_projecttb AS t
+        WHERE
+            t.customerId = #{customerId}
+          AND t.projectId = #{projectId}
+        ORDER BY
+            t.sortNo
+
+    </select>
+
+    <select id="queryTbSubjectForCusCalFun" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgProjectTbDto">
+        SELECT
+            autoId,
+            vocationId,
+            customerId,
+            projectId,
+            departmentId,
+            tbSubjectId,
+            tbSubjectName,
+            reportSubjectId,
+            reportSubjectName,
+            subjectType,
+            cusCalFun,
+            sortNo,
+            isSubject,
+            calFun
+        FROM
+            bdo_taxdg.tax_dg_projecttb
+        WHERE
+            customerId =#{customerId}
+          AND projectId = #{projectId}
+          AND cusCalFun LIKE CONCAT( '%', #{tbSubjectId}, '%' )
+    </select>
+
+    <select id="queryTbSubjectForCalFun" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgProjectTbDto">
+        SELECT
+            autoId,
+            vocationId,
+            customerId,
+            projectId,
+            departmentId,
+            tbSubjectId,
+            tbSubjectName,
+            reportSubjectId,
+            reportSubjectName,
+            subjectType,
+            cusCalFun,
+            sortNo,
+            isSubject,
+            calFun
+        FROM
+            bdo_taxdg.tax_dg_projecttb
+        WHERE
+            customerId =#{customerId}
+          AND projectId = #{projectId}
+          AND calFun LIKE CONCAT( '%', #{tbSubjectId}, '%' )
+    </select>
+    <select id="queryTbSubjectLikeCalFun" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgProjectTbDto">
+        SELECT
+            t.autoId,
+            t.vocationId,
+            t.customerId,
+            t.projectId,
+            t.departmentId,
+            t.tbSubjectId,
+            t.tbSubjectName,
+            t.reportSubjectId,
+            t.reportSubjectName,
+            t.subjectType,
+            t.sortNo,
+            t.userDefined,
+            IFNULL( t.cusCalFun, "" ) AS cusCalFun,
+            IFNULL( t.calFun, "" ) AS calFun,
+            t.isSubject,
+            t.ACTIVE_FLAG
+        FROM
+            bdo_taxdg.tax_dg_projecttb AS t
+        WHERE
+            t.customerId = #{customerId}
+          AND t.projectId = #{projectId}
+          AND (
+            t.cusCalFun LIKE CONCAT( '%',#{tbSubjectId}, '%' )
+           OR t.calFun LIKE CONCAT( '%', #{tbSubjectId}, '%' ))
+    </select>
+
+    <select id="queryMaxSortNo" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        SELECT
+            max(sortNo) AS tbCount
+        FROM
+            bdo_taxdg.tax_dg_projecttb
+        WHERE
+            customerId = #{customerId}
+          AND projectId = #{projectId}
+    </select>
+
+    <select id="queryCurentTb" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgProjectTbDto">
+
+        SELECT
+            autoId AS tbId,
+            tbsubjectName AS tbSubjectName,
+            tbSubjectId AS subjectCode,
+            isSubject,
+            calFun,
+            reportSubjectId,
+            reportSubjectName,
+            LEFT ( subjectType, 1 ) AS subjectType1,
+            IF( LENGTH( subjectType ) >= 3, LEFT ( subjectType, 3 ), '' ) AS subjectType2,
+            sortNo
+        FROM
+            bdo_taxdg.tax_dg_projecttb
+        WHERE
+            projectId = #{projectId}
+          AND customerId = #{customerId}
+          AND tbSubjectId =#{tbSubjectId}
+    </select>
+
+    <select id="querySwitchTbSubject" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTbSubjectSwitchDto">
+        SELECT
+            t1.colCode,
+            t1.colDisp,
+            GROUP_CONCAT( t2.tbSubject ) AS tbSubject,
+            t2.cusCalFun
+        FROM
+            bdo_taxdg.tax_dg_k_reporttemplate t1
+                LEFT JOIN ( SELECT CONCAT( tbSubjectId, '-', tbSubjectName ) tbSubject, reportSubjectId, cusCalFun
+                FROM bdo_taxdg.tax_dg_projecttb
+                	WHERE customerId = #{customerId}
+                	  AND projectId = #{projectId}
+            ) t2 ON t1.colCode = t2.reportSubjectId
+        WHERE
+            t1.vocationId = #{vocationId}
+        GROUP BY
+            t1.colCode
+        ORDER BY
+            sortNo
+    </select>
+</mapper>

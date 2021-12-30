@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgSubjectEntryAdjustDao">
+
+
+    <select id="querySubjectEntryAdjustList" parameterType="java.lang.String"
+            resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgSubjectEntryAdjustDto">
+        SELECT autoId,
+        accPackageId,
+        customerId,
+        yyyy,
+        projectId,
+        indexId,
+        voucherId,
+        typeId,
+        vchDate,
+        serail,
+        summary,
+        dirction,
+        occurValue,
+        oppSubjectJson,
+        currRate,
+        currValue,
+        currency,
+        quantity,
+        unitPrice,
+        unitName,
+        adjustType,
+        tbSubjectCode,
+        adjustSubjectTB,
+        assItemId,
+        assItemName,
+        adjustSubjectCodeReport,
+        adjustSubjectReport,
+        subjectId,
+        subjectname1,
+        subjectFullName1,
+        fillUser,
+        auditUser,
+        status,
+        workpaperId,
+        reason,
+        cbType,
+        taxEffect,
+        analyseSubjectId,
+        analyseSubjectName,
+        analyseOccurValue,
+        isEliminate
+        <!-- FROM bdo_dg.dg_subjectentryadjust-->
+        FROM bdo_taxdg.tax_dg_subjectentryadjust
+        <where>
+            <if test="customerId != null and customerId != ''">
+                AND customerId = #{customerId}
+            </if>
+
+            <if test="projectId != null and projectId != ''">
+                AND projectId = #{projectId}
+            </if>
+            <if test="subjectId != null and subjectId != ''">
+                AND subjectId = #{subjectId}
+            </if>
+            <if test="yyyy != null and yyyy != ''">
+                AND yyyy = #{yyyy}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="querySubjectOfAdjust" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgSubjectEntryAdjustDto" resultType="java.util.Map">
+        SELECT
+            subjectId,
+            subjectFullName1
+        FROM
+            bdo_taxdg.tax_dg_subjectentryadjust
+              <where>
+                  <if test="customerId != null and customerId != ''">
+                     AND customerId = #{customerId}
+                  </if>
+                  <if test="projectId != null and projectId != ''">
+                      AND projectId =#{projectId}
+                  </if>
+                  <if test="subjectId != null and subjectId != ''">
+                      AND subjectId like concat('',#{subjectId},'%')
+                  </if>
+              </where>
+        GROUP BY
+            subjectId
+    </select>
+
+    <select id="queryAdjustDetail" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgSubjectEntryAdjustDto" resultType="java.util.Map">
+        SELECT
+            IFNULL(c.indexCount,0) as indexCount,
+            CASE a.dirction WHEN '-1' THEN a.occurValue END AS 'minusOccurValue',
+            CASE a.dirction WHEN '1' THEN a.occurValue END AS 'plusOccurValue',
+            a.autoId,
+            a.workpaperId,
+            IFNULL(a.taxEffect,'') taxEffect,
+            IFNULL(a.cbType,'') cbType,
+            a.assItemId,
+            a.assItemName,
+            a.indexId,
+            a.accPackageId,
+            a.customerId,
+            a.projectId,
+            a.yyyy AS subjectYear,
+            a.subjectId,
+            a.voucherId,
+            a.serail,
+            a.summary,
+            a.dirction,
+            a.occurValue,
+            a.currValue,
+            a.currency,
+            a.subjectname1 AS subjectName,
+            a.subjectFullName1 AS fullName,
+            a.adjustType,
+            a.adjustSubjectTB,
+            a.adjustSubjectCodeReport,
+            a.adjustSubjectReport,
+            a.STATUS,
+            a.reason,
+            a.fillUser AS __ufillUserName,
+	        a.ACTIVE_FLAG,
+	        DATE_FORMAT( a.LAST_UPDATE_DATE, '%Y-%m-%d %H:%i:%s' ) AS lastUpdateDate
+        FROM
+            bdo_taxdg.tax_dg_subjectentryadjust a
+            INNER JOIN (
+            SELECT DISTINCT
+            indexId
+            FROM
+            bdo_taxdg.tax_dg_subjectentryadjust
+            WHERE
+            customerId = #{customerId}
+            AND yyyy BETWEEN #{yyyy}
+            AND #{yyyy}
+            AND adjustType = #{adjustType}
+            <if test="tbSubjectCode != null and tbSubjectCode != ''">
+                AND (tbSubjectCode = #{tbSubjectCode} OR subjectId LIKE concat('',#{tbSubjectCode},'%'))
+            </if>
+            AND projectId = #{projectId}
+            ) b ON a.indexId = b.indexId
+            LEFT JOIN (
+                SELECT
+                    count( indexId ) AS indexCount,
+                    indexId
+                FROM
+                    bdo_taxdg.tax_dg_subjectentryadjust a
+                WHERE
+                a.customerId = #{customerId}
+                AND a.yyyy BETWEEN #{yyyy}
+                AND #{yyyy}
+                AND a.projectId = #{projectId}
+                AND a.adjustType = #{adjustType}
+                GROUP BY
+                indexId
+            ) c ON a.indexId = c.indexId
+        WHERE
+            a.customerId = #{customerId}
+          AND a.yyyy BETWEEN #{yyyy} AND #{yyyy}
+          AND a.projectId = #{projectId}
+          AND a.adjustType = #{adjustType}
+        ORDER BY
+            a.indexId,
+            a.occurValue DESC
+    </select>
+
+    <select id="queryAdjustMaxSortNo" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgSubjectEntryAdjustDto" resultType="java.lang.String">
+        SELECT Max(CAST(RIGHT(indexId,4) AS SIGNED)) AS maxIndex
+        FROM bdo_taxdg.tax_dg_subjectentryadjust
+        WHERE customerId = #{customerId}
+          AND projectId = #{projectId}
+          AND adjustType = #{adjustType}
+    </select>
+
+    <select id="queryAdjustNumber" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgAdjustAccountDto">
+        SELECT
+        subjectId,
+        assItemId,
+        sum(occurValue) reviewAdjustment
+        FROM
+        bdo_taxdg.tax_dg_subjectentryadjust
+        WHERE
+         projectId = #{projectId}
+        AND yyyy = #{year}
+        AND subjectId in
+        <foreach collection="subjectIdList" item="subjectId" index="index" open="(" close=")" separator=",">
+            #{subjectId}
+        </foreach>
+        GROUP BY
+        subjectId,
+        assItemId
+    </select>
+
+    <select id="querySubjectEntryAdjustForUpdate" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgSubjectEntryAdjustDto" resultType="java.util.Map">
+        SELECT
+            a.oppSubjectJson,
+            a.autoId,
+            a.indexId,
+            a.accPackageId,
+            a.customerId,
+            a.yyyy,
+            a.voucherId,
+            a.subjectId,
+            a.subjectId,
+            a.reason,
+            a.subjectname1 AS subjectName,
+            CONCAT( a.subjectId, '-', a.subjectfullname1 ) AS subjectContent,
+            CONCAT( a.assItemId, '-', a.assItemName ) AS assitemContent,
+            CONCAT( a.tbSubjectCode, '-', a.adjustSubjectTB ) AS adjustSubjectTB,
+            a.adjustSubjectCodeReport,
+            a.adjustSubjectReport,
+            a.summary,
+            a.active_flag,
+            a.dirction,
+            a.occurValue,
+            CASE a.dirction WHEN '-1' THEN a.occurValue WHEN '1' THEN '' END AS 'outValue', <!-- 贷方金额 -->
+            CASE a.dirction WHEN '1' THEN a.occurValue WHEN '-1' THEN '' END AS 'inValue',   <!-- 借方金额 -->
+            a.currency,
+            IFNULL( a.currValue, '' ) AS currValue,
+            a.STATUS,
+            IFNULL( a.assItemId, '' ) AS assItemId,
+            IFNULL( a.assItemName, '' ) AS assItemName,
+            a.isEliminate
+        FROM
+            bdo_taxdg.tax_dg_subjectentryadjust a
+        WHERE
+            a.customerId = #{customerId}
+          AND a.yyyy = #{yyyy}
+          AND a.projectId = #{projectId}
+          AND a.indexId = #{indexId}
+         <if test="workpaperId != null and workpaperId != ''">
+             AND a.workpaperId = #{workpaperId}
+         </if>
+        ORDER BY
+            a.accPackageId,
+            a.voucherId,
+            a.subjectId
+    </select>
+
+    <select id="findValueByIndexKey" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgSubjectEntryAdjustDto" resultType="java.util.Map">
+        SELECT
+            Max( adjust.indexValue ) AS indexId,
+            autoId,
+            customerId,
+            workpaperId
+        FROM
+            bdo_taxdg.tax_dg_entryadjustindex adjust
+        WHERE
+            adjust.customerId =#{customerId}
+          AND adjust.projectId = #{projectId}
+          AND adjust.INDEXKEY = #{indexKey}
+          AND adjust.workpaperId = #{workpaperId}
+    </select>
+</mapper>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxbase.dao.TaxBaseTemplateNodeDao">
+
+    <select id="queryTemplateNodesToTree" parameterType="cn.com.bdo.taxbase.dto.TaxBaseTemplateNodeDto"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseTemplateNodeTreeDto">
+        SELECT autoId,
+        tpNameId,
+        tpNodeId,
+        tpNodeId AS value,
+        tpNodeName,
+        tpNodeName text,
+        tpNodeId nodeId,
+        IF(LEFT(tpNodeId,1) IN('G','S','Z') ,1,0) as updateFlg,
+        parentId,
+        nodeType,
+        isLeaf,
+        nodeLevel,
+        sortNo,
+        isCalc,
+        calFun,
+        subjectType,
+        sortCode
+        FROM bdo_taxbase.tax_base_templatenode
+        <where>
+            <if test="tpNameId != null and tpNameId != ''">
+                and tpNameId = #{tpNameId}
+            </if>
+        </where>
+        ORDER BY tpNodeId
+    </select>
+    <select id="queryByParent" resultType="cn.com.bdo.taxbase.dto.TaxBaseTemplateNodeDto">
+        SELECT autoId,
+               tpNameId,
+               tpNodeId,
+               tpNodeName,
+               parentId,
+               nodeType,
+               isLeaf,
+               nodeLevel,
+               isCalc,
+               calFun,
+               subjectType,
+               sortCode,
+               sortNo,
+               creatorName,
+               CREATION_DATE,
+               CREATED_BY,
+               LAST_UPDATE_DATE,
+               LAST_UPDATED_BY,
+               ABOLITION_DATE,
+               ABOLISHED_BY,
+               PROGRAM_APPLICATION_ID,
+               PROGRAM_ID,
+               ACTIVE_FLAG
+        FROM bdo_taxbase.tax_base_templatenode
+
+        WHERE tpNameId = #{tpNameId} and LEFT (tpNodeId, 4) = #{parentId}
+    </select>
+
+    <select id="querySubjectTb" parameterType="cn.com.bdo.taxbase.dto.TaxBaseProjectTbDto" resultType="cn.com.bdo.taxbase.dto.TaxBaseProjectTbDto">
+        SELECT
+            a.vocationId,a.tbtemplateid,
+            a.autoId AS tbId,
+            a.calFun AS cusCal,
+            c.tbTmpNodeName AS tbSubjectName,
+            a.subjectCode,
+            a.reportSubjectCode AS reportSubjectId,
+            TRIM( b.colDisp ) AS reportSubjectName,
+            LEFT ( subjectType1, 1 ) AS subjectType1,
+            IF( LENGTH( subjectType1 ) >= 3, LEFT ( subjectType1, 3 ), '' ) AS subjectType2,
+            c.calFun,
+            c.isSubject,
+            c.sortNo AS sortNo
+        FROM
+            bdo_taxbase.tax_base_k_subjecttb a
+            LEFT JOIN bdo_taxbase.tax_base_reporttemplatenode b ON a.reportSubjectCode = b.colCode
+            AND a.vocationId = b.vocationId
+            LEFT JOIN bdo_taxbase.tax_base_tbtemplatenode c ON a.subjectcode = c.tbTmpNodeId
+            AND a.tbtemplateid = c.tbTemplateId
+        WHERE
+            <!-- a.vocationId = 99
+          AND a.tbtemplateid = 840 -->
+        a.vocationId = #{vocationId}
+        <if test="tbTemplateId != null and tbTemplateId != ''">
+            AND a.tbtemplateid = #{tbTemplateId}
+        </if>
+        ORDER BY
+            c.sortNo
+    </select>
+    <!--<select id="querySubjectTb" parameterType="cn.com.bdo.taxbase.dto.TaxBaseProjectTbDto" resultType="cn.com.bdo.taxbase.dto.TaxBaseProjectTbDto">
+        SELECT
+            a.autoId AS tbId,
+            a.calFun AS calFun,
+            c.tbTmpNodeName AS tbSubjectName,
+            a.subjectCode,
+            a.reportSubjectCode AS reportSubjectId,
+            TRIM( b.colDisp ) AS reportSubjectName,
+            LEFT ( subjectType1, 1 ) AS subjectType1,
+            IF( LENGTH( subjectType1 ) >= 3, LEFT ( subjectType1, 3 ), '' ) AS subjectType2,
+            c.calFun,
+            c.isSubject,
+            c.sortNo AS sortNo
+        FROM
+            bdo_taxbase.tax_base_k_subjecttb a
+            &lt;!&ndash;LEFT JOIN bdo_taxbase.tax_base_k_reporttemplate b ON a.reportSubjectCode = b.colCode &ndash;&gt;
+            LEFT JOIN bdo_taxbase.tax_base_reporttemplatenode b ON a.reportSubjectCode = b.colCode
+            AND a.vocationId = b.vocationId
+            LEFT JOIN bdo_taxbase.tax_base_tbtemplatenode c ON a.subjectcode = c.tbTmpNodeId
+            AND a.tbtemplateid = c.tbTemplateId
+        WHERE
+            a.vocationId = #{vocationId}
+          AND a.tbtemplateid = #{tbTemplateId}
+        ORDER BY
+            c.sortNo
+
+    </select>-->
+</mapper>

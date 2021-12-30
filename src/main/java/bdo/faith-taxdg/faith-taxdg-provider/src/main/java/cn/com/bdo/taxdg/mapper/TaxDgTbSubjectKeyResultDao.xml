@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgTbSubjectKeyResultDao">
+
+
+    <select id="queryKeyDataByCustomer" parameterType="java.lang.String"
+            resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTBSubjectKeyResultDto">
+        SELECT
+            departId,
+            customerId,
+            tbSubjectKey,
+            userSubjectKey
+        FROM
+            bdo_taxdg.tax_dg_tbsubjectkeyresult
+        WHERE
+            customerId = #{customerId} UNION
+        SELECT
+            departId,
+            customerId,
+            tbSubjectKey,
+            userSubjectKey
+        FROM
+            (
+                SELECT
+                    departmentId AS departId,
+                    0 AS customerId,
+                    subjectname AS tbSubjectKey,
+                    subjectName AS userSubjectKey
+                FROM
+                    bdo_taxdg.tax_dg_subjecttb
+                WHERE
+                    customerId = #{customerId} UNION
+                SELECT
+                    b.departmentId AS departId,
+                    0 AS customerId,
+                    b.subjectName AS tbSubjectKey,
+                    TRIM( REPLACE ( CONCAT( b.subjectName, '' ), a.key1, a.key2 ) ) AS userSubjectKey
+                FROM
+                    asdb.k_subjectContractkey a
+                    INNER JOIN (
+                    SELECT
+                    departmentId,
+                    subjectName
+                    FROM
+                    asdb.k_subjecttb
+                    WHERE
+                    customerId = #{customerId}) b ON b.subjectName LIKE CONCAT( '%', a.key1, '%' )) aa
+                WHERE
+                userSubjectKey NOT IN (
+                SELECT
+                    userSubjectKey
+                FROM
+                    bdo_taxdg.tax_dg_tbsubjectkeyresult
+                WHERE
+                    customerId = #{customerId}
+    </select>
+</mapper>

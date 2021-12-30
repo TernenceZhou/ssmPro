@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgCenterDetailDao">
+
+    <select id="selectOneByAutoId" resultType="cn.com.bdo.taxdg.entity.TaxDgCenterDetailEntity">
+        SELECT autoId,
+               projectId,
+               customerId,
+               yyyy,
+               indexId,
+               subjectId,
+               subjectName,
+               assItemId,
+               assItemName,
+               unreviewed,
+               reviewAdjustment,
+               auditConfirmationAmount,
+               currentDebit,
+               yearBeginBalance,
+               currentLender,
+               endingBalance,
+               term,
+               interestRate,
+               accountAdjustment,
+               overseasPayment,
+               remark,
+               confiscationExpenditure,
+               adjustment
+        FROM bdo_taxdg.${tableName}
+        WHERE autoId = #{id}
+          AND ACTIVE_FLAG = '1'
+        LIMIT 1;
+    </select>
+
+    <select id="selectByNodeId" resultType="cn.com.bdo.taxdg.entity.TaxDgCenterDetailEntity">
+        SELECT autoId,
+               projectId,
+               customerId,
+               yyyy,
+               indexId,
+               subjectId,
+               subjectName,
+               assItemId,
+               assItemName,
+               unreviewed,
+               reviewAdjustment,
+               auditConfirmationAmount,
+               currentDebit,
+               yearBeginBalance,
+               currentLender,
+               endingBalance,
+               term,
+               interestRate,
+               accountAdjustment,
+               overseasPayment,
+               remark,
+               confiscationExpenditure,
+               adjustment
+        FROM bdo_taxdg.${tableName}
+        WHERE customerId = #{customerId}
+          AND projectId = #{projectId}
+          AND yyyy = #{yyyy}
+          AND indexId = #{indexId}
+          AND ACTIVE_FLAG = '1';
+    </select>
+
+    <insert id="insertList" parameterType="cn.com.bdo.taxdg.entity.TaxDgCenterDetailEntity">
+        INSERT INTO bdo_taxdg.tax_dg_centerdetail_${dbSuffix} (
+        `projectId`, `customerId`, `yyyy`, `indexId`,
+        `subjectId`, `subjectName`, `assItemId`, `assItemName`,
+       `unreviewed`, `reviewAdjustment`, `auditConfirmationAmount`,
+      `currentDebit`, `yearBeginBalance`, `currentLender`, `endingBalance`,
+      `term`, `interestRate`, `accountAdjustment`, `overseasPayment`, `remark`,
+      `confiscationExpenditure`, `adjustment`, `CREATION_DATE`, `CREATED_BY`,
+      `PROGRAM_APPLICATION_ID`, `ACTIVE_FLAG`) VALUES
+        <foreach collection ="list" item="detail" index= "index" separator =",">
+            (
+            #{detail.projectId},#{detail.customerId}, #{detail.yyyy},#{detail.indexId},
+            #{detail.subjectId},#{detail.subjectName},#{detail.assItemId},#{detail.assItemName},
+            #{detail.unreviewed},#{detail.reviewAdjustment},#{detail.auditConfirmationAmount},
+            #{detail.currentDebit}, #{detail.yearBeginBalance}, #{detail.currentLender}, #{detail.endingBalance},
+            #{detail.term},#{detail.interestRate},#{detail.accountAdjustment},#{detail.overseasPayment},#{detail.remark},
+            #{detail.confiscationExpenditure},#{detail.adjustment},now(),#{detail.createdBy},
+            '01001','1'
+             )
+        </foreach>
+    </insert>
+
+    <update id="updateDetail" parameterType="cn.com.bdo.taxdg.entity.TaxDgCenterDetailEntity">
+        UPDATE bdo_taxdg.${tableName} SET `unreviewed` = #{detail.unreviewed},
+                                `reviewAdjustment` = #{detail.reviewAdjustment},
+                                `auditConfirmationAmount` = #{detail.auditConfirmationAmount},
+                                `currentDebit` = #{detail.currentDebit},
+                                `yearBeginBalance` = #{detail.yearBeginBalance},
+                                `currentLender` = #{detail.currentLender},
+                                `endingBalance` = #{detail.endingBalance},
+                                `term` = #{detail.term},
+                                `interestRate` = #{detail.interestRate},
+                                `accountAdjustment` = #{detail.accountAdjustment},
+                                `overseasPayment` = #{detail.overseasPayment},
+                                `remark` = #{detail.remark},
+                                `confiscationExpenditure` = #{detail.confiscationExpenditure},
+                                `adjustment` = #{detail.adjustment},
+                                 `LAST_UPDATE_DATE` = now(),
+                                `LAST_UPDATED_BY` = #{detail.lastUpdatedBy},
+                                `PROGRAM_APPLICATION_ID` = '01001', `PROGRAM_ID` = '', `ACTIVE_FLAG` = '1'
+        WHERE `autoId` = #{detail.autoId};
+    </update>
+
+    <delete id="deleteByProjectIdAndNodeId">
+        DELETE
+        FROM
+            bdo_taxdg.tax_dg_centerdetail_${dbSuffix}
+        WHERE
+            projectId = #{projectId}
+          AND yyyy = #{yyyy}
+          <if test="nodeId != null and nodeId != ''">
+              AND indexId = #{nodeId}
+          </if>
+    </delete>
+
+</mapper>

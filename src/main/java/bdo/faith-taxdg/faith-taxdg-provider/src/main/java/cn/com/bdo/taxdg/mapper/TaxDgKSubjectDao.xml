@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgKSubjectDao">
+
+    <select id="queryFSACode" parameterType="java.lang.String" resultType="java.util.HashMap">
+        SELECT
+            a.*,
+            b.fsaCode,
+            b.fsaName,
+            b.lsReportCode,
+            b.lsReportName
+        FROM
+            (
+                SELECT
+                    a.customerId,
+                    a.projectId,
+                    a.yyyy,
+                    a.tbSubjectId,
+                    a.tbSubjectName,
+                    a.baseSubjectId,
+                    a.baseSubjectName
+                FROM
+                    bdo_taxdg.tax_dg_tbsubjectcontract a
+                WHERE
+                    a.customerId = #{customerId}
+                  AND a.projectId = #{projectId}
+                  AND a.yyyy = #{yyyy}
+                  AND a.tbSubjectId IS NOT NULL
+                  AND a.baseSubjectId IS NOT NULL
+            ) a
+                LEFT JOIN bdo_taxdg.tax_dg_k_subject b ON a.baseSubjectId = b.subjectId
+        GROUP BY
+            a.tbSubjectId
+    </select>
+</mapper>

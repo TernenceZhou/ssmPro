@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxdg.dao.TaxDgTbSubjectContractDao">
+
+    <select id="querySubjectContracts" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTbSubjectContractDto">
+        SELECT 	autoId,
+        projectId,
+        customerId,
+        yyyy,
+        vocationId,
+        tbSubjectId,
+        tbSubjectCode,
+        tbSubjectName,
+        baseSubjectId,
+        baseSubjectName,
+        reportSubjectId,
+        reportSubjectName,
+        userSubjectId,
+        userSubjectName,
+        debitRemain,
+        creditRemain,
+        debitTotalOcc,
+        creditTotalOcc,
+        tranDebitTotalOcc,
+        tranCreditTotalOcc,
+        debitBalance,
+        creditBalance,
+        direction,
+        remain,
+        balance,
+        adjustValue,
+        cusAdjustValue,
+        preAdjustValue,
+        preCusAdjustValue,
+        userDefined,
+        subjectLevel,
+        isLeaf
+        FROM bdo_taxdg.tax_dg_tbsubjectcontract a
+
+        <where>
+            <if test="customerId != null and customerId != ''">
+                AND a.customerId = #{customerId}
+            </if>
+            <if test="year != null and year != ''">
+                AND a.yyyy = #{year}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and a.projectId = #{projectId}
+            </if>
+            <if test="userSubjectId != null and userSubjectId != ''">
+                AND a.userSubjectId = #{userSubjectId}
+            </if>
+            ORDER BY a.userSubjectId
+        </where>
+    </select>
+
+    <select id="queryByRetainedProfits" parameterType="java.lang.String" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTbSubjectContractDto">
+        SELECT
+            userSubjectId,
+            userSubjectName
+        FROM
+            bdo_taxdg.tax_dg_tbsubjectcontract
+        WHERE
+            customerId = #{customerId}
+          AND projectId = #{projectId}
+          AND yyyy = #{year}
+          AND ( userSubjectName = '利润分配' OR userSubjectName = '年初未分配利润' );
+    </select>
+
+    <select id="queryTbSubjectContractList" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTbSubjectContractDto"
+            parameterType="java.lang.String">
+        SELECT a.autoId,
+        a.userDefined,
+        a.creditBalance,
+        a.tranDebitTotalOcc,
+        a.tranCreditTotalOcc,
+        debitTotalOcc - tranDebitTotalOcc AS debitTotalOccNoTran,
+        creditTotalOcc - tranCreditTotalOcc AS creditTotalOccNoTran,
+        a.customerId,
+        a.projectId,
+        a.yyyy,
+        a.baseSubjectId,
+        a.baseSubjectName,
+        a.tbSubjectName,
+        a.tbSubjectId,
+        a.tbSubjectCode,
+        a.reportSubjectId,
+        a.reportSubjectName,
+        a.userSubjectId,
+        a.userSubjectName,
+        a.remain,
+        a.debitRemain,
+        a.creditRemain,
+        a.debitTotalOcc,
+        a.creditTotalOcc,
+        a.debitBalance,
+        a.creditBalance * (- 1),
+        a.direction AS directionVal,
+        CASE a.direction WHEN -1 THEN '贷' WHEN 1 THEN '借' END AS direction,
+        a.balance,
+        a.subjectLevel,
+        a.isLeaf
+        FROM bdo_taxdg.tax_dg_tbsubjectcontract a
+        <where>
+            <if test="customerId != null and customerId != ''">
+                AND a.customerId = #{customerId}
+            </if>
+            <if test="yyyy != null and yyyy != ''">
+                AND a.yyyy = #{yyyy}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                and a.projectId = #{projectId}
+            </if>
+            <if test="showControl == '1'.toString() and showControl != '' and showControl != null">
+                and a.tbSubjectId is not null
+            </if>
+            <if test="showControl == '0'.toString() and showControl != '' and showControl != null">
+                and a.tbSubjectId is null
+            </if>
+        </where>
+        ORDER BY a.userSubjectId, a.subjectLevel
+    </select>
+
+    <select id="queryKsubject" resultType="java.util.HashMap">
+
+        SELECT a.autoId                                AS id,
+               a.SubjectId                             AS subjectId,
+               a.SubjectName                           AS subjectName,
+               CONCAT(a.SubjectId, '-', a.SubjectName) AS label,
+               a.parentId                              AS parentid,
+               CONCAT(a.SubjectId, '-', a.SubjectName) AS VALUE,
+                'true' AS leaf,
+                'subject' AS typeName
+        FROM
+            <!-- asdb.k_subject a -->
+            bdo_taxdg.tax_dg_subject a
+        WHERE
+            a.ACTIVE_FLAG = 1
+        ORDER BY
+            a.SubjectId
+    </select>
+
+    <select id="querySubjectKeyResult" parameterType="java.lang.String"
+            resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTBSubjectKeyResultDto">
+        SELECT
+        departId,
+        customerId,
+        userSubjectKey,
+        tbSubjectKey,
+        baseSubjectKey,
+        level,
+        property
+        FROM bdo_taxdg.tax_dg_tbsubjectkeyresult
+        WHERE customerId = #{customerId}
+        <if test="departId != null and departId != ''">
+            AND departId = #{departId}
+        </if>
+    </select>
+
+    <select id="querySubjectContractKey" resultType="java.util.HashMap">
+        select autoId, key1, key2
+        <!-- from asdb.k_subjectcontractkey -->
+        from bdo_taxdg.tax_dg_subjectcontractkey
+    </select>
+
+    <select id="queryDgCusSubjectList" parameterType="cn.com.bdo.taxdg.dto.projectset.TaxDgCustomerSubjectDto"
+            resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgCustomerSubjectDto">
+        select autoId,
+        customerId,
+        projectId,
+        yyyy,
+        subjectId,
+        parentSubjectId,
+        level1,
+        subjectFullId,
+        subjectName,
+        subjectFullName,
+        isLeaf,
+        userDefined
+        from bdo_taxdg.tax_dg_customersubject
+        <where>
+            <if test="customerId != null and customerId != ''">
+                AND customerId = #{customerId}
+            </if>
+            <if test="projectId != null and projectId != ''">
+                AND projectId =#{projectId}
+            </if>
+            <if test="subjectId != null and subjectId != ''">
+                AND subjectId =#{subjectId}
+            </if>
+            <if test="subjectName != null and subjectName != ''">
+                AND subjectName =#{subjectName}
+            </if>
+            <if test="userDefined != null and userDefined != ''">
+                AND userDefined = #{userDefined}
+            </if>
+            <if test="activeFlg != null and activeFlg != ''">
+                AND ACTIVE_FLAG = #{activeFlg}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryStandardSubjectControlKeywords" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgTBSubjectKeyResultDto">
+        SELECT t.userSubjectKey,
+               t.baseSubjectKey
+        FROM (
+                 SELECT b.subjectName                                            AS baseSubjectKey,
+                        TRIM(REPLACE(CONCAT(b.subjectName, ''), a.key1, a.key2)) AS userSubjectKey
+                 <!--FROM asdb.k_basesubjectContractkey a -->
+                 FROM bdo_taxdg.tax_dg_basesubjectcontractkey a
+                 <!--asdb.k_subject-->
+                          INNER JOIN (SELECT subjectName FROM bdo_taxdg.tax_dg_subject) b
+                                     ON b.subjectName LIKE CONCAT('%', a.key1, '%')) t
+        GROUP BY t.userSubjectKey
+
+    </select>
+
+    <select id="queryAsdbKsubjectTb" parameterType="java.lang.String"
+            resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgProjectTbDto">
+        SELECT
+        a.autoId AS tbId,
+        a.calFun AS calFun,
+        c.tbsubjectName AS tbSubjectName,
+        a.subjectCode,
+        a.reportSubjectCode AS reportSubjectId,
+        TRIM( b.colDisp ) AS reportSubjectName,
+         LEFT ( subjectType1, 1 ) AS subjectType1,
+        IF( LENGTH( subjectType1 ) >= 3, LEFT ( subjectType1, 3 ), '' ) AS subjectType2,
+        c.calFun,
+        c.isSubject,
+        c.sortNo AS sortNo
+        FROM
+        <!-- asdb.k_subjecttb a-->
+        bdo_taxdg.tax_dg_subjecttb a
+        LEFT JOIN bdo_taxdg.tax_dg_k_tbtemplate b ON a.reportSubjectCode = b.colCode
+        AND a.vocationId = b.vocationId
+        <!-- LEFT JOIN asdb.k_tbtemplate c ON a.subjectcode = c.tbsubjectid -->
+        LEFT JOIN bdo_taxdg.tax_dg_tbtemplate c ON a.subjectcode = c.tbsubjectid
+        AND a.tbtemplateid = c.tbvocationid
+        WHERE
+        a.vocationId = #{vocationId}
+        <if test="tbTemplateId != null and tbTemplateId != ''">
+            AND a.tbtemplateid = #{tbTemplateId}
+        </if>
+        ORDER BY
+        c.sortNo
+    </select>
+
+    <select id="querySubjectEntryAdjustList" parameterType="java.lang.String"
+            resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgSubjectEntryAdjustDto">
+        SELECT autoId,
+        accPackageId,
+        customerId,
+        yyyy,
+        projectId,
+        indexId,
+        voucherId,
+        typeId,
+        vchDate,
+        serail,
+        summary,
+        dirction,
+        occurValue,
+        oppSubjectJson,
+        currRate,
+        currValue,
+        currency,
+        quantity,
+        unitPrice,
+        unitName,
+        adjustType,
+        tbSubjectCode,
+        adjustSubjectTB,
+        assItemId,
+        assItemName,
+        adjustSubjectCodeReport,
+        adjustSubjectReport,
+        subjectId,
+        subjectname1,
+        subjectFullName1,
+        fillUser,
+        auditUser,
+        status,
+        workpaperId,
+        reason,
+        cbType,
+        taxEffect,
+        analyseSubjectId,
+        analyseSubjectName,
+        analyseOccurValue,
+        isEliminate
+        <!-- FROM bdo_dg.dg_subjectentryadjust-->
+        FROM bdo_taxdg.tax_dg_subjectentryadjust
+        <where>
+            <if test="customerId != null and customerId != ''">
+                AND customerId = #{customerId}
+            </if>
+
+            <if test="projectId != null and projectId != ''">
+                AND projectId = #{projectId}
+            </if>
+            <if test="subjectId != null and subjectId != ''">
+                AND subjectId = #{subjectId}
+            </if>
+            <if test="yyyy != null and yyyy != ''">
+                AND yyyy = #{yyyy}
+            </if>
+        </where>
+
+
+    </select>
+
+    <select id="hasAuditProgram" parameterType="java.lang.String" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM bdo_taxdg.tax_dg_auditprogram
+        WHERE customerId = #{customerId}
+        AND projectId = #{projectId}
+        AND subjectId = #{subjectId}
+        AND ACTIVE_FLAG = '1'
+    </select>
+
+    <select id="queryAuditLevelCount" resultType="java.util.Map">
+        SELECT
+            IFNULL( SUM( IF ( ap.LEVEL = 1, 1, 0 )), 0 ) AS apCount,
+            IFNULL( SUM( IF ( ap.LEVEL != 1, 1, 0 )), 0 ) AS appCount,
+            IFNULL( SUM( IF ( ap.LEVEL = 1 AND ap.workpaperId > '', 1, 0 )), 0 ) AS wpCount
+        FROM
+            bdo_taxdg.tax_dg_auditprogram ap
+                LEFT JOIN bdo_taxdg.tax_dg_subjecttree st ON st.customerId = ap.customerId
+                AND st.projectId = ap.projectId
+                AND st.autoId = ap.subjecttreeId
+                AND st.userSubjectId = ap.subjectId
+        WHERE
+            ap.customerId = #{customerId}
+          AND ap.projectId = #{projectId}
+          AND ap.subjectId = #{baseSubjectId}
+          AND st.tbSubjectCode =#{tbSubjectCode}
+          AND ap.ACTIVE_FLAG = '1'
+    </select>
+    <!-- cn.com.bdo.base.dto.BaseDicDto-->
+    <!--<select id="queryDicInfoByAttributeType" resultType="cn.com.bdo.common.vo.BaseLabelValueVo" parameterType="java.lang.String">
+        SELECT
+            attributeName AS label,
+            attributeValue1 AS value
+        FROM
+            bdo_base.base_dic
+        WHERE
+            attributeType LIKE CONCAT( '%', #{attributeType}, '%' )
+        ORDER BY
+            id ASC
+    </select>-->
+
+<!--    <select id="queryUserInfoById" resultType="cn.com.bdo.taxdg.dto.projectset.TaxDgBaseUserDto">-->
+<!--        SELECT * FROM bdo_base.base_user WHERE id = #{id}-->
+<!--    </select>-->
+
+    <select id="querySubjectIdByCondition" resultType="java.lang.String">
+        SELECT
+            GROUP_CONCAT(
+                DISTINCT CONCAT( '"', userSubjectId, '"' )) AS subjectId
+        FROM
+            bdo_dg.dg_tbsubjectcontract
+        WHERE
+            customerId = #{customerId}
+          AND projectId = #{projectId}
+          AND baseSubjectId = #{subjectId}
+    </select>
+</mapper>

@@ -1,0 +1,55 @@
+{
+	"container": "cn.com.bdo.base.web.BaseRestSpringContainer",
+	"definitions": {
+		"package": ".+"
+	},
+	"errors": {
+		"cn.com.bdo.base.exception.BaseException": 406,
+		"java.lang.Exception": 401
+	},
+	"mappings": {
+		"/{package}/{class}.json": {
+			"method": null,
+			"target": "cn.com.bdo.${package}.json.service.${class}Service",
+			"verb": null
+		},
+		"/{package}/{class}.{method:print|exception}.json": {
+			"method": null,
+			"target": "cn.com.bdo.${package}.json.service.${class}Service",
+			"verb": [
+				"GET"
+			]
+		},
+		"/{package}/{class}.{method}.json": {
+			"method": null,
+			"target": "cn.com.bdo.${package}.json.service.${class}Service",
+			"verb": [
+				"GET",
+				"POST"
+			]
+		},
+		"/{package}/{class}/{id}.json": {
+			"method": null,
+			"target": "cn.com.bdo.${package}.json.service.${class}Service",
+			"verb": [
+				"GET",
+				"PUT",
+				"DELETE"
+			]
+		}
+	},
+	"method": {
+		"DELETE": "delete",
+		"GET": "find",
+		"POST": "create",
+		"PUT": "update"
+	},
+	"verb": [
+		"HEAD",
+		"DELETE",
+		"POST",
+		"GET",
+		"OPTIONS",
+		"PUT"
+	]
+}

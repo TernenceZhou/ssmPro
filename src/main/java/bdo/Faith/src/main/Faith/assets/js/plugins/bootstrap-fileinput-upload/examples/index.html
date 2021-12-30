@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>Krajee JQuery</title>
+    <link href="../../../../../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link media="all" rel="stylesheet" type="text/css" href="../css/fileinput.css"/>
+    <link media="all" rel="stylesheet" type="text/css" href="../themes/explorer/theme.css">
+    <script type="text/javascript" src="../../../../../assets/js/core/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/sortable.js"></script>
+    <script type="text/javascript" src="../js/fileinput.js"></script>
+    <script type="text/javascript" src="../js/locales/zh.js"></script>
+    <script type="text/javascript" src="../themes/explorer/theme.js"></script>
+    <script type="text/javascript" src="../../../../../assets/js/core/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container kv-main">
+    
+    <form enctype="multipart/form-data" id="form">
+        
+        <div class="form-group">
+            <input id="fileinput" class="file" type="file" multiple data-preview-file-type="any" >
+            <div id="errorBlock" class="help-block"></div>
+        </div>
+    </form>
+    <hr>
+    <br>
+</div>
+</body>
+<script>
+var pluginOpt = {
+		dropZoneEnabled: false,
+		dropZoneTitle: '',
+		dropZoneClickTitle: '',
+		browseLabel: '上传附件',
+		showCaption: true,
+		showRemove: false,
+		showUpload: false,
+		showBrowse: true,
+		showPreview: false,
+		initialPreviewShowDelete: true,
+		language: 'zh',
+		browseOnZoneClick: true,
+		showClose : false, 
+		uploadAsync: false,
+		showCancel: false,
+		hideThumbnailContent: true,
+		layoutTemplates: {
+			actionUpload: '',
+			actionZoom: ''
+		},
+		fileActionSettings: {
+			removeIcon: '<i class="glyphicon glyphicon-remove text-danger"></i>',
+		},
+		uploadAsync: false,
+		//建议此行以上的配置写成固定的配置
+		//后台代码参考/Faith/src/cn/com/bdo/cusBase/json/service/CusRcService.java 的uploadFile方法
+		uploadUrl: 'cusBase/CusRc.uploadFile.json',
+		uploadExtraData: function() {
+			return {
+				param1: '',
+				param2: ''
+			}
+		}
+	};
+	var $el = $('#fileinput').fileinput(pluginOpt);
+
+	//uploadAsync = false 时调用
+	$el.on('filebatchuploadsuccess', function(event, data) {
+		console.log('filebatchuploadsuccess:');
+		console.log(data);
+		uploadFileSuccess(data.response);
+	});
+	//uploadAsync = true 时调用
+	$el.on('fileuploaded', function(event, data) {
+		console.log('fileuploaded:');
+		console.log(data);
+		uploadFileSuccess(data.response);
+	});
+	//uploadAsync = true 时，后台返回数据data.error 非空是调用
+	$el.on('fileuploaderror', function(event, data, msg) {
+		console.log('fileuploaderror:');
+		console.log(msg);
+		uploadFileSuccess(data.response);
+	});
+	//uploadAsync = false 时，后台返回数据data.error 非空是调用
+	$el.on('filebatchuploaderror', function(event, data, msg) {
+		console.log('filebatchuploaderror:');
+		console.log(msg);
+		uploadFileSuccess(data.response);
+	});
+	//文件上传成功/失败后，处理后台响应函数
+	function uploadFileSuccess(data) {
+		//建议文件上传成功之后再提交其他表单数据
+		// $('#form').submint();
+	}
+
+	//建议文件上传成功之后再提交其他表单数据
+	function uploadFile() {
+		$el.fileinput('upload');
+	}
+</script>
+</html>

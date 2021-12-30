@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.taxbase.dao.TaxBaseKSubjectTbDao">
+
+    <select id="queryTbSubjectReportCalFun" parameterType="cn.com.bdo.taxbase.dto.TaxBaseKSubjectTbDto"
+            resultType="cn.com.bdo.taxbase.dto.TaxBaseKSubjectTbDto">
+        SELECT autoId,
+               tbTemplateId,
+               vocationId,
+               customerId,
+               departmentId,
+               subjectCode,
+               subjectName,
+               reportSubjectCode,
+               subjectType1,
+               calFun
+        FROM bdo_taxbase.tax_base_k_subjecttb
+        where calFun like CONCAT('%', #{calFun}, '%')
+          AND tbTemplateId = #{tbTemplateId}
+          AND vocationId = #{vocationId}
+    </select>
+</mapper>
