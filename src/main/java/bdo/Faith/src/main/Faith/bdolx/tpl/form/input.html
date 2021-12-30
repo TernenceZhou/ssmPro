@@ -1,0 +1,31 @@
+<div :class="{{prefix}}.colClass"
+	 {{setEvents([inputOptions.parentEvents, prefix])}}
+	 data-vrole="col">
+	<div :class="{{prefix}}.typeClass"
+		 data-vrole="type"
+		 :data-fc-id="{{prefix}}.id"
+	>
+		<input
+			v-if="({{prefix}}.type == 'text' || {{prefix}}.type == 'email' || {{prefix}}.type == 'hidden' || {{prefix}}.type == 'password')"
+			:data-fc-id="{{prefix}}.id"
+			data-vrole="fc"
+			data-item-index="{{itemIndex}}"
+			data-group-item-index="{{groupItemIndex}}"
+			{{@ setAttr([inputOptions, prefix]) }}
+			{{@ setEvents([inputOptions.events, prefix]) }}
+		>
+		<label v-if="{{prefix}}.label"
+			   :data-fc-id="{{prefix}}.id"
+			   :ref="{{prefix}}.id+'Label'"
+			   :for="{{prefix}}.id">
+			{{'\{\{' + prefix + '.label\}\}' }}
+			<span v-if="{{prefix}}.required" class="text-danger" :data-fc-id="{{prefix}}.id">*</span>
+		</label>
+		<span v-show="{{prefix}}.addonShow" v-if="form.immediateUpdate && {{prefix}}.addon"
+			  @mouseover="immediateUpdateAddonmouseover"
+			  @mouseout="immediateUpdateAddonmouseout"
+			  @click="immediateUpdateAddonclick"
+			  class="addo-edit-btn"
+			  :data-fc-id="{{prefix}}.id"><i :class="form.addonIconClass" :data-fc-id="{{prefix}}.id"></i></span>
+	</div>
+</div>

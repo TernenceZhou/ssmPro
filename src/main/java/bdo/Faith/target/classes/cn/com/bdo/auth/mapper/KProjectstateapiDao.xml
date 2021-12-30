@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.com.bdo.auth.dao.KProjectstateapiDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cn.com.bdo.auth.entity.KProjectstateapiEntity" id="kProjectstateapiMap">
+        <result property="autoId" column="autoId"/>
+        <result property="stateId" column="stateId"/>
+        <result property="apiId" column="apiId"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="createdBy" column="CREATED_BY"/>
+        <result property="lastUpdateDate" column="LAST_UPDATE_DATE"/>
+        <result property="lastUpdatedBy" column="LAST_UPDATED_BY"/>
+        <result property="abolitionDate" column="ABOLITION_DATE"/>
+        <result property="abolishedBy" column="ABOLISHED_BY"/>
+        <result property="programApplicationId" column="PROGRAM_APPLICATION_ID"/>
+        <result property="programId" column="PROGRAM_ID"/>
+        <result property="activeFlag" column="ACTIVE_FLAG"/>
+    </resultMap>
+
+    <resultMap type="cn.com.bdo.auth.bo.ProjectStateApiBo" id="stateApiBoMap">
+        <result property="customerId" column="customerId"/>
+        <result property="projectId" column="projectId"/>
+        <result property="stateId" column="stateId"/>
+        <result property="apiId" column="apiId"/>
+        <result property="apiPath" column="apiPath"/>
+        <result property="apiLevel" column="apiLevel"/>
+        <result property="state" column="state"/>
+        <result property="stateName" column="stateName"/>
+    </resultMap>
+
+    <select id="selectStateApiList" resultType="cn.com.bdo.auth.bo.ProjectStateApiBo">
+        select
+            proj.customerId,
+            proj.projectId,
+            sapi.stateId,
+            sapi.apiId,
+            api.apiPath,
+            api.apiLevel,
+            sapi.state
+        from
+            bdo_dg.dg_project proj
+                left join asdb.k_projectstateapi sapi
+                          on sapi.state = proj.isResetNow
+                left join asdb.k_api api
+                          on api.autoId = sapi.apiId
+        where proj.customerId = #{customerId}
+          and proj.projectId = #{projectId}
+          and api.autoId is not null
+    </select>
+    <!-- selectProjectState -->
+    <select id="selectProjectState" resultType="cn.com.bdo.auth.bo.ProjectStateApiBo">
+        select
+            proj.customerId,
+            proj.projectId,
+            s.autoId as stateId,
+            s.state,
+            s.stateName               
+        from
+            bdo_dg.dg_project proj
+                left join asdb.k_projectstate s
+                          on s.state = proj.isResetNow
+        where proj.customerId = #{customerId}
+          and proj.projectId = #{projectId}
+    </select>
+</mapper>

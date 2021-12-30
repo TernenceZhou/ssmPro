@@ -1,0 +1,69 @@
+<style>
+	@media (min-width: 1200px) {
+		.col-lg-2.n5 {
+			width: 20%;
+		}
+	}
+</style>
+<div class="content remove-padding push-10-l push-10-r push-10-t">
+	<div class="col-md-6" id="contentChild">
+		<div class="block">
+			<ul class="nav nav-tabs" data-toggle="tabs" id="tab_tbList">
+				<li class="active"><a href="tab_tbList">选择项目</a></li>
+			</ul>
+			<div class="block-content" id="tab_tbList_content">
+				<div class="block ">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="block-content">
+								<div class="form-group"></div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<div class="form-material ">
+											<select class="js-select2 form-control" id="set_customerId"
+													style="width: 100%;">
+												<option></option>
+											</select> <label for="set_customerId">客户名称</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<div class="form-material ">
+											<select class="form-control" id="set_projectId">
+												<option></option>
+											</select> <label for="set_projectId">项目选择</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<div class="form-material input-group">
+											<input class="form-control" type="text"
+												   id="set_auditStartDate" size=10 disabled> <span
+											id="search_dateAddon" class="input-group-addon">-</span> <input
+											class="form-control" type="text" id="set_auditEndDate"
+											size=10 disabled> <label for="set_auditStartDate">审计期间</label>
+										</div>
+									</div>
+									<div class="col-sm-14 block-options-simple">
+										<button class="btn btn-primary" type="submit" id="set_clone">
+											<i class="fa fa-check"></i> 克隆
+										</button>
+										<button class="btn btn-warning" type="reset" id="set_clear">
+											<i class="fa fa-repeat"></i> 重置
+										</button>
+										<button class="btn btn-success" type="button" id="set_refresh">
+											<i class="fa fa-refresh"></i> 同步客户项目
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

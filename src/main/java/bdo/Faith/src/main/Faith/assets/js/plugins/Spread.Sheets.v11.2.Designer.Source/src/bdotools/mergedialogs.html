@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<!-- ZQF 自定义 START -->
+<div class="custom-label-dialog">
+    <table style="border-collapse:separate; border-spacing:0px 10px;">
+        <tr>
+            <td>
+                <label for="cell_alias" data-bind="text: res.customLabelDialog.cellAlias"></label>
+            </td>
+            <td>
+                <input type="text" id="cell_alias" name="cell_alias" class="cellAlias" autocomplete="off"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="cell_position" data-bind="text: res.customLabelDialog.cellPositionBtn"></label>
+            </td>
+            <td>
+                <input type="text" id="cell_position" name="cell_position" class="cellPosition" readonly="readonly"/>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="mergenote-feature-dialog">
+    <table style="border-collapse:separate; border-spacing:0px 10px;">
+        <tr>
+           <td style="width: 100px;vertical-align: bottom;">
+               <label for="cur-sheet" data-bind="text: res.mergenoteFeatureDialog.curSheet"></label>
+           </td>
+           <td style="width: 300px;">
+               <input type="text" id="cur-sheet" name="cur-sheet" class="curSheet" autocomplete="off"/>
+           </td>
+        </tr>
+        <tr>
+           <td style="vertical-align: bottom;">
+               <label for="cur-position" data-bind="text: res.mergenoteFeatureDialog.curPosition"></label>
+           </td>
+           <td style="width: 300px;">
+               <input type="text" id="cur-position" name="cur-sheet" class="curPosition" autocomplete="off"/>
+           </td>
+        </tr>
+        <tr>
+            <td>
+                <label>
+                    <input type="radio" name="indexType" value="1" style="width: 13px;" checked/>
+                    &nbsp;报表
+                </label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label data-bind="text: res.mergenoteFeatureDialog.reportCode"></label>
+            </td>
+            <td>
+                <select id="report-list" class="reportList"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label data-bind="text: res.mergenoteFeatureDialog.reportDisp"></label>
+            </td>
+            <td>
+                <input type="text" id="reportDisp-input" name="reportDisp-input" class="reportDispInput" disabled/>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <label>
+                    <input type="radio" name="reportValueType" value="1" style="width: 13px;" checked/>
+                    &nbsp;本年审定数&nbsp;
+                </label>
+                <label>
+                    <input type="radio" name="reportValueType" value="2" style="width: 13px;"/>
+                    &nbsp;上年审定数
+                </label>
+            </td>
+        </tr>
+        <!-- <tr>
+            <td>
+                <label>
+                    <input type="radio" name="indexType" value="2" style="width: 13px;"/>
+                    &nbsp;底稿
+                </label>
+            </td>
+            <td>
+                <button class="openDg-button" type="button" style="width: 64px;">
+                    <span data-bind="text: res.mergenoteFeatureDialog.openDg"></span>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label data-bind="text: res.mergenoteFeatureDialog.dgListTitle"></label>
+            </td>
+            <td>
+                <select id="dg-list" class="dgList"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label data-bind="text: res.mergenoteFeatureDialog.dgSheetTitle"></label>
+            </td>
+            <td>
+                <select id="dg-sheet" class="dgSheet"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label data-bind="text: res.mergenoteFeatureDialog.dgCellTitle"></label>
+            </td>
+            <td>
+                <input type="text" id="dgCell-input" name="dgCell-input" class="dgCellInput" placeholder="输入单元格位置,如:A1" autocomplete="off"/>
+            </td>
+        </tr> -->
+        <tr>
+            <td>
+                <label>
+                    <input type="radio" name="indexType" value="3" style="width: 13px;" checked/>
+                    &nbsp;附注
+                </label>
+            </td>
+            <td>
+                <button class="openNote-button" type="button" style="width: 64px;">
+                    <span data-bind="text: res.mergenoteFeatureDialog.openNote"></span>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label data-bind="text: res.mergenoteFeatureDialog.noteListTitle"></label>
+            </td>
+            <td>
+                <select id="note-list" class="noteList"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label data-bind="text: res.mergenoteFeatureDialog.noteSheetTitle"></label>
+            </td>
+            <td>
+                <select id="note-sheet" class="noteSheet"></select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label data-bind="text: res.mergenoteFeatureDialog.noteCellTitle"></label>
+            </td>
+            <td>
+                <input type="text" id="noteCell-input" name="noteCell-input" class="noteCellInput" placeholder="输入单元格位置,如:A1" autocomplete="off"/>
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- ZQF 自定义 END -->
+</body>
+</html>

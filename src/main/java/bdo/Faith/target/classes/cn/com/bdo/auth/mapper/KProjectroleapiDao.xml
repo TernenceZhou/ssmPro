@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.com.bdo.auth.dao.KProjectroleapiDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cn.com.bdo.auth.entity.KProjectroleapiEntity" id="kProjectroleapiMap">
+        <result property="autoId" column="autoId"/>
+        <result property="roleId" column="roleId"/>
+        <result property="apiId" column="apiId"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="createdBy" column="CREATED_BY"/>
+        <result property="lastUpdateDate" column="LAST_UPDATE_DATE"/>
+        <result property="lastUpdatedBy" column="LAST_UPDATED_BY"/>
+        <result property="abolitionDate" column="ABOLITION_DATE"/>
+        <result property="abolishedBy" column="ABOLISHED_BY"/>
+        <result property="programApplicationId" column="PROGRAM_APPLICATION_ID"/>
+        <result property="programId" column="PROGRAM_ID"/>
+        <result property="activeFlag" column="ACTIVE_FLAG"/>
+    </resultMap>
+    <resultMap type="cn.com.bdo.auth.bo.ProjectRoleBo" id="projectRoleBoMap">
+        <result property="customerId" column="customerId"/>
+        <result property="projectId" column="projectId"/>
+        <result property="manager" column="manager"/>
+        <result property="signAccountant2" column="signAccountant2"/>
+        <result property="signAccountant3" column="signAccountant3"/>
+        <result property="audit1" column="audit1"/>
+        <result property="audit2" column="audit2"/>
+        <result property="reaReviewer" column="reaReviewer"/>
+        <result property="signUser" column="signUser"/>
+        <result property="reviewPartner" column="reviewPartner"/>
+        <result property="issuedPeople" column="issuedPeople"/>
+        <result property="membersId" column="membersId"/>
+        <result property="tbEditor" column="tbEditor"/>
+        <result property="unReportEditor" column="unReportEditor"/>
+        <result property="bbEditor" column="bbEditor"/>
+        <collection property="subjectEditors" javaType="ArrayList" ofType="cn.com.bdo.auth.bo.SubjectEditorBo">
+            <id property="tbAutoId" column="tbAutoId"/>
+            <result property="tbYyyy" column="tbYyyy"/>
+            <result property="tbSubjectId" column="tbSubjectId"/>
+            <result property="tbSubjectCode" column="tbSubjectCode"/>
+            <result property="tbSubjectName" column="tbSubjectName"/>
+            <result property="baseSubjectId" column="baseSubjectId"/>
+            <result property="baseSubjectName" column="baseSubjectName"/>
+            <result property="userSubjectId" column="userSubjectId"/>
+            <result property="userSubjectName" column="userSubjectName"/>
+            <result property="reportSubjectId" column="reportSubjectId"/>
+            <result property="reportSubjectName" column="reportSubjectName"/>
+            <result property="subjectEditor" column="subjectEditor"/>
+        </collection>
+        <collection property="workPaperEditors" javaType="ArrayList" ofType="cn.com.bdo.auth.bo.WorkPaperEditorBo">
+            <id property="apAutoId" column="apAutoId"/>
+            <result property="workPaperId" column="workpaperId"/>
+            <result property="subjectId" column="subjectId"/>
+            <result property="subjectName" column="subjectName"/>
+            <result property="level" column="level"/>
+            <result property="workPaperEditor" column="workpaperEditor"/>
+        </collection>
+        
+    </resultMap>
+    
+    <select id="queryProjectRoleList" resultMap="projectRoleBoMap" >
+        select
+            p.customerId,
+            p.projectId,
+            p.manager,
+            p.signAccountant2,
+            p.signAccountant3,
+            p.audit1,
+            p.audit2,
+            p.reaReviewer,
+            p.signUser,
+            p.reviewPartner,
+            p.issuedPeople,
+            p.membersId,
+            pext.tbEditer as tbEditor,
+            pext.unReportEditer as unReportEditor,
+            pext.bbEditer as bbEditor,
+            tbsc.autoId as tbAutoId,
+            tbsc.yyyy as tbYyyy,
+            tbsc.tbSubjectId,
+            tbsc.tbSubjectCode,
+            tbsc.tbSubjectName,
+            tbsc.baseSubjectId,
+            tbsc.baseSubjectName,
+            tbsc.userSubjectId,
+            tbsc.userSubjectName,
+            tbsc.reportSubjectId,
+            tbsc.reportSubjectName,
+            tbsc.subjectEditors as subjectEditor,
+            ap.autoId as apAutoId,
+            ap.workpaperId,
+            ap.subjectId,
+            ap.subjectName,
+            ap.level,
+            ap.workpaperEditor
+        from
+            bdo_dg.dg_project p
+                left join bdo_dg.dg_projectext pext
+                          on pext.customerId = p.customerId
+                              and pext.projectId = p.projectId
+                left join bdo_dg.dg_tbsubjectcontract tbsc
+                          on tbsc.customerId = p.customerId
+                              and tbsc.projectId = p.projectId
+                              and tbsc.yyyy = p.year
+                left join bdo_dg.dg_auditprogram ap
+                          on ap.customerId = p.customerId
+                              and ap.projectId = p.projectId
+                              and ap.subjectId = tbsc.userSubjectId
+        where p.customerId = #{customerId}
+          and p.projectId = #{projectId}
+    </select>
+
+</mapper>

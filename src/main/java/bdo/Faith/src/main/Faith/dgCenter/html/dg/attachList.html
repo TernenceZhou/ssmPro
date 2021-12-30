@@ -1,0 +1,91 @@
+<div id="attachListPage">
+	<div class="content" id="contentBlock" style="padding-top: 0px">
+		<div class="col-md-12">
+			<div class="block">
+				<ul class="nav" style="margin-left: -40px;margin-right: -40px;background-color: #f9f9f9;"
+					data-toggle="tabs" id="tab_materset">
+					<li class="active" style="float:left;"><a>文件附件</a></li>
+					<li style="float: right;margin-top: 13px;margin-left: 10px;margin-right: 10px;">
+						<button id="refreshAttachTableBtn" type="button"
+								style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+							<i class="fa fa-refresh"> 刷新</i>
+						</button>
+					</li>
+					<li style="float: right;margin-top: 13px;">
+						<button class="bdoexport-btn" type="button"
+								style="border: 0px;background-color: #f9f9f9;color: #337ab7;"
+								data-bdoexport-table-id="attachTable"
+								data-bdoexport-title="javascript:$('#headtitle').text()+'附件一览';"
+						>
+							<i class="si si-cloud-download"> 导出</i>
+						</button>
+					</li>
+					<li style="float: right;margin-top: 13px;">
+						<button id="upload" type="button" style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+							<i class="fa fa-upload"> 上传文件</i>
+						</button>
+					</li>
+					<li style="float: right;margin-top: 13px;">
+						<button id="customerProjectUpload" type="button" style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+							<img src="./bdolx/img/blueclientPortal.png" style = "width: 128px;transform: translateY(-2px);"/>
+						</button>
+					</li>
+				</ul>
+				<br>
+				<div class="block-content">
+					<div class="row">
+						<table id="attachTable"
+							   class="table table-bordered table-striped table-hover table-condensed"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="uploadTplFormModal" tabindex="-1" role="dialog"
+			 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" style="margin-top: 50px;">
+				<div class="modal-content">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button type="button" data-dismiss="modal">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h3 class="block-title">上传文件</h3>
+						</div>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="uploadFileForm"></form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal fade" id="uploadCpFileModal" tabindex="-1" role="dialog"
+			 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" style="margin-top: 50px;">
+				<div class="modal-content" style="width: 1100px">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button type="button" data-dismiss="modal">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h3 class="block-title">客户门户上传文件</h3>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div id="selectFile"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

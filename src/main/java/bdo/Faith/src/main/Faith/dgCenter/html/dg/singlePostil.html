@@ -1,0 +1,175 @@
+<div id="postilPage" class="bdo-side" tabindex="-0" style="width:600px;">
+	<div class="bdo-side-block block block-themed"
+		 id="vmpostilPage"
+		 @postil-action="postilAction"
+	>
+		<!-- header -->
+		<div class="block-header bg-info">
+			<ul class="block-options">
+				<li>
+					<button data-close="true" type="button"><i class="si si-close"></i></button>
+				</li>
+			</ul>
+			<h3 class="block-title">批注</h3>
+		</div>
+		<!-- header end -->
+		<!-- tab -->
+		<div class="bdo-side-content">
+			<div class="block" style="height:100%;">
+				<!-- tab content-->
+				<div class="block-content block-content-full" style="height:100%;">
+					<div class="postil-content-wrap">
+						<div class="postil-content" style="top:0px;">
+							<div data-toggle="slimscroll" data-always-visible="true" data-rail-visible="true"
+								 data-rail-color="#777" data-rail-opacity=".15" data-height="100%">
+								<ul class="list list-timeline postil-list">
+									<li v-for="(item, index) in postils">
+										<i class="fa fa-user list-timeline-icon bg-success"></i>
+										<!--<div class="list-timeline-content postil-item">
+											<p style="word-wrap: break-word;word-break: normal;">
+												<a href="#" class="postil-list-username">{{ item.__ucreateUserName }}</a>
+												<span class="postil-list-createdate">{{ item.createDate }}</span>
+												<button class="btn btn-xs postil-list-reply-btn" 
+													v-if="item.activeFlag == 1"
+													@click="postilAction($event, ['C001', item])"
+													>&nbsp;回复
+												</button>
+												<button class="btn btn-xs postil-list-reply" 
+													v-if="item.activeFlag == 1 && item.isAuthor" 
+													@click="postilAction($event, ['005', item])"
+													>&nbsp;关闭
+												</button>
+												<span class="postil-list-close-mark" v-if="item.activeFlag == 0" >已关闭</span>
+											</p>
+											<p style="word-wrap: break-word;word-break: normal;">{{ item.content }}</p>
+											<div class="postil-list-replylist bg-gray" v-if="item.comments && item.comments.length > 0">
+												<div class="postil-replylist-item" v-for="(comment, cindex) in item.comments">
+													<p style="word-wrap: break-word;word-break: normal;">
+														<a href="#" class="postil-list-username">{{ comment.__ucreateUserName }}</a>
+														<span class="postil-list-createdate" 
+															v-if="item.activeFlag == 1"
+															>回复 
+															<a href="#" class="postil-list-username"
+																v-if="comment.__ucommentedUserName != comment.__ucreateUserName">
+																{{ comment.__ucommentedUserName }}
+															</a>
+														</span>
+														<span class="postil-list-createdate">{{ comment.createDate }}</span>
+														<button class="btn btn-xs postil-reply-btn" 
+															v-if="item.activeFlag == 1" 
+															@click="postilAction($event, ['C002', item, comment])"
+															>&nbsp;回复
+														</button>
+													</p>
+													<p style="word-wrap: break-word;word-break: normal;">{{ comment.content }}</p>
+												</div> 
+											</div>
+										</div>-->
+
+										<div class="list-timeline-content postil-item">
+											<p style="word-wrap: break-word;word-break: normal;">
+												<a href="#" class="postil-list-username">{{ item.__ucreateUserName
+													}}</a>
+												<span class="postil-list-createdate">索引号：{{ item.indexId }}</span>
+												<span class="postil-list-createdate">{{ item.createDate }}</span>
+												<button class="btn btn-xs postil-list-reply-btn"
+														v-if="item.activeFlag == 1"
+														@click="postilAction($event, ['C001', item])"
+												>&nbsp;回复
+												</button>
+												<button class="btn btn-xs postil-list-reply"
+														v-if="item.activeFlag == 1 && item.isAuthor"
+														@click="postilAction($event, ['005', item])"
+												>&nbsp;关闭
+												</button>
+												<span class="postil-list-close-mark"
+													  v-if="item.activeFlag == 0">已关闭</span>
+												<button class="btn btn-xs postil-list-reply"
+														v-if="item.activeFlag == 0 && item.isAuthor"
+														@click="postilAction($event, ['006', item])"
+												>&nbsp;开启
+												</button>
+												<button class="btn btn-xs postil-list-reply"
+														v-if="item.isAuthor"
+														@click="postilAction($event, ['007', item])"
+												>&nbsp;删除
+												</button>
+											</p>
+											<p style="word-wrap: break-word;word-break: normal;"><span class="postil-list-createdate"
+													 v-if="item.cellContent != null && item.cellContent != ''">单元格位置：<a
+												href="#" class="postil-list-username" v-on:click="setActiveCell">{{ item.cellContent }}</a></span>
+											</p>
+											<p style="word-wrap: break-word;word-break: normal;">{{ item.content }}</p>
+											<div class="postil-list-replylist bg-gray"
+												 v-if="item.comments && item.comments.length > 0">
+												<div class="postil-replylist-item"
+													 v-for="(comment, cindex) in item.comments">
+													<p style="word-wrap: break-word;word-break: normal;">
+														<a href="#" class="postil-list-username">{{
+															comment.__ucreateUserName }}</a>
+														<span class="postil-list-createdate"
+															  v-if="item.activeFlag == 1"
+														>回复
+																			<a href="#" class="postil-list-username"
+																			   v-if="comment.__ucommentedUserName != comment.__ucreateUserName">
+																				{{ comment.__ucommentedUserName }}
+																			</a>
+																		</span>
+														<span
+															class="postil-list-createdate">{{ comment.createDate }}</span>
+														<button class="btn btn-xs postil-reply-btn"
+																v-if="item.activeFlag == 1"
+																@click="postilAction($event, ['C002', item, comment])"
+														>&nbsp;回复
+														</button>
+													</p>
+													<p style="word-wrap: break-word;word-break: normal;"><span class="postil-list-createdate"
+															 v-if="comment.cellContent != null && comment.cellContent != ''">单元格位置：<a
+														href="#" class="postil-list-username"
+														v-on:click="setActiveCell">{{ comment.cellContent }}</a></span>
+													</p>
+													<p style="word-wrap: break-word;word-break: normal;">{{ comment.content }}</p>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="border-t postil-editor"
+						 id="postilFormBlock"
+						 v-show="newContent">
+						<div class="block">
+							<div class="block-header bg-gray-lighter">
+								<h3 class="block-title"></h3>
+							</div>
+							<div class="block-content bg-gray-lighter">
+								<div class="row form-group">
+									<div class="col-xs-12">
+										<textarea class="form-control postil-textarea" rows="3" id="postilContent"
+												  v-model="postilContent"></textarea>
+									</div>
+								</div>
+								<div class="row form-group">
+									<div class="col-xs-12">
+										<botton class="btn btn-ms btn-primary postil-submit-btn"
+												id="submitPostilContentBtn"
+												@click="onSubmitPostil">&nbsp;提交
+										</botton>
+										<botton class="btn btn-ms btn-warning postil-submit-btn"
+												id="postilCloseBtn"
+												@click="onPostilClose">&nbsp;取消
+										</botton>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- tab content end-->
+			</div>
+		</div>
+		<!-- tab end -->
+	</div>
+</div>

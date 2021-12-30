@@ -1,0 +1,328 @@
+<style>
+
+	.tab_temp > .block > .nav-tabs > li.active > a,
+	.tab_temp > .block > .nav-tabs > li.active > a:hover,
+	.tab_temp > .block > .nav-tabs > li.active > a:focus {
+		color: black;
+		background-color: white;
+	}
+	.width-line-break  {
+		word-break:break-all;
+	}
+	.width-je  {
+		min-width: 120px;
+		max-width: 120px;
+	}
+</style>
+<div data-toggle="slimscroll" data-always-visible="false"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%">
+	<div class="block" style="height: 100%;max-height: 100%;min-height: 100%;margin-bottom: -40px;">
+		<div class="block-heade">
+			<ul class="nav nav-tabs" data-toggle="tabs">
+				<li class="active"><a href="#bbReportList">报备</a></li>
+				<li class=""><a id="bbReportTabDetail" href="#bbReportDetail">报备报表</a></li>
+			</ul>
+		</div>
+		<div class="block-content block-content-full" style="height: 93%;max-height: 93%;min-height: 93%;">
+			<div class="tab-content">
+				<!-- <div class="block" style="margin: 10px 0px -20px 0px">
+					<div class="block-content tab-content" id="tab_bbReport_content" style="padding-bottom: 20px"> -->
+						<div class="tab-pane active" id="bbReportList">
+							<div class="block block-themed">
+								<div class="block-header bg-primary">
+									<ul class="block-options">
+										<li style="width: 300px">
+											<div class="block-options form-group has-info" style="width: 320px;float: left;">
+												<label class="col-xs-4 col-sm-4 col-lg-4 control-label" for="tb_editer"
+												       style="text-align: right;padding-top:4px;color: #fff;">报备编制人:</label>
+												<div class="form-material col-xs-8 col-sm-8 col-lg-8" style="margin: 0;width: 110px">
+													<select class="form-control" value="2" id="bb_editer" name="filter" size="1"
+													        style="color: #fff;padding:0px;">
+													</select>
+												</div>
+											</div>
+										</li>
+										<li>
+											<button id="bb_search" type="button">
+												<i class="fa fa-refresh" style="color: white;" title="刷新"></i>
+											</button>
+										</li>
+										<li>
+											<button type="button" data-toggle="block-option"
+													data-action="fullscreen_toggle" style="color: white;" title="放大">
+											</button>
+										</li>
+										<li>
+											<button type="button" data-toggle="block-option"
+													data-action="content_toggle"></button>
+										</li>
+									</ul>
+									<h3 class="block-title">报备 <span id="title_index"></span></h3>
+								</div>
+								<div class="block-content">
+									<table id="bb_table" class="table table-bordered table-striped table-hover">
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="tab-pane fade" id="bbReportDetail">
+							<div class="content">
+								<div class="block block-themed">
+									<div class="block-header bg-primary">
+										<ul class="block-options">
+											<li>
+												<button type="button" data-toggle="block-option"
+														data-action="content_toggle"></button>
+											</li>
+										</ul>
+										<h3 class="block-title">校验</h3>
+									</div>
+									<div class="block-content">
+										<table id="bbcheck_table" class="table table-bordered table-striped table-hover"></table>
+									</div>
+								</div>
+								<div class="block block-themed block-transparent remove-margin-b">
+									<div class="block-header bg-primary">
+										<ul class="block-options">
+											<li>
+												<button id="bbReport_refresh" type="button">
+													<i class="fa fa-refresh" style="color: white;" title="刷新"></i>
+												</button>
+											</li>
+											<!-- <li>
+												<button id="bbReport_save" type="button">
+													<i class="fa fa-save" style="color: white;" title="保存"></i>
+												</button>
+											</li> -->
+											<!-- <li>
+												<button type="button" data-dismiss="modal">
+													<i class="si si-close"></i>
+												</button>
+											</li> -->
+										</ul>
+										<h3 class="block-title">报备</h3>
+									</div>
+								</div>
+								<div class="tab-pane" id="tab_bbReport">
+									<div class="block block-themed">
+										<div class="block" style="margin: 10px 0px -20px 0px">
+											<ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" id="bbreport_type">
+												<li class="active"><a href="#zc_bbreport" data-result="zc_bbreport_table"
+														data-content="1"><i class="fa fa-file-text-o"> 资产负债表</i></a></li>
+												<li><a href="#lr_bbreport" data-result="lr_bbreport_table" data-content="3"><i
+														class="fa fa-file-text-o"> 利润表</i></a></li>
+												<li><a href="#xj_bbreport" data-result="xj_bbreport_table" data-content="4"><i
+														class="fa fa-file-text-o"> 现金流量表</i></a></li>
+												<li><a href="#qy1_bbreport" data-result="qy1_bbreport_table" data-content="5"><i
+														class="fa fa-file-text-o"> 所有者权益变动表本期</i></a></li>
+												<li><a href="#qy2_bbreport" data-result="qy2_bbreport_table" data-content="6"><i
+														class="fa fa-file-text-o"> 所有者权益变动表上期</i></a></li>
+												<li class="hbShow"><a href="#hbzc_bbreport" data-result="hbzc_bbreport_table" data-content="7">
+														<i class="fa fa-file-text-o"> 合并资产负债表</i></a></li>
+												<li class="hbShow"><a href="#hblr_bbreport" data-result="hblr_bbreport_table" data-content="9"><i
+														class="fa fa-file-text-o"> 合并利润表</i></a></li>
+												<li class="hbShow"><a href="#hbxj_bbreport" data-result="hbxj_bbreport_table" data-content="10"><i
+														class="fa fa-file-text-o"> 合并现金流量表</i></a></li>
+												<li class="hbShow"><a href="#hbqy1_bbreport" data-合并result="hbqy1_bbreport_table" data-content="11"><i
+														class="fa fa-file-text-o"> 合并所有者权益变动表本期</i></a></li>
+												<li class="hbShow"><a href="#hbqy2_bbreport" data-result="hbqy2_bbreport_table" data-content="12"><i
+														class="fa fa-file-text-o"> 合并所有者权益变动表上期</i></a></li>
+											</ul>
+											<div class="block-content tab-content" id="four_report">
+												<div class="tab-pane fade in active" id="zc_bbreport" data-result="1">
+													<!-- <table id="zc_bbcheck_table"
+														   class="table table-bordered table-striped table-hover"></table> -->
+													<table id="zc_bbreport_table"
+														   class="table table-bordered table-striped table-hover"></table>
+												</div>
+												<div class="tab-pane fade" id="lr_bbreport" data-result="3">
+													<!-- <table id="lr_bbcheck_table"
+														   class="table table-bordered table-striped table-hover"></table> -->
+													<table id="lr_bbreport_table"
+														   class="table table-bordered table-striped table-hover"></table>
+												</div>
+												<div class="tab-pane fade" id="xj_bbreport" data-result="4">
+													<!-- <table id="xj_bbcheck_table"
+														   class="table table-bordered table-striped table-hover"></table> -->
+													<table id="xj_bbreport_table"
+														   class="table table-bordered table-striped table-hover"></table>
+												</div>
+												<div class="tab-pane fade" id="qy1_bbreport" data-result="5">
+													<!-- <table id="qy1_bbcheck_table"
+														   class="table table-bordered table-striped table-hover"></table> -->
+													<table id="qy1_bbreport_table"
+														   class="table table-bordered table-striped table-hover"></table>
+												</div>
+												<div class="tab-pane fade" id="qy2_bbreport" data-result="6">
+													<!-- <table id="qy2_bbcheck_table"
+														   class="table table-bordered table-striped table-hover"></table> -->
+													<table id="qy2_bbreport_table"
+														   class="table table-bordered table-striped table-hover"></table>
+												</div>
+												<div class="tab-pane fade" id="hbzc_bbreport" data-result="7">
+													<!-- <table id="hbzc_bbcheck_table"
+														   class="table table-bordered table-striped table-hover"></table> -->
+													<table id="hbzc_bbreport_table"
+														   class="table table-bordered table-striped table-hover"></table>
+												</div>
+												<div class="tab-pane fade" id="hblr_bbreport" data-result="9">
+													<!-- <table id="hblr_bbcheck_table"
+														   class="table table-bordered table-striped table-hover"></table> -->
+													<table id="hblr_bbreport_table"
+														   class="table table-bordered table-striped table-hover"></table>
+												</div>
+												<div class="tab-pane fade" id="hbxj_bbreport" data-result="10">
+													<!-- <table id="hbxj_bbcheck_table"
+														   class="table table-bordered table-striped table-hover"></table> -->
+													<table id="hbxj_bbreport_table"
+														   class="table table-bordered table-striped table-hover"></table>
+												</div>
+												<div class="tab-pane fade" id="hbqy1_bbreport" data-result="11">
+													<!-- <table id="hbqy1_bbcheck_table"
+														   class="table table-bordered table-striped table-hover"></table> -->
+													<table id="hbqy1_bbreport_table"
+														   class="table table-bordered table-striped table-hover"></table>
+												</div>
+												<div class="tab-pane fade" id="hbqy2_bbreport" data-result="12">
+													<!-- <table id="hbqy2_bbcheck_table"
+														   class="table table-bordered table-striped table-hover"></table> -->
+													<table id="hbqy2_bbreport_table"
+														   class="table table-bordered table-striped table-hover"></table>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					<!-- </div>
+				</div> -->
+			</div>
+		</div>
+		
+	</div>
+</div>
+<!-- <div class="modal fade" id="bbReport_modal" tabindex="-1" role="dialog" aria-hidden="true"
+	 data-backdrop="static" data-keyboard="false" style="top:40px;">
+	<div class="modal-dialog modal-md" style="width:1200px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button id="bbReport_refresh" type="button">
+								<i class="fa fa-refresh" style="color: white;" title="刷新"></i>
+							</button>
+						</li>
+						<li>
+							<button id="bbReport_save" type="button">
+								<i class="fa fa-save" style="color: white;" title="保存"></i>
+							</button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">报备</h3>
+				</div>
+			</div>
+			<div class="modal-body block block-bordered" id="bbReportZc_content"  style="min-height:100px;max-height:500px">
+				<div class="content">
+					<div class="tab-pane" id="tab_bbReport" style="height:600px;">
+						<div class="tab_temp">
+							<div class="block" style="margin: 10px 0px -20px 0px">
+								<ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" id="bbreport_type">
+									<li class="active"><a href="#zc_bbreport" data-result="zc_bbreport_table"
+											data-content="1"><i class="fa fa-file-text-o"> 资产负债表</i></a></li>
+									<li><a href="#lr_bbreport" data-result="lr_bbreport_table" data-content="3"><i
+											class="fa fa-file-text-o"> 利润表</i></a></li>
+									<li><a href="#xj_bbreport" data-result="xj_bbreport_table" data-content="4"><i
+											class="fa fa-file-text-o"> 现金流量表</i></a></li>
+									<li><a href="#qy1_bbreport" data-result="qy1_bbreport_table" data-content="5"><i
+											class="fa fa-file-text-o"> 所有者权益变动表本期</i></a></li>
+									<li><a href="#qy2_bbreport" data-result="qy2_bbreport_table" data-content="6"><i
+											class="fa fa-file-text-o"> 所有者权益变动表上期</i></a></li>
+									<li class="hbShow"><a href="#hbzc_bbreport" data-result="hbzc_bbreport_table" data-content="7">
+											<i class="fa fa-file-text-o"> 合并资产负债表</i></a></li>
+									<li class="hbShow"><a href="#hblr_bbreport" data-result="hblr_bbreport_table" data-content="9"><i
+											class="fa fa-file-text-o"> 合并利润表</i></a></li>
+									<li class="hbShow"><a href="#hbxj_bbreport" data-result="hbxj_bbreport_table" data-content="10"><i
+											class="fa fa-file-text-o"> 合并现金流量表</i></a></li>
+									<li class="hbShow"><a href="#hbqy1_bbreport" data-合并result="hbqy1_bbreport_table" data-content="11"><i
+											class="fa fa-file-text-o"> 合并所有者权益变动表本期</i></a></li>
+									<li class="hbShow"><a href="#hbqy2_bbreport" data-result="hbqy2_bbreport_table" data-content="12"><i
+											class="fa fa-file-text-o"> 合并所有者权益变动表上期</i></a></li>
+								</ul>
+								<div class="block-content tab-content" id="four_report">
+									<div class="tab-pane fade in active" id="zc_bbreport" data-result="1">
+										<table id="zc_bbcheck_table"
+											   class="table table-bordered table-striped table-hover"></table>
+										<table id="zc_bbreport_table"
+											   class="table table-bordered table-striped table-hover"></table>
+									</div>
+									<div class="tab-pane fade" id="lr_bbreport" data-result="3">
+										<table id="lr_bbcheck_table"
+											   class="table table-bordered table-striped table-hover"></table>
+										<table id="lr_bbreport_table"
+											   class="table table-bordered table-striped table-hover"></table>
+									</div>
+									<div class="tab-pane fade" id="xj_bbreport" data-result="4">
+										<table id="xj_bbcheck_table"
+											   class="table table-bordered table-striped table-hover"></table>
+										<table id="xj_bbreport_table"
+											   class="table table-bordered table-striped table-hover"></table>
+									</div>
+									<div class="tab-pane fade" id="qy1_bbreport" data-result="5">
+										<table id="qy1_bbcheck_table"
+											   class="table table-bordered table-striped table-hover"></table>
+										<table id="qy1_bbreport_table"
+											   class="table table-bordered table-striped table-hover"></table>
+									</div>
+									<div class="tab-pane fade" id="qy2_bbreport" data-result="6">
+										<table id="qy2_bbcheck_table"
+											   class="table table-bordered table-striped table-hover"></table>
+										<table id="qy2_bbreport_table"
+											   class="table table-bordered table-striped table-hover"></table>
+									</div>
+									<div class="tab-pane fade" id="hbzc_bbreport" data-result="7">
+										<table id="hbzc_bbcheck_table"
+											   class="table table-bordered table-striped table-hover"></table>
+										<table id="hbzc_bbreport_table"
+											   class="table table-bordered table-striped table-hover"></table>
+									</div>
+									<div class="tab-pane fade" id="hblr_bbreport" data-result="9">
+										<table id="hblr_bbcheck_table"
+											   class="table table-bordered table-striped table-hover"></table>
+										<table id="hblr_bbreport_table"
+											   class="table table-bordered table-striped table-hover"></table>
+									</div>
+									<div class="tab-pane fade" id="hbxj_bbreport" data-result="10">
+										<table id="hbxj_bbcheck_table"
+											   class="table table-bordered table-striped table-hover"></table>
+										<table id="hbxj_bbreport_table"
+											   class="table table-bordered table-striped table-hover"></table>
+									</div>
+									<div class="tab-pane fade" id="hbqy1_bbreport" data-result="11">
+										<table id="hbqy1_bbcheck_table"
+											   class="table table-bordered table-striped table-hover"></table>
+										<table id="hbqy1_bbreport_table"
+											   class="table table-bordered table-striped table-hover"></table>
+									</div>
+									<div class="tab-pane fade" id="hbqy2_bbreport" data-result="12">
+										<table id="hbqy2_bbcheck_table"
+											   class="table table-bordered table-striped table-hover"></table>
+										<table id="hbqy2_bbreport_table"
+											   class="table table-bordered table-striped table-hover"></table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->

@@ -1,0 +1,52 @@
+<div class="content" id="contentBlock">
+	<div class="col-md-12">
+		<div class="block">
+			<ul class="nav" style="margin-left: -40px;margin-right: -40px;background-color: #f9f9f9;" data-toggle="tabs"
+				id="tab_materset">
+				<li class="active" style="float:left;"><a
+					style="background-color: #337ab7;color: white;border-radius: 0;font-weight: 600;height: 46px;padding-top: 13px;width: 158px;">文件附件</a>
+				</li>
+				<li style="float: right;margin-top: 13px;margin-left: 10px;margin-right: 10px;">
+					<button id="refreshTableBtn" type="button"
+							style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+						<i class="fa fa-refresh"> 刷新</i>
+					</button>
+				</li>
+				<li style="float: right;margin-top: 13px;">
+					<button id="upload" type="button" style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+						<i class="fa fa-upload"> 上传文件</i>
+					</button>
+				</li>
+			</ul>
+			<br>
+			<div class="block-content">
+				<div class="row">
+					<table id="fileTable" class="table table-bordered table-striped table-hover"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="uploadTplFormModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 50px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">上传文件</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="uploadFileForm"></form>
+			</div>
+		</div>
+	</div>
+</div>

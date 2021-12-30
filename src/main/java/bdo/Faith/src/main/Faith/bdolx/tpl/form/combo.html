@@ -1,0 +1,53 @@
+<div :class="{{prefix}}.colClass"
+	 {{setEvents([inputOptions.parentEvents, prefix])}}
+	 data-vrole="col"
+	 :data-fc-id="{{prefix}}.id">
+	<div :class="{{prefix}}.typeClass"
+		 data-vrole="type"
+		 :data-fc-id="{{prefix}}.id"
+	>
+		<input v-if="({{prefix}}.type == 'combo')"
+			   data-vrole="fc"
+			   data-item-index="{{itemIndex}}"
+			   data-group-item-index="{{groupItemIndex}}"
+			   :data-value="{{prefix}}.selectValue"
+			   :data-values="{{prefix}}.selectValues"
+			   {{@ setAttr([inputOptions, prefix]) }}
+			   {{@ setEvents([inputOptions.events, prefix]) }}
+		>
+		<label v-if="{{prefix}}.label"
+			   :ref="{{prefix}}.id+'Label'"
+			   :data-fc-id="{{prefix}}.id"
+			   :for="{{prefix}}.id">
+			{{'\{\{' + prefix + '.label\}\}' }}
+			<span v-if="{{prefix}}.required" class="text-danger" :data-fc-id="{{prefix}}.id">*</span>
+		</label>
+		<span class="caret combo-caret"></span>
+		<span v-show="{{prefix}}.addonShow"
+			  v-if="form.immediateUpdate && {{prefix}}.addon"
+			  :data-fc-id="{{prefix}}.id"
+			  @mouseover="immediateUpdateAddonmouseover"
+			  @mouseout="immediateUpdateAddonmouseout"
+			  @click="immediateUpdateAddonclick"
+			  class="addo-edit-btn"
+		><i :class="form.addonIconClass" :data-fc-id="{{prefix}}.id"></i></span>
+		<ul class="combo-options-ul"
+			v-show="{{prefix}}.comboOptionsShow"
+			:data-vrole-combo="{{prefix}}.id"
+			:data-fc-id="{{prefix}}.id"
+			@mouseover="comboOptionsMounseover"
+			@mouseout="comboOptionsMounseout"
+		>
+			<li v-for="(value, index) in {{prefix}}.stores"
+				:label="value.label"
+				:value="value.value"
+				:store="value"
+				@click="comboSelected"
+				:data-target-fc="{{prefix}}.id"
+				:data-fc-id="{{prefix}}.id"
+			>
+				{{'\{\{'}} value.label {{'\}\}'}}
+			</li>
+		</ul>
+	</div>
+</div>

@@ -1,0 +1,175 @@
+/* ZQF 自定义 START */
+.cell-type-dialog {
+    margin: 5px;
+    height: 380px;
+}
+
+.cell-type-dialog fieldset {
+    height: 290px;
+    margin-left: 4px;
+}
+
+.cell-type-dialog select {
+    border-color: darkgrey;
+    width: 200px;
+}
+
+.cell-type-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.cell-type-dialog .items {
+    width: 100%;
+}
+
+.cell-type-dialog input {
+    width: 200px;
+}
+
+.cell-type-dialog button {
+    margin-left: 8px;
+}
+
+.cell-type-dialog td {
+    vertical-align: top;
+    width: 160px;
+}
+
+.custom-label-dialog {
+    margin: 5px;
+    height: 200px;
+}
+
+.custom-label-dialog button {
+    margin-right: 5px;
+    width: 120px;
+    height: 25px;
+}
+
+.custom-label-dialog input {
+    width: 200px;
+}
+
+.custom-label-dialog input[readonly] {
+    background-color: rgb(235, 235, 228);
+}
+
+.custom-label-dialog td {
+    vertical-align: top;
+    height: 30px;
+}
+
+/* .custom-links-dialog fieldset {
+    margin-left: 8px;
+}
+.custom-links-dialog legend {
+    text-align: center;
+}
+
+.custom-links-dialog td {
+    vertical-align: top;
+}
+
+.custom-links-dialog input {
+    width: 200px;
+}
+
+.custom-links-dialog select {
+    border-color: darkgrey;
+    width: 200px;
+}
+
+.custom-links-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+} */
+
+.mutual-index-dialog fieldset {
+    margin-left: 8px;
+}
+.mutual-index-dialog legend {
+    text-align: center;
+}
+
+.mutual-index-dialog input {
+    border-width: 0px;
+    border-bottom-width: 1px;
+    border-color: rgb(169, 169, 169);
+    width: 230px;
+    height: 28px;
+}
+
+.mutual-index-dialog input:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.mutual-index-dialog select {
+	border-width: 0px;
+    border-bottom-width: 1px;
+    border-color: rgb(169, 169, 169);
+    width: 230px;
+}
+
+.mutual-index-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.audit-sampling-dialog td {
+    vertical-align: top;
+}
+
+.audit-sampling-dialog select {
+    border-color: darkgrey;
+    width: 200px;
+    height: 28px;
+}
+
+.audit-sampling-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.note-feature-dialog {
+    margin: 5px;
+    height: 230px;
+}
+
+.note-feature-dialog input {
+    width: 200px;
+}
+
+.note-feature-dialog select {
+    border-color: darkgrey;
+    width: 200px;
+}
+
+.note-feature-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.note-feature-dialog button {
+    margin-right: 5px;
+    height: 25px;
+}
+
+.dg-fetch-dialog {
+    margin: 5px;
+    height: 280px;
+}
+
+.dg-fetch-dialog input {
+    width: 200px;
+}
+
+.dg-fetch-dialog select {
+    border-color: darkgrey;
+    width: 200px;
+}
+
+.dg-fetch-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.dg-fetch-dialog button {
+    margin-right: 5px;
+    height: 25px;
+}
+/* ZQF 自定义 END */

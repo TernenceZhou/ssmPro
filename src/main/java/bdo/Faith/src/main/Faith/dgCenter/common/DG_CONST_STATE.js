@@ -1,0 +1,4 @@
+// 未审报表期初索引
+var DG_CONST_UNAUDITREPORT_BEGINNING = 'R001';
+// 未审报表期末索引
+var DG_CONST_UNAUDITREPORT_ENDING = 'R002';

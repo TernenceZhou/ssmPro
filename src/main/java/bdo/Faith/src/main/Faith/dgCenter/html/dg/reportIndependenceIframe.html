@@ -1,0 +1,192 @@
+<div data-toggle="slimscroll"
+	 data-always-visible="true"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%"
+	 data-size="10px">
+	<div class="block block-bordered " id="contentBlock" style="position: relative;margin-bottom: 0px;">
+		<div class="block-header">
+			<div class="block-options block-options-left">
+				<button id="coverBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="获取最新数据">
+					<i class="fa fa-refresh">&nbsp;获取最新数据</i>
+				</button>
+			</div>
+			<h3 class="block-title"><span id="fileFullPath"></span></h3>
+		</div>
+		<div id="spreadContainerRoot">
+			<div class="" id="spreadContainer"></div>
+		</div>
+
+		<!-- Side Overlay-->
+		<aside id="side-overlay-likai">
+			<!-- Side Overlay Scroll Container -->
+			<div id="side-overlay-scroll">
+				<!-- Side Header -->
+				<!--				<div class="side-header side-content">
+									&lt;!&ndash; Layout API, functionality initialized in App() -> uiLayoutApi() &ndash;&gt;
+									<button class="btn btn-default pull-right" type="button" data-toggle="layout" data-action="side_overlay_close">
+										<i class="fa fa-times"></i>
+									</button>
+									<span>
+											<img class="img-avatar img-avatar32" src="assets/img/avatars/avatar10.jpg" alt="">
+											<span class="font-w600 push-10-l">Joshua Munoz</span>
+										</span>
+								</div>-->
+				<!-- END Side Header -->
+
+				<!-- Side Content -->
+				<div class="side-content remove-padding-t">
+					<!-- Shopping Cart -->
+					<div class="block pull-r-l">
+						<div class="block-content">
+							<div class="pull-r-l">
+								<ul class="nav-users push" id="major">
+									<!-- <img class="img-avatar" src="assets/img/avatars/avatar6.jpg" alt="">-->
+									<li>
+										<a>
+											<b id="signAccountant2"></b>
+											<i class="fa fa-circle" id="audit-color"></i>
+											<div class="font-w400 text-muted">
+												<small>注会2<br>
+													审批时间：<b id="signAccountant2Date"></b><br>
+													审核状态：<b id="signAccountant2_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a>
+											<b id="signAccountant3"></b>
+											<i class="fa fa-circle" id="audit-color2"></i>
+											<div class="font-w400 text-muted">
+												<small>注会3<br>
+													审批时间：<b id="signAccountant3Date"></b><br>
+													审核状态：<b id="signAccountant3_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a>
+											<b id="audit1"></b>
+											<i class="fa fa-circle audit-color" id="audit-color3"></i>
+											<div class="font-w400 text-muted">
+												<small>一审<br>
+													审批时间：<b id="audit1Date"></b><br>
+													审核状态：<b id="audit1_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a>
+											<b id="audit2"></b>
+											<i class="fa fa-circle audit-color" id="audit-color4"></i>
+											<div class="font-w400 text-muted">
+												<small>二审<br>
+													审批时间：<b id="audit2Date"></b><br>
+													审核状态：<b id="audit2_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a>
+											<b id="reaReviewer"></b>
+											<i class="fa fa-circle audit-color" id="audit-color5"></i>
+											<div class="font-w400 text-muted">
+												<small>外派<br>
+													审批时间：<b id="reaReviewerDate"></b><br>
+													审核状态：<b id="reaReviewer_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a>
+											<b id="signUser"></b>
+											<i class="fa fa-circle audit-color" id="audit-color6"></i>
+											<div class="font-w400 text-muted">
+												<small>签字<br>
+													审批时间：<b id="signUserDate"></b><br>
+													审核状态：<b id="signUser_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a>
+											<b id="reviewPartner"></b>
+											<i class="fa fa-circle audit-color" id="audit-color7"></i>
+											<div class="font-w400 text-muted">
+												<small>三审<br>
+													审批时间：<b id="reviewPartnerDate"></b><br>
+													审核状态：<b id="reviewPartner_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a>
+											<b id="issuedPeople"></b>
+											<i class="fa fa-circle audit-color" id="audit-color8"></i>
+											<div class="font-w400 text-muted">
+												<small>签发<br>
+													审批时间：<b id="issuedPeopleDate"></b><br>
+													审核状态：<b id="issuedPeople_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+
+
+								</ul>
+								<ul class="nav-users push" id="general">
+									<li>
+										<a>
+											<b id="audit1"></b>
+											<i class="fa fa-circle text-success" id="audit-color3"></i>
+											<div class="font-w400 text-muted">
+												<small>一审<br>
+													审批时间：<b id="audit1Date"></b><br>
+													审核状态：<b id="audit1_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a>
+											<b id="audit2"></b>
+											<i class="fa fa-circle text-success" id="audit-color4"></i>
+											<div class="font-w400 text-muted">
+												<small>二审<br>
+													审批时间：<b id="audit2Date"></b><br>
+													审核状态：<b id="audit2_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a>
+											<b id="signUser"></b>
+											<i class="fa fa-circle text-success audit-color" id="audit-color6"></i>
+											<div class="font-w400 text-muted">
+												<small>签字 <br>
+													审批时间：<b id="signUserDate"></b><br>
+													审核状态：<b id="signUser_User"></b>
+												</small>
+											</div>
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- END Shopping Cart -->
+				</div>
+				<!-- END Side Content -->
+			</div>
+			<!-- END Side Overlay Scroll Container -->
+		</aside>
+
+	</div>
+</div>

@@ -1,0 +1,26 @@
+<template>
+	<div :class="formControl.colClass"
+		 {{setEvents([inputOptions.parentEvents, prefix])}}
+		 data-vrole="col">
+		<div :class="formControl.typeClass"
+			 data-vrole="type">
+			<input
+				v-if="(formControl.type == 'text' || formControl.type == 'email' || formControl.type == 'hidden' || formControl.type == 'password')"
+				data-vrole="fc"
+				{{@ setAttr([inputOptions, prefix]) }}
+				{{@ setEvents([inputOptions.events, prefix]) }}
+			>
+			<label v-if="formControl.label"
+				   :ref="formControl.id+'Label'"
+				   :for="formControl.id">
+				{{'\{\{' + formControl + '.label\}\}' }}
+				<span v-if="formControl.required" class="text-danger">*</span>
+			</label>
+			<span v-show="formControl.addonShow" v-if="form.immediateUpdate && formControl.addon"
+				  @mouseover="immediateUpdateAddonmountover"
+				  @mouseout="immediateUpdateAddonmountout"
+				  @click="immediateUpdateAddonclick"
+				  class="addo-edit-btn"><i :class="form.addonIconClass"></i></span>
+		</div>
+	</div>
+</template>

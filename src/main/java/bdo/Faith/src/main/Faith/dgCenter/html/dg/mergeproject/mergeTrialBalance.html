@@ -1,0 +1,128 @@
+<style>
+	/* Table Head */
+	#subtable thead th {
+		background-color: rgb(81, 130, 187);
+		color: #fff;
+		border-bottom-width: 0;
+		padding: 5px 10px;
+	}
+
+	/* Column Style */
+	#subtable td {
+		color: #000;
+	}
+
+	/* Heading and Column Style */
+	#subtable tr, #table-7 th {
+		border-width: 1px;
+		border-style: solid;
+		border-color: rgb(81, 130, 187);
+	}
+
+	/* Padding and font style */
+	#subtable td, #table-7 th {
+		padding: 5px 10px;
+		font-size: 12px;
+		font-family: Verdana;
+	}
+
+	.width-jyx  {
+		min-width: 352px;
+		max-width: 352px;
+	}
+	.width-je  {
+		min-width: 120px;
+		max-width: 120px;
+	}
+	.width-seq  {
+		height: 35px;
+		min-width: 30px;
+		max-width: 30px;
+	}
+	.width-code  {
+		min-width: 60px;
+		max-width: 60px;
+	}
+	.width-subject-id  {
+		min-width: 100px;
+		max-width: 100px;
+	}
+	.width-subject-name  {
+		min-width: 200px;
+		max-width: 200px;
+	}
+</style>
+
+<div data-toggle="slimscroll" data-always-visible="false"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%">
+	<div class="block">
+		<div class="block-heade">
+			<ul class="nav nav-tabs" data-toggle="tabs" id="tab_contract">
+				<li id="tab2" class="active"><a href="#tab_tbList">试算平衡表</a></li>
+			</ul>
+		</div>
+		<div class="block-content tab-content" id="tab_contract_content">
+			<div class="tab-pane active" id="tab_tbList">
+				<div class="block block-themed">
+					<div class="block-header bg-primary">
+						<ul class="block-options">
+							<li>
+								<button id="btnRefreshTables" type="button">
+									<i class="fa fa-refresh" style="color: white;" title="刷新"></i>
+								</button>
+							</li>
+							<li>
+								<button id="tb_upload" type="button">
+									<i class="si si-cloud-upload" style="color: white;" title="导入"></i>
+								</button>
+							</li>
+							<li style="display: none">
+								<button id="tb_export" type="button">
+									<i class="si si-cloud-download" style="color: white;" title="导出"></i>
+								</button>
+							</li>
+							<li>
+								<button type="button" data-toggle="block-option" data-action="fullscreen_toggle"
+										title="放大">
+									<i class="si si-size-fullscreen"></i>
+								</button>
+							</li>
+						</ul>
+						<h3 class="block-title">试算平衡表 <span id="title_index"></span></h3>
+					</div>
+					<div class="block-content">
+						<table id="tableCheck" class="table table-bordered table-striped table-hover">
+						</table>
+						<table id="tableDetail" class="table table-bordered table-striped table-hover">
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 对话框：上传文件 -->
+<div class="modal fade" id="uploadDataModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-md" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">上传试算平衡表</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="uploadDataForm"></form>
+			</div>
+		</div>
+	</div>
+</div>

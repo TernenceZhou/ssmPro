@@ -1,0 +1,107 @@
+<div id="oteConfPage" class="block-content">
+	<div class="row items-push">
+		<div class="col-sm-1">
+			<h1 class="page-heading">
+				考试
+			</h1>
+		</div>
+		<div class="col-sm-6">
+			<div class="font-300 text-white bg-info">
+				<div>基础考核：<span style="color: red;">完成查询与分析题试</span>，考核通过后用户可以自行导入客户账套后作基于财务数据的查询与分析</div>
+				<div>高级考核：<span style="color: red;">完成底稿中心题试</span>和考试环境中<span style="color: red;">考试项目的底稿</span>，考试通过后用户可以在SACP中做项目底稿</div>
+				<div><span style="color: red;font-size: 1px;">题试入口：培训考试          项目考试数据有效期三个月，过期后自动删除</span></div>
+			</div>
+		</div>
+		<div class="col-lg-offset-3 col-sm-2">
+			<a id="oteVideo" data-ote-btn-click="onOpenVideo" class="pull-right" target="_blank" data-video-href="https://training.bdo.com.cn/TrainingFile/2020/courseChapter/sacp-examintro/20200727-sacp_examintro.m3u8"><button class="btn btn-success push-5-r push-10" type="button">考试教程&nbsp;<i class="fa fa-video-camera"></i> </button></a>
+			<a id="oteToSacpExam" data-ote-btn-click="onLinkToSacpExamSysClick" class="pull-right" target="_blank"><button class="btn btn-info push-5-r push-10" type="button">考试系统&nbsp;<i class="fa fa-server"></i> </button></a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="block home-block-rounded">
+				<div class="block-header">
+					<div class="block-options-simple block-options-simple-left">
+						<button class="btn btn-xs btn-info push-5-r push-10" type="button" data-toggle="tooltip" title="我要考试"
+								data-original-title="我要考试"
+								data-ote-btn-click="onNewOteClick"
+						>
+							<i class="fa fa-plus"></i> 我要考试
+						</button>
+						<button class="btn btn-xs btn-info push-5-r push-10" type="button" data-toggle="tooltip" title="刷新"
+								data-original-title="刷新"
+								data-ote-btn-click="onRefreshOteClick"
+						>
+							<i class="fa fa-refresh"></i> 刷新
+						</button>
+						<p style="display: inline;color: red;">考试项目无需导入任何财务账套数据，系统会自动初始化考试用财务数据。</p>
+						<!--<button class="btn btn-xs btn-info push-5-r push-10" type="button" data-toggle="tooltip" title="打开考试系统"
+								data-original-title="打开考试系统"
+								data-ote-btn-click="onLinkToExamSysClick"
+						>
+							<i class="fa fa-external-link"></i> 打开考试系统
+						</button>-->
+					</div>
+					<h3 class="block-title">考核一览</h3>
+				</div>
+				<div class="block-content pull-t" id="oteTableWrap">
+					<table class="table table-borderless text-center remove-margin-b" id="oteTable"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="oteNewSider" class="bdo-side"></div>
+	<div id="oteDetailSider" class="bdo-side"></div>
+	<div id="oteCerSider" class="bdo-side"></div>
+	<div id="oteLinkModal" class="modal ui-draggable fade" id="bdostore-modal" tabindex="-1" role="dialog" aria-hidden="true" style="">
+		<div id="oteLinkModalDialog" class="modal-sm modal-dialog">
+			<div class="modal-content">
+				<!--  Bdo Store Block -->
+				<div class="block block-themed block-transparent">
+					<div class="block-header bg-primary ui-draggable-handle">
+						<ul class="block-options">
+							<li>
+								<button data-dismiss="modal" type="button"><i class="si si-close"></i></button>
+							</li>
+						</ul>
+						<h3 class="block-title">参加考试</h3>
+					</div>
+					<div class="block-content">
+						<div class="row text-center">
+							<div class="col-xs-6">
+								<a class="block bdo-store-block" href="javascript:void(0)" data-ote-btn-click="onLinkToTrainSysClick">
+									<div class="block-content bdo-store-block-content text-info  bg-gray-light">
+										<i class="fa fa-address-book-o fa-2x bdo-store-block-icon"></i>
+										<div class="font-w600 push-15-t push-15" style="width: 85px;">培训考试</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-xs-6">
+								<a class="block bdo-store-block" href="javascript:void(0)" data-ote-btn-click="onLinkToSacpExamSysClick">
+									<div class="block-content bdo-store-block-content text-info  bg-gray-light">
+										<i class="fa fa-address-book-o fa-2x bdo-store-block-icon"></i>
+										<div class="font-w600 push-15-t push-15" style="width: 85px;">项目操作考试</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--  END Bdo Store Block -->
+			</div>
+		</div>
+	</div>
+	<style type="text/css">
+		#oteNewSider {
+			width: 600px;
+		}
+		#oteLinkModal {
+			/*overflow: hidden; display: block; left: 384px; top: 241px;;*/
+		}
+		#oteLinkModalDialog {
+			box-shadow: -4px -4px 10px 3px;
+			transform: translateX(0) translateY(0) translateZ(0);
+		}
+	</style>
+</div>

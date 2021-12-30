@@ -1,0 +1,586 @@
+<style>
+	.bdo-item {
+		position: relative;
+		width: 130px;
+		display: inline-block;
+	}
+
+	.lightpink {
+		background-color: lightpink;
+	}
+
+	.bg-info .badge {
+		padding: 3px 5px;
+		float: right;
+		background-color: white;
+		color: #70b9eb;
+		position: absolute;
+		top: 0;
+		right: 1px;
+	}
+
+	.bg-success .badge {
+		padding: 3px 5px;
+		float: right;
+		background-color: white;
+		color: #46c37b;
+		position: absolute;
+		top: 0;
+		right: 1px;
+	}
+
+	.bg-warning .badge {
+		padding: 3px 5px;
+		float: right;
+		background-color: white;
+		color: #f3b760;
+		position: absolute;
+		top: 0;
+		right: 1px;
+	}
+
+	.bg-standard .badge {
+		padding: 3px 5px;
+		float: right;
+		background-color: white;
+		color: #CD96CD;
+		position: absolute;
+		top: 0;
+		right: 1px;
+	}
+	.audit-program-fullscreen-flag {
+		
+	}
+	.audit-program-fullscreen-flag .swal2-container,
+	.audit-program-fullscreen-flag .sideRegin{
+		z-index: 10010;
+	}
+	.audit-program-fullscreen {
+		height: 100% !important;
+		max-height: 100% !important;;
+		min-height: 100% !important;;
+		position: fixed !important;;
+		z-index: 10000 !important;;
+		top: 0px !important;;
+		border: 0px !important;;
+		left: 0px !important;;
+		right: 0px !important;;
+		padding: 0px 0px 0px !important;
+		background-color: #fff;
+	}
+	.audit-program-fullscreen .block.block-themed{
+		margin-bottom: 0px !important;
+	}
+	.audit-program-fullscreen .tab-content {
+		height: 100% !important;
+		max-height: 100% !important;;
+		min-height: 100% !important;;
+	}
+</style>
+<div id="auditProgramEcavpTableBlock" class="block block-themed " style="display: none;">
+	<table class="table table-header-bg table-hover table-bordered" style="width:60%;font-weight:700;">
+		<thead>
+		<tr>
+			<th style="width:35%" scope="col">认定分值合计：</th>
+			<th scope="col">E</th>
+			<th scope="col">C</th>
+			<th scope="col">A</th>
+			<th scope="col">V</th>
+			<th scope="col">P</th>
+		</tr>
+		</thead>
+		<tbody style="text-align: center">
+		<tr>
+			<td scope="row">科目认定分值 ：</td>
+			<td id="subjectE"></td>
+			<td id="subjectC"></td>
+			<td id="subjectA"></td>
+			<td id="subjectV"></td>
+			<td id="subjectP"></td>
+		</tr>
+		<tr>
+			<td scope="row">计划程序认定分值 ：</td>
+			<td id="summeryE"></td>
+			<td id="summeryC"></td>
+			<td id="summeryA"></td>
+			<td id="summeryV"></td>
+			<td id="summeryP"></td>
+		</tr>
+		<tr>
+			<td scope="row">实施程序认定分值 ：</td>
+			<td id="implE"></td>
+			<td id="implC"></td>
+			<td id="implA"></td>
+			<td id="implV"></td>
+			<td id="implP"></td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+<div class="modal fade" id="programParamModal1" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button data-close="true" type="button" id="modalHideBtn">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">生成参数</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="programParamForm1">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="block block-themed" style="height: 100%;">
+	<div class="block-header bg-primary">
+		<!-- <ul class="block-options">
+			<li>
+				<button id="newAuditprogramBtn" type="button">
+					<i class="fa fa-plus-square"> 自定义程序</i>
+				</button>
+			</li>
+			<li>
+				<button id="addOtherProgramBtn" type="button">
+					<i class="fa fa-check-square-o"> 添加程序</i>
+				</button>
+			</li>
+		</ul> -->
+		<div style="float:right">
+			<div class="block-options form-group has-info" style="width: 280px;float: left;">
+				<label class="col-xs-4 col-sm-4 col-lg-4 control-label" for="filter"
+					   style="text-align: right;padding-top:4px;color: #fff;">显示方式:</label>
+				<div class="form-material col-xs-8 col-sm-8 col-lg-8" style="margin: 0px;">
+					<select class="form-control"
+							value="all"
+							id="filter"
+							name="filter" size="1"
+							style="color: #fff;padding:0px;">
+						<option value="all" style="color: #000;">全部</option>
+						<option value="std" style="color: #000;">计划阶段</option>
+						<option value="sub" style="color: #000;">实施阶段</option>
+					</select>
+				</div>
+			</div>
+			<div class="block-options form-group has-info" style="width: 310px;float: left;">
+				<label class="col-xs-4 col-sm-4 col-lg-4 control-label" for="filterEditor2"
+					   style="text-align: right;padding-top:4px;color: #fff;">底稿编制人:</label>
+				<div class="form-material col-xs-8 col-sm-8 col-lg-8" style="margin: 0px;">
+					<select class="form-control"
+							value="all"
+							id="filterEditor2"
+							name="filterEditor2" size="1"
+							style="color: #fff;padding:0px;">
+					</select>
+				</div>
+			</div>
+			<button id="shareToAptAll" style="border: 0px;background-color: #5c90d2">
+				<i class="fa fa-share-alt" title="分享至APT"></i>
+			</button>
+			<button id="refreshButtonAll" style="border: 0px;background-color: #5c90d2">
+				<i class="fa fa-file-excel-o" title="批量刷新底稿封面"></i>
+			</button>
+			<button id="editButtonAll" style="border: 0px;background-color: #5c90d2">
+				<i class="fa fa-send" title="批量生成实施程序和底稿"></i>
+			</button>
+			<button id="auditProgramTopBtn" type="button" style="border: 0px;background-color: #5c90d2">
+				<i class="si si-arrow-down"></i>
+			</button>
+			<button class="audit-program-fullscreen-btn" id="auditProgramFullscreenBtn" type="button" style="border: 0px;background-color: #5c90d2">
+				<i class="si si-size-fullscreen"></i>
+			</button>
+		</div>
+		<h3 class="block-title">审计程序</h3>
+	</div>
+	<div class="block-content">
+		<h3 class="block-title"><font size="3" color="red">需执行的审计程序</font>
+			<span class="bdo-item-wrap">
+				<span class="bdo-item center-block bg-info">标准<span class="badge push-5-l"
+																	id="companyCount"></span></span>
+				<span class="bdo-item center-block bg-success">部门<span class="badge push-5-l"
+																	   id="depCount"></span></span>
+				<span class="bdo-item center-block bg-warning">自定义<span class="badge push-5-l"
+																		id="customizeCount"></span></span>
+				<span class="bdo-item center-block bg-standard">实施程序<span class="badge push-5-l"
+																		  id="subCount"></span></span>
+			</span>
+		</h3>
+		<table id="auditProgramTable" class="table table-bordered table-striped table-hover"></table>
+		<h3 class="block-title"><font size="3" color="red">不执行的审计程序</font></h3>
+		<table id="unexecuteprogamTable" class="table table-bordered table-striped table-hover"></table>
+	</div>
+</div>
+<!-- uploadTplFormModal begin -->
+<div class="modal fade" id="uploadTplFormModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">上传底稿</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="uploadTplForm"></form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- uploadTplFormModal end -->
+<!-- unexecuteFormSider begin -->
+<div class="">
+	<div id="unexecuteFormSider" class="bdo-side" tabindex="-0" style="width: 600px;">
+		<div class="bdo-side-block block block-themed">
+			<div class="block-header bg-info">
+				<ul class="block-options">
+					<li>
+						<button data-close="true" type="button">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title">请输入不执行该审计程序的理由</h3>
+			</div>
+			<div class="block-content bdo-side-content">
+				<div data-toggle="slimscroll" data-always-visible="false"
+					 data-rail-visible="true" data-rail-color="#777"
+					 data-rail-opacity=".0" data-height="100%">
+					<form class="form-horizontal push-10-t" id="unexecuteForm"></form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- unexecuteFormSider end -->
+<!-- auditFormSider begin -->
+<div class="">
+	<div id="auditFormSider" class="bdo-side" tabindex="-0" style="width: 600px;">
+		<div class="bdo-side-block block block-themed">
+			<div class="block-header bg-info">
+				<ul class="block-options">
+					<li>
+						<button data-close="true" type="button">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title">审核</h3>
+			</div>
+			<div class="block-content bdo-side-content">
+				<div data-toggle="slimscroll" data-always-visible="false"
+					 data-rail-visible="true" data-rail-color="#777"
+					 data-rail-opacity=".0" data-height="100%">
+					<form class="form-horizontal push-10-t" id="auditForm"></form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- auditFormSider end -->
+<!-- viewProgramSider begin -->
+<div class="">
+	<div id="viewProgramSider" class="bdo-side" tabindex="-0" style="width: 600px;">
+		<div class="bdo-side-block block block-themed">
+			<div class="block-header bg-info">
+				<ul class="block-options">
+					<li>
+						<button data-close="true" type="button">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title"></h3>
+			</div>
+			<div class="block-content bdo-side-content">
+				<div data-toggle="slimscroll" data-always-visible="false"
+					 data-rail-visible="true" data-rail-color="#777"
+					 data-rail-opacity=".0" data-height="100%">
+					<form class="form-horizontal push-10-t" id="programViewForm"></form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- viewProgramSider end -->
+<!-- cusAuditprogramFormSider begin -->
+<div class="">
+	<div id="cusAuditprogramFormSider" class="bdo-side" tabindex="-0" style="width: 600px;">
+		<div class="bdo-side-block block block-themed">
+			<div class="block-header bg-info">
+				<ul class="block-options">
+					<li>
+						<button data-close="true" type="button">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title"></h3>
+			</div>
+			<div class="block-content bdo-side-content">
+				<div data-toggle="slimscroll" data-always-visible="false"
+					 data-rail-visible="true" data-rail-color="#777"
+					 data-rail-opacity=".0" data-height="100%">
+					<form class="form-horizontal push-10-t" id="cusAuditprogramForm"></form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- cusAuditprogramFormSider end -->
+<!-- selectProgramSider begin -->
+<div class="">
+	<div id="selectProgramSider" class="bdo-side">
+		<div class="bdo-side-block block block-themed">
+			<div class="block-header bg-info">
+				<ul class="block-options">
+					<li>
+						<button data-close="true" type="button">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title">添加审计程序</h3>
+			</div>
+			<div class="block-content bdo-side-content">
+				<div data-toggle="slimscroll" data-always-visible="false"
+					 data-rail-visible="true" data-rail-color="#777"
+					 data-rail-opacity=".0" data-height="90%">
+					<div class="block block-themed">
+						<div class="block-header bg-primary">
+							<ul class="block-options">
+								<li>
+									<button id="searchBtn" type="button"><i class="fa fa-search">&nbsp;搜索</i></button>
+								</li>
+								<li>
+									<button id="searchResetBtn" type="button"><i class="fa fa-repeat">&nbsp;重置</i>
+									</button>
+								</li>
+								<li>
+									<button type="button" data-toggle="block-option" data-action="content_toggle"><i
+										class="si si-arrow-up"></i></button>
+								</li>
+							</ul>
+							<h3 class="block-title">搜索条件</h3>
+						</div>
+						<div class="block-search">
+							<div class="row" data-form="search">
+								<form id="searchForm"></form>
+							</div>
+						</div>
+					</div>
+					<table id="selectProgramTable" class="table table-bordered table-striped table-hover"></table>
+				</div>
+				<div class="row border-t">
+					<div class="col-xs-12 block-content">
+						<button id="selectOkBtn" type="button" class="btn btn-primary">
+							<i class="fa fa-check-square-o"> 确定</i>
+						</button>
+						<button id="selectCancelBtn" type="button" class="btn btn-warning">
+							<i class="fa fa fa-arrow-right"> 取消</i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- selectProgramSider end -->
+<!-- editAuditprogramFormSider begin -->
+<div class="">
+	<div id="editAuditprogramFormSider" class="bdo-side" tabindex="-0" style="width: 600px;">
+		<div class="bdo-side-block block block-themed">
+			<div class="block-header bg-info">
+				<ul class="block-options">
+					<li>
+						<button data-close="true" type="button">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title">修改程序</h3>
+			</div>
+			<div class="block-content bdo-side-content">
+				<div data-toggle="slimscroll" data-always-visible="false"
+					 data-rail-visible="true" data-rail-color="#777"
+					 data-rail-opacity=".0" data-height="100%">
+					<form class="form-horizontal push-10-t" id="editAuditprogramForm"></form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- editAuditprogramFormSider end -->
+<!-- dgAttachSider begin -->
+<div class="">
+	<div id="dgAttachSider" class="bdo-side" tabindex="-0">
+		<div class="bdo-side-block block block-themed">
+			<div class="block-header bg-info">
+				<ul class="block-options">
+					<li>
+						<button data-close="true" type="button">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title">底稿附件</h3>
+			</div>
+			<div class="block-content bdo-side-content">
+				<div id="dgAttachRegion"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dgAttachSider end -->
+<!-- uploadAttachFormModal begin -->
+<div class="modal fade" id="uploadAttachFormModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">上传底稿附件</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="uploadAttachForm"></form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- uploadAttachFormModal end -->
+<div class="modal fade" id="selectTeModal" tabindex="-1" role="dialog"
+     aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择模板</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="">
+						<div class="form-group">
+							<div class="col-sm-10">
+								<div class="form-material ">
+									<select class="js-select2 form-control" id="tplInfoId"
+									        style="width: 100%;">
+										<option></option>
+									</select> 
+									<label for="tplInfoId">底稿模板</label>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material ">
+									<button class="btn btn-sm btn-primary" type="button" id="tplInfoIdSelectedBtn">确定</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal_share_to_apt begin -->
+<div class="modal fade" id="modal_share_to_apt" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:800px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button id="selectFileShareToAptBtn" type="button">
+								<i class="fa fa-share-alt" style="color: white;">&nbsp;分享至APT</i>
+							</button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择底稿</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;">
+				<table id="shareToAptTable"
+					   class="table table-bordered table-striped table-hover">
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="aptMessageModal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-popin modal-lg">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-primary" >
+					<h3 class="block-title text-center">提示</h3>
+				</div>
+				<div class="block-content">
+					<div id="aptMessageInfo"></div>
+				</div>
+			</div>
+			<div class="modal-footer" style="text-align: center;">
+				<button  class="btn btn-sm btn-primary" type="button" data-dismiss="modal"><i class="fa fa-check"></i> 确认</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- modal_share_to_apt end -->
+<!-- editSubProgramSider begin -->
+<div class="">
+	<div id="editSubProgramSider" class="bdo-side" tabindex="-0" style="width: 600px;">
+		<div class="bdo-side-block block block-themed">
+			<div class="block-header bg-info">
+				<!--<ul class="block-options">
+					<li>
+						<button data-close="true" type="button" id="cancelClose">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>-->
+				<h3 class="block-title" id="editSubProgramSiderTitle">添加实施程序</h3>
+			</div>
+			<div class="block-content bdo-side-content" style="top: 0px;">
+				<form id="editSubProgramForm"></form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- editSubProgramSider end -->
+
+<!-- programParam begin -->
+<div id="programParamModalWrap" style="position:fixed;z-index:1070;"></div>
+<!-- programParam end -->

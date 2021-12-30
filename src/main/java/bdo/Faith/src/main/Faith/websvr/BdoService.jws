@@ -1,0 +1,24 @@
+import cn.com.bdo.base.pushlet.PushletUtils;
+
+public class BdoService {
+
+	public boolean sendMsgToUser(String userId, String postUserid, String message, String menuid) {
+		return PushletUtils.sendMsgToUser(userId, postUserid, message, menuid);
+	}
+
+	public boolean broadcast(String postUserid, String message) {
+		return PushletUtils.broadcast(postUserid, message);
+	}
+
+	public boolean broadcastTask(String postUserid, String message, String menuId) {
+		return PushletUtils.broadcastTask(postUserid, message, menuId);
+	}
+
+	public boolean unicastByUserIdNoLog(String userId, String message) {
+		return PushletUtils.unicastByUserIdNoLog(userId, message);
+	}
+
+	public boolean broadcastNoLog(String message) {
+		return PushletUtils.broadcastNoLog(message);
+	}
+}

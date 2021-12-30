@@ -1,0 +1,26 @@
+<div class="block block-themed">
+	<div class="block-header bg-primary">
+		<ul class="block-options">
+			<li>
+				<button class="bdoexport-btn" type="button"
+						data-bdoexport-table-id="adjustTable"
+						data-bdoexport-title="调整分录表"
+				>
+					<i class="si si-cloud-download" title="导出"></i>
+				</button>
+			</li>
+			<li>
+				<button id="refreshAdjustTableBtn" type="button">
+					<i class="fa fa-refresh" title="刷新"></i>
+				</button>
+			</li>
+		</ul>
+		<h3 id="adjustTableTitle" class="block-title">调整分录表<span id="adjustEffect"></span></h3>
+	</div>
+	<div class="block-content">
+		<div class="row">
+			<table id="adjustTable" class="table table-bordered table-striped table-hover"></table>
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" href="/Faith/dgCenter/js/dg/adjust.css">

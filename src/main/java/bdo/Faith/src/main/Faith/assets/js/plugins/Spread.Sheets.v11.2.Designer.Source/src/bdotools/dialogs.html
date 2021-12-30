@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<!-- ZQF 自定义 START -->
+<div class="cell-type-dialog">
+    <table>
+        <tr>
+            <td style="height: 330px;">
+                <fieldset style="width: 220px;">
+                    <legend data-bind="text: res.cellTypeDialog.items"></legend>
+                    <select class="items" size="10" style="height: 310px;"/>
+                </fieldset>
+            </td>
+            <td>
+                <fieldset style="width: 340px;">
+                    <legend data-bind="text: res.cellTypeDialog.itemProperties"></legend>
+                    <table style="border-collapse:separate; border-spacing:0px 10px;">
+                        <tr>
+                            <td>
+                                <input type="radio" name="linktype" value="0" style="width: 13px;" checked="checked"/>
+                                <label data-bind="text: res.cellTypeDialog.cellTitle"></label>
+                            </td>
+                            <td>
+                                <button class="refershPaper-button" type="button" style="width: 40px;">
+                                    <span data-bind="text: res.cellTypeDialog.refershDgBtn"></span>
+                                </button>
+                                <button class="openDgBtn-button" type="button" style="width: 65px;">
+                                    <span data-bind="text: res.cellTypeDialog.openDgBtn"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="display-text" data-bind="text: res.cellTypeDialog.displayText"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="display-text" class="displayText" autocomplete="off"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="paper-cell-right" data-bind="text: res.cellTypeDialog.paperText"></label>
+                                <button class="clearPaper-button" type="button" style="width: 40px;">
+                                    <span data-bind="text: res.cellTypeDialog.clearDgBtn"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <input type="text" id="paper-text-cell" name="paper-text-cell" class="paperTextCell" autocomplete="off"/>
+                                <select id="paper-list-cell" class="paperListCell" style="display: none;position: absolute;" size="5" height="120px"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="sheet_list" data-bind="text: res.cellTypeDialog.sheetText"></label>
+                            </td>
+                            <td>
+                                <select id="sheet_list" class="sheetText" style="height: 28px;"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="custom-text" data-bind="text: res.cellTypeDialog.text"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="custom-text" class="text" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" name="linktype" value="1" style="width: 13px;"/>
+                                <label data-bind="text: res.cellTypeDialog.fileTitle"></label>
+                            </td>
+                            <td>
+                                <button class="refreshDg-button" type="button" style="width: 40px;">
+                                    <span data-bind="text: res.cellTypeDialog.refershDgBtn"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="paper_list" data-bind="text: res.cellTypeDialog.paperText"></label>
+                                <button class="clearDg-button" type="button" style="width: 40px;">
+                                    <span data-bind="text: res.cellTypeDialog.clearDgBtn"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <input type="text" id="paper-text" name="paper-text" class="paperInput" autocomplete="off"/>
+                                <select id="paper_list" class="paperText" style="display: none;position: absolute;" size="5" height="120px"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="attachment_list" data-bind="text: res.cellTypeDialog.attachmentText"></label>
+                            </td>
+                            <td>
+                                <select id="attachment_list" class="attachmentText" style="height: 28px;"></select>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </td>
+        </tr>
+    </table>
+    <button class="add-button" role="button" aria-disabled="false" type="button">
+        <span data-bind="text: res.cellTypeDialog.add"></span>
+    </button>
+    <button class="remove-button" role="button" aria-disabled="false" type="button">
+        <span data-bind="text: res.cellTypeDialog.remove"></span>
+    </button>
+</div>
+<div class="mutual-index-dialog">
+    <table style="border-collapse:separate;" id="indexTable">
+        <tr>
+            <td id="leftTd">
+                <fieldset>
+                    <legend><label id="leftLabel">左交叉索引</label></legend>
+                    <table style="border-collapse:separate; border-spacing:0px 5px;">
+                        <tr>
+                            <td style="width: 70px;">
+                                <table style="border-collapse:separate; border-spacing:0px 5px;">
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="leftIndexType" value="0" style="width: 13px;" checked/>
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            &nbsp;<label style="margin-top: 6px;" data-bind="text: res.mutualIndexDialog.tbTitle"></label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label data-bind="text: res.mutualIndexDialog.tbListTitle"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="tb-list-text" class="tbListText" autocomplete="off"/>
+                                <select id="tb-list" class="tbList" style="display: none;position: absolute;" size="5" height="120px"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label data-bind="text: res.mutualIndexDialog.tbColumnTitle"></label>
+                            </td>
+                            <td>
+                                <select id="tbColumn-list" class="tbColumnList" style="height: 28px;">
+                                    <option value="0">未审数</option>
+                                    <option value="1">审计调整数</option>
+                                    <option value="2">审定数</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="border-collapse:separate; border-spacing:0px 5px;">
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="leftIndexType" value="1" style="width: 13px;" checked/>
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            &nbsp;<label style="margin-top: 6px;" data-bind="text: res.mutualIndexDialog.guideTitle"></label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label data-bind="text: res.mutualIndexDialog.guideListTitle"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="guide-list-text" class="guideListText" autocomplete="off"/>
+                                <select id="guide-list" class="guideList" style="display: none;position: absolute;" size="5" height="120px"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label data-bind="text: res.mutualIndexDialog.guideColumnTitle"></label>
+                            </td>
+                            <td>
+                                <select id="guideColumn-list" class="guideColumnList" style="height: 28px;">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="border-collapse:separate; border-spacing:0px 5px;">
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="leftIndexType" value="2" style="width: 13px;" checked/>
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            &nbsp;<label style="margin-top: 6px;" data-bind="text: res.mutualIndexDialog.dgTitle"></label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <button class="openDg-button" type="button" style="width: 64px;">
+                                    <span data-bind="text: res.mutualIndexDialog.openDg"></span>
+                                </button>
+                                <button class="refreshDg-button" type="button" style="width: 64px;">
+                                    <span data-bind="text: res.mutualIndexDialog.refreshDg"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label data-bind="text: res.mutualIndexDialog.dgListTitle"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="dg-list-text" class="dgListText" autocomplete="off"/>
+                                <select id="dg-list" class="dgList" style="display: none;position: absolute;" size="5" height="120px"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label data-bind="text: res.mutualIndexDialog.dgSheetTitle"></label>
+                            </td>
+                            <td>
+                                <select id="dg-sheet" class="dgSheet" style="height: 28px;"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label data-bind="text: res.mutualIndexDialog.dgCellTitle"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="dgCell-input" name="dgCell-input" class="dgCellInput" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table style="border-collapse:separate; border-spacing:0px 5px;">
+                                    <tr>
+                                        <td>
+                                            <input type="radio" name="leftIndexType" value="3" style="width: 13px;" checked/>
+                                        </td>
+                                        <td style="vertical-align: middle;">
+                                            &nbsp;<label style="margin-top: 6px;" data-bind="text: res.mutualIndexDialog.noteTitle"></label>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <button class="openNote-button" type="button" style="width: 64px;">
+                                    <span data-bind="text: res.mutualIndexDialog.openNote"></span>
+                                </button>
+                                <button class="refreshNote-button" type="button" style="width: 64px;">
+                                    <span data-bind="text: res.mutualIndexDialog.refreshNote"></span>
+                                </button>
+                            </td>
+                            
+                        </tr>
+                        <tr>
+                            <td>
+                                <label data-bind="text: res.mutualIndexDialog.noteListTitle"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="note-list-text" class="noteListText" autocomplete="off"/>
+                                <select id="note-list" class="noteList" style="display: none;position: absolute;" size="4" height="110px"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label data-bind="text: res.mutualIndexDialog.noteSheetTitle"></label>
+                            </td>
+                            <td>
+                                <select id="note-sheet" class="noteSheet" style="height: 28px;"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label data-bind="text: res.mutualIndexDialog.noteCellTitle"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="noteCell-input" name="noteCell-input" class="noteCellInput" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </td>
+            <td id="rightTd" style="vertical-align: baseline;">
+                <fieldset>
+                    <legend><label id="rightLabel">右交叉索引</label></legend>
+                    <table style="border-collapse:separate; border-spacing:0px 5px;">
+                        <tr>
+                            <td style="width: 80px;">
+                                <label data-bind="text: res.mutualIndexDialog.activeCell"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="activeCell-input" name="activeCell-input" class="activeCellInput" style="width: 230px;" disabled/>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </td>
+        <tr>
+    </table>
+</div>
+<div class="audit-sampling-dialog">
+    <table>
+        <tr>
+            <td style="height: 230px;">
+                <fieldset style="width: 210px;">
+                    <legend data-bind="text: res.auditSamplingDialog.items"></legend>
+                    <select class="items" size="6" style="height: 200px;"/>
+                </fieldset>
+            </td>
+            <td>
+                <fieldset>
+                    <legend data-bind="text: res.auditSamplingDialog.itemProperties"></legend>
+                    <table>
+                        <tr>
+                            <td style="width: 140px;">
+                                <label data-bind="text: res.auditSamplingDialog.samplingAttachTitle"></label>
+                                <button class="refreshSamplingAttach-button" type="button" style="width: 64px;">
+                                    <span data-bind="text: res.auditSamplingDialog.refreshSamplingAttach"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <select id="sampling-attach" class="samplingAttach"></select>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </td>
+        </tr>
+    </table>
+    <button class="add-button" role="button" aria-disabled="false" type="button">
+        <span data-bind="text: res.cellTypeDialog.add"></span>
+    </button>
+    <button class="remove-button" role="button" aria-disabled="false" type="button">
+        <span data-bind="text: res.cellTypeDialog.remove"></span>
+    </button>
+</div>
+<div class="custom-label-dialog">
+    <table style="border-collapse:separate; border-spacing:0px 10px;">
+        <tr>
+            <td>
+                <label for="cell_alias" data-bind="text: res.customLabelDialog.cellAlias"></label>
+            </td>
+            <td>
+                <input type="text" id="cell_alias" name="cell_alias" class="cellAlias" autocomplete="off"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="cell_position" data-bind="text: res.customLabelDialog.cellPositionBtn"></label>
+            </td>
+            <td>
+                <input type="text" id="cell_position" name="cell_position" class="cellPosition" readonly="readonly"/>
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- <div class="custom-links-dialog">
+    <table style="border-collapse:separate; border-spacing:0px 10px;">
+        <tr>
+            <td>
+                <fieldset>
+                    <legend data-bind="text: res.customLinksDialog.leftProperties"></legend>
+                    <table style="border-collapse:separate; border-spacing:0px 10px;">
+                        <tr>
+                            <td style="width: 160px;">
+                                <input type="radio" name="leftLinkType" value="0" style="width: 13px;" checked/>
+                                <label data-bind="text: res.customLinksDialog.linkTypeCell"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;<label for="paper-cell-left" data-bind="text: res.customLinksDialog.paperLabel"></label>
+                            </td>
+                            <td style="width: 200px;">
+                                <input type="text" id="paper-text-left" name="paper-text-left" class="paperTextLeft"/>
+                                <select id="paper-cell-left" class="paperCellLeft" style="display: none;position: absolute;" size="5" height="120px"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;<label for="sheet-list-left" data-bind="text: res.customLinksDialog.sheetLabel"></label>
+                            </td>
+                            <td>
+                                <select id="sheet-list-left" class="sheetListLeft" style="height: 28px;"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;<label for="cell-text-left" data-bind="text: res.customLinksDialog.cellLabel"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="cell-text-left" class="cellTextLeft"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" name="leftLinkType" value="1" style="width: 13px;"/>
+                                <label data-bind="text: res.customLinksDialog.linkTypeFile"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;<label for="paper-list-left" data-bind="text: res.customLinksDialog.paperLabel"></label>
+                            </td>
+                            <td style="width: 200px;">
+                                <input type="text" id="paper-input-left" name="paper-input-left" class="paperInputLeft"/>
+                                <select id="paper-list-left" class="paperListLeft" style="display: none;position: absolute;" size="5" height="120px"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;<label for="attachment-list-left" data-bind="text: res.customLinksDialog.attachmentLabel"></label>
+                            </td>
+                            <td>
+                                <select id="attachment-list-left" class="attachmentListLeft" style="height: 28px;"></select>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </td>
+            <td>
+                <fieldset>
+                    <legend data-bind="text: res.customLinksDialog.rightProperties"></legend>
+                    <table style="border-collapse:separate; border-spacing:0px 10px;">
+                        <tr>
+                            <td style="width: 160px;">
+                                <input type="radio" name="rightLinkType" value="0" style="width: 13px;" checked/>
+                                <label data-bind="text: res.customLinksDialog.linkTypeCell"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;<label for="paper-cell-right" data-bind="text: res.customLinksDialog.paperLabel"></label>
+                            </td>
+                            <td style="width: 200px;">
+                                <input type="text" id="paper-text-right" name="paper-text-right" class="paperTextRight"/>
+                                <select id="paper-cell-right" class="paperCellRight" style="display: none;position: absolute;" size="5" height="120px"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;<label for="sheet-list-right" data-bind="text: res.customLinksDialog.sheetLabel"></label>
+                            </td>
+                            <td>
+                                <select id="sheet-list-right" class="sheetListRight" style="height: 28px;"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;<label for="cell-text-right" data-bind="text: res.customLinksDialog.cellLabel"></label>
+                            </td>
+                            <td>
+                                <input type="text" id="cell-text-right" class="cellTextRight"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio" name="rightLinkType" value="1" style="width: 13px;"/>
+                                <label data-bind="text: res.customLinksDialog.linkTypeFile"></label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;<label for="paper-list-right" data-bind="text: res.customLinksDialog.paperLabel"></label>
+                            </td>
+                            <td style="width: 200px;">
+                                <input type="text" id="paper-input-right" name="paper-input-right" class="paperInputRight"/>
+                                <select id="paper-list-right" class="paperListRight" style="display: none;position: absolute;" size="5" height="120px"></select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                &nbsp;&nbsp;&nbsp;<label for="attachment-list-right" data-bind="text: res.customLinksDialog.attachmentLabel"></label>
+                            </td>
+                            <td>
+                                <select id="attachment-list-right" class="attachmentListRight" style="height: 28px;"></select>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </td>
+        <tr>
+    </table>
+</div> -->
+<div class="note-feature-dialog">
+    <table style="border-collapse:separate; border-spacing:0px 10px;">
+        <tr>
+           <td style="width: 100px;vertical-align: bottom;">
+               <label for="cur-sheet" data-bind="text: res.noteFeatureDialog.curSheet"></label>
+           </td>
+           <td style="width: 300px;">
+               <input type="text" id="cur-sheet" name="cur-sheet" class="curSheet" autocomplete="off"/>
+           </td>
+        </tr>
+        <tr>
+           <td style="vertical-align: bottom;">
+               <label for="cur-position" data-bind="text: res.noteFeatureDialog.curPosition"></label>
+           </td>
+           <td style="width: 300px;">
+               <input type="text" id="cur-position" name="cur-sheet" class="curPosition" autocomplete="off"/>
+           </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: bottom;">
+                <label for="dg-file" data-bind="text: res.noteFeatureDialog.dgFile"></label>
+            </td>
+            <td style="width: 395px;">
+                <input type="text" id="dg-file-input" name="dg-file-input" class="dgFileInput" autocomplete="off"/>
+                <select id="dg-file-select" class="dgFileSelect" style="display: none;position: absolute;" size="5" height="120px"></select>
+                <button class="clearDg-button" type="button" style="width: 40px;">
+                    <span data-bind="text: res.noteFeatureDialog.refreshBtn"></span>
+                </button>
+                <button class="openDg-button" role="button" aria-disabled="false" type="button" style="width: 64px;">
+                    <span data-bind="text: res.noteFeatureDialog.openDg"></span>
+                </button>
+                <button class="refreshDg-button" role="button" aria-disabled="false" type="button" style="width: 64px;">
+                    <span data-bind="text: res.noteFeatureDialog.refreshDg"></span>
+                </button>
+            </td>
+         </tr>
+         <tr>
+            <td style="vertical-align: bottom;">
+                <label for="dg-sheet-select" data-bind="text: res.noteFeatureDialog.dgSheet"></label>
+            </td>
+            <td>
+                <select id="dg-sheet-select" class="dgSheetSelect" style="height: 23px;"></select>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: bottom;">
+                <label for="dg-range-start" data-bind="text: res.noteFeatureDialog.dgRangeStart"></label>
+            </td>
+            <td>
+                <input type="text" id="dg-range-start" name="dg-range-start" class="dgRangeStart" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: bottom;">
+                <label for="dg-range-end" data-bind="text: res.noteFeatureDialog.dgRangeEnd"></label>
+            </td>
+            <td>
+                <input type="text" id="dg-range-end" name="dg-range-end" class="dgRangeEnd" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="dg-fetch-dialog">
+    <table style="border-collapse:separate; border-spacing:0px 10px;">
+        <tr>
+           <td style="width: 100px;vertical-align: bottom;">
+               <label for="cur-sheet" data-bind="text: res.dgFetchDialog.curSheet"></label>
+           </td>
+           <td style="width: 300px;">
+               <input type="text" id="cur-sheet" name="cur-sheet" class="curSheet" autocomplete="off"/>
+           </td>
+        </tr>
+        <tr>
+           <td style="vertical-align: bottom;">
+               <label for="cur-position" data-bind="text: res.dgFetchDialog.curPosition"></label>
+           </td>
+           <td style="width: 300px;">
+               <input type="text" id="cur-position" name="cur-sheet" class="curPosition" autocomplete="off"/>
+           </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: bottom;">
+                <label for="dg-file" data-bind="text: res.dgFetchDialog.dgFile"></label>
+            </td>
+            <td style="width: 395px;">
+                <input type="text" id="dg-file-input" name="dg-file-input" class="dgFileInput" autocomplete="off"/>
+                <select id="dg-file-select" class="dgFileSelect" style="display: none;position: absolute;" size="5" height="120px"></select>
+                <button class="clearDg-button" type="button" style="width: 40px;">
+                    <span data-bind="text: res.dgFetchDialog.refreshBtn"></span>
+                </button>
+                <button class="openDg-button" role="button" aria-disabled="false" type="button" style="width: 64px;">
+                    <span data-bind="text: res.dgFetchDialog.openDg"></span>
+                </button>
+                <button class="refreshDg-button" role="button" aria-disabled="false" type="button" style="width: 64px;">
+                    <span data-bind="text: res.dgFetchDialog.refreshDg"></span>
+                </button>
+            </td>
+         </tr>
+         <tr>
+            <td style="vertical-align: bottom;">
+                <label for="dg-sheet-select" data-bind="text: res.dgFetchDialog.dgSheet"></label>
+            </td>
+            <td>
+                <select id="dg-sheet-select" class="dgSheetSelect" style="height: 23px;"></select>
+            </td>
+        </tr>
+        <tr>
+            <td style="vertical-align: bottom;">
+                <label for="dg-range-start" data-bind="text: res.dgFetchDialog.dgRange"></label>
+            </td>
+            <td>
+                <input type="text" id="dg-range" name="dg-range" class="dgRange" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- ZQF 自定义 END -->
+</body>
+</html>

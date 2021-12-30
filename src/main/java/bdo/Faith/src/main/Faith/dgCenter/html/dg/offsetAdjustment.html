@@ -1,0 +1,364 @@
+<style>
+	#sideRegin .content-wrapper {
+		background-color: aliceblue;
+		/*width: 70%;*/
+		height: 50%;
+		overflow: auto;
+		position: fixed;
+		z-index: 99999;
+		top: 20%;
+		left: 20%;
+	}
+	
+	#sideRegin label {
+		display: inline-block;
+		width: 100px;
+	}
+	
+	#sideRegin input {
+		padding: 0 8px;
+		box-sizing: border-box;
+		outline: none;
+	}
+	
+	#sideRegin input, #sideRegin select {
+		height: 32px;
+		line-height: 32px;
+		min-width: 217px;
+		border: 1px solid #F2F6FC;
+		border-radius: 6px;
+		background-color: #fff;
+	}
+	
+	#sideRegin input:focus, #sideRegin select:focus {
+		border-radius: 6px;
+		outline: 1px solid #409EFF;
+	}
+	
+	#sideRegin .display {
+		background-color: #cccccc;
+	}
+	
+	#sideRegin button {
+		height: 32px;
+		line-height: 32px;
+		min-width: 64px;
+		border-radius: 6px;
+		text-align: center;
+		border: none;
+		background-color: #409EFF;
+		color: #fff;
+		outline: none;
+		cursor: pointer;
+	}
+	
+	#sideRegin button:hover {
+		background-color: rgb(38, 129, 219);
+	}
+	
+	#sideRegin .btn-red {
+		background-color: #F56C6C !important;
+	}
+	
+	#sideRegin .btn-red:hover {
+		background-color: rgb(161, 12, 12) !important;
+	}
+	
+	#sideRegin .filter-item {
+		display: inline-block;
+		min-width: 400px;
+		line-height: 32px;
+		margin-bottom: 8px;
+	}
+	
+	.linner-layout {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	
+	#sideRegin .table {
+		width: 100%;
+	}
+	
+	#sideRegin .table thead tr {
+		background-color: #F2F6FC;
+		height: 40px;
+		line-height: 40px;
+	}
+	
+	#sideRegin .action-btn {
+		width: 16px;
+		height: 16px;
+		line-height: 16px;
+		text-align: center;
+		cursor: pointer;
+		background-color: #F2F6FC;
+		margin: auto;
+	}
+	
+	#sideRegin .action-btn:hover {
+		background-color: #EBEEF5;
+	}
+	
+	#sideRegin .action-btn:first-child {
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+	}
+	
+	#sideRegin .action-btn:last-child {
+		border-bottom-left-radius: 5px;
+		border-bottom-right-radius: 5px;
+	}
+	
+	#sideRegin .modal {
+		display: none;
+		position: fixed;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(43, 43, 43, 0.5);
+	}
+	
+	#sideRegin .modal-wrapper {
+		width: 100%;
+		height: 100%;
+		position: relative;
+	}
+	
+	#sideRegin .modal-content {
+		position: absolute;
+		width: 800px;
+		height: 600px;
+		background-color: #fff;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
+	
+	#sideRegin .modal-content .header {
+		padding: 0 16px;
+		width: 100%;
+		height: 56px;
+		line-height: 56px;
+		box-sizing: border-box;
+		overflow: hidden;
+		border-bottom: 1px solid #F2F6FC;
+	}
+	
+	#sideRegin .modal-content .body {
+		padding: 16px;
+		width: 100%;
+		height: 488px;
+		box-sizing: border-box;
+		overflow-y: auto;
+	}
+	
+	#sideRegin .modal-content .footer {
+		text-align: right;
+		padding: 0 16px;
+		width: 100%;
+		height: 56px;
+		line-height: 56px;
+		box-sizing: border-box;
+		overflow: hidden;
+		border-top: 1px solid #F2F6FC;
+	}
+	
+	#sideRegin .modal ul {
+		margin: 0;
+		padding: 0;
+		/*font-size: 14px;*/
+	}
+	
+	#sideRegin .modal li {
+		margin: 0;
+		padding: 0 24px;
+		list-style: none;
+	}
+	
+	#sideRegin .modal span, .modal input {
+		display: inline-block;
+		height: 32px !important;
+		line-height: 32px !important;
+		margin: 0;
+		box-sizing: border-box;
+		vertical-align: middle;
+	}
+	
+	#sideRegin #table_body input[name=debtorAmount] {
+		text-align: right;
+	}
+	
+	#sideRegin #table_body input[name=creditorAmount] {
+		text-align: right;
+	}
+	
+	#sideRegin .verify_number_div span {
+		width: 100px;
+	}
+
+</style>
+<div class="content-wrapper" id="offset_div" onmousedown="mouseDown()" onmouseup="mouseUp()">
+	
+	<div style="width: 100%;height: 35px;background: #70b9eb;">
+		<h5 class="block-title" style="float: left; margin-left: 20px; color: white; margin-top: 9px;">抵消分录</h5>
+		<button type="button" style="float: right;background:#70b9eb;;color: white;border: 0;" id="adjust_close">
+			<i class="si si-close"></i>
+		</button>
+	</div>
+	
+	<div style="width: 98%;
+	height: 42px;
+	position: relative;
+	top: 10px;
+	margin-left: 15px;
+	background: #5c90d2;
+    margin-bottom: 20px;" id="offset_title">
+		
+		<h5 class="block-title" style="color:white;position: relative; top: 10px; left: 10px;width: 49px;">分录项</h5>
+		<div style="color: white; width: 450px; margin-left: 83px; margin-top: -7px;">
+			<label for="offset_dgName2" id="offset_name" style="width: auto">客户名称:</label>
+			【<span id="offset_dgName2"></span>】
+		</div>
+		<div style="color: white; width: 130px; margin-left: 570px; margin-top: -22px;">
+			<label for="offset_dgYear2" style="width: auto">调整年份:</label>
+			【<span id="offset_dgYear2"></span>】
+		</div>
+		
+		<span style="float:right;position: relative; left: -10px; top: -31px;">
+				<button class="" type="button" id="save_adjust" style="border: 0; background: #5c90d2;">
+				    <i class="fa fa-save"></i><span>&nbsp;保存</span>
+			     </button>
+				  <button id="close_adjust" type="button" style="border: 0px; background: rgb(92, 144, 210); visibility: visible;">
+					<i class="fa fa-close" style="color: white;">&nbsp;关闭</i>
+				  </button>
+			</span>
+	</div>
+	<!-- filter block -->
+	<header>
+		<div class="filter-item">
+			<label><b style="color:red;">&lowast;&nbsp;</b>项目一</label>
+			<!--			onchange="updateFilterData('companyFirst', this.value)"-->
+			<select id="company_first" placeholder="请选择项目"></select>
+		</div>
+		<div class="filter-item">
+			<label><b style="color:red;">&lowast;&nbsp;</b>项目二</label>
+			<!--			onchange="updateFilterData('companySecond', this.value)"-->
+			<select id="company_second" placeholder="请选择项目"></select>
+		</div>
+		
+		<div class="verify_number_div">
+			<label>借方金额</label>
+			<span id="deb_span"></span>
+			<label>贷方金额</label>
+			<span id="cre_span"></span>
+			<label>差异金额</label>
+			<span id="diff_span"></span>
+		</div>
+		
+		<div class="filter-item">
+			<label><b style="color:red;">&lowast;&nbsp;</b>分录方式</label>
+			<select id="journalizing_way" placeholder="请选择分录方式"/>
+		</div>
+		<div class="filter-item">
+			<label><b style="color:red;">&lowast;&nbsp;</b>分录类别</label>
+			<!--			onchange="updateFilterData('journalizingType', this.value, true)"-->
+			<select id="journalizing_type" placeholder="请选择分录类别"></select>
+		</div>
+		<!--		<button id="save_adjust">保存</button>-->
+		<!--		<button class="btn-red" id="close_adjust">关闭</button>-->
+	
+	</header>
+	
+	<!-- table block -->
+	<br/>
+	<footer>
+		<!--		<div class="linner-layout">-->
+		<!--			<label style="flex-shrink: 0;">分录说明：</label>-->
+		<!--			<input type="text" id="remark" placeholder="输入分录说明" style="width: 100%;"/>-->
+		<!--		</div>-->
+	</footer>
+	<br/>
+	<main>
+		<table class="table">
+			<thead>
+			<tr>
+				<th style="width: 24px;"/>
+				<th>摘要</th>
+				<th>项目名称</th>
+				<th>科目名称</th>
+				<th>借方金额</th>
+				<th>贷方金额</th>
+			</tr>
+			</thead>
+			<tbody id="table_body"/>
+		</table>
+	</main>
+	<br/>
+	<hr size="1" style="border: 0.5px solid #EBEEF5"/>
+	<br/>
+	
+	<!-- extension block -->
+	
+	
+	<!-- modal block -->
+	<aside class="modal" id="template_modal">
+		<div class="modal-wrapper">
+			<div class="modal-content">
+				<section class="header">
+					<span>选择模板</span>
+					<span style="float: right;cursor: pointer;margin-top: 12px;">&Chi;</span>
+				</section>
+				<section class="body">
+					<ul id="sel_tree"/>
+				</section>
+				<section class="footer">
+					<button id="select_all_btn">全 选</button>
+					<button id="clean_all_btn">清 空</button>
+					<button class="btn-red" id="cancel_btn">取 消</button>
+					<button id="tree_submit">确 定</button>
+				</section>
+			</div>
+		</div>
+	</aside>
+	
+	<!-- submit test-->
+	<!--	<button onclick="submit()">Submit test</button>-->
+	
+	<!-- javascript -->
+</div>
+<script>
+	var startX;
+	var startY;
+	var moveSwitch = false;
+	var currentLeft;
+	var currentTop;
+	var loginTag = document.getElementById('offset_div');
+
+
+	document.onmousemove = function (e) {　　　//定义一个方法，用来捕捉鼠标的坐标位置
+		if (moveSwitch) {　　　　　　　　　//类似于if(true);　　　　　　　　　　　　　　　
+			var x = e.clientX;　　　　　　　　//e.clientX是一个触摸事件，即是鼠标点击时的X轴上的坐标
+			var y = e.clientY;　　　　　　　　//e.clientY是一个触摸事件，即是鼠标点击时的Y轴上的坐标
+			var distanceX = x - startX;　　　　//X轴上获得移动的实际距离
+			var distanceY = y - startY;　　　　　//Y轴上获得移动的实际距离
+			loginTag.style.left = (distanceX + currentLeft) + 'px';　　//currentLeft下面的方法会有解释，需要注意最后要添加PX单位，如果给left赋值会破坏文档流，不加单位就会无效
+			loginTag.style.top = (distanceY + currentTop) + 'px';　　//
+		}
+	};
+
+	function mouseDown(e) {　　　　//鼠标按下事件
+		e = e ? e : window.event;　　　　//因为兼容问题，event可能在隐藏参数中，如果隐藏参数没有event事件，则可以使用全局的事件window.event（大家记住写法就可以了）
+		moveSwitch = true;
+		startX = e.clientX;
+		startY = e.clientY;
+		currentLeft = loginTag.offsetLeft;　　//通过对象获取对象的坐标
+		currentTop = loginTag.offsetTop;
+	}
+
+	function mouseUp() {
+		moveSwitch = false;
+	}
+</script>

@@ -1,0 +1,17 @@
+/**
+ * @ClassName BdoWebService
+ * @Description BdoWebService
+ * @Author fan.gj
+ * @Date 22:31
+ * @Version 1.0
+ **/
+public class BdoWebService implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
+
+	public BdoWebService() {
+	}
+
+	public String receive(String param) {
+		return cn.com.bdo.base.webservice.service.BdoWebService.receive(param);
+	}
+}

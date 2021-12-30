@@ -1,0 +1,13 @@
+import cn.com.bdo.base.service.BdoSmsService;
+
+public class BdoPublicService {
+	
+	public boolean reciveSms( String phoneNumSrc, String phoneNumDest, String message){
+		return BdoSmsService.reciveSms(phoneNumSrc, phoneNumDest, message);
+	}
+	
+	public boolean updateState( String uid, String message, String state){
+		return BdoSmsService.updateState( uid,  message,  state);
+	}
+	
+}

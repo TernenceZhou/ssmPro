@@ -1,0 +1,69 @@
+<div id="oteNewSider" class="bdo-side">
+	<div class="bdo-side-block block block-themed">
+		<div class="block-header bg-info">
+			<ul class="block-options">
+				<li>
+					<button data-close="true" type="button">
+						<i class="si si-close"></i>
+					</button>
+				</li>
+			</ul>
+			<h3 class="block-title">{{title}}</h3>
+		</div>
+		<div class="block-content bdo-side-content">
+			<div data-toggle="slimscroll" data-always-visible="false"
+				 data-rail-visible="true" data-rail-color="#777"
+				 data-rail-opacity=".0" data-height="90%">
+				<div class="">
+					<form class="js-validation-material form-horizontal pull-t push-5-t POJO" id="oteNewForm">
+						<div class="form-group">
+							<div class="col-sm-12">
+								<button class="btn btn-sm btn-primary push-5-r" type="button"
+										data-ote-btn-click="onSaveOteClick"
+								>保存</button>
+							</div>
+						</div>
+						<div class="form-group has-success">
+							<div class="col-sm-12 col-xs-12">
+								<div class="form-material">
+									<select class="js-select2 form-control" id="realCustomerId"
+											data-ote-input-change="onSelectCustomer"
+											value="{{customerId}}"
+									>
+										<option value=""></option>
+										{{each customers cus ci}}
+											<option value="{{cus.value}}" >{{cus.label}}</option>
+										{{/each}}
+									</select>
+									<label>参考客户</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group has-success">
+							<div class="col-sm-12 col-xs-12">
+								<div class="form-material">
+									<select class="form-control" id="realProjectId"
+											value="{{projectId}}"
+									>
+										<option value=""></option>
+										{{each projects pros ci}}
+										<option value="{{pros.value}}">{{pros.label}}</option>
+										{{/each}}
+									</select>
+									<label>参考项目</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-1">
+								<button class="btn btn-sm btn-primary" type="button"
+										data-ote-btn-click="onSaveOteClick"
+								>保存</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  cn.com.bdo.common.config.RedisSessionConfig,\
+  cn.com.bdo.common.config.RedisCacheConfig, \
+  org.springframework.data.redis.connection.ReactiveRedisConnectionFactory, \
+  org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration

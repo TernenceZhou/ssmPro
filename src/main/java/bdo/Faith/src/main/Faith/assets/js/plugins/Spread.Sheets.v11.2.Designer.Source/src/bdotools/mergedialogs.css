@@ -1,0 +1,47 @@
+/* ZQF 自定义 START */
+.custom-label-dialog {
+    margin: 5px;
+    height: 200px;
+}
+
+.custom-label-dialog button {
+    margin-right: 5px;
+    width: 120px;
+    height: 25px;
+}
+
+.custom-label-dialog input {
+    width: 200px;
+}
+
+.custom-label-dialog input[readonly] {
+    background-color: rgb(235, 235, 228);
+}
+
+.custom-label-dialog td {
+    vertical-align: top;
+    height: 30px;
+}
+
+.mergenote-feature-dialog td {
+    vertical-align: top;
+}
+
+.mergenote-feature-dialog input {
+    width: 200px;
+}
+
+.mergenote-feature-dialog select {
+    border-color: darkgrey;
+    width: 200px;
+    height: 28px;
+}
+
+.mergenote-feature-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.mergenote-feature-dialog button:disabled {
+    background-color: rgb(235, 235, 228);
+}
+/* ZQF 自定义 END */

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN" monitorInterval="30">
+	<properties>
+		<!-- 日志备份目录 -->
+		<property name="BACKUP_HOME">backup</property>
+		<property name="SERVER_NAME">Faith</property>
+		<property name="OUTPUT_LOG_LEVEL">OFF</property><!-- 日志输出级别 -->
+		<property name="faith.host">${sys:web.server.host}</property>
+	</properties>
+	<appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<!--<PatternLayout charset="UTF-8" pattern="${faith.host} %d %-5p [id:%X{requestId}] [%c{1.}] %line %m%n" />-->
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5p [%c{1.}] %line %m%n" charset="UTF-8"/>
+			<Filters>
+				<ThresholdFilter level="${OUTPUT_LOG_LEVEL}" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+			</Filters>
+		</Console>
+	</appenders>
+
+	<Loggers>
+		<Logger name="org.springframework" level="${OUTPUT_LOG_LEVEL}" includeLocation="true"/>
+		<Logger name="org.springframework.jndi" level="${OUTPUT_LOG_LEVEL}" includeLocation="false"/>
+		<Root level="${OUTPUT_LOG_LEVEL}" includeLocation="true">
+			<AppenderRef ref="CONSOLE"/>
+		</Root>
+	</Loggers>
+</configuration>

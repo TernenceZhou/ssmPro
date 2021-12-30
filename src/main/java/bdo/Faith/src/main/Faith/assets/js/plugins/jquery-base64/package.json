@@ -1,0 +1,45 @@
+{
+  "_from": "jquery-base64",
+  "_id": "jquery-base64@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha1-FUkz7Ur/+UqeL9j4IdfIN8ICyxk=",
+  "_location": "/jquery-base64",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "jquery-base64",
+    "name": "jquery-base64",
+    "escapedName": "jquery-base64",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/jquery-base64/-/jquery-base64-1.0.0.tgz",
+  "_shasum": "154933ed4afff94a9e2fd8f821d7c837c202cb19",
+  "_spec": "jquery-base64",
+  "_where": "C:\\devworkspace\\workspace\\Faith\\Faith-build\\Faith-ui",
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/xuanhoa88/jquery-base64/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "jquery, base64",
+  "homepage": "https://github.com/xuanhoa88/jquery-base64#readme",
+  "license": "ISC",
+  "main": "jquery.base64.js",
+  "name": "jquery-base64",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xuanhoa88/jquery-base64.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.0"
+}

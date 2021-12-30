@@ -1,0 +1,55 @@
+<div data-toggle="slimscroll"
+	 data-always-visible="true"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%"
+	 data-size="10px">
+	<div class="block block-bordered " id="contentBlock" style="position: relative;margin-bottom: 0px;">
+		<div class="block-header">
+			<div class="block-options block-options-left">
+				<button id="saveExcelBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="保存">
+					<i class="fa fa-save">&nbsp;保存</i>
+				</button>
+				<button id="saveExcelStorageBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="临时保存">
+					<i class="fa fa-save">&nbsp;临时保存</i>
+				</button>
+				<button id="exportExcelBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="导出">
+					<i class="si si-cloud-download">&nbsp;导出</i>
+				</button>
+				<button id="uploadExcelBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="导入">
+					<i class="si si-cloud-upload">&nbsp;导入</i>
+				</button>
+				<button id="coverBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="获取最新版本">
+					<i class="fa fa-refresh">&nbsp;获取最新版本</i>
+				</button>
+			</div>
+			<h3 class="block-title"><span id="fileFullPath"></span></h3>
+		</div>
+		<div id="spreadContainerRoot">
+			<div class="" id="spreadContainer"></div>
+		</div>
+	</div>
+	<!-- uploadAttachFormModal begin -->
+	<div class="modal fade" id="uploadExamTplPaperFormModal" tabindex="-1" role="dialog"
+		 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog" style="margin-top: 150px;">
+			<div class="modal-content">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" data-dismiss="modal">
+									<i class="si si-close"></i>
+								</button>
+							</li>
+						</ul>
+						<h3 class="block-title">上传考试试卷模板</h3>
+					</div>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="uploadExamTplPaperForm"></form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- uploadAttachFormModal end -->
+</div>

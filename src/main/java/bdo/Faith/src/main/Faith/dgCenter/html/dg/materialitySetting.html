@@ -1,0 +1,634 @@
+<div id="materialitySettingPage">
+	<style>
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none !important;
+		}
+
+		input[type="number"] {
+			-moz-appearance: textfield;
+		}
+
+		#materialitySettingPage {
+			height: inherit;
+		}
+	</style>
+	<div data-toggle="slimscroll" data-always-visible="false"
+		 data-rail-visible="true" data-rail-color="#777"
+		 data-rail-opacity=".0" data-height="100%">
+		<div class="" id="contentBlock">
+			<!--<div class="block-heade">
+				<ul class="nav nav-tabs" data-toggle="tabs" id="tab_materset">
+					<li class="active"><a>计划阶段重要性水平</a></li>
+				</ul>
+			</div>-->
+			<div class="block-header bg-gray-lighter">
+				<div class="block-options-simple">
+					<button class="btn btn-primary btn-sm" id="exportLevel" type="button"
+							style="float: right;position: relative;"><i class="si si-cloud-download"> 导出</i></button>
+				</div>
+				<div class="block-options-simple">
+					<button class="btn btn-primary btn-sm" id="mergeMateriality" type="button"
+							style="float: right;position: relative;"> 集团重要性水平分配</button>
+				</div>
+				<h3 class="block-title">计划阶段重要性水平</h3>
+			</div>
+			<div class="block-content" id="tab_materset_content">
+				<form id="mater_form" class="form-horizontal push-10-t">
+					<div class="form-group">
+						<div class="col-sm-2 has-success">
+							<div class="form-material">
+								<input type="text" class="form-control" name="mater_index" disabled>
+								<label>索引号</label>
+							</div>
+						</div>
+						<div class="col-sm-2 has-success">
+							<div class="form-material">
+								<input type="text" class="form-control" name="mater_editer" disabled>
+								<label>编制人</label>
+							</div>
+						</div>
+						<div class="col-sm-2 has-success">
+							<div class="form-material">
+								<input type="text" class="form-control date-picker" name="mater_editdate" disabled
+									   disabled>
+								<label>编制日期</label>
+							</div>
+						</div>
+					</div>
+					<h3 class="block-title mathtitle" style="margin-bottom: 20px;">重要性水平计算</h3>
+					<div class="form-group">
+						<div class="col-sm-1">
+							<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="mater_use" data-result="1"><span></span>
+							</label>
+						</div>
+						<div class="col-sm-2 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="text" style="display: inline-block;" class="form-control" id="maternum1" name="mater_number"
+									   data-result="1" disabled>
+							    <div id="different_reason_1" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label id="mater_label_1">主营业务收入</label>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<span class="project_import_service">以收入为主要考量标准</span>
+						</div>
+						<div class="col-sm-2">
+							<span class="project_scale">主营业务收入×0.5%～3%</span>
+						</div>
+						<div class="col-sm-1 form-material" id="add" style="transform: translateX(-30px);">
+
+						</div>
+						<div class="col-sm-1 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="number" style="padding-top: 20px;display: inline-block;" class="form-control" name="mater_rate"
+									   data-result="1" min="0.5" max="2" disabled>
+								<div class="different_reason" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label>选择(%)</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" name="mater_ratenum" data-result="1" disabled>
+								<label>建议的重要性水平</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-1">
+							<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="mater_use" data-result="2"><span></span>
+							</label>
+						</div>
+						<div class="col-sm-2 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="text" style="display: inline-block;" class="form-control" id="maternum2" name="mater_number"
+									   data-result="2" disabled>
+								<div id="different_reason_2" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label id="mater_label_2">税前利润</label>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<span>以利润为主要考量标准</span>
+						</div>
+						<div class="col-sm-2">
+							<span>税前利润×3% ～ 10%</span>
+						</div>
+						<div class="col-sm-1 form-material" id="add" style="transform: translateX(-30px);">
+
+						</div>
+						<div class="col-sm-1 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="number" style="padding-top: 20px;display: inline-block;" class="form-control valid"
+									   name="mater_rate" data-result="2" min="3" max="10" disabled>
+								<div class="different_reason" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label>选择(%)</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" name="mater_ratenum" data-result="2" disabled>
+								<label>建议的重要性水平</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-1">
+							<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="mater_use" data-result="3"><span></span>
+							</label>
+						</div>
+						<div class="col-sm-2 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="text" style="display: inline-block;" class="form-control" id="maternum3" name="mater_number"
+									   data-result="3" disabled>
+								<div id="different_reason_3" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label id="mater_label_3">总资产</label>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<span>以资产为主要考量标准/投资公司</span>
+						</div>
+						<div class="col-sm-2">
+							<span>总资产×1%～2%</span>
+						</div>
+						<div class="col-sm-1 form-material" id="add" style="transform: translateX(-30px);">
+
+						</div>
+						<div class="col-sm-1 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="number" style="padding-top: 20px;display: inline-block;" class="form-control" name="mater_rate"
+									   data-result="3" min="1" max="2" disabled>
+								<div class="different_reason" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label>选择(%)</label>
+							</div>
+							
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" name="mater_ratenum" data-result="3" disabled>
+								<label>建议的重要性水平</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-1">
+							<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="mater_use" data-result="4"><span></span>
+							</label>
+						</div>
+						<div class="col-sm-2 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="text" style="display: inline-block;" class="form-control" id="maternum4" name="mater_number"
+									   data-result="4" disabled>
+								<div id="different_reason_4" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label id="mater_label_4">收入</label>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<span>非盈利组织</span>
+						</div>
+						<div class="col-sm-2">
+							<span>总收入×0.5%～3%</span>
+						</div>
+						<div class="col-sm-1 form-material" id="add" style="transform: translateX(-30px);">
+
+						</div>
+						<div class="col-sm-1 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="number" style="padding-top: 20px;display: inline-block;" class="form-control" name="mater_rate"
+									   data-result="4" min="0.5" max="3" disabled>
+								<div class="different_reason" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label>选择(%)</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" name="mater_ratenum" data-result="4" disabled>
+								<label>建议的重要性水平</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group" >
+						<div class="col-sm-1">
+							<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="mater_use" data-result="5"><span></span>
+							</label>
+						</div>
+						<div class="col-sm-2 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="text" style="display: inline-block;" class="form-control" id="maternum5" name="mater_number"
+									   data-result="5" disabled>
+								<div id="different_reason_5" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label id="mater_label_5">净资产</label>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<span>以资产为主要考量标准/投资公司</span>
+						</div>
+						<div class="col-sm-2">
+							<span>净资产×2%～5%</span>
+						</div>
+						<div class="col-sm-1 form-material" id="add" style="transform: translateX(-30px);">
+
+						</div>
+						<div class="col-sm-1 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="number" style="padding-top: 20px;display: inline-block;" class="form-control" name="mater_rate"
+									   data-result="5" min="2" max="5" disabled>
+								<div class="different_reason" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label>选择(%)</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" name="mater_ratenum" data-result="5" disabled>
+								<label>建议的重要性水平</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-1">
+							<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="mater_use" data-result="6"><span></span>
+							</label>
+						</div>
+						<div class="col-sm-2 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="text" style="display: inline-block;" class="form-control" id="maternum6" name="mater_number"
+									   data-result="6" disabled>
+								<div id="different_reason_6" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label id="mater_label_6">费用</label>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<span>非盈利组织</span>
+						</div>
+						<div class="col-sm-2">
+							<span>总支出×0.5%～3%</span>
+						</div>
+						<div class="col-sm-1 form-material" id="add" style="transform: translateX(-30px);">
+
+						</div>
+						<div class="col-sm-1 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="number" style="padding-top: 20px;display: inline-block;" class="form-control" name="mater_rate"
+									   data-result="6" min="0.5" max="3" disabled>
+								<div class="different_reason" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label>选择(%)</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" name="mater_ratenum" data-result="6" disabled>
+								<label>建议的重要性水平</label>
+							</div>
+						</div>
+					</div>
+					<h3 class="block-title" style="color: red;margin-bottom: 20px;">选择的重要性水平*</h3>
+					<div class="form-group">
+						<div class="col-sm-3">
+							<div class="form-material">
+								<input type="text" class="form-control" style="color:#f3b760" id="mater_surenum">
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<span>实际执行的重要性</span>
+						</div>
+						<div class="col-sm-2">
+							<span>BDO标准 50%～90%</span>
+						</div>
+						<div class="col-sm-1 form-material" id="add" style="transform: translateX(-30px);">
+
+						</div>
+						<div class="col-sm-1 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="number" style="padding-top: 20px;display: inline-block;" class="form-control"
+									   name="mater_surerate" min="50" max="90" data-result="1">
+								<div class="different_reason" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label>选择(%)</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" style="color:#f3b760" name="mater_sureratenum"
+									   data-result="1" disabled>
+								<label style="color: red;">执行重要性水平*</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-3 col-sm-offset-3">
+							<span>明显微小错报</span>
+						</div>
+						<div class="col-sm-2">
+							<span>BDO标准 1%～5%</span>
+						</div>
+						<div class="col-sm-1 form-material" id="add" style="transform: translateX(-30px);">
+
+						</div>
+						<div class="col-sm-1 has-success">
+							<div class="form-material" style="white-space:nowrap;">
+								<input type="number" style="padding-top: 20px;display: inline-block;" class="form-control"
+									   name="mater_surerate" min="1" max="10" data-result="2">
+								<div class="different_reason" style="display: inline-block;transform: translateX(-20px);"></div>
+								<label>选择(%)</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" style="color:#f3b760" name="mater_sureratenum"
+									   data-result="2" disabled>
+								<label style="color: red;">建议的重要性水平*</label>
+							</div>
+						</div>
+					</div>
+					<div id="mergerReport">
+					<h3 class="block-title" style="color: red;margin-bottom: 20px;">集团分配的重要性水平*</h3>
+					<div class="form-group">
+						<div class="col-sm-3">
+							<span>实际执行的重要性</span>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" style="color:#f3b760" id="mergeSettingTypeValue1"
+									   data-result="1" disabled>
+								<label style="color: red;">执行重要性水平*</label>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<span>明显微小错报</span>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" style="color:#f3b760" id="mergeSettingTypeValue2"
+									   data-result="2" disabled>
+								<label style="color: red;">建议的重要性水平*</label>
+							</div>
+						</div>
+					</div>
+
+					<h3 class="block-title" style="color: red;margin-bottom: 20px;">最终实施的重要性水平*</h3>
+					<div class="form-group">
+						<div class="col-sm-3">
+							<span>实际执行的重要性</span>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" style="color:#f3b760" id="finalSettingTypeValue1">
+								<label style="color: red;">执行重要性水平*</label>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<span>明显微小错报</span>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input type="text" class="form-control" style="color:#f3b760" id="finalSettingTypeValue2">
+								<label style="color: red;">建议的重要性水平*</label>
+							</div>
+						</div>
+					</div>
+					</div>
+				</form>
+			</div>
+			<div class="block-header bg-gray-lighter">
+				<!--<div class="block-options-simple">
+					<button class="btn btn-primary btn-sm" id="openMaterModal" type="button"><i class="si si-settings">&nbsp;设置</i>
+					</button>
+				</div>-->
+				<h3 class="block-title">审计阶段重要性水平</h3>
+			</div>
+			<!--<div class="block-heade">
+				<ul class="nav nav-tabs"  data-toggle="tabs" id="tab_materset1">
+					<li class="active">
+						<a >审计阶段重要性水平</a>
+					</li>
+					<li class="pull-right">
+						<ul class="block-options push-10-t push-10-r">
+							<li>
+								<button class="btn btn-primary btn-sm" id="openMaterModal" type="button" ><i class="si si-settings">&nbsp;设置</i></button>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>-->
+			<div class="block-content" id="tab_materset_content1">
+				<from id="mater_form2" class="form-horizontal push-10-t">
+					<div class="form-group">
+						<div class="col-sm-3 has-success">
+							<div class="form-material">
+								<!-- value="1000000" -->
+								<input type="text" style="width: 180px;" class="form-control" id="mater_profit"
+									   disabled>
+								<label id="mater_profit_label">主营业务收入</label>
+							</div>
+						</div>
+						<div class="col-sm-3 has-success">
+							<div class="form-material">
+								<!-- value="1%" -->
+								<input type="number" style="width: 100px;" class="form-control" id="mater_procent"
+									   disabled>
+								<label>选择百分比(%)</label>
+							</div>
+						</div>
+						<div class="col-sm-3 has-success">
+							<div class="form-material">
+								<!-- value="100000" -->
+								<input type="text" style="width: 180px;" class="form-control" id="mater_num" disabled>
+								<label>重要性水平</label>
+							</div>
+						</div>
+						<div class="col-sm-3 has-success">
+							<div class="form-material">
+								<!-- value="低于实际重要性水平！"  -->
+								<input type="text" style="width: 200px;" class="form-control" id="mater_result"
+									   disabled>
+								<label>结果</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-6 has-success">
+							<div class="form-material">
+								<textarea class="form-control" style="height: 120px;" name="mater_reason" maxlength="255"></textarea>
+								<label style="color: red;">选择理由*</label>
+							</div>
+						</div>
+						<div class="col-sm-4" style="float:right;margin-top: 9%;">
+							<button class="btn btn-md btn-primary" id="mater_set" type="submit"><i
+								class="fa fa-save"></i>&nbsp;保存
+							</button>
+						</div>
+					</div>
+				</from>
+			</div>
+			<div class="block-header">
+				<ul style="display: none;" class="nav nav-tabs" data-toggle="tabs" id="tab_materset2">
+					<li class="active" style="float:left;"><a
+						style="background-color: #337ab7;color: white;border-radius: 0;font-weight: 600;height: 46px;padding-top: 13px;width: 158px;">文件附件</a>
+					</li>
+					<li style="float: right;margin-top: 13px;margin-left: 10px;margin-right: 10px;">
+						<button id="refreshTableBtn" type="button"
+								style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+							<i class="fa fa-refresh"> 刷新</i>
+						</button>
+					</li>
+					<li style="float: right;margin-top: 13px;">
+						<button id="upload" type="button" style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+							<i class="fa fa-upload"> 上传文件</i>
+						</button>
+					</li>
+				</ul>
+			</div>
+			<div style="display: none;" class="block-content" id="tab_materset_content2">
+				<div class="row">
+					<table id="fileTable" class="table table-bordered table-striped table-hover"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="materuploadTplFormModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 50px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">上传文件</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="materuploadFileForm"></form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="materialityModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 20px;">
+		<div class="modal-content" style="width: 800px;">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<i class="si si-close" style="color: black;cursor: pointer;"></i>
+					</button>
+					<h4 class="block-title">重要性水平设置</h4>
+				</div>
+			</div>
+			<div class="modal-body" style="height:505px;">
+				<div class="block" style="height: 90%;">
+					<div class="block-content block-content-full" style="height:90%;padding: 0px;">
+						<div class="row">
+							<div class="form-group"></div>
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="form-material">
+										<label for="mater_type">类型</label>
+										<select class="js-select2 form-control" id="mater_type">
+											<option value="1" selected>TB</option>
+											<option value="2">报表</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="form-material">
+										<label>科目</label>
+										<input class="form-control" type="text" id="mater_subject_text_1"/>
+										<select class="js-select2 form-control" id="mater_subject_1"
+												style="display: none;position: absolute;" size="14">
+										</select>
+										<input class="form-control" type="text" id="mater_subject_text_2"
+											   style="display: none;"/>
+										<select class="js-select2 form-control" id="mater_subject_2"
+												style="display: none;position: absolute;" size="14">
+										</select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="padding-top:15px;">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="form-material">
+										<label for="mater_subjectId">科目编号</label>
+										<input class="form-control" type="text" id="mater_subjectId" disabled>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="padding-top:15px;">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="form-material">
+										<label for="mater_subjectName">科目名称</label>
+										<input class="form-control" type="text" id="mater_subjectName" disabled>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="padding-top:15px;">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="form-material">
+										<label for="mater_auditAmount">审定数</label>
+										<input class="form-control" type="text" id="mater_auditAmount" disabled>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<div class="col-sm-6">
+									<div class="form-material">
+										<button type="button" class="btn btn-default" id="undoItemBtn">撤销</button>
+										<button type="button" class="btn btn-primary" id="mater_profit">添加</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="padding-top:10px;">
+							<div class="form-material" id="itemGroup">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+				<button type="button" class="btn btn-primary" id="setMaterBtn">设置</button>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+
+<div class="">
+	<div id="mergeMaterialitySider" class="bdo-side" tabindex="-0">
+		<div class="bdo-side-block block block-themed">
+			<div class="block-header bg-info">
+				<ul class="block-options">
+					<li>
+						<button data-close="true" type="button">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title">集团重要性水平分配</h3>
+			</div>
+			<div class="block-content bdo-side-content">
+				<div id="mergeMaterialityRegion"></div>
+			</div>
+		</div>
+	</div>
+</div>

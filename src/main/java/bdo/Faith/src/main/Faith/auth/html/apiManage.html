@@ -1,0 +1,76 @@
+<div id="apiManagePage">
+	
+	<div class="col-xs-3 spread-content-dir">
+		<div class="row">
+			<!-- Collapsed Tree -->
+			<div id="api-manage-content" class="block block-bordered"
+				 style="margin-bottom: 0px;overflow-x: scroll;overflow-y: hidden;">
+				<div class="block-header">
+					<!--<%&#45;&#45;<div style="float:right">
+					<button id="delSubjectTreeBtn" style="border: 0px;background-color: rgba(92, 144, 210, 0);color: red; display: none" ><i class="fa fa-trash" title="删除节点"></i></button>
+				</div>
+					<div style="float:right">
+						<button id="updSubjectTreeBtn" style="border: 0px;background-color: rgba(92, 144, 210, 0);color: grey;" ><i class="fa fa-refresh" title="更新节点"></i></button>
+					</div>&#45;&#45;%>-->
+					<h3 class="block-title  dg-mulu">接口</h3>
+				</div>
+				<div class="block-content dircontext pull-l api-manage-tree-block" style="padding-left: 0px;">
+					<!-- Tree View Container -->
+					<div data-toggle="slimscroll" data-always-visible="false"
+						 data-rail-visible="true" data-rail-color="#777"
+						 data-rail-opacity=".0" data-height="100%" data-rail-right="-10">
+						<div class="api-manage-tree-wrap">
+							<div id="api-manage-tree" class="js-tree-collapsed"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- END Collapsed Tree -->
+		</div>
+	</div>
+	<div class="col-xs-9 spread-content-file">
+		<div class="row">
+			<div class="block block-bordered " id="api-manage-content-block" style="position: relative;margin-bottom: 0px;">
+				<div class="block-header">
+					<div class="block-options block-options-left">
+						<button id="api-manage-toggle-tree-btn" type="button" class="btn btn-xs btn-primary push-5-r">
+							<i class="toggle-dir-icon si si-arrow-left"></i>
+						</button>
+					</div>
+					<ul class="block-options">
+						<li>
+							<button id="api-manage-api-edit-btn" type="button" class=" push-5-r">
+								<i class="fa fa-edit"></i>
+							</button>
+						</li>
+						<li>
+							<button id="api-manage-fullscreen-btn" type="button" class=" push-5-r">
+								<i class="si si-size-fullscreen"></i>
+							</button>
+						</li>
+					</ul>
+					<div style="float: left;margin-left: 15px;width: auto; text-align: center; height: 22px;position: relative; top: -3px;">
+						<span id="api-manage-head-title"></span>
+						<span id="api-manage-title" style="display: none"></span>
+					</div>
+				</div>
+				<div id="api-manage-right-panal"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+	#apiManagePage .js-tree-collapsed .list-group .list-group-item {
+		white-space: nowrap;
+		width: auto;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	#apiManagePage .js-tree-collapsed,
+	#apiManagePage .js-tree-collapsed .list-group {
+		width: auto;
+	}
+	.api-manage-tree-wrap {
+		overflow-x: auto;
+	}
+</style>

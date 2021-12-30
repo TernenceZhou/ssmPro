@@ -1,0 +1,227 @@
+<style>
+	.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+	.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+	.autocomplete-selected { background: #5dbef0; }
+	.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+</style>
+
+<!-- 父项目列表 -->
+<div class="modal fade" id="modalParentProjectList" tabindex="-1" role="dialog" aria-hidden="true"
+	 data-backdrop="static" data-keyboard="false" style="top:-20px;">
+	<div class="modal-dialog modal-md" style="width:800px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="btnRefreshParentProjectTable" title="刷新">
+								<i class="fa fa-refresh"></i>
+							</button>
+						</li>
+						<li>
+							<button type="button" id="btnAddParentProject" title="添加父项目">
+								<i class="fa fa-plus"></i>
+							</button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal" title="关闭">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">父项目列表</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div class="row">
+					<div class="block-content">
+						<table id="parentProjectTable" class="table table-bordered table-striped table-hover table-condensed"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 选择父项目对话框 -->
+<div class="modal fade" id="selectParentProjectModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog sm" style="margin-top: 180px;">
+		<div class="modal-content" style="height:250px">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择父项目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height:450px;padding: 5px 20px 0px 20px;">
+				<div class="block-content">
+					<div class="form-group"></div>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<div class="form-material ">
+								<input class="js-merge-projects form-control" id="selParentProject" style="width: 100%;" >
+								<label for="selParentProject">父项目</label>
+							</div>
+							<br>
+							<input type="checkbox" id="chkIsUnitChildProject" > <label for="chkIsUnitChildProject">当前项目属于合并项目母公司的单体</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-14 block-options-simple">
+							<br>
+							<button class="btn btn-primary" type="submit" id="btnSelectParentProjectOk">
+								<i class="fa fa-check"></i> 确定
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<!-- 子项目列表 -->
+<div class="modal fade" id="modalChildProjectList" tabindex="-1" role="dialog" aria-hidden="true"
+	 data-backdrop="static" data-keyboard="false" style="top:-20px;">
+	<div class="modal-dialog modal-md" style="width:1000px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="btnRefreshMergeProjectTable" title="刷新">
+								<i class="fa fa-refresh"></i>
+							</button>
+						</li>
+						<li>
+							<div class="dropdown">
+								<!--<button type="button" id="btnAddNewProject" title="添加子项目">
+									<i class="fa fa-plus"></i>
+								</button>-->
+								<button  class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" style="background:none;margin:0 -6px 3px -5px;" aria-expanded="true" title="添加子项目">
+									<i class="fa fa-plus" style="color: white;"></i>
+								</button>
+								<ul class="dropdown-menu " style="min-width: 100px;font-size: 10px;">
+									<li><a href="#" id="btn_user_subject">项目管理系统</a></li>
+									<li><a href="#" id="btnAddNewProject">仅用于合并（无底稿）</a></li>
+								</ul>
+							</div>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal" title="关闭">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">子项目列表</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div class="row">
+					<div class="block-content">
+						<table id="mergeProjectTable" class="table table-bordered table-striped table-hover table-condensed"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 选择父项目对话框 -->
+<div class="modal fade" id="selectNewProjectModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog sm" style="margin-top: 180px;">
+		<div class="modal-content" style="height:250px">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择子项目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height:450px;padding: 5px 20px 0px 20px;">
+				<div class="block-content">
+					<div class="form-group"></div>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<div class="form-material ">
+								<input class="js-merge-newProjects form-control" id="selNewProject" style="width: 100%;">
+								<label for="selNewProject">子项目</label>
+							</div>
+							<br>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-14 block-options-simple">
+							<br>
+							<button class="btn btn-primary" type="submit" id="btnSelectNewProjectOk">
+								<i class="fa fa-check"></i> 确定
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 新建子项目对话框 -->
+<div class="modal fade" id="createProjectModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog sm" style="margin-top: 180px;">
+		<div class="modal-content" style="height:260px">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">新建项目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height:450px;padding: 5px 20px 0px 20px;">
+				<div class="block-content">
+					<div class="form-group"></div>
+					<div class="form-group">
+						<div class="col-sm-12">
+							<div class="form-material ">
+								<input class="js-merge-customers form-control" id="mergeCustomer" style="width: 100%;" disabled="true">
+								<label for="mergeCustomer">客户</label>
+							</div>
+						</div>
+						<div class="col-sm-12">
+							<div class="form-material ">
+								<input class="form-control" id="mergeProjectName" maxlength="200" style="width: 100%;">
+								<label for="mergeProjectName">项目名称</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-14 block-options-simple">
+							<br>
+							<button class="btn btn-primary" type="submit" id="btnNewProjectOk">
+								<i class="fa fa-check"></i> 确定
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

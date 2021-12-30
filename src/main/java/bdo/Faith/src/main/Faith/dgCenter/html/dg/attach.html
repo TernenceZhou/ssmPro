@@ -1,0 +1,195 @@
+<div class="block block-themed">
+	<div class="block-header bg-primary">
+		<ul class="block-options">
+			<li>
+				<button id="btn_search" type="button">
+					<i class="fa fa-search" style="color: white;">&nbsp;查询</i>
+				</button>
+			</li>
+			<li>
+				<button id="btn_clear" type="button">
+					<i class="fa fa-repeat" style="color: white;">&nbsp;清空</i>
+				</button>
+			</li>
+			<li>
+				<button id="toggleBtn" type="button" data-toggle="block-option" data-action="content_toggle"><i
+					class="si si-arrow-up" style="color: white;"></i>
+				</button>
+			</li>
+		</ul>
+		<h3 class="block-title">查询条件设定</h3>
+	</div>
+	<div id="search-condition" class="block-search">
+		<div class="row">
+			<div class="form-group"></div>
+			<div class="form-group has-info">
+				<div class="col-sm-2">
+					<div class="form-material">
+						<input class="form-control" type="text" id="detail_tbSubject">
+						<label for="detail_tbSubject">TB科目</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group has-info">
+				<div class="col-sm-2">
+					<div class="form-material">
+						<input class="form-control" type="text" id="detail_fileIndexId">
+						<label for="detail_fileIndexId">索引号</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group has-info">
+				<div class="col-sm-2">
+					<div class="form-material">
+						<input class="form-control" type="text" id="detail_dgName">
+						<label for="detail_dgName">底稿名称</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group has-info">
+				<div class="col-sm-2">
+					<div class="form-material">
+						<input class="form-control" type="text" id="detail_fileName">
+						<label for="detail_fileName">文件名称</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group has-info">
+				<div class="col-sm-2">
+					<div class="form-material">
+						<select class="form-control" id="detail_isReferred" style="width: 100%;">
+							<option value="" selected="selected"></option>
+							<option value="1">是</option>
+							<option value="0">否</option>
+						</select>
+						<label for="detail_isReferred">是否被关联</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="block block-themed">
+	<div class="block-header bg-primary">
+		<ul class="block-options">
+			<li>
+				<button type="button" id="batchUploadAttachBtn"	>
+					<i class="fa fa-upload" title="批量上传底稿附件"></i>
+				</button>
+			</li>
+			<li>
+				<button class="bdoexport-btn" type="button"
+						data-bdoexport-table-id="attachTable"
+						data-bdoexport-title="底稿附件一览"
+				>
+					<i class="si si-cloud-download" title="导出"></i>
+				</button>
+
+			</li>
+			<li>
+				<button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i
+					class="si si-size-fullscreen" style="color: white;"></i>
+				</button>
+			</li>
+		</ul>
+		<h3 class="block-title">底稿附件一览</h3>
+	</div>
+	<div class="block-content">
+		<table id="attachTable" class="table table-bordered table-striped table-hover"></table>
+	</div>
+</div>
+<input type="text" id="referredDgId" style="display: none;">
+<input type="text" id="attachAutoId" style="display: none;">
+<div class="modal fade" id="dgModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 50px;">
+		<div class="modal-content" style="width: 800px;">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="block-title">被关联底稿一览</h4>
+				</div>
+			</div>
+			<div class="modal-body" style="height:505px;">
+				<div class="block" style="height: 90%;">
+					<div class="block-content block-content-full" style="height:90%;padding: 0px;">
+						<div class="tab-content">
+							<div class="block-header bg-primary">
+								<label> 底稿一览</label>
+							</div>
+							<div class="block-content">
+								<table id="dgTable" class="table table-bordered table-striped table-hover"></table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 对话框：批量上传底稿附件 -->
+<div class="modal fade" id="batchUploadWPAttachFormModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-lg" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">批量上传底稿附件</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="batchUploadWPAttachForm"></form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 对话框：上传文件一览和底稿匹配 -->
+<style>
+	.js-match-dg-attach{
+		width: 100%;
+	}
+	.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+	.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+	.autocomplete-selected { background: #5dbef0; }
+	.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+</style>
+
+<div class="modal fade" id="tmpDgAttachModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-lg" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" class="btn btn-primary" id="dgAttachMatchAllBtn" title="确定">
+								<i class="fa fa-send"></i>
+							</button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">底稿附件匹配</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height:450px;padding: 5px 20px 0px 20px;">
+				<table id="batchWPAttachTable" class="table table-striped table-hover"></table>
+			</div>
+		</div>
+	</div>
+</div>

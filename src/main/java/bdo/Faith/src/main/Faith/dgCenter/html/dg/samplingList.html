@@ -1,0 +1,2391 @@
+<style>
+
+	.tab_temp > .block > .nav-tabs > li.active > a,
+	.tab_temp > .block > .nav-tabs > li.active > a:hover,
+	.tab_temp > .block > .nav-tabs > li.active > a:focus {
+		color: black;
+		background-color: white;
+	}
+</style>
+<div data-toggle="slimscroll" data-always-visible="false"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%" id="samplingIsShow">
+	<div id="dgSamplingPage">
+		<div class="block" style="height: 100%;max-height: 100%;min-height: 100%;margin-bottom: -40px;">
+			<div class="block-heade">
+				<ul id="navTabSampling" class="nav nav-tabs " data-toggle="tabs">
+					<li class="active"><a href="#dgSamplingInfoTab">抽凭结果</a></li>
+					<li class=""><a href="#dgSamplingPageTab">新增抽凭</a></li>
+				</ul>
+			</div>
+			<div class="block-content block-content-full" style="height: 93%;max-height: 93%;min-height: 93%;">
+				<div id="navTabSampling_content" class="tab-content">
+					<div class="tab-pane active" id="dgSamplingInfoTab">
+						<div class="block block-themed">
+							<div class="block-header bg-primary">
+								<ul class="block-options">
+									<li>
+										<button id="btn_dgSamplingInfo_search" type="button">
+											<i class="fa fa-search" style="color: white;">&nbsp;查询</i>
+										</button>
+									</li>
+									<li>
+										<button type="button" data-toggle="block-option"
+												data-action="content_toggle"></button>
+									</li>
+								</ul>
+								<h3 class="block-title">查询条件设定</h3>
+							</div>
+							<div class="block-search">
+								<div class="row">
+									<div class="form-group"></div>
+									<div class="form-group has-info">
+										<div class="col-sm-4">
+											<div id="dgSamplingInfo_dateGroup" class="form-material input-group">
+												<select class="form-control" id="dgSamplingInfo_dateType"
+														style="min-width: 40px;">
+													<option value='0'>日</option>
+													<option value='1'>月</option>
+													<option value='2'>年</option>
+												</select>
+												<span class="input-group-addon"> </span>
+												<input id="dgSamplingInfo_startDate" class="form-control date-picker" size=10
+													   type="text" value="" autocomplete="off">
+												<span id="dgSamplingInfo_dateAddon" class="input-group-addon">-</span>
+												<input id="dgSamplingInfo_endDate" class="form-control date-picker" size=10
+													   type="text" value="" autocomplete="off">
+												<label for="dgSamplingInfo_dateType">凭证日期</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info">
+										<div class="col-sm-1">
+											<div class="form-material">
+												<input class="form-control" type="text" id="dgSamplingInfo_voucherId">
+												<label for="dgSamplingInfo_voucherId">号</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info">
+										<div class="col-sm-2">
+											<div class="form-material">
+												<input class="form-control" type="text" id="dgSamplingInfo_subjectid">
+												<label for="dgSamplingInfo_subjectid">科目编号</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info">
+										<div class="col-sm-3">
+											<div class="form-material">
+												<select class="js-select2 form-control" id="dgSamplingInfo_sampleMethod"
+														style="width: 100%;">
+													<option></option>
+												</select> <label for="dgSamplingInfo_sampleMethod">抽凭方式</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info">
+										<div class="col-sm-2">
+											<div class="form-material">
+												<input class="form-control" type="text" id="dgSamplingInfo_sampleUser">
+												<label for="dgSamplingInfo_sampleUser">抽凭人</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group"></div>
+									<div class="form-group has-info">
+										<div class="col-sm-2">
+											<div class="form-material">
+												<input class="form-control" type="text" id="dgSamplingInfo_sampleName">
+												<label for="dgSamplingInfo_sampleName">抽凭名称</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info">
+                                        <div class="col-sm-3">
+                                            <div class="form-material">
+                                                <select class="js-select2 form-control" id="dgSamplingInfo_isRelated"
+                                                        style="width: 100%;">
+                                                    <option></option>
+                                                </select> <label for="dgSamplingInfo_isRelated">需进一步查验且未关联抽凭的凭证</label>
+                                            </div>
+                                        </div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+						<div class="block block-themed" style="margin-bottom: 0px;">
+							<div class="block-header bg-primary">
+								<ul class="block-options">
+									<li>
+										<button id="btn_dgSamplingInfo_statistics" type="button">
+											<i class="fa" style="color: white;">&nbsp;抽凭统计表</i>
+										</button>
+									</li>
+									<li>
+										<button id="btn_dgSamplingInfo_file" type="button">
+											<i class="fa" style="color: white;">&nbsp;附件管理</i>
+										</button>
+									</li>
+									<li>
+										<button id="btn_dgSamplingInfo_export" type="button">
+											<i class="si si-cloud-download" style="color: white;" title="导出"></i>
+										</button>
+									</li>
+									<li>
+										<button type="button" data-toggle="block-option"
+												data-action="fullscreen_toggle" style="color: white;" title="放大">
+										</button>
+									</li>
+								</ul>
+								<h3 class="block-title">查询结果<span id="samplingIndex"></span></h3>
+	
+							</div>
+							<div class="block-content">
+								<table id="dgSamplingInfoTable"
+									   class="table table-bordered table-striped table-hover"></table>
+							</div>
+						</div>
+					</div>
+					<!-- ------------------------------------------------------------------------------- -->
+					<div class="tab-pane" id="dgSamplingPageTab">
+						<div class="block block-themed">
+							<div class="block-header bg-primary">
+								<ul class="block-options">
+									<li>
+										<button id="btn_samplingList_search" type="button">
+											<i class="fa fa-search" style="color: white;">&nbsp;查询</i>
+										</button>
+									</li>
+									<li>
+										<button type="button" data-toggle="block-option"
+												data-action="content_toggle"></button>
+									</li>
+								</ul>
+								<h3 class="block-title">查询条件设定</h3>
+							</div>
+							<div class="block-search">
+								<div class="row">
+									<div class="form-group"></div>
+									<!-- <div class="form-group has-info">
+										<div class="col-sm-4">
+											<div class="form-material">
+												<select class="js-select2 form-control" id="samplingList_customerId"
+														style="width: 100%;">
+													<option></option>
+												</select> <label for="samplingList_customerId">客户名称</label>
+											</div>
+										</div>
+									</div> -->
+									<div class="form-group has-info">
+										<div class="col-sm-4">
+											<div class="form-material">
+												<input class="form-control" type="text" id="samplingList_name">
+												<label for="samplingList_name">抽样名称</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="block block-themed" style="margin-bottom: 0px;">
+							<div class="block-header  bg-primary">
+								<ul class="block-options">
+									<li>
+										<button id="samplingSet_add" type="button">
+											<i class="fa fa-plus" style="color: white;" title="新增抽凭"></i>
+										</button>
+									</li>
+									<li>
+										<button id="samplingSet_add_cutoff" type="button">
+											<i class="fa fa-crop" style="color: white;" title="新增截止性测试"></i>
+										</button>
+									</li>
+									<li>
+										<button id="samplingSet_add_customize" type="button">
+											<i class="fa fa-copyright" style="color: white;" title="新增自定义抽凭"></i>
+										</button>
+									</li>
+									<!-- <li>
+										<button id="samplingList_export" type="button" style="display: none;">
+											<i class="si si-cloud-download" style="color: white;" title="导出"></i>
+										</button>
+									</li> -->
+								</ul>
+								<h3 class="block-title">查询结果<span name="cus_select"></span></h3>
+	
+							</div>
+							<div class="block-content">
+								<table id="samplingListTable"
+									   class="table table-bordered table-striped table-hover"></table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal-samplingSet" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:1400px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">抽凭</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;overflow: auto;">
+				<div class="block-heade">
+	                <ul id="navTabSamplingSet" class="nav nav-tabs " data-toggle="tabs">
+	                    <li class="" id="liSamplingCommon"><a href="#dgSamplingCommonTab">通用维度</a></li>
+	                    <li class="" id="liSamplingCompany"><a href="#dgSamplingCompanyTab">核算维度</a></li>
+	                </ul>
+	            </div>
+	            <div class="block-content tab-content" id="navTabSamplingSet_content">
+                    <div class="tab-pane active" id="dgSamplingCommonTab">
+                        <div class="content">
+                            <div class="block block-themed">
+                                <div class="block-header bg-primary">
+                                    <ul class="block-options">
+                                        <li>
+                                            <button id="btn_samplingSet_search" type="button">
+                                                <i class="fa fa-search" style="color: white;">&nbsp;查询</i>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" data-toggle="block-option"
+                                                    data-action="content_toggle"></button>
+                                        </li>
+                                    </ul>
+                                    <h3 class="block-title">查询条件设定</h3>
+                                </div>
+                                <div class="block-search">
+									<div class="row">
+										<div style="color: red">第二步:确定抽凭范围</div>
+									</div>
+                                    <div class="row">
+                                        <div class="form-group"></div>
+                                        <div class="form-group has-info" id="samplingSet_typeId_div">
+                                            <div class="col-sm-1">
+                                                <div class="form-material">
+                                                    <!--<select class="form-control" id="samplingSet_typeId">
+                                                        <option></option>
+                                                    </select>-->
+													<input class="form-control" type="text" id="samplingSet_typeId">
+                                                    <label for="samplingSet_typeId">字</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-info" id="samplingSet_voucherId_div">
+                                            <div class="col-sm-1">
+                                                <div class="form-material">
+                                                    <input class="form-control" type="text" id="samplingSet_voucherId">
+                                                    <label for="samplingSet_voucherId">号</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-info" id="samplingSet_summery_div">
+                                            <div class="col-sm-2">
+                                                <div class="form-material">
+                                                    <input class="form-control" type="text" id="samplingSet_summery">
+                                                    <label for="samplingSet_summery">摘要</label>
+                                                </div>
+                                            </div>
+                                        </div>
+										<div class="form-group has-info" id="samplingSet_subjectid_div">
+											<div class="col-sm-4">
+												<div class="form-material">
+													<input class="form-control" type="text" id="samplingSet_common_subjectid">
+													<label for="samplingSet_common_subjectid">科目编号</label>
+												</div>
+											</div>
+										</div>
+                                        <div class="form-group has-info" id="samplingSet_assitemid_div">
+                                            <div class="col-sm-4">
+                                                <div class="form-material">
+                                                    <input class="form-control" type="text" id="samplingSet_assitemid">
+                                                    <label for="samplingSet_assitemid">核算类型</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+									<div class="row">
+										<div class="form-group"></div>
+										<div class="form-group has-info">
+											<div class="col-sm-6">
+												<div class="form-material input-group">
+													<select class="form-control" id="samplingSet_amountType">
+														<option value=''>借方发生额或贷方发生额</option>
+														<option value='1'>借方发生额</option>
+														<option value='-1'>贷方发生额</option>
+													</select>
+													<span class="input-group-addon"> </span>
+													<input class="form-control" type="text" id="samplingSet_amountStart">
+													<span class="input-group-addon">-</span>
+													<input class="form-control" type="text" id="samplingSet_amountEnd">
+													<label for="samplingSet_amountType">金额</label>
+												</div>
+											</div>
+										</div>
+									</div>
+                                </div>
+                            </div>
+                            <div class="block block-themed block-opt-hidden">
+                                <div class="block-header bg-primary">
+                                    <ul class="block-options">
+                                        <li>
+                                            <button type="button" data-toggle="block-option"
+                                                    data-action="content_toggle"></button>
+                                        </li>
+                                    </ul>
+                                    <h3 class="block-title">剔除条件设定</h3>
+                                </div>
+                                <div class="block-search">
+                                    <div class="row">
+                                        <div class="form-group"></div>
+                                        <div class="form-group has-info">
+                                            <div class="col-sm-6">
+                                                <div class="form-material input-group">
+                                                    <select class="form-control" id="samplingSet_cullAmountType">
+                                                        <option value=''>借方发生额或贷方发生额</option>
+                                                        <option value='1'>借方发生额</option>
+                                                        <option value='-1'>贷方发生额</option>
+                                                    </select>
+                                                    <span class="input-group-addon"> </span>
+                                                    <input class="form-control" type="text" id="samplingSet_cullAmountStart">
+                                                    <span class="input-group-addon">-</span>
+                                                    <input class="form-control" type="text" id="samplingSet_cullAmountEnd">
+                                                    <label for="samplingSet_cullAmountType">剔除金额</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-info">
+                                            <div class="col-sm-2">
+                                                <div class="form-material">
+                                                    <input class="form-control" type="text" id="samplingSet_subjectid_cull">
+                                                    <label for="samplingSet_subjectid_cull">对方科目</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-info">
+                                            <div class="col-sm-4">
+                                                <div class="form-material">
+                                                    <input class="form-control" type="text" id="samplingSet_cullReason">
+                                                    <label for="samplingSet_cullReason">剔除原因</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+									<div class="row">
+										<div class="form-group"></div>
+										<div class="form-group has-info">
+											<div class="col-sm-4">
+												<div class="form-material">
+													<input class="form-control" type="text" id="samplingSet_assitemid_cull">
+													<label for="samplingSet_assitemid_cull">剔除核算</label>
+												</div>
+											</div>
+										</div>
+									</div>
+                                </div>
+                            </div>
+                            <div class="block block-bordered">
+                                <div class="block-header bg-primary">
+                                    <!-- <ul class="block-options">
+                                        <li>
+                                            <button id="btn_samplingSet_cull" type="button">
+                                                <i class="fa" style="color: white;">&nbsp;剔除</i>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button id="btn_samplingSet_cancelCull" type="button">
+                                                <i class="fa" style="color: white;">&nbsp;取消剔除</i>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button id="btn_samplingSet_cancelCullAll" type="button">
+                                                <i class="fa" style="color: white;">&nbsp;取消全部剔除</i>
+                                            </button>
+                                        </li>
+                                    </ul> -->
+                                    <h3 class="block-title">查询结果<span name="cus_select"></span></h3>
+        
+                                </div>
+                                <div class="block-content">
+                                    <table id="samplingSetTable"
+                                           class="table table-bordered table-striped table-hover"></table>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dgSamplingCompanyTab">
+                        <div class="content">
+                            <div class="block block-themed">
+                                <div class="block-header bg-primary">
+                                    <ul class="block-options">
+                                        <li>
+                                            <button id="btn_samplingSet_company_search" type="button">
+                                                <i class="fa fa-search" style="color: white;">&nbsp;查询</i>
+                                            </button>
+                                        </li>
+                                        <li>
+                                            <button type="button" data-toggle="block-option"
+                                                    data-action="content_toggle"></button>
+                                        </li>
+                                    </ul>
+                                    <h3 class="block-title">查询条件设定</h3>
+                                </div>
+                                <div class="block-search">
+									<div class="row">
+										<div style="color: red">第二步:确定抽凭范围</div>
+									</div>
+                                    <div class="row">
+                                        <div class="form-group"></div>
+                                        <div class="form-group has-info">
+                                            <div class="col-sm-2">
+                                                <div class="form-material">
+                                                    <input class="form-control" type="text" id="samplingSet_balance_rank">
+                                                    <label for="samplingSet_balance_rank">期末余额前几名</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-info">
+                                            <div class="col-sm-2">
+                                                <div class="form-material">
+                                                    <input class="form-control" type="text" id="samplingSet_credit_rank">
+                                                    <label for="samplingSet_credit_rank">贷方发生额前几名</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-info">
+                                            <div class="col-sm-2">
+                                                <div class="form-material">
+                                                    <input class="form-control" type="text" id="samplingSet_debit_rank">
+                                                    <label for="samplingSet_debit_rank">借方发生额前几名</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group has-info">
+                                            <div class="col-sm-2">
+                                                <div class="form-material">
+                                                    <input class="form-control" type="text" id="samplingSet_customize_assitem">
+                                                    <label for="samplingSet_customize_assitem">自定义辅助核算</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+		                    <div class="block block-bordered">
+		                        <div class="block-header bg-primary">
+		                            <h3 class="block-title">查询结果<span name="cus_select"></span></h3>
+		                        </div>
+		                        <div class="block-content">
+		                            <table id="samplingSetCompanyTable"
+		                                   class="table table-bordered table-striped table-hover"></table>
+		                        </div>
+		                     </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-md btn-primary" type="button" id="samplingSet_prev" style="display:none">
+					<i class="si"></i><span>&nbsp;上一步</span>
+				</button>
+				<button class="btn btn-md btn-primary" type="button" id="samplingSet_next" style="display:none">
+					<i class="si"></i><span>&nbsp;下一步</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal-samplingAdd" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">创建抽样抽凭</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height: auto; overflow: visible;">
+				<div class="row">
+					<div style="color: red">第一步:创建抽凭</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-12" for="samplingAdd_name_model">抽凭名称</label>
+						<div class="col-xs-12">
+							<input id="samplingAdd_name_model" class="form-control" type="text" value="">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group"></div>
+					<div class="col-sm-12">
+						<div class="form-material">
+							<select class="js-select2 form-control" id="samplingSet_dataResource"
+									style="width: 100%;" disabled=true>
+								<option></option>
+							</select> <label for="samplingSet_dataResource">数据来源</label>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div id="samplingSet_dateGroup" class="form-material input-group">
+							<select class="form-control" id="samplingSet_dateType"
+									style="min-width: 40px;">
+								<option value='0'>日</option>
+								<option value='1'>月</option>
+								<option value='2'>年</option>
+							</select>
+							<span class="input-group-addon"> </span>
+							<input id="samplingSet_startDate" class="form-control date-picker" size=10
+								   type="text" value="" autocomplete="off">
+							<span id="samplingSet_dateAddon" class="input-group-addon">-</span>
+							<input id="samplingSet_endDate" class="form-control date-picker" size=10
+								   type="text" value="" autocomplete="off">
+							<label for="samplingSet_dateType">凭证日期</label>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-material">
+							<input class="form-control" type="text" id="samplingSet_subjectid">
+							<label for="samplingSet_subjectid">科目编号</label>
+						</div>
+					</div>
+					<div class="col-sm-12">
+						<div class="form-material">
+							<select class="js-select2 form-control" id="samplingSet_samplingType"
+									style="width: 100%;">
+								<option></option>
+							</select> <label for="samplingSet_samplingType">抽凭维度</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-md btn-primary" type="button" id="samplingAdd_submit">
+					<i class="si"></i><span>&nbsp;下一步</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_samplingMethod" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选取样本方法</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height: auto; overflow: visible;">
+				<div class="row">
+					<div style="color: red">第五步:选取样本方法</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-12" for="samplingList_method">抽样方式</label>
+						<div class="col-xs-12">
+							<select class="js-select2 form-control" id="samplingList_method" style="width: 100%;">
+								<option></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group" id="samplingAdd_customizeReason" style="display:none">
+						<label class="col-xs-12" for="samplingList_customizeReason">自定义方法与理由</label>
+						<div class="col-xs-12">
+							<input id="samplingList_customizeReason" class="form-control" type="text" value="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-md btn-primary" type="button" id="samplingMethod_prev">
+					<i class="si"></i><span>&nbsp;上一步</span>
+				</button>
+				<button class="btn btn-md btn-primary" type="button" id="samplingMethod_next">
+					<i class="si"></i><span>&nbsp;下一步</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_samplingMode" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">确认抽样方式</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height: auto; overflow: visible;">
+				<div class="row">
+					<div style="color: red">第三步:确认抽样方式</div>
+				</div>
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-12" for="samplingList_mode_default">根据设置的抽样条件，系统推荐使用</label>
+						<div class="col-xs-12">
+							<select class="js-select2 form-control" id="samplingList_mode_default" style="width: 100%;" disabled=true>
+								<option></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12" for="samplingList_mode_actual">修改抽样方式</label>
+						<div class="col-xs-12">
+							<select class="js-select2 form-control" id="samplingList_mode_actual" style="width: 100%;">
+								<option></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12" for="samplingList_mode_reason">修改理由</label>
+						<div class="col-xs-12">
+							<input id="samplingList_mode_reason" class="form-control" type="text" value="">
+						</div>
+					</div>
+					<div class="form-group" id="sampling_mode_tips" style="color:red">
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-md btn-primary" type="button" id="samplingList_prev">
+					<i class="si"></i><span>&nbsp;上一步</span>
+				</button>
+				<button class="btn btn-md btn-primary" type="button" id="samplingList_next">
+					<i class="si"></i><span>&nbsp;下一步</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_subjectid" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div id="subject_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput1" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_subjectid_detail" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div id="subject_detail_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput_detail" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_detail_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_detail_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_subjectid_samplingInfo" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div id="subject_tree_samplingInfo"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput1_samplingInfo" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_reset_samplingInfo">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_sure_samplingInfo">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_subjectid_samplistRelate" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div id="subject_tree_samplistRelate"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput1_samplistRelate" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_reset_samplistRelate">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_sure_samplistRelate">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_subjectid_cull" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div id="subject_tree_cull"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput_cull" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_reset_cull">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_sure_cull">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_subjectid_cutoff" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div id="subject_tree_cutoff"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput_cutoff" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_reset_cutoff">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_sure_cutoff">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_assitemid" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div id="samplingSet_assitem_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInputSamplingSet" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_assitemid_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_assitemid_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_assitemid_cull" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div id="samplingSet_assitem_cull_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInputSamplingSetCull" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_assitemid_cull_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_assitemid_cull_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_assitemid_customize" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+     data-keyboard="false" style="top:40px;z-index: 1070;">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="block block-themed block-transparent remove-margin-b">
+                <div class="block-header bg-info">
+                    <ul class="block-options">
+                        <li>
+                            <button type="button" data-dismiss="modal">
+                                <i class="si si-close"></i>
+                            </button>
+                        </li>
+                    </ul>
+                    <h3 class="block-title">选择科目</h3>
+                </div>
+            </div>
+            <div class="modal-body" style="min-height:500px;max-height:500px">
+                <div id="customize_assitem_tree"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="col-sm-3">
+                    <input class="form-control" type="text" id="searchInputCustomize" placeholder="搜索科目">
+                </div>
+                <div class="col-sm-9">
+                    <button class="btn btn-md btn-primary" type="button" id="modal_assitemid_customize_reset">
+                        <i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+                    </button>
+                    <button class="btn btn-md btn-primary" type="button" id="modal_assitemid_customize_sure">
+                        <i class="fa fa-send"></i><span>&nbsp;确定</span>
+                    </button>
+                    <button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+                        <i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="modal_samplingCaculation" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:900px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">样本量计算</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;">
+				<div class="content">
+					<div class="block block-themed">
+						<div class="block-header bg-primary">
+							<h3 class="block-title">样本量计算</h3>
+						</div>
+						<div id="search-condition" class="block-search">
+							<div class="row">
+								<div style="color: red">第四步:样本量计算</div>
+								<div class="form-group" style="color: red">样本总体金额-剔除的金额=剔除后样本总体金额</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingCaculation_totalAmount">
+											<label for="samplingCaculation_totalAmount">样本总体金额</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingCaculation_cullAmount">
+											<label for="samplingCaculation_cullAmount">剔除的金额</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingCaculation_amount">
+											<label for="samplingCaculation_amount">剔除后样本总体金额</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- <div class="row">
+								<div class="form-group"></div>
+								
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingCaculation_important">
+											<label for="samplingCaculation_important">财务报表整体重要性</label>
+										</div>
+									</div>
+								</div>
+								
+							</div> -->
+							<div class="row">
+								<div class="form-group" id="samplingFormula1" style="color: red">错报风险等级-控制测试获取的保证程度-实质性分析程序获取的保证程度-从其他OSP获取的保证程度-数据分析测试获取的保证程度=其他实质性程序抽样R因子</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<select class="js-select2 form-control" id="samplingCaculation_risk"
+													style="width: 100%;">
+												<option></option>
+											</select> <label for="samplingCaculation_risk">错报风险等级</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info" id="samplingCaculation_control_show">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<select class="js-select2 form-control" id="samplingCaculation_control"
+													style="width: 100%;">
+												<option></option>
+											</select> <label for="samplingCaculation_control">控制测试获取的保证程度</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info" id="samplingCaculation_tocPlan_show">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<select class="js-select2 form-control" id="samplingCaculation_tocPlan"
+													style="width: 100%;">
+												<option></option>
+											</select> <label for="samplingCaculation_tocPlan">是否计划实施TOC</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<select class="js-select2 form-control" id="samplingCaculation_analysis"
+													style="width: 100%;">
+												<option></option>
+											</select> <label for="samplingCaculation_analysis">实质性分析程序获取的保证程度</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group"></div>
+								
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<select class="js-select2 form-control" id="samplingCaculation_pledge"
+													style="width: 100%;">
+												<option></option>
+											</select> <label for="samplingCaculation_pledge">从其他OSP获取的保证程度</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<select class="js-select2 form-control" id="samplingCaculation_dataTest"
+													style="width: 100%;">
+												<option></option>
+											</select> <label for="samplingCaculation_dataTest">数据分析测试获取的保证程度</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingCaculation_r">
+											<label for="samplingCaculation_r">其他实质性程序抽样R因子</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group" id="samplingFormula2" style="color: red">剔除后样本总体金额*其他实质性程序抽样R因子/实际执行的重要性=初始样本量</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingCaculation_actualImportant">
+											<label for="samplingCaculation_actualImportant">实际执行的重要性</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingCaculation_initialAmount">
+											<label for="samplingCaculation_initialAmount">初始样本量</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingCaculation_total">
+											<label for="samplingCaculation_total">初始样本量总计(不包括小数点)</label>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							<div class="row">
+								<div class="form-group" id="samplingFormula3" style="color: red">初始样本量总计(不包括小数点)*是否能够应对样本总体的变量因素?=考虑抽样方法后调整的样本量</div>
+								<div class="form-group has-info" id="samplingCaculation_variable_show">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<select class="js-select2 form-control" id="samplingCaculation_variable"
+													style="width: 100%;">
+												<option></option>
+											</select>
+											<label for="samplingCaculation_variable">是否能够应对样本总体的变量因素? </label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info" id="samplingCaculation_smallScaleRate_show">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<select class="js-select2 form-control" id="samplingCaculation_smallScaleRate"
+													style="width: 100%;" disabled="true">
+												<option></option>
+											</select>
+											<label for="samplingCaculation_smallScaleRate">小规模总体调整% </label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingCaculation_num">
+											<label for="samplingCaculation_num">剔除后样本总体数量</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingCaculation_calAmount">
+											<label id="samplingCaculation_calAmount_label" for="samplingCaculation_calAmount">考虑抽样方法后调整的样本量</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+                                <div class="form-group"></div>
+								<div class="form-group has-info" id="samplingCaculation_lowestLevel_show">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<select class="js-select2 form-control" id="samplingCaculation_lowestLevel"
+													style="width: 100%;">
+												<option></option>
+											</select>
+											<label for="samplingCaculation_lowestLevel">最低样本量—适用于40个或更少项目</label>
+										</div>
+									</div>
+								</div>
+                                <div class="form-group has-info">
+                                    <div class="col-sm-4">
+                                        <div class="form-material">
+                                            <input class="form-control" type="text" id="samplingCaculation_adjustAmount">
+                                            <label for="samplingCaculation_adjustAmount">审计确认样本量</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group has-info">
+                                    <div class="col-sm-4">
+                                        <div class="form-material">
+                                            <input class="form-control" type="text" id="samplingCaculation_calRemark">
+                                            <label for="samplingCaculation_calRemark">备注</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-12">
+					<button class="btn btn-md btn-primary" type="button" id="modal_samplingCaculation_prev">
+						<i class="fa"></i><span>&nbsp;上一步</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_samplingCaculation_next">
+						<i class="fa"></i><span>&nbsp;下一步</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal_samplingInterval" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:900px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">样本量计算</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;">
+				<div class="content">
+					<div class="block block-themed">
+						<div class="block-header bg-primary">
+							<h3 class="block-title">样本量计算</h3>
+						</div>
+						<div id="search-condition" class="block-search">
+							<div class="row">
+								<div style="color: red">第四步:样本量计算</div>
+							</div>
+							<div class="row">
+								<div class="form-group"></div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingInterval_totalAmount">
+											<label for="samplingInterval_totalAmount">样本总体金额</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingInterval_cullAmount">
+											<label for="samplingInterval_cullAmount">剔除的金额</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingInterval_amount">
+											<label for="samplingInterval_amount">剔除后样本总体金额</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="form-group"></div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingInterval_num">
+											<label for="samplingInterval_num">剔除后样本总体数量</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="samplingInterval_adjustAmount">
+											<label for="samplingInterval_adjustAmount">样本量</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-12">
+					<button class="btn btn-md btn-primary" type="button" id="modal_samplingInterval_prev">
+						<i class="fa"></i><span>&nbsp;上一步</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_samplingInterval_next">
+						<i class="fa"></i><span>&nbsp;下一步</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal_samplingRange" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:900px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">自定义区间</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;">
+				<div class="content">
+					<div class="block block-themed">
+						<div class="block-header bg-primary">
+							<ul class="block-options">
+								<li>
+									<button id="btn_samplingRange_set" type="button">
+										<i class="fa" style="color: white;">&nbsp;设置区间</i>
+									</button>
+								</li>
+							</ul>
+							<h3 class="block-title">样本量计算</h3>
+						</div>
+						<div class="block-content" id="samplingRangeContent">
+								<div class="row">
+									<div id="samplingRangeMessage" style="color: red">第四步:样本量计算</div>
+								</div>
+								<table id="samplingRangeTable"
+									   class="table table-bordered table-striped table-hover"></table>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-12">
+					<button class="btn btn-md btn-primary" type="button" id="modal_samplingRange_prev">
+						<i class="fa"></i><span>&nbsp;上一步</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_samplingRange_next">
+						<i class="fa"></i><span>&nbsp;下一步</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal_samplingRangeSet" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:900px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">自定义区间</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;">
+				<div class="content">
+					<div class="block block-themed">
+						<div class="block-header bg-primary">
+							<h3 class="block-title">样本量计算</h3>
+						</div>
+						<div class="block-content" id="samplingRangeSetContent">
+							<p style="color:red">第一行的开始金额和最后一行的结束金额可以设为空，表示范围是从负无穷大至结束金额和开始金额至无穷大</p>
+							<table id="samplingRangeSetTable"
+								   class="table table-bordered table-striped table-hover"></table>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-12">
+					<button class="btn btn-md btn-primary" type="button" id="modal_samplingRangeSet_sure">
+						<i class="fa fa-send"></i><span>&nbsp;保存</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_samplistTest" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:1200px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">试抽样</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;">
+				<ul class="nav nav-tabs" data-toggle="tabs" id="tabs_sample">
+					<li class="active"><a href="#tab_samplingTest">抽凭结果</a></li>
+				</ul>
+				<div class="block-content tab-content" id="tabs_sample_content">
+					<div class="tab-pane active" id="tab_samplingTest">
+						<div class="content">
+							<div class="row">
+								<div style="color: red">第四步:抽凭</div>
+							</div>
+							<div class="block block-bordered">
+								<div class="block-header bg-primary">
+									<ul class="block-options">
+										<li>
+											<button id="modal_samplistTest_test" type="button">
+												<i class="fa" style="color: white;">&nbsp;抽凭</i>
+											</button>
+										</li>
+										<li>
+											<button id="modal_samplistTest_statistics" type="button">
+												<i class="fa" style="color: white;">&nbsp;查看统计</i>
+											</button>
+										</li>
+									</ul>
+									<h3 class="block-title">抽凭结果<span id="voucherIdNum"></span></h3>
+								</div>
+								<div class="block-content">
+									<table id="samplistTestTable"
+										   class="table table-bordered table-striped table-hover">
+									</table>
+								</div>
+							</div>
+							<div class="block block-bordered">
+								<div class="block-header bg-primary">
+									<h3 class="block-title">重复抽中的凭证</h3>
+								</div>
+								<div class="block-content">
+									<table id="samplistTestRepeatTable"
+										   class="table table-bordered table-striped table-hover">
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-12">
+					<button class="btn btn-md btn-primary" type="button" id="modal_samplistTest_prev">
+						<i class="fa"></i><span>&nbsp;上一步</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_samplistTest_sure">
+						<i class="fa fa-send"></i><span>&nbsp;保存</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_samplistResult1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-lg" style="width:1200px" id="samplistResultPage">
+		
+	</div>
+</div>
+<div class="modal fade" id="modal_samplistResult" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:1200px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">抽凭结果</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;">
+				<ul class="nav nav-tabs" data-toggle="tabs" id="tabs_sampleResult">
+					<li class="active"><a href="#tab_samplingCondition">抽凭参数</a></li>
+					<li class=""><a href="#tab_samplingResult">抽凭结果</a></li>
+					<li class=""><a href="#tab_samplingCull">剔除清单</a></li>
+				</ul>
+				<div class="block-content tab-content" id="tabs_sampleResult_content">
+					<div class="tab-pane active" id="tab_samplingCondition">
+						<div class="row" id="samplistResult_Condition">
+
+						</div>
+					</div>
+					<div class="tab-pane" id="tab_samplingResult">
+						<div class="content">
+							<!-- <div class="block block-themed">
+							<div class="block-header bg-primary">
+								<ul class="block-options">
+									<li>
+										<button type="button" data-toggle="block-option"
+												data-action="content_toggle"></button>
+									</li>
+								</ul>
+								<h3 class="block-title">抽凭范围</h3>
+							</div>
+							<div class="block-search">
+								<div class="row" id="samplistResult_search1">
+									<div class="form-group"></div>
+									<div class="form-group has-info">
+										<div class="col-sm-4">
+											<div class="form-material">
+												<select class="js-select2 form-control" id="samplistResult_customerId"
+														style="width: 100%;">
+													<option></option>
+												</select> <label for="samplistResult_customerId">客户名称</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info">
+										<div class="col-sm-2">
+											<div class="form-material">
+												<select class="js-select2 form-control" id="samplistResult_dataResource"
+														style="width: 100%;">
+													<option></option>
+												</select> <label for="samplistResult_dataResource">数据来源</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info">
+										<div class="col-sm-3">
+											<div id="samplistResult_dateGroup" class="form-material input-group">
+												<select class="form-control" id="samplistResult_dateType"
+														style="min-width: 40px;">
+													<option value='0'>日</option>
+													<option value='1'>月</option>
+													<option value='2'>年</option>
+												</select>
+												<span class="input-group-addon"> </span>
+												<input id="samplistResult_startDate" class="form-control date-picker" size=10
+													   type="text" value="" autocomplete="off">
+												<span id="samplistResult_dateAddon" class="input-group-addon">-</span>
+												<input id="samplistResult_endDate" class="form-control date-picker" size=10
+													   type="text" value="" autocomplete="off">
+												<label for="samplistResult_dateType">凭证日期</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info">
+										<div class="col-sm-2">
+											<div class="form-material">
+												<input class="form-control" type="text" id="samplistResult_subjectid">
+												<label for="samplistResult_subjectid">科目编号</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info" id="samplistResult_typeId_div">
+										<div class="col-sm-1">
+											<div class="form-material">
+												<select class="form-control" id="samplistResult_typeId">
+													<option></option>
+												</select>
+												<label for="samplistResult_typeId">字</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row" id="samplistResult_search2">
+									<div class="form-group"></div>
+									<div class="form-group has-info" id="samplingSet_voucherId_div">
+										<div class="col-sm-1">
+											<div class="form-material">
+												<input class="form-control" type="text" id="samplistResult_voucherId">
+												<label for="samplistResult_voucherId">号</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info" id="samplistResult_summery_div">
+										<div class="col-sm-2">
+											<div class="form-material">
+												<input class="form-control" type="text" id="samplistResult_summery">
+												<label for="samplistResult_summery">摘要</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info" id="samplistResult_assitemid_div">
+										<div class="col-sm-3">
+											<div class="form-material">
+												<input class="form-control" type="text" id="samplistResult_assitemid">
+												<label for="samplistResult_assitemid">核算类型</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info">
+										<div class="col-sm-6">
+											<div class="form-material input-group">
+												<select class="form-control" id="samplistResult_amountType">
+													<option value='1'>借方发生额</option>
+													<option value='-1'>贷方发生额</option>
+													<option value='3'>余额</option>
+												</select>
+												<span class="input-group-addon"> </span>
+												<input class="form-control" type="text" id="samplistResult_amountStart">
+												<span id="samplistResult_dateAddon" class="input-group-addon">-</span>
+												<input class="form-control" type="text" id="samplistResult_amountEnd">
+												<label for="samplistResult_amountType">金额</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row" id="samplistResult_cutoff">
+									<div class="form-group"></div>
+									<div class="form-group has-info">
+										<div class="col-sm-4">
+											<div class="form-material">
+												<input class="form-control" type="text" id="samplistResult_cutoff_num">
+												<label for="samplistResult_cutoff_num">张数</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group has-info">
+										<div class="col-sm-4">
+											<div class="form-material">
+												<input class="form-control" type="text" id="samplistResult_cutoff_amount">
+												<label for="samplistResult_cutoff_amount">金额</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div> -->
+							<div class="block block-bordered">
+								<div class="block-header bg-primary">
+									<ul class="block-options">
+										<li>
+											<button id="modal_samplistResult_statistics" type="button">
+												<i class="fa" style="color: white;">&nbsp;查看统计</i>
+											</button>
+										</li>
+									</ul>
+									<h3 class="block-title">抽凭结果</h3>
+								</div>
+								<div class="block-content">
+									<table id="samplistResultTable"
+										   class="table table-bordered table-striped table-hover">
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="tab-pane" id="tab_samplingCull">
+						<div class="content">
+							<div class="block block-bordered">
+								<div class="block-header bg-primary">
+									<h3 class="block-title">剔除清单</h3>
+								</div>
+								<div class="block-content">
+									<table id="samplistCullTable"
+										   class="table table-bordered table-striped table-hover">
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-12">
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal-samplingInfoEdit" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">编辑</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height: auto; overflow: visible;">
+				
+			</div>
+			<div class="modal-footer">
+				<!-- <button class="btn btn-md btn-primary" type="button" id="samplingInfoEdit_submit">
+					<i class="si si-send"></i><span>&nbsp;保存</span>
+				</button> -->
+				<!-- <button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+					<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+				</button> -->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal-samplingFileUpload" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false" style="z-index: 1030;">
+	<div class="modal-dialog modal-md" style="width:1200px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="samplingInfoEdit_submit">
+								<i class="fa fa-save" style="color: white;"></i><span>&nbsp;保存</span>
+							</button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">编辑</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height: 550px;">
+				<div class="content">
+					<div id = "samplingFileShow">
+					<div class="block block-themed">
+						<div class="block-header bg-primary">
+                            <ul class="block-options">
+								<li>
+									<button id="btn_sampling_file_upload" type="button">
+										<i class="fa fa-upload" style="color: white;">&nbsp;上传附件</i>
+									</button>
+								</li>
+                                <li>
+                                    <button id="btn_samplingDetail_show_result" type="button">
+                                        <i class="fa" style="color: white;">&nbsp;查看抽凭参数</i>
+                                    </button>
+                                </li>
+                                <li>
+                                    <label class="css-input switch switch-sm switch-success"><input type="checkbox" id="show_currentVoucher" value="" checked><span></span></label>仅显示当前分录
+                                </li>
+                            </ul>
+							<h3 class="block-title">凭证详细</h3>
+						</div>
+						<div class="block-content">
+							<table id="samplingVoucherDetail_table"
+								   class="table table-bordered table-striped table-hover"></table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<label class="col-xs-3" for="samplingInfoEdit_auditResult">审计结论</label>
+							<div class="col-xs-3">
+								<select class="js-select2 form-control" id="samplingInfoEdit_auditResult" style="width: 100%;">
+									<option></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-3" for="samplingInfoEdit_remark">备注</label>
+							<div class="col-xs-3">
+								<input id="samplingInfoEdit_remark" class="form-control" type="text" value="">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<label class="col-xs-3" for="samplingInfoEdit_relateSampling">添加关联抽凭</label>
+							<div class="col-xs-3">
+								<input id="samplingInfoEdit_relateSampling" class="form-control" type="text" value="" readonly="true">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">原始凭证内容完整：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="contentComplete" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="contentComplete" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">有授权批准：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="authorize" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="authorize" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">账务处理正确：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="handleCorrect" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="handleCorrect" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">账证的内容相符：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="contentMatch" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="contentMatch" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">账证的金额相符：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="amountMatch" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="amountMatch" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">截止测试正确：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="cutoffCorrect" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="cutoffCorrect" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<div>
+								<div class="col-xs-3">
+									<input id="samplingInfoEdit_customizeResultName1" class="form-control" type="text" value="">
+								</div>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name=customizeResult1 data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="customizeResult1" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<div class="col-xs-3">
+									<input id="samplingInfoEdit_customizeResultName2" class="form-control" type="text" value="">
+								</div>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="customizeResult2" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="customizeResult2" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<div>
+								<div class="col-xs-3">
+									<input id="samplingInfoEdit_customizeResultName3" class="form-control" type="text" value="">
+								</div>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name=customizeResult3 data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="customizeResult3" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<div class="col-xs-3">
+									<input id="samplingInfoEdit_customizeResultName4" class="form-control" type="text" value="">
+								</div>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="customizeResult4" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="customizeResult4" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="block block-themed">
+						<div class="block">
+							<ul class="nav" style="margin-left: -40px;margin-right: -40px;background-color: #f9f9f9;"
+								data-toggle="tabs" id="tab_materset_samplingFileUpload">
+								<li class="active" style="float:left;"><a>文件附件</a></li>
+								<li style="float: right;margin-top: 13px;margin-left: 10px;margin-right: 10px;">
+									<button id="refreshAttachTableBtn_samplingFileUpload" type="button"
+											style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+										<i class="fa fa-refresh"> 刷新</i>
+									</button>
+								</li>
+								<li style="float: right;margin-top: 13px;">
+									<button class="bdoexport-btn" type="button"
+											style="border: 0px;background-color: #f9f9f9;color: #337ab7;"
+											data-bdoexport-table-id="samplingFileUploadTable"
+											data-bdoexport-title="javascript:$('#headtitle').text()+'附件一览';"
+									>
+										<i class="si si-cloud-download"> 导出</i>
+									</button>
+								</li>
+								<li id="upload_samplingFileBtn" style="float: right;margin-top: 13px;display: none;">
+									<button id="upload_samplingFileUpload" type="button" style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+										<i class="fa fa-upload"> 上传文件</i>
+									</button>
+								</li>
+							</ul>
+							<br>
+							<div class="block-content">
+								<div class="row">
+									<table id="samplingFileUploadTable"
+										   class="table table-bordered table-striped table-hover table-condensed"></table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--<div class="modal-footer" id = "samplingInfoEditShow">
+				<button class="btn btn-md btn-primary" type="button" id="samplingInfoEdit_submit">
+					<i class="si si-send"></i><span>&nbsp;保存</span>
+				</button>
+				<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+					<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+				</button>
+			</div>-->
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="uploadSamplingFormModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 50px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">上传文件</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="uploadSamplingFileForm"></form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_samplistRelate" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:900px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择关联分录</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;">
+				<div class="block block-themed">
+					<div class="block-header bg-primary">
+						<ul class="block-options">
+							<li>
+								<button id="btn_samplistRelate_search" type="button">
+									<i class="fa fa-search" style="color: white;">&nbsp;查询</i>
+								</button>
+							</li>
+						</ul>
+						<h3 class="block-title">查询条件设定</h3>
+					</div>
+					<div class="block-search">
+						<div class="row">
+							<div class="form-group"></div>
+							<div class="form-group has-info">
+								<div class="col-sm-4">
+									<div id="samplistRelate_dateGroup" class="form-material input-group">
+										<select class="form-control" id="samplistRelate_dateType"
+												style="min-width: 40px;">
+											<option value='0'>日</option>
+											<option value='1'>月</option>
+											<option value='2'>年</option>
+										</select>
+										<span class="input-group-addon"> </span>
+										<input id="samplistRelate_startDate" class="form-control date-picker" size=10
+											   type="text" value="" autocomplete="off">
+										<span id="samplistRelate_dateAddon" class="input-group-addon">-</span>
+										<input id="samplistRelate_endDate" class="form-control date-picker" size=10
+											   type="text" value="" autocomplete="off">
+										<label for="samplistRelate_dateType">凭证日期</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group has-info">
+								<div class="col-sm-1">
+									<div class="form-material">
+										<input class="form-control" type="text" id="samplistRelate_voucherId">
+										<label for="samplistRelate_voucherId">号</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group has-info">
+								<div class="col-sm-2">
+									<div class="form-material">
+										<input class="form-control" type="text" id="samplistRelate_subjectid">
+										<label for="samplistRelate_subjectid">科目编号</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group has-info">
+								<div class="col-sm-3">
+									<div class="form-material">
+										<select class="js-select2 form-control" id="samplistRelate_sampleMethod"
+												style="width: 100%;">
+											<option></option>
+										</select> <label for="samplistRelate_sampleMethod">抽凭方式</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group has-info">
+								<div class="col-sm-2">
+									<div class="form-material">
+										<input class="form-control" type="text" id="samplistRelate_sampleUser">
+										<label for="samplistRelate_sampleUser">抽凭人</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block block-themed" style="margin-bottom: 0px;">
+					<div class="block-header bg-primary">
+						<h3 class="block-title">查询结果<span name="cus_select"></span></h3>
+					</div>
+					<div class="block-content">
+						<table id="samplistRelateTable"
+							   class="table table-bordered table-striped table-hover"></table>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-12">
+					<button class="btn btn-md btn-primary" type="button" id="btn_samplistRelate_select">
+						<i class="fa fa-send"></i><span>&nbsp;保存</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_cutoff" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:900px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">截止抽样</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;">
+				<div class="content">
+					<div class="block block-themed">
+						<div class="block-header bg-primary">
+							<h3 class="block-title">截止抽样</h3>
+						</div>
+						<div id="search-condition" class="block-search">
+							<div class="row">
+								<div class="form-group" style="color: red">选取资产负债表日前后_____张、____金额以上的凭证实施截止测试   资产负债表日即项目审计结束日期</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="cutoff_num">
+											<label for="cutoff_num">张数</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="cutoff_amount">
+											<label for="cutoff_amount">金额</label>
+										</div>
+									</div>
+								</div>
+								<div class="form-group has-info">
+									<div class="col-sm-4">
+										<div class="form-material">
+											<input class="form-control" type="text" id="cutoff_subjectid">
+											<label for="cutoff_subjectid">科目编号</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-12">
+					<button class="btn btn-md btn-primary" type="button" id="modal_cutoff_prev">
+						<i class="fa"></i><span>&nbsp;上一步</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_cutoff_next">
+						<i class="fa"></i><span>&nbsp;下一步</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 核算多选 -->
+<div class="modal fade" id="modal_assItemSelect" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:1400px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button id="assItemSelect_add" type="button">
+								<i class="fa fa-plus" style="color: white;" title="添加核算"></i>
+							</button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">设置核算</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;overflow: auto;">
+				<div class="content">
+					<div class="block block-bordered">
+						<div class="block-header bg-primary">
+							<h3 class="block-title">查询结果<span name="cus_select"></span></h3>
+						</div>
+						<div class="block-content">
+							<table id="assItemSelectTable"
+								   class="table table-bordered table-striped table-hover"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 核算多选 -->
+<div class="modal fade" id="modal_assItemCullSelect" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:1400px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button id="assItemCullSelect_add" type="button">
+								<i class="fa fa-plus" style="color: white;" title="添加核算"></i>
+							</button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">设置核算</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-height:500px;overflow: auto;">
+				<div class="content">
+					<div class="block block-bordered">
+						<div class="block-header bg-primary">
+							<h3 class="block-title">查询结果<span name="cus_select"></span></h3>
+						</div>
+						<div class="block-content">
+							<table id="assItemCullSelectTable"
+								   class="table table-bordered table-striped table-hover"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_samplingRelated_add" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">添加关联抽凭</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height: auto; overflow: visible;">
+				<div class="row">
+					<div class="form-group col-xs-6">
+						<a class="block bdo-store-block" href="javascript:void(0)" id="sampling_related_common">
+							<div class="block-content bdo-store-block-content text-info  bg-gray-light" style="min-height:120px">
+								<i class="fa fa-plus fa-2x bdo-store-block-icon"></i>
+								<div class="font-w600 push-15-t push-15" style="width: 85px;">通用抽凭</div>
+							</div>
+						</a>
+					</div>
+					<div class="form-group col-xs-6">
+						<a class="block bdo-store-block" href="javascript:void(0)" id="sampling_related_customize">
+							<div class="block-content bdo-store-block-content text-info  bg-gray-light" style="min-height:120px">
+								<i class="fa fa-copyright fa-2x bdo-store-block-icon"></i>
+								<div class="font-w600 push-15-t push-15" style="width: 85px;">自定义抽凭</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

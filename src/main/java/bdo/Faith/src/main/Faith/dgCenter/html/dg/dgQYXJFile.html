@@ -1,0 +1,205 @@
+<div data-toggle="slimscroll"
+	 data-always-visible="true"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%"
+	 data-size="10px">
+	<div class="block block-bordered " id="contentBlock" style="position: relative;margin-bottom: 0px;">
+		<div class="block-header">
+			<div class="block-options block-options-left">
+				<button id="saveExcelBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="保存">
+					<i class="fa fa-save">&nbsp;保存</i>
+				</button>
+				<button id="exportExcelBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="导出">
+					<i class="si si-cloud-download">&nbsp;导出</i>
+				</button>
+				<button id="importExcelBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="导入">
+					<i class="si si-cloud-upload">&nbsp;导入</i>
+				</button>
+				<button id="coverBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="获取最新版本">
+					<i class="fa fa-refresh">&nbsp;获取最新版本</i>
+				</button>
+				<button id="reCreateBtn" type="button" class="btn btn-xs btn-danger push-5-r" title="重新生成">
+					<i class="fa fa-power-off">&nbsp;重新生成</i>
+				</button>
+				<button id="resetBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="重新取值">
+					<i class="fa fa-repeat">&nbsp;重新取值</i>
+				</button>
+				<button id="postilBtn" type="button" class="btn btn-xs btn-danger push-5-r" title="批注">
+					<i class="fa fa-bookmark-o">&nbsp;批注</i>
+				</button>
+				<button id="openPreBtn" type="button" class="btn btn-xs btn-primary push-5-r" title="打开上期底稿">
+					<i class="fa fa-file-excel-o">&nbsp;打开上期底稿</i>
+				</button>
+				<button id="openFormulaModalBtn" type="button" class="btn btn-xs btn-success push-5-r" title="校验公式">
+					<i class="fa fa-sticky-note-o">&nbsp;校验公式</i>
+				</button>
+				<button id="openVerifyModalBtn" type="button" class="btn btn-xs btn-warning push-5-r" title="核对公式">
+					<i class="fa fa-sticky-note-o">&nbsp;核对公式</i>
+				</button>
+				<button id="merchantRelatedModalBtn" type="button" class="btn btn-xs btn-warning push-5-r" title="关联方">
+					<i class="fa fa-codepen">&nbsp;关联方</i>
+				</button>
+			</div>
+		</div>
+		<div id="spreadContainerRoot">
+			<div class="" id="spreadContainer"></div>
+		</div>
+		<div id="designerment"></div>
+		<div class="progress-mark">
+			<div class="progress active progress-display progress-mini">
+				<div class="progress-bar progress-bar-success progress-bar-striped progress-bar-cus" role="progressbar"
+					 aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+		</div>
+		<div class="modal fade" id="formulaModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+			 data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content" style="width: 1100px;border:1px solid #D3D3D3;">
+					<!--  style="width: 600px;" -->
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-primary" style="height: 40px;padding: 10px 20px 10px 20px;">
+							<div class="col-sm-3" style="padding-left: 0px;">
+								<label> 校验数据公式一览</label>
+							</div>
+							<div class="col-sm-3">
+								<label>公式校验结果</label>
+								<select id="formulaCalc" style="color: #0000009e;border: 1px solid #e9e9e9;">
+									<option value=""></option>
+									<option value="1">通过</option>
+									<option value="0" selected>未通过</option>
+								</select>
+							</div>
+							<div class="col-sm-3" style="text-align: right;">
+								<label>正确数/总数:</label>&nbsp;
+								<label id="rightNum"></label><span>&nbsp;/&nbsp;</span><label id="totalNum"></label>
+							</div>
+							<div class="col-sm-3" style="text-align: right;padding-right: 0px;">
+								<button id="checkFormulaBtn" class="btn btn-primary" style="height: 23px;padding-top: 1px;" type="button" title="公式校验">
+									<i class="fa fa-check" style="color: white;"> 校验</i>
+								</button>
+								<button class="btn btn-primary" style="height: 23px;padding-top: 1px;" type="button" data-dismiss="modal" aria-hidden="true">
+									<i class="si si-close"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-body" style="height:510px;padding: 10px 20px 10px 20px;">
+						<table id="formulaTable" class="table table-bordered table-striped table-hover"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="verifyModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+			 data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content" style="width: 1100px;border:1px solid #D3D3D3;">
+					<!--  style="width: 600px;" -->
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info" style="height: 40px;padding: 10px 20px 10px 20px;">
+							<ul class="block-options">
+								<li>
+									<button id="verifyFormulaBtn" class="btn btn-primary" type="button" title="公式校验">
+										<i class="fa fa-check" style="color: white;"> 核对</i>
+									</button>
+								</li>
+								<li>
+									<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h4 class="block-title">核对公式一览</h4>
+						</div>
+					</div>
+					<div class="modal-body" style="height:510px;padding: 10px 20px 10px 20px;">
+						<table id="verifyTable" class="table table-bordered table-striped table-hover"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal" id="remarkModal" tabindex="-1" role="dialog" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content" style="border:1px solid #D3D3D3;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info" style="height: 40px;padding: 10px 20px 10px 20px;">
+							<ul class="block-options">
+								<li>
+									<button id="saveRemarkBtn" class="btn btn-primary" type="button" title="保存备注">
+										<i class="fa fa-check" style="color: white;"> 保存</i>
+									</button>
+								</li>
+								<li>
+									<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h4 class="block-title">备注</h4>
+						</div>
+					</div>
+					<input type="text" id="formulaId" style="display: none;">
+					<div class="modal-body">
+						<div class="row">
+							<div class="form-group has-success">
+								<div class="col-sm-12">
+									<div class="form-material">
+										<input id="remark_input" class="form-control" type="text" maxlength="200">
+										<label for="remark_input">核对公式备注</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="uploadTplFormModal" tabindex="-1" role="dialog"
+			 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" style="margin-top: 150px;">
+				<div class="modal-content">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button type="button" data-dismiss="modal">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h3 class="block-title">上传文件</h3>
+						</div>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="uploadTplForm"></form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="selectMerchantRelatedModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" style="margin-top: 150px;">
+				<div class="modal-content" style="width: 1000px;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button type="button" id="checkMerchantRelatedBtn">
+										<i class="fa fa-check">确定</i>
+									</button>
+								</li>
+								<li>
+									<button type="button" data-dismiss="modal">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h3 class="block-title">选择关联方</h3>
+						</div>
+					</div>
+					<div class="modal-body">
+						<table id="selectMerchantRelatedTable" class="table table-bordered table-striped table-hover"></table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

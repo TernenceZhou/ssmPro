@@ -1,0 +1,74 @@
+<div :class="{{prefix}}.colClass"
+	 {{setEvents([inputOptions.parentEvents, prefix])}}
+	 data-vrole="col"
+	 :data-fc-id="{{prefix}}.id">
+	<div :class="{{prefix}}.typeClass"
+		 data-vrole="type"
+		 :data-fc-id="{{prefix}}.id"
+	>
+		<input v-if="({{prefix}}.type == 'treecombo')"
+			   data-vrole="fc"
+			   data-item-index="{{itemIndex}}"
+			   data-group-item-index="{{groupItemIndex}}"
+			   :data-value="{{prefix}}.selectValue"
+			   :data-values="{{prefix}}.selectValues"
+			   {{@ setAttr([inputOptions, prefix]) }}
+			   {{@ setEvents([inputOptions.events, prefix]) }}
+		>
+		<label v-if="{{prefix}}.label"
+			   :ref="{{prefix}}.id+'Label'"
+			   :data-fc-id="{{prefix}}.id"
+			   :for="{{prefix}}.id">
+			{{'\{\{' + prefix + '.label\}\}' }}
+			<span v-if="{{prefix}}.required" class="text-danger" :data-fc-id="{{prefix}}.id">*</span>
+		</label>
+		<span class="caret combo-caret"></span>
+		<span v-show="{{prefix}}.addonShow"
+			  v-if="form.immediateUpdate && {{prefix}}.addon"
+			  :data-fc-id="{{prefix}}.id"
+			  @mouseover="immediateUpdateAddonmouseover"
+			  @mouseout="immediateUpdateAddonmouseout"
+			  @click="immediateUpdateAddonclick"
+			  class="addo-edit-btn"
+		><i :class="form.addonIconClass" :data-fc-id="{{prefix}}.id"></i></span>
+		<div class="block block-themed block-bordered treecombo" tabindex="-0"
+			 :data-fc-id="{{prefix}}.id"
+			 v-show="{{prefix}}.comboOptionsShow"
+			 @mouseover="comboOptionsMounseover"
+			 @mouseout="comboOptionsMounseout"
+			 @click="treeBlockClick"
+			 @blur="treeBlockBlur"
+		>
+			<div class="block-content treecombo-content"
+				 :data-fc-id="{{prefix}}.id"
+			>
+				<div data-vrole-treecombo="tree"
+					 :data-fc-id="{{prefix}}.id"
+					 @mouseover="comboOptionsMounseover"
+					 @mouseout="comboOptionsMounseout"></div>
+			</div>
+			<div class="block-content border-t treecombo-footer"
+				 :data-fc-id="{{prefix}}.id">
+				<div class="row text-center"
+					 :data-fc-id="{{prefix}}.id">
+					<div class="col-xs-6 border-r btn"
+						 @click="treecomboCancel"
+						 :data-fc-id="{{prefix}}.id"
+					>
+						<div class="h5 font-w300 text-muted"
+							 :data-fc-id="{{prefix}}.id">{{'\{\{'}} {{prefix}}.cancelBtnLabel {{'\}\}'}}
+						</div>
+					</div>
+					<div class="col-xs-6 btn"
+						 @click="treecomboOk"
+						 :data-fc-id="{{prefix}}.id"
+					>
+						<div class="h5 font-w300 text-muted"
+							 :data-fc-id="{{prefix}}.id">{{'\{\{'}} {{prefix}}.comfirmBtnLabel {{'\}\}'}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,15 @@
+/common/resources.cn.js
+/contextMenu/contextMenu.js
+/contextMenu/contextMenu.css
+/dialogs/dialogs.css
+/dialogs/dialogs.html
+/dialogs/dialogs.js
+/formatDialog/formatDialog.html
+/formatDialog/formatDialog.css
+/images/bdospreadicon.png
+/ribbon/ribbon.css
+/ribbon/ribbon.html
+/ribbon/ribbon.js
+/spreadWrapper/spreadActions.js
+/widgets/borderpicker/borderpicker.css
+/widgets/fontpicker/fontpicker.css

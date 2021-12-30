@@ -1,0 +1,61 @@
+<div class="modal fade" id="programParamModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false" data-dgparam-method="modal4">
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">生成参数</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="programParamForm">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_assitemid" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+		data-keyboard="false" style="top:40px;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择辅助核算</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div id="assitem_z_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput2" placeholder="搜索辅助核算">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_assitem_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_assitem_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<!-- ZQF 自定义 START -->
+<!-- 应收票据 -->
+<div class="modal fade" id="modal_bill_receive" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <input type="hidden" id="isReceivable" name="isReceivable" value="0" />
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 600px;border:1px solid #D3D3D3;">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+								<select class="js-select2" id="inventoryModel_bill_receive">
+									<option value="1">存货</option>
+									<option value="2">固定资产</option>
+									<option value="3">在建工程</option>
+									<option value="4">库存现金</option>
+									<option value="5">票据</option>
+								</select>
+							</div>
+						</li>
+						<li style="width: 60px;"></li>
+						<li style="display: none;">
+							<h3 class="block-title">第&nbsp;<label id="label_bill_receive"></label>&nbsp;步&nbsp;</h3>
+						</li>
+						<li>
+							<button type="button" class="btn btn-primary" id="button_bill_receive_next">下一步</button>
+						</li>
+						<li>
+							<button type="button" class="btn btn-primary" id="button_bill_receive_return">上一步</button>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+						</li>
+					</ul>
+					<h3 class="block-title"><label id="headlabel">监盘系统</label></h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height: 200px;max-height: 580px;padding-top: 5px;padding-bottom: 5px;">
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_bill_receive_1">
+					<div class="row" id="radio_ma">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success">
+									<input type="radio" name="radio_bill_receive" value="1" checked><span></span> 底稿附件
+								</label>
+							</div>
+							<div class="col-sm-7">
+								<div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+									<select class="js-select2 form-control" id="attach_bill_receive" style="width: 100%;">
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row" id="radio_sd">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success">
+									<input type="radio" name="radio_bill_receive" value="2"><span></span> 监盘
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success push-10-r">
+									<input type="radio" name="radio_bill_receive" value="3"><span></span> 上传文件
+								</label>
+							</div>
+							<div class="col-sm-7">
+								<input id="bill_fileinput" class="file" type="file" style="width: 100%;" data-preview-file-type="any">
+							</div>
+						</div>
+					</div>
+					<!--<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success">
+									<input type="radio" name="radio_bill_receive" value="4"><span></span> 监盘小结
+								</label>
+							</div>
+						</div>
+					</div>-->
+				</div>
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_bill_receive_2">
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-10">
+								<div class="form-material">
+									<select class="js-select2 form-control" id="sheet_bill_receive" style="width: 100%;">
+									</select>
+									<label for="sheet_bill_receive">选择工作表</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="titlerow_dg_file" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="底稿中数据明细标题行（合并行则为最下一行）" for="titlerow_dg_file">底稿标题行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="startrow_dg_file" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="底稿中数据明细起始行" for="startrow_dg_file">底稿起始行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="endrow_dg_file" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="底稿中数据明细结束行" for="endrow_dg_file">底稿结束行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="titlerow_bill_receive" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="从监盘系统获取的数据标题行（合并行则为最下一行）" for="titlerow_bill_receive">备查簿标题行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="startrow_bill_receive" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="从监盘系统获取的数据明细起始行" for="startrow_bill_receive">备查簿起始行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="endrow_bill_receive" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="从监盘系统获取的数据明细结束行" for="endrow_bill_receive">备查簿结束行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="block-content" style="padding:0px 20px 0px 20px;overflow: auto;height: 420px;">
+							<div id="bill_spreadContent" class="ss fill" style="height: 400px;"></div>
+						</div>
+					</div>
+				</div>
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_bill_receive_3">
+					
+				</div>
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_bill_receive_4">
+					<div class="row">
+						<div class="block-content" style="padding:0px 20px 0px 20px;overflow: auto;height: 420px;">
+							<div id="supervision_summary_spreadContent" class="ss fill" style="height: 400px;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 银行对账 -->
+<div class="modal fade" id="modal_bank_statement" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="">
+		<div class="modal-content" style="width: 600px;border:1px solid #D3D3D3;">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button class="btn btn-primary" type="button" id="download_bank_statement" title="下载银行对账单模板">
+								<i class="fa fa-download"></i>&nbsp;
+							</button>
+						</li>
+						<li style="display: none;">
+							<h3 class="block-title">第&nbsp;<label id="label_bank_statement"></label>&nbsp;步&nbsp;</h3>
+						</li>
+						<li>
+							<button type="button" class="btn btn-primary" id="button_bank_statement_next">下一步</button>
+						</li>
+						<li>
+							<button type="button" class="btn btn-primary" id="button_bank_statement_return">上一步</button>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+						</li>
+					</ul>
+					<h3 class="block-title">银行对账&nbsp;<label style="color: rgb(100, 100, 100)">(适用于'银行存款余额调节表'底稿)</label></h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height: 200px;max-height: 580px;padding-top: 5px;padding-bottom: 5px;">
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_bank_statement_1">
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success">
+									<input type="radio" name="radio_bank_statement" value="1" checked><span></span> 底稿附件
+								</label>
+							</div>
+							<div class="col-sm-7">
+								<div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+									<select class="js-select2 form-control" id="attach_bank_statement" style="width: 100%;">
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success">
+									<input type="radio" name="radio_bank_statement" value="2"><span></span> 银行对账单
+								</label>
+							</div>
+							<div class="col-sm-7">
+								<div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+									<select class="js-select2 form-control" id="list_bank_statement" style="width: 100%;">
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success push-10-r">
+									<input type="radio" name="radio_bank_statement" value="3"><span></span> 上传文件
+								</label>
+							</div>
+							<div class="col-sm-7">
+								<input id="bank_fileinput" class="file" type="file" style="width: 100%;" data-preview-file-type="any">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_bank_statement_2">
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-6">
+								<div class="form-material input-group">
+									<input id="account_bank_statement" class="form-control" type="text" placeholder="请输入账套名" maxlength="21">
+									<label for="account_bank_statement">账套名</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<select class="form-control" id="trading_time_bank" name="data_bank_statement"></select>
+									<label for="trading_time_bank">交易时间</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<select class="form-control" id="trading_purposes_bank" name="data_bank_statement"></select>
+									<label for="trading_purposes_bank">交易用途</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<select class="form-control" id="reciprocal_account_name_bank" name="data_bank_statement"></select>
+									<label for="reciprocal_account_name_bank">对方户名</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-2">
+								<label class="css-input css-radio css-radio-success">
+									<input type="radio" name="radio_amount_bank" value="1" checked><span></span> 借贷
+								</label>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<select class="form-control" id="debit_credit_marks_bank" name="data_bank_statement"></select>
+									<label for="debit_credit_marks_bank">借贷标志</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<select class="form-control" id="occur_amount_bank" name="data_bank_statement"></select>
+									<label for="occur_amount_bank">发生额</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<label class="css-input css-radio css-radio-success">
+									<input type="radio" name="radio_amount_bank" value="2"><span></span> 收入支出
+								</label>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<select class="form-control" id="income_amount_bank" name="data_bank_statement"></select>
+									<label for="income_amount_bank">收入金额</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<select class="form-control" id="paid_amount_bank" name="data_bank_statement"></select>
+									<label for="paid_amount_bank">支出金额</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="block-content" style="padding:0px 20px 0px 20px;overflow: auto;height: 420px;">
+							<div id="bank_spreadContent" class="ss fill" style="height: 400px;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 银行函证 -->
+<div class="modal fade" id="modal_bank_hz_fetch" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 600px;border:1px solid #D3D3D3;">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+								<select class="js-select2" id="inventoryModel_hz_bank">
+									<option value="1">银行存款函证程序</option>
+									<option value="2">其他货币资金函证程序</option>
+								</select>
+							</div>
+						</li>
+						<li style="width: 60px;"></li>
+						<li style="display: none;">
+							<h3 class="block-title">第&nbsp;<label id="label_hz_bank"></label>&nbsp;步&nbsp;</h3>
+						</li>
+						<li>
+							<button type="button" class="btn btn-primary" id="button_hz_bank_next">下一步</button>
+						</li>
+						<li>
+							<button type="button" class="btn btn-primary" id="button_hz_bank_return">上一步</button>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+						</li>
+					</ul>
+					<h3 class="block-title">银行函证</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height: 200px;max-height: 580px;padding-top: 5px;padding-bottom: 5px;">
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_hz_bank_1">
+					<!-- <div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success">
+									<input type="radio" name="radio_bill_receive" value="1" checked><span></span> 底稿附件
+								</label>
+							</div>
+							<div class="col-sm-7">
+								<div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+									<select class="js-select2 form-control" id="attach_hz_bank" style="width: 100%;">
+									</select>
+								</div>
+							</div>
+						</div>
+					</div> -->
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success">
+									<input type="radio" name="radio_bill_receive" value="2"><span></span> 银行函证
+								</label>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success push-10-r">
+									<input type="radio" name="radio_bill_receive" value="3"><span></span> 上传文件
+								</label>
+							</div>
+							<div class="col-sm-7">
+								<input id="bill_fileinput" class="file" type="file" style="width: 100%;" data-preview-file-type="any">
+							</div>
+						</div>
+					</div> -->
+				</div>
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_hz_bank_2">
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-10">
+								<div class="form-material">
+									<select class="js-select2 form-control" id="sheet_hz_bank" style="width: 100%;">
+									</select>
+									<label for="sheet_bill_receive">选择工作表</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="hz_startrow_dg_file" oninput="value=value.replace(/[^\d]/g,'')">
+									<label for="startrow_dg_file">底稿起始行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="hz_endrow_dg_file" oninput="value=value.replace(/[^\d]/g,'')">
+									<label for="endrow_dg_file">底稿结束行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="hz_titlerow" oninput="value=value.replace(/[^\d]/g,'')">
+									<label for="titlerow_bill_receive">备查簿标题行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="hz_startrow" oninput="value=value.replace(/[^\d]/g,'')">
+									<label for="startrow_bill_receive">备查簿起始行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="hz_endrow" oninput="value=value.replace(/[^\d]/g,'')">
+									<label for="endrow_bill_receive">备查簿结束行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="block-content" style="padding:0px 20px 0px 20px;overflow: auto;height: 420px;">
+							<div id="hz_spreadContent" class="ss fill" style="height: 400px;"></div>
+						</div>
+					</div>
+				</div>
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_hz_bank_3">
+					<div class="row">
+						<div class="form-group">
+							<div class="col-sm-2" style="border-right: groove;">
+								<div class="form-material">
+									<h4>备查簿列名</h4>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material">
+									<h4>数据源</h4>
+								</div>
+							</div>
+							<div class="col-sm-2">
+							</div>
+							<div class="col-sm-2" style="border-right: groove;">
+								<div class="form-material">
+									<h4>备查簿列名</h4>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material">
+									<h4>数据源</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<div class="col-sm-2" style="border-right: groove;">
+								<div class="form-material">
+									<h6>询证函编号</h6>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+									<select class="js-select2 form-control" id="data_hz_receive_0" name="data_hz_receive" style="width: 100%;"></select>
+								</div>
+							</div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>二次发函日期（如适用） </h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_24" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>被询证银行</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_1" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>二次发函单号（如适用）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_25" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>被询证银行地址</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_2" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>是否收到回函</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_27" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>被询证银行联系人</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_3" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>回函日期</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_28" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>联系电话（对公柜台）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_4" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>将回函与留存的复印件或扫描件进行比对，回函是否与发出的询证函一致</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_30" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>询证金额 （原币）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_12" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>如通过邮寄、快递方式收到：回函是否由被询证者直接寄给项目组或函证中心</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_31" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>发函人员（项目组成员姓名或我所函证中心等）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_19" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>如通过邮寄、快递方式收到：回函发件人名称、地址是否发出询证函的收件人名称、地址一致（如，检查回函邮戳或快递收件网点）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_32" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>发函方式（如，快递、邮寄、跟函、银行电子函证平台或第三方函证平台等）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_20" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>加盖在询证函上的银行印章是否与询证函中记载的收件人名称一致，印章以及签名是否清晰可辨认</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_33" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>发函日期</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_21" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>回函确认金额（原币）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_38" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>发函单号 (如，快递单号、挂号信单号等)</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_22" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_hz_bank_4">
+					<div class="row">
+						<div class="form-group">
+							<div class="col-sm-2" style="border-right: groove;">
+								<div class="form-material">
+									<h4>备查簿列名</h4>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material">
+									<h4>数据源</h4>
+								</div>
+							</div>
+							<div class="col-sm-2">
+							</div>
+							<div class="col-sm-2" style="border-right: groove;">
+								<div class="form-material">
+									<h4>备查簿列名</h4>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material">
+									<h4>数据源</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+							<div class="col-sm-2" style="border-right: groove;">
+								<div class="form-material">
+									<h6>询证函编号</h6>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+									<select class="js-select2 form-control" id="data_hz_receive_0" name="data_hz_receive" style="width: 100%;"></select>
+								</div>
+							</div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>二次发函日期（如适用） </h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_24" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>被询证银行</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_1" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>二次发函单号（如适用）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_25" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>被询证银行地址</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_2" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>是否收到回函</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_27" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>被询证银行联系人</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_3" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>回函日期</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_28" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>联系电话（对公柜台）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_4" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>将回函与留存的复印件或扫描件进行比对，回函是否与发出的询证函一致</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_30" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>询证金额 （原币）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_12" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>如通过邮寄、快递方式收到：回函是否由被询证者直接寄给项目组或函证中心</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_31" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>发函人员（项目组成员姓名或我所函证中心等）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_19" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>如通过邮寄、快递方式收到：回函发件人名称、地址是否发出询证函的收件人名称、地址一致（如，检查回函邮戳或快递收件网点）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_32" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>发函方式（如，快递、邮寄、跟函、银行电子函证平台或第三方函证平台等）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_20" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>加盖在询证函上的银行印章是否与询证函中记载的收件人名称一致，印章以及签名是否清晰可辨认</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_33" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>发函日期</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_21" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+							<div class="col-sm-2">
+							</div>
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>回函确认金额（原币）</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_38" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group">
+                            <div class="col-sm-2" style="border-right: groove;">
+                                <div class="form-material">
+                                    <h6>发函单号 (如，快递单号、挂号信单号等)</h6>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-material" style="margin-top: 0px; margin-bottom: 0px;">
+                                    <select class="js-select2 form-control" id="data_hz_receive_22" name="data_hz_receive" style="width: 100%;"></select>
+                                </div>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 折旧摊销计价 -->
+<div class="modal fade" id="modal_depreciation_amortization_valuation" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <input type="hidden" id="progressType" name="progressType" value="0" />
+	<div class="modal-dialog">
+		<div class="modal-content" style="width: 600px;border:1px solid #D3D3D3;">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li style="display: none;">
+							<h3 class="block-title">第&nbsp;<label id="label_dav"></label>&nbsp;步&nbsp;</h3>
+						</li>
+						<li>
+							<button type="button" class="btn btn-primary" id="button_dav_next">下一步</button>
+						</li>
+						<li>
+							<button type="button" class="btn btn-primary" id="button_dav_return">上一步</button>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+						</li>
+					</ul>
+					<h3 class="block-title"><label id="davheadlabel">折旧摊销计价</label></h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height: 200px;max-height: 580px;padding-top: 5px;padding-bottom: 5px;">
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_dav_1">
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-5">
+								<label class="css-input css-radio css-radio-success push-10-r">
+									<input type="radio" name="radio_dav" value="3"><span></span> 上传文件
+								</label>
+							</div>
+							<div class="col-sm-7">
+								<input id="dav_fileinput" class="file" type="file" style="width: 100%;" data-preview-file-type="any">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_dav_2">
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-10">
+								<div class="form-material">
+									<select class="js-select2 form-control" id="sheet_dav" style="width: 100%;">
+									</select>
+									<label for="sheet_dav">选择工作表</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group has-info">
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="titlerow_dav_dg_file" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="底稿中数据明细标题行（合并行则为最下一行）" for="titlerow_dav_dg_file">底稿标题行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="startrow_dav_dg_file" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="底稿中数据明细起始行" for="startrow_dav_dg_file">底稿起始行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="endrow_dav_dg_file" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="底稿中数据明细结束行" for="endrow_dav_dg_file">底稿结束行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="titlerow_dav" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="备查簿数据明细标题行（合并行则为最下一行）" for="titlerow_dav">备查簿标题行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="startrow_dav" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="备查簿数据明细起始行" for="startrow_dav">备查簿起始行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-material input-group">
+									<input class="form-control" type="text" id="endrow_dav" oninput="value=value.replace(/[^\d]/g,'')">
+									<label title="备查簿数据明细结束行" for="endrow_dav">备查簿结束行</label>
+									<span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="block-content" style="padding:0px 20px 0px 20px;overflow: auto;height: 420px;">
+							<div id="dav_spreadContent" class="ss fill" style="height: 400px;"></div>
+						</div>
+					</div>
+				</div>
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_dav_3">
+				</div>
+				<div class="block" style="height: 100%;margin-bottom: 0px;padding-top: 5px;" id="div_dav_4">
+					<div class="row">
+						<div class="block-content" style="padding:0px 20px 0px 20px;overflow: auto;height: 420px;">
+							<div id="dav_supervision_summary_spreadContent" class="ss fill" style="height: 400px;"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ZQF 自定义 END -->
+</body>
+</html>

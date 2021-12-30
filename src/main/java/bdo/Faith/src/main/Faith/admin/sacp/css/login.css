@@ -1,0 +1,98 @@
+*, *:after, *:before { -webkit-box-sizing: border-box; box-sizing: border-box; }
+.clearfix:before, .clearfix:after { content: ''; display: table; }
+.clearfix:after { clear: both; }
+
+body {
+	background: #fff;
+	color: #383a3c;
+	font-weight: 400;
+	font-size: 1em;
+	line-height: 1.25;
+	font-family: 'Raleway', Calibri, Arial, sans-serif;
+}
+
+a, button {
+	outline: none;
+}
+
+a {
+	color: #566473;
+	text-decoration: none;
+}
+
+a:hover, a:focus {
+	color: #34495e;
+}
+
+section {
+	padding: 1em;
+	text-align: center;
+}
+
+p.ref {
+	text-align: center;
+	padding: 2em 1em;
+}
+
+
+@font-face {
+	font-family: 'FontAwesome';
+	src: url('/assets/fonts/fontawesome-webfont.eot?v=4.7.0');
+	src: url('/assets/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('/assets/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('./assets/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('./assets/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('./assets/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.fa {
+	display: inline-block;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: inherit;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.fa-copyright:before {
+	content: "\f1f9";
+}
+:after, :before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+:after, :before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+#errorMessage {
+	text-align: center;
+	width: 460px;
+	border: none;
+	color: red;
+	line-height: 40px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -230px;
+	margin-top: 85px;
+	background-color: floralwhite;
+	opacity: 0.8;
+	font-size: 13px;
+}
+
+#login-page-foot {
+	align-content: center;
+	text-align: center;
+	position: fixed;
+	bottom: 1rem;
+	left: 0px;
+	right: 0px;
+	z-index: 10000;
+}
+
+#login-page-foot .fa.fa-copyright,
+#login-page-foot .fa {
+	font: normal normal normal 18px/1 FontAwesome;
+	font-weight: 400 !important;
+    font-size: 1.6em !important;
+    /*font-family: 'Raleway', Calibri, Arial, sans-serif !important;*/
+}

@@ -1,0 +1,230 @@
+<style>
+
+	.tab_temp > .block > .nav-tabs > li.active > a,
+	.tab_temp > .block > .nav-tabs > li.active > a:hover,
+	.tab_temp > .block > .nav-tabs > li.active > a:focus {
+		color: black;
+		background-color: white;
+	}
+</style>
+<div data-toggle="slimscroll" data-always-visible="false"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%">
+	<div class="block">
+		<div class="block-heade">
+		</div>
+		<div class="block-content tab-content" id="tab_unAuditReport_content" style="padding-bottom: 20px">
+			<div class="block block-themed" id="tab_head_rpt">
+				<div class="block-header bg-primary">
+					<div style="height:18px;">
+						<h3 class="block-title" id="ar_title" style="float:left;">
+							初步分析性复核<span id="reviewIndex"></span>
+						</h3>
+						<ul class="block-options">
+							<li>
+								<button id="rpt_check_analysisReview" type="button">
+									<i class="fa fa-check" style="color: white;" title="确认完成"></i>
+								</button>
+							</li>
+							<li>
+								<button id="rpt_search" type="button">
+									<i class="fa fa-refresh" style="color: white;" title="刷新"></i>
+								</button>
+							</li>
+							<li>
+								<button id="rpt_export" type="button">
+									<i class="si si-cloud-download" style="color: white;" title="导出"></i>
+								</button>
+							</li>
+							<!--							<li>
+															<button id="ar_save" type="button">
+																<i class="fa fa-save" style="color: white;">&nbsp;保存</i>
+															</button>
+														</li>-->
+							<li>
+								<button id="ar_config" type="button">
+									<i class="si si-settings" style="color: white;" title="分析性复核参数设置"></i>
+								</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane active" id="tab_unAuditReportser">
+				<div class="tab_temp">
+					<div class="block" style="margin: 10px 0 -20px 0">
+						<ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" id="report_type">
+							<li class="active"><a href="#zc_report" data-result="zc_report_table"
+												  data-content="1"><i class="fa fa-file-text-o"> 资产负债表</i></a></li>
+							<li><a href="#lr_report" data-result="lr_report_table" data-content="3"><i
+								class="fa fa-file-text-o"> 利润表</i></a></li>
+							<li id="unusual_tab"><a href="#unusual_report_first" ><i
+								class="fa fa-file-text-o"> 行业指标</i></a></li>
+						</ul>
+						<div class="block-content tab-content" id="four_report">
+							<div class="tab-pane fade in active" id="zc_report" data-result="1">
+								<table id="zc_report_table"
+									   class="table table-bordered table-striped table-hover"></table>
+							</div>
+							<div class="tab-pane fade" id="lr_report" data-result="3">
+								<table id="lr_report_table"
+									   class="table table-bordered table-striped table-hover"></table>
+							</div>
+							<div class="tab-pane fade" id="unusual_report_first">
+								<div class="content" style="overflow:auto;height:600px">
+									<div class="block block-themed hidden">
+										<div class="block-header bg-primary">
+											<ul class="block-options">
+												<li>
+													<button id="unusual_search" type="button">
+														<i class="fa fa-search" style="color: white;">&nbsp;查询</i>
+													</button>
+												</li>
+												<!-- <li>
+													<button id="unusual_clear" type="button">
+														<i class="fa fa-repeat" style="color: white;">&nbsp;重置</i>
+													</button>
+												</li> -->
+												<li>
+													<button type="button" data-toggle="block-option"
+															data-action="content_toggle"></button>
+												</li>
+											</ul>
+											<h3 class="block-title">查询条件&nbsp;&nbsp;<span id="unusual_cusId"></span></h3>
+										</div>
+										<div id="unusual_search-condition" class="block-search">
+											<div class="row">
+												<div class="form-group"></div>
+												<div class="form-group has-info hidden">
+													<div class="col-sm-2">
+														<div class="form-material">
+															<input id="unusual_slpk" class="form-control" type="text">
+															<label for="unusual_slpk" class="langConvert" propKey="companyName">公司名称</label>
+														</div>
+													</div>
+												</div>
+												<div class="form-group has-info">
+													<div class="col-sm-2">
+														<div class="form-material">
+															<input class="form-control" type="text" id="unusual_industry">
+															<label for="unusual_industry">行业名称</label>
+														</div>
+													</div>
+												</div>
+												<!-- <div class="form-group has-info">
+													<div class="col-sm-2">
+														<div class="form-material">
+															<select class="form-control selectpicker  " id="industry_year">
+																<option></option>
+															</select>
+															<input id="unusual_year" class="form-control date-picker" type="text"
+																   autocomplete="off">
+															<label for="unusual_year">行业分类年份</label>
+														</div>
+													</div>
+												</div> -->
+												<div class="form-group has-info">
+													<div class="col-sm-2">
+														<div class="form-material">
+															<select class="form-control selectpicker  " id="unusual_industry_period">
+																<option></option>
+															</select> <label for="unusual_industry_period">行业分类季度</label>
+														</div>
+													</div>
+												</div>
+												<!-- <div class="form-group has-info">
+													<div class="col-sm-2">
+														<div class="form-material">
+															<select class="js-select2 form-control" id="unusual_isShowAll">
+																<option value="0">否</option>
+																<option value="1">是</option>
+															</select> <label for="unusual_isShowAll">显示全部</label>
+														</div>
+													</div>
+												</div> -->
+											</div>
+										</div>
+									</div>
+				
+									<div class="block block-bordered">
+										<div class="block-header bg-primary">
+											<ul class="block-options">
+												<li>显示全部 <label class="css-input switch switch-sm switch-success"><input type="checkbox" id="unusual_isShowAll"><span></span></label></li>
+												<li>
+													<button type="button" data-toggle="block-option"
+															data-action="content_toggle" style="color: white;"></button>
+												</li>
+												<li>
+													<button type="button" data-toggle="block-option"
+															data-action="fullscreen_toggle" style="color: white;">
+													</button>
+												</li>
+											</ul>
+											<h3 class="block-title langConvert" propKey="quotaAnalysis" id="project_industry">未审报表中的行业指标为上年行业数据，审定报表中的行业指标为本年行业数据</h3>
+										</div>
+										<div class="block-content">
+											<div id="unusual_chartsTabContent" class="tab-content">
+												<div class="tab-pane fade active in" id="unusual_chartsForPeriod">
+													<div class="block-content row" id="unusual_chartsProfitForPeriod">
+				
+													</div>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--初步性分析复核配置 -->
+			<div class="modal fade" id="ar_config_modal" tabindex="-1" role="dialog"
+				 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="block block-themed block-transparent remove-margin-b">
+							<div class="block-header bg-info">
+								<ul class="block-options">
+									<li>
+										<button type="button" data-dismiss="modal">
+											<i class="si si-close"></i>
+										</button>
+									</li>
+								</ul>
+								<h3 class="block-title">分析性复核参数设置</h3>
+							</div>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal" id="ar_config_form"></form>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class="modal fade" id="uploadTplFormModal" tabindex="-1" role="dialog"
+			 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" style="margin-top: 50px;">
+				<div class="modal-content">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button type="button" data-dismiss="modal">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h3 class="block-title">上传文件</h3>
+						</div>
+					</div>
+					<div class="modal-body">
+						<form class="form-horizontal" id="uploadFileForm"></form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		</div>
+	</div>
+</div>

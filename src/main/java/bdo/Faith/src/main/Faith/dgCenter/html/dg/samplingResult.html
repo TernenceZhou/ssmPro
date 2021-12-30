@@ -1,0 +1,302 @@
+<!-- <div data-toggle="slimscroll" data-always-visible="false"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%"> -->
+<div >
+
+</div>
+	<div id="sampling_pdf" class="modal-content">
+		<div class="block block-themed block-transparent remove-margin-b">
+			<div class="block-header bg-info">
+				<ul class="block-options">
+					<li>
+						<button id=sampling_export_pdf type="button" title="导出pdf">
+							<i class="fa fa-file-pdf-o" style="color: white;">&nbsp;</i>
+						</button>
+					</li>
+					<li>
+						<button type="button" data-dismiss="modal">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title">抽凭结果</h3>
+			</div>
+		</div>
+		<div class="modal-body" style="max-height:550px;">
+			<div class="block block-themed">
+				<div class="block-header bg-primary">
+				    <ul class="block-options">
+	                    <li>
+	                        <div id="sampleUser" style="color: white;"></div>
+	                    </li>
+	                </ul>
+					<h3 class="block-title">抽凭参数</h3>
+				</div>
+				<div class="block-content" id="samplistResult_Condition">
+
+				</div>
+			</div>
+			<div class="block block-themed" id="sampleResult_count_show">
+				<div class="block-header bg-primary">
+					<h3 class="block-title">抽凭统计</h3>
+
+				</div>
+				<div class="block-content">
+					<table id="dgSamplingCountTable"
+						   class="table table-bordered table-striped table-hover"></table>
+				</div>
+			</div>
+			<div class="block block-themed" style="margin-bottom: 0px;">
+				<div class="block-header bg-primary">
+					<h3 class="block-title">抽凭结果</h3>
+
+				</div>
+				<div class="block-content">
+					<table id="dgSamplingResultTable"
+						   class="table table-bordered table-striped table-hover"></table>
+				</div>
+			</div>	
+		</div>
+		<div class="modal-footer">
+			<div class="col-sm-12">
+				<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+					<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+<!-- </div> -->
+<!-- 
+<div class="modal fade" id="modal_samplingFileUpload" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog modal-md" style="width:1100px">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="sampling_pdf_close">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">查看</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height: 550px;">
+				<div class="content">
+					<div id = "samplingFileShow">
+					<div class="block block-themed">
+						<div class="block-header bg-primary">
+
+							<h3 class="block-title">凭证详细</h3>
+
+						</div>
+						<div class="block-content">
+							<table id="samplingVoucherDetailResult_table"
+								   class="table table-bordered table-striped table-hover"></table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<label class="col-xs-3" for="samplingInfoEditResult_auditResult">审计结论</label>
+							<div class="col-xs-3">
+								<select class="js-select2 form-control" id="samplingInfoEditResult_auditResult" style="width: 100%;">
+									<option></option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-3" for="samplingInfoEditResult_remark">备注</label>
+							<div class="col-xs-3">
+								<input id="samplingInfoEditResult_remark" class="form-control" type="text" value="">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">原始凭证内容完整：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="samplingInfoEditResult_contentComplete" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="samplingInfoEditResult_contentComplete" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">有授权批准：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="samplingInfoEditResult_authorize" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="samplingInfoEditResult_authorize" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">账务处理正确：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="samplingInfoEditResult_handleCorrect" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="samplingInfoEditResult_handleCorrect" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">账证的内容相符：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="samplingInfoEditResult_contentMatch" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="samplingInfoEditResult_contentMatch" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">账证的金额相符：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="samplingInfoEditResult_amountMatch" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="samplingInfoEditResult_amountMatch" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<label class="col-xs-3 css-input css-radio css-radio-primary">截止测试正确：</label>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="samplingInfoEditResult_cutoffCorrect" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="samplingInfoEditResult_cutoffCorrect" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<div>
+								<div class="col-xs-3">
+									<input id="samplingInfoEditResult_customizeResultName1" class="form-control" type="text" value="">
+								</div>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name=samplingInfoEditResult_customizeResult1 data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="samplingInfoEditResult_customizeResult1" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<div class="col-xs-3">
+									<input id="samplingInfoEditResult_customizeResultName2" class="form-control" type="text" value="">
+								</div>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="samplingInfoEditResult_customizeResult2" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="samplingInfoEditResult_customizeResult2" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group"></div>
+						<div class="form-group">
+							<div>
+								<div class="col-xs-3">
+									<input id="samplingInfoEditResult_customizeResultName3" class="form-control" type="text" value="">
+								</div>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name=samplingInfoEditResult_customizeResult3 data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="samplingInfoEditResult_customizeResult3" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<div class="col-xs-3">
+									<input id="samplingInfoEditResult_customizeResultName4" class="form-control" type="text" value="">
+								</div>
+								<div class="col-xs-3 css-input css-radio css-radio-primary">
+								<label class="css-input css-radio css-radio-primary">
+								<input type="radio" name="samplingInfoEditResult_customizeResult4" data-result="1"><span></span></label>是 <label
+									class="css-input css-radio css-radio-primary"
+									style="margin-left: 30px;"> <input type="radio"
+									name="samplingInfoEditResult_customizeResult4" data-result="0"><span></span>
+								</label>否</div>
+							</div>
+						</div>
+					</div>
+					</div>
+					<div class="block block-themed">
+						<div class="block">
+							<ul class="nav" style="margin-left: -40px;margin-right: -40px;background-color: #f9f9f9;"
+								data-toggle="tabs" id="tab_samplingFileUpload_result">
+								<li class="active" style="float:left;"><a>文件附件</a></li>
+								<li style="float: right;margin-top: 13px;margin-left: 10px;margin-right: 10px;">
+									<button id="refreshAttachTableBtn_samplingFileUploadResult" type="button"
+											style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+										<i class="fa fa-refresh"> 刷新</i>
+									</button>
+								</li>
+								<li style="float: right;margin-top: 13px;">
+									<button class="bdoexport-btn" type="button"
+											style="border: 0px;background-color: #f9f9f9;color: #337ab7;"
+											data-bdoexport-table-id="samplingFileUploadResultTable"
+											data-bdoexport-title="javascript:$('#headtitle').text()+'附件一览';"
+									>
+										<i class="si si-cloud-download"> 导出</i>
+									</button>
+								</li>
+								<li id="upload_samplingFileBtn" style="float: right;margin-top: 13px;display: none;">
+									<button id="upload_samplingFileUploadResult" type="button" style="border: 0px;background-color: #f9f9f9;color: #337ab7;">
+										<i class="fa fa-upload"> 上传文件</i>
+									</button>
+								</li>
+							</ul>
+							<br/>
+							<div class="block-content">
+								<div class="row">
+									<table id="samplingFileUploadResultTable"
+										   class="table table-bordered table-striped table-hover table-condensed"></table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div> -->
+

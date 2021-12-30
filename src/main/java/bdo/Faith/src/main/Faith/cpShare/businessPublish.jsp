@@ -1,0 +1,310 @@
+﻿<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8" errorPage="/hasNoRight.jsp"%>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/js/plugins/bootstrap-datepicker/bootstrap-datepicker3.min.css">
+	<style> 
+		#example  {
+			text-align: center;
+		}
+	</style>
+	<div class="content bg-gray-lighter">
+		<div class="row items-push">
+			<div class="col-sm-7">
+				<h1 id="page_head" class="page-heading"></h1>
+			</div>
+			<div class="col-sm-5 text-right hidden-xs">
+				<ol id="page_title" class="breadcrumb push-10-t">
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="block block-themed">
+			<div class="block-header bg-primary">
+				<ul class="block-options">
+					<li>
+						<button id="btn_search" type="button">
+							<i class="fa fa-search" style="color: white;">&nbsp;搜索</i>
+						</button>
+					</li>
+					<li>
+						<button id="btn_clear" type="button">
+							<i class="fa fa-repeat" style="color: white;">&nbsp;重置</i>
+						</button>
+					</li>
+					<li>
+						<button type="button" data-toggle="block-option"
+							data-action="content_toggle"></button>
+					</li>
+				</ul>
+				<h3 class="block-title">搜索条件设定</h3>
+			</div>
+			<div id="search-condition" class="block-search">
+				<div class="row">
+					<div class="form-group"></div>
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input class="form-control" type="text" id="search_departId"
+									name="search_departId">
+								<label for="search_departId">所属部门</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input class="form-control" type="text" id="search_businessType"
+									name="search_businessType">
+								<label for="search_businessType">业务类型</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input class="form-control" type="text" id="search_industry"
+									name="search_industry">
+								<label for="search_industry">所属行业</label>
+							</div>
+						</div>
+					</div>
+                    <div class="form-group has-info">
+                        <div class="col-sm-2">
+                        	<div class="form-material input-group">
+                                <input class="form-control" type="number" id="search_menNumRequireMin" placeholder="最小人数" min="0">
+                                <span class="input-group-addon">~</span>
+                                <input class="form-control" type="number" id="search_menNumRequireMax" placeholder="最大人数" min="0">
+                                <label for="search_menNumRequireMin">所需人数</label>
+                            </div>
+                        </div>
+                    </div>
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input class="form-control" type="text" id="search_customerName">
+								<label for="search_customerName">客户名称</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group"></div>
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<select class="form-control" id="search_cooperation"
+									name="search_department">
+									<option></option>
+								</select> <label for="search_cooperation">合作意向</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input class="form-control" type="text" id="search_workingPlace">
+								<label for="search_workingPlace">工作地点</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<select class="form-control" id="search_isRegist"
+									name="search_isRegist">
+									<option></option>
+								</select> <label for="search_isRegist">是否关联登记单</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<select class="form-control" id="search_auditState"
+									name="search_auditState">
+									<option></option>
+								</select> <label for="search_auditState">业务机会状态</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<select class="form-control" id="search_isClose"
+									name="search_isClose">
+									<option></option>
+								</select> <label for="search_isClose">是否关闭</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block block-bordered">
+			<div class="block-header bg-primary">
+				<ul class="block-options">
+					<li>
+						<button id="btn_plus" type="button">
+							<i class="fa fa-plus" style="color: white;">&nbsp;新增</i>
+						</button>
+					</li>
+					<li>
+						<button id="btn_export" type="button">
+							<i class="si si-cloud-download" style="color: white;">&nbsp;导出</i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title">业务机会一览</h3>
+			</div>
+			<div class="block-content">
+				<table id="chanceInfo" class="table table-bordered table-striped table-hover">
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="modal_form" tabindex="-1" role="dialog"
+		aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="modal-header block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" data-dismiss="modal">
+									<i class="si si-close"></i>
+								</button>
+							</li>
+						</ul>
+						<h3 class="block-title">详细信息</h3>
+					</div>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="sub_form">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="regist_modal" tabindex="-1" role="dialog"
+		aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="modal-header block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" data-dismiss="modal">
+									<i class="si si-close"></i>
+								</button>
+							</li>
+						</ul>
+						<h3 class="block-title">详细信息</h3>
+					</div>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="regist_form"></form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="regist_list" tabindex="-1" role="dialog"
+		data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="modal-header block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" data-dismiss="modal">
+									<i class="si si-close"></i>
+								</button>
+							</li>
+						</ul>
+						<h3 class="block-title">业务登记单</h3>
+					</div>
+				</div>
+				<div class="modal-body">
+					<table id="registlist" class="table table-bordered table-striped table-hover">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="modal-team" tabindex="-1" role="dialog"
+		aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button name="sub_close" type="button">
+									<i class="si si-close"></i>
+								</button>
+							</li>
+						</ul>
+						<h3 class="block-title">合作团队</h3>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="block block-bordered">
+						<div class="block block-themed">
+							<div class="block-header bg-primary">
+								<ul class="block-options">
+									<li>
+										<button id="btn_teamSearch" type="button">
+											<i class="fa fa-search" style="color: white;">&nbsp;搜索</i>
+										</button>
+									</li>
+									<li>
+										<button id="btn_teamClear" type="button">
+											<i class="fa fa-repeat" style="color: white;">&nbsp;重置</i>
+										</button>
+									</li>
+									<li>
+										<button type="button" data-toggle="block-option"
+											data-action="content_toggle"></button>
+									</li>
+								</ul>
+								<h3 class="block-title">搜索条件设定</h3>
+							</div>
+							<div id="search-teamCondition" class="block-search">
+								<div class="row">
+									<div class="form-group"></div>
+									<div class="form-group has-info">
+										<div class="col-sm-2">
+											<div class="form-material">
+												<input class="form-control" type="text" id="search_teamDepartId" />
+												<label for="search_departId">所属部门</label>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="block block-bordered">
+						<div class="block-header  bg-primary">
+							<h3 class="block-title">合作团队一览</h3>
+						</div>
+						<div class="block-content">
+							<table id="teamCooperate" class="table table-bordered table-striped table-hover"></table>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary" type="button" style="margin-left:10px;" id="teamAdd">
+							<i class="fa fa-plus" style="margin-right:8px;"></i><span>添加</span></button>
+					<button class="btn btn-css1 btn-warning" type="button" id="teamClose">
+							<i class="fa fa-sign-out" style="margin-right:8px;"></i><span>关闭</span></button>
+				</div>		
+			</div>
+		</div>
+	</div>
+	
+	<script src="${pageContext.request.contextPath}/cpShare/registForm.js"></script>
+	<script src="${pageContext.request.contextPath}/cpShare/businessPublish.js"></script>

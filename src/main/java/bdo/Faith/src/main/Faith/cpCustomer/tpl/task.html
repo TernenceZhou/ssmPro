@@ -1,0 +1,46 @@
+<div class="col-sm-4 col-lg-5" id="taskDetail">
+	<div class="block block-bordered block-themed" :class="classObject">
+		<div class="block-header bg-primary" >
+			<ul class="block-options">
+				<li>
+					<button id="addTaskBtn" type="button" v-on:click="onAddTaskClick">
+						<i class="fa fa-plus">&nbsp;{{ newTaskBtnLable }}</i>
+					</button>
+				</li>
+				<li>
+					<button id="turnBackTasksBtn" type="button" v-on:click="onTurnBackTasksClick">
+						<i class="si si-action-undo">&nbsp;{{ turnBackTasksBtnLable }}</i>
+					</button>
+				</li>
+				<li>
+					<button id="refreshBtn" type="button" v-on:click="onRefreshClick">
+						<i class="si si-refresh">&nbsp;{{ refreshBtnLabel }}</i>
+					</button>
+				</li>
+			</ul>
+			<h3 class="block-title">{{title}}</h3>
+		</div>
+		<keep-alive>
+			<component 
+				:is="subComponent" 
+				:tasks="tasks" 
+				:json-data="jsonData"
+				:select-file-data="selectFileData"
+				:page-model="pageModel"
+				@add-file="doAddFileBtnClick"
+				@del-edit-file="doDelEditFileBtnClick"
+				@select-file-comfirm="onSelectFileComfirm"
+				@select-file-close="onSelectFileClose"
+				@edit-task="doEditTask"
+				@del-task="doDeleteTask"
+				@download-file="downloadFile"
+				@del-file="deleteFile"
+				@comment-task="doComment"
+				@reply-comment="doReplyComment"
+				@del-comment="doDeleteComment"
+				@task-list-loadmore="loadmore"
+				ref="subpage"
+			></component>
+		</keep-alive>
+	</div>
+</div>

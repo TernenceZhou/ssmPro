@@ -1,0 +1,211 @@
+<div class="bdo-side-block block block-themed">
+	<div class="block-header bg-info">
+		<ul class="block-options">
+			<li>
+				<button data-close="true" type="button"><i class="si si-close"></i></button>
+			</li>
+		</ul>
+		<h3 class="block-title">批注</h3>
+	</div>
+	<div class="block-content bdo-side-content">
+		<div class="block" style="height:100%;">
+			<div class="block-heade">
+				<ul class="nav nav-tabs " data-toggle="tabs">
+					<li class="active"><a href="#postilFirstAuditTab">一审</a></li>
+					<li><a href="#postilSecondAuditTab">二审</a></li>
+					<li><a href="#postilThirdAuditTab">三审</a></li>
+				</ul>
+			</div>
+			<div class="block-content block-content-full" style="height:100%;">
+				<div class="tab-content">
+					<div class="postil-content-wrap tab-pane active" id="postilFirstAuditTab">
+						<div class="postil-content">
+							<div data-toggle="slimscroll" data-always-visible="true" data-rail-visible="true"
+								 data-rail-color="#777" data-rail-opacity=".15" data-height="100%">
+								<ul class="list list-timeline postil-list">
+									<li v-for="(item, index) in postils1">
+										<i class="fa fa-user list-timeline-icon bg-success"></i>
+										<div class="list-timeline-content postil-item">
+											<p style="word-wrap: break-word;word-break: normal;">
+												<a href="#" class="postil-list-username">{{item.createUser}}</a>
+												<span class="postil-list-createdate">{{item.createDate}}</span>
+												<button class="btn btn-xs postil-list-reply-btn"
+														v-if="item.activeFlag == 1">&nbsp;回复
+												</button>
+												<button class="btn btn-xs postil-list-reply"
+														v-if="item.activeFlag == 1 && item.isAuthor">&nbsp;关闭
+												</button>
+											</p>
+											<p style="word-wrap: break-word;word-break: normal;">{{content}}</p>
+											<div class="postil-list-replylist bg-gray" v-if="item.comments.length > 0">
+												<div class="postil-replylist-item"
+													 v-for="(comment, cindex) in item.comments">
+													<p style="word-wrap: break-word;word-break: normal;">
+														<a href="#"
+														   class="postil-list-username">{{comment.createUser}}</a>
+														<span class="postil-list-createdate" v-if="">回复  <a href="#"
+																											class="postil-list-username">{{(comment.commentedUser}}</a></span>
+														<span
+															class="postil-list-createdate">{{comment.createDate}}</span>
+														<button class="btn btn-xs postil-reply-btn"
+																v-if="item.activeFlag == 1">&nbsp;回复
+														</button>
+													</p>
+													<p style="word-wrap: break-word;word-break: normal;">{{comment.content}}</p>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="border-t postil-editor">
+							<div class="block">
+								<div class="block-header bg-gray-lighter">
+									<h3 class="block-title"></h3>
+								</div>
+								<div class="block-content bg-gray-lighter">
+									<div class="row form-group">
+										<div class="col-xs-12">
+											<textarea class="form-control postil-textarea" rows="3"
+													  id="postilContent"></textarea>
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col-xs-12">
+											<botton class="btn btn-ms btn-primary postil-submit-btn"
+													id="submitPostilContentBtn">&nbsp;提交
+											</botton>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="postil-content-wrap tab-pane" id="postilSecondAuditTab">
+						<div class="postil-content">
+							<div data-toggle="slimscroll" data-always-visible="true" data-rail-visible="true"
+								 data-rail-color="#777" data-rail-opacity=".15" data-height="100%">
+								<ul class="list list-timeline postil-list">
+									<li>
+										<i class="fa fa-user list-timeline-icon bg-success"></i>
+										<div class="list-timeline-content postil-item">
+											<p style="word-wrap: break-word;word-break: normal;">
+												<a href="#" class="postil-list-username">User</a>
+												<span class="postil-list-createdate">2018-07-03</span>
+												<button class="btn btn-xs postil-list-reply-btn">&nbsp;回复</button>
+												<button class="btn btn-xs postil-list-reply">&nbsp;关闭</button>
+											</p>
+											<p style="word-wrap: break-word;word-break: normal;">批注内容</p>
+											<div class="postil-list-replylist bg-gray">
+												<div class="postil-replylist-item">
+													<p style="word-wrap: break-word;word-break: normal;">
+														<a href="#" class="postil-list-username">User</a>
+														<span class="postil-list-createdate">2018-07-03</span>
+														<button class="btn btn-xs postil-reply-btn">&nbsp;回复</button>
+													</p>
+													<p style="word-wrap: break-word;word-break: normal;">回复内容</p>
+												</div>
+												<div class="postil-replylist-item">
+													<p style="word-wrap: break-word;word-break: normal;">
+														<a href="#" class="postil-list-username">User</a>
+														<span class="postil-list-createdate">2018-07-03</span>
+														<button class="btn btn-xs postil-reply-btn">&nbsp;回复</button>
+													</p>
+													<p style="word-wrap: break-word;word-break: normal;">回复内容</p>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="border-t postil-editor">
+							<div class="block">
+								<div class="block-header bg-gray-lighter">
+									<h3 class="block-title"></h3>
+								</div>
+								<div class="block-content bg-gray-lighter">
+									<div class="row form-group">
+										<div class="col-xs-12">
+											<textarea class="form-control postil-textarea" rows="3"
+													  id="postilContent"></textarea>
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col-xs-12">
+											<botton class="btn btn-ms btn-primary postil-submit-btn"
+													id="submitPostilContentBtn">&nbsp;提交
+											</botton>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="postil-content-wrap tab-pane" id="postilThirdAuditTab">
+						<div class="postil-content">
+							<div data-toggle="slimscroll" data-always-visible="true" data-rail-visible="true"
+								 data-rail-color="#777" data-rail-opacity=".15" data-height="100%">
+								<ul class="list list-timeline postil-list">
+									<li>
+										<i class="fa fa-user list-timeline-icon bg-success"></i>
+										<div class="list-timeline-content postil-item">
+											<p style="word-wrap: break-word;word-break: normal;">
+												<a href="#" class="postil-list-username">User</a>
+												<span class="postil-list-createdate">2018-07-03</span>
+												<button class="btn btn-xs postil-list-reply-btn">&nbsp;回复</button>
+												<button class="btn btn-xs postil-list-reply">&nbsp;关闭</button>
+											</p>
+											<p style="word-wrap: break-word;word-break: normal;">批注内容</p>
+											<div class="postil-list-replylist bg-gray">
+												<div class="postil-replylist-item">
+													<p style="word-wrap: break-word;word-break: normal;">
+														<a href="#" class="postil-list-username">User</a>
+														<span class="postil-list-createdate">2018-07-03</span>
+														<button class="btn btn-xs postil-reply-btn">&nbsp;回复</button>
+													</p>
+													<p style="word-wrap: break-word;word-break: normal;">回复内容</p>
+												</div>
+												<div class="postil-replylist-item">
+													<p style="word-wrap: break-word;word-break: normal;">
+														<a href="#" class="postil-list-username">User</a>
+														<span class="postil-list-createdate">2018-07-03</span>
+														<button class="btn btn-xs postil-reply-btn">&nbsp;回复</button>
+													</p>
+													<p style="word-wrap: break-word;word-break: normal;">回复内容</p>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="border-t postil-editor">
+							<div class="block">
+								<div class="block-header bg-gray-lighter">
+									<h3 class="block-title"></h3>
+								</div>
+								<div class="block-content bg-gray-lighter">
+									<div class="row form-group">
+										<div class="col-xs-12">
+											<textarea class="form-control postil-textarea" rows="3"
+													  id="postilContent"></textarea>
+										</div>
+									</div>
+									<div class="row form-group">
+										<div class="col-xs-12">
+											<botton class="btn btn-ms btn-primary postil-submit-btn"
+													id="submitPostilContentBtn">&nbsp;提交
+											</botton>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

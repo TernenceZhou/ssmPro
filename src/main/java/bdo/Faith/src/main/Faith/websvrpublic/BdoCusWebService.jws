@@ -1,0 +1,33 @@
+import java.util.Map;
+import cn.com.bdo.cusBase.service.CustomerWebService;
+
+public class BdoCusWebService {
+	
+	public String addCus(String CustomerName,String uscc,String systemid,String outsidecustomerid,String hrdepartmentcode,String outdepartname,String actiontype,String userId){
+		return CustomerWebService.addCus(CustomerName,uscc,systemid,outsidecustomerid,hrdepartmentcode,outdepartname,actiontype,userId);
+	}
+
+	public String findInfo(String CustomerName,String uscc,String from,String size,boolean isLoad){
+		return CustomerWebService.findInfo(CustomerName,uscc,from,size,isLoad);
+	}
+       
+        public String findCusBasicInfo(String CustomerId){
+		return CustomerWebService.findCusBasicInfo(CustomerId);
+	}
+        
+         public String setRelation(String systemid,String outsidecustomerid,String hrdepartmentcode,String userid,String customerid,String CustomerName,String outDepName){
+		return CustomerWebService.setRelation(systemid,outsidecustomerid,hrdepartmentcode,userid,customerid,CustomerName,outDepName);
+	}
+
+       public static boolean isCreatedPeople(String hrLoginId,String customerId){
+               return CustomerWebService.isCreatedPeople(hrLoginId,customerId);
+	}
+       
+       public static boolean isBlack(String customerId){
+               return CustomerWebService.isBlack(customerId);
+	}
+
+      public static String getUserIdByHrLoginId(String hrLoginId){
+              return CustomerWebService.getUserIdByHrLoginId(hrLoginId);
+       }
+}

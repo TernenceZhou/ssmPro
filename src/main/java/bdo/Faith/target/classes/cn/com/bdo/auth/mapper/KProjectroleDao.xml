@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.com.bdo.auth.dao.KProjectroleDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cn.com.bdo.auth.entity.KProjectroleEntity" id="kProjectroleMap">
+        <result property="autoId" column="autoId"/>
+        <result property="roleName" column="roleName"/>
+        <result property="dbField" column="dbField"/>
+        <result property="classField" column="classField"/>
+        <result property="property" column="property"/>
+        <result property="roleDesc" column="roleDesc"/>
+        <result property="creationDate" column="CREATION_DATE"/>
+        <result property="createdBy" column="CREATED_BY"/>
+        <result property="lastUpdateDate" column="LAST_UPDATE_DATE"/>
+        <result property="lastUpdatedBy" column="LAST_UPDATED_BY"/>
+        <result property="abolitionDate" column="ABOLITION_DATE"/>
+        <result property="abolishedBy" column="ABOLISHED_BY"/>
+        <result property="programApplicationId" column="PROGRAM_APPLICATION_ID"/>
+        <result property="programId" column="PROGRAM_ID"/>
+        <result property="activeFlag" column="ACTIVE_FLAG"/>
+    </resultMap>
+
+
+</mapper>

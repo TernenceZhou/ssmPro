@@ -1,0 +1,38 @@
+<style>
+
+	.tab_temp > .block > .nav-tabs > li.active > a,
+	.tab_temp > .block > .nav-tabs > li.active > a:hover,
+	.tab_temp > .block > .nav-tabs > li.active > a:focus {
+		color: black;
+		background-color: white;
+	}
+</style>
+<div data-toggle="slimscroll" data-always-visible="false"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%" id="samplingIsShow">
+	<div id="dgStockSummaryPage">
+		<div class="block" style="height: 100%;max-height: 100%;min-height: 100%;margin-bottom: -40px;">
+			<div class="block block-themed" style="margin-bottom: 0px;">
+				<div class="block-header bg-primary">
+					<ul class="block-options">
+						<li>
+							<button id="btn_dgStock_export" type="button">
+								<i class="si si-cloud-download" style="color: white;" title="导出"></i>
+							</button>
+						</li>
+						<li>
+							<button type="button" data-toggle="block-option"
+									data-action="fullscreen_toggle" style="color: white;" title="放大">
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">存货汇总表<span id="stockSummaryIndex"></span></h3>
+				</div>
+				<div class="block-content">
+					<table id="dgStockSummaryTable"
+						   class="table table-bordered table-striped table-hover"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

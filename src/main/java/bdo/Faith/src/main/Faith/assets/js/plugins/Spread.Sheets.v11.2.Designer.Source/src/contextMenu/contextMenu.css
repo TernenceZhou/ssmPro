@@ -1,0 +1,99 @@
+/* ZQF START */
+.gc-spread-cashFlowFeature{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -122px -46px;
+    background-repeat: no-repeat;
+}
+.gc-spread-noteFeature{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -122px -46px;
+    background-repeat: no-repeat;
+}
+.gc-spread-cellType{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -46px -47px;
+    background-repeat: no-repeat;
+}
+.gc-spread-customLabel{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -71px -47px;
+    background-repeat: no-repeat;
+}
+/* .gc-spread-customLinks{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -96px -46px;
+    background-repeat: no-repeat;
+} */
+.gc-spread-mutualIndex{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -96px -46px;
+    background-repeat: no-repeat;
+}
+.gc-spread-customClear{
+    background-image: url(../images/icons.png);
+    background-position: 0px -608px;
+    background-repeat: no-repeat;
+}
+/* ZQF END */
+.gc-spread-formatCells {
+    background-image: url(../images/icons.png);
+    background-position: 0px -1248px;
+    background-repeat: no-repeat;
+}
+
+.gc-spread-customSort {
+    background-image: url(../images/icons.png);
+    background-repeat: no-repeat;
+}
+
+.gc-spread-formatComment {
+    background-image: url(../images/icons.png);
+    background-position: 0px -4000px;
+    background-repeat: no-repeat;
+}
+
+.gc-spread-protectSheet {
+    background-image: url(../images/icons.png);
+    background-position: 0px -2176px;
+    background-repeat: no-repeat;
+}
+
+.gc-spread-slicerProperty {
+    background-image: url(../images/slicer_height.png);
+    background-repeat: no-repeat;
+}
+
+.gc-spread-slicerSetting {
+    background-image: url(../images/slicer_setting.png);
+    background-repeat: no-repeat;
+}
+
+.gc-spread-resetChartColor {
+    background-image: url(../images/chartIcon.png);
+    background-position: 0px -176px;
+    background-repeat: no-repeat;
+}
+
+.gc-spread-changeChartTypeDialog {
+    background-image: url(../images/chartIcon.png);
+    background-position: 0px -192px;
+    background-repeat: no-repeat;
+}
+
+.gc-spread-selectChartDataDialog {
+    background-image: url(../images/chartIcon.png);
+    background-position: 0px -208px;
+    background-repeat: no-repeat;
+}
+
+.gc-spread-moveChartDialog {
+    background-image: url(../images/chartIcon.png);
+    background-position: 0px -224px;
+    background-repeat: no-repeat;
+}
+
+.gc-spread-formatChart {
+    background-image: url(../images/chartIcon.png);
+    background-position: 0px -240px;
+    background-repeat: no-repeat;
+}

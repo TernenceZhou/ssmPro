@@ -1,0 +1,17 @@
+<html>
+<head>
+<link rel="Shortcut Icon" href="${pageContext.request.contextPath}/img/coop/logo2.png">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+	 // 只允许Chrome访问
+	if(window.chrome){
+		window.location.replace("./Faith/bdologin.do");
+	}else {
+		document.write('由于您:<br/><br/>'
+		+'① 未使用谷歌浏览器<br/>'
+		+'② 或者浏览器的兼容模式不为Chrome内核<br/><br/>'
+		+'因此访问审计业务综合管理平台时，某些功能模块有可能发生无法预知的异常。<br/>为避免发生不确定的异常，目前该系统仅允许在【含有谷歌内核】的浏览器才能访问，谢谢配合。');
+	}
+</script>
+</head>
+</html>

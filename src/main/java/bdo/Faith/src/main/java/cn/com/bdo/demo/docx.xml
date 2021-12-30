@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<w:document xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+			xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+			mc:Ignorable="w14 w15 w16se w16cid wp14"
+>
+	<w:body>
+		<w:p w:rsidP="00E40DB6" w:rsidR="00850197" w:rsidRDefault="00E40DB6" w:rsidRPr="00E40DB6">
+			<w:r w:rsidRPr="00B21AB3">
+				<w:rPr>
+					<w:highlight w:val="lightGray"/>
+				</w:rPr>
+				<w:fldChar w:fldCharType="end"/>
+			</w:r>
+			<w:bookmarkStart w:id="0" w:name="_GoBack"/>
+			<w:bookmarkEnd w:id="0"/>
+		</w:p>
+		<w:sectPr w:rsidR="00850197" w:rsidRPr="003F23B8" w:rsidSect="00963D8C">
+			<w:headerReference r:id="rId9" w:type="even"/>
+			<w:headerReference r:id="rId10" w:type="default"/>
+			<w:footerReference r:id="rId11" w:type="default"/>
+			<w:headerReference r:id="rId12" w:type="first"/>
+			<w:pgSz w:code="9" w:h="16839" w:w="11907"/>
+			<w:pgMar w:bottom="1440" w:footer="992" w:gutter="0" w:header="709" w:left="1797" w:right="1797"
+					 w:top="1440"/>
+			<w:cols w:space="425"/>
+			<w:docGrid w:linePitch="312"/>
+		</w:sectPr>
+	</w:body>
+</w:document>
+
+<xml-fragment w:rsidP="00E40DB6" w:rsidR="00E40DB6" w:rsidRDefault="00E40DB6" w:rsidRPr="00B21AB3"
+			  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+			  xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+>
+<w:pPr>
+	<w:pStyle w:val="29"/>
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:bCs/>
+	</w:rPr>
+</w:pPr>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:b/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:fldChar w:fldCharType="begin"/>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText xml:space="preserve"> LINK Excel.Sheet.12 E:\\</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText>雍</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText>\\</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText>附注排版</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText>\\2014</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText>年年报格式</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText>\\</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText>附注过渡表</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText xml:space="preserve">20150130V0910.xlsx </w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText>货币资金</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText>!</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText>货币资金</w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:instrText xml:space="preserve"> \f 4 \h \* MERGEFORMAT </w:instrText>
+</w:r>
+<w:r w:rsidRPr="00B21AB3">
+	<w:rPr>
+		<w:rFonts w:eastAsiaTheme="minorEastAsia"/>
+		<w:b/>
+		<w:highlight w:val="lightGray"/>
+	</w:rPr>
+	<w:fldChar w:fldCharType="separate"/>
+</w:r>
+</xml-fragment>

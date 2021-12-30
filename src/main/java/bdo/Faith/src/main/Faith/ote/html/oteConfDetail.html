@@ -1,0 +1,138 @@
+<div id="oteConfDetailSider" class="bdo-side">
+	<div class="bdo-side-block block block-themed">
+		<div class="block-header bg-info">
+			<ul class="block-options">
+				<li>
+					<button data-close="true" type="button">
+						<i class="si si-close"></i>
+					</button>
+				</li>
+			</ul>
+			<h3 class="block-title">{{title}}</h3>
+		</div>
+		<div class="block-content bdo-side-content">
+			<div data-toggle="slimscroll" data-always-visible="false"
+				 data-rail-visible="true" data-rail-color="#777"
+				 data-rail-opacity=".0" data-height="90%">
+				<div class="">
+					<form class="js-validation-material form-horizontal pull-t push-5-t POJO" id="oteConfDetailForm">
+						<div class="form-group">
+							<div class="col-sm-12">
+								<button class="btn btn-sm btn-primary push-5-r" type="button"
+										data-ote-btn-click="onSaveOteRulesClick"
+								>保存</button>
+							</div>
+						</div>
+						<div class="form-group has-success">
+							<div class="col-sm-3 col-xs-3">
+								<div class="form-material">
+									<input class="form-control" type="text"
+										   {{readonly}}
+										   placeholder=""
+										   data-param-name="oteVersion"
+										   value="{{oteVersion}}"
+										   name="oteVersion" >
+									<label>版本号</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group has-success">
+							<div class="col-sm-3 col-xs-3">
+								<div class="form-material">
+									<label>节点</label>
+								</div>
+							</div>
+							<div class="col-sm-3 col-xs-3">
+								<div class="form-material">
+									<label>节点名称</label>
+								</div>
+							</div>
+							<div class="col-sm-2 col-xs-2">
+								<div class="form-material">
+									<label>分值</label>
+								</div>
+							</div>
+							<div class="col-sm-2 col-xs-2">
+								<div class="form-material">
+									<label>进度要求(%)</label>
+								</div>
+							</div>
+							<div class="col-sm-2 col-xs-2">
+								<div class="form-material">
+									<label>总分占比(%)</label>
+								</div>
+							</div>
+						</div>
+						{{each oteConfs oteConf i}}
+						<div class="form-group">
+							<div class="col-sm-3 col-xs-3">
+								<div class="form-material">
+									<input class="form-control" type="text"
+										   readonly
+										   placeholder=""
+										   data-param-name="{{oteConf.nodeType}}"
+										   value="{{oteConf.nodeType}}"
+										   name="{{oteConf.nodeType}}.nodeType" >
+								</div>
+							</div>
+							<div class="col-sm-3 col-xs-3">
+								<div class="form-material">
+									<input class="form-control" type="text"
+										   readonly
+										   placeholder=""
+										   data-param-name="{{oteConf.nodeType}}"
+										   value="{{oteConf.nodeName}}"
+										   name="{{oteConf.nodeType}}.nodeName" >
+								</div>
+							</div>
+							<div class="col-sm-2 col-xs-2">
+								<div class="form-material">
+									<input class="form-control" type="number"
+										   required
+										   max="100"
+										   min="0"
+										   {{readonly}}
+										   placeholder=""
+										   data-param-name="{{oteConf.nodeType}}"
+										   value="{{oteConf.score}}"
+										   name="{{oteConf.nodeType}}.score" >
+								</div>
+							</div>
+							<div class="col-sm-2 col-xs-2">
+								<div class="form-material">
+									<input class="form-control" type="number"
+										   required
+										   max="100"
+										   min="0"
+										   {{readonly}}
+										   placeholder=""
+										   data-param-name="{{oteConf.nodeType}}"
+										   value="{{oteConf.nodeRop}}"
+										   name="{{oteConf.nodeType}}.nodeRop" >
+								</div>
+							</div>
+							<div class="col-sm-2 col-xs-2">
+								<div class="form-material">
+									<input class="form-control" type="text"
+										   readonly
+										   placeholder=""
+										   data-param-name="{{oteConf.nodeType}}"
+										   value="{{oteConf.proportion}}%"
+										   name="{{oteConf.nodeType}}.proportion" >
+								</div>
+							</div>
+						</div>
+						{{/each}}
+						<div class="form-group">
+							<div class="col-sm-1">
+								<button class="btn btn-sm btn-primary" type="button"
+										data-ote-btn-click="onSaveOteRulesClick"
+								>保存</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,361 @@
+@CHARSET "UTF-8";
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_1"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_2"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_3"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_4"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_5"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_6"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_7"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_8"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_9"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_10"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_11"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_12"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_13"] {
+    height: 50px;
+}
+
+.gc-ribbon-bar button[data-command="ribbon.setIdentifier_14"] {
+    height: 50px;
+}
+
+.ribbon-formatpainter{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -149px -46px !important;
+}
+
+.ribbon-customlabel{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -71px -47px !important;
+}
+
+.ribbon-mutualIndex{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -97px -46px !important;
+}
+
+.ribbon-auditsampling{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -197px -47px !important;
+}
+
+.ribbon-notefeature{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -122px -46px !important;
+}
+
+.ribbon-notelink{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -46px -47px !important;
+}
+
+.ribbon-cashflowfeature{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -122px -46px !important;
+}
+
+.ribbon-mergenotefeature{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -122px -46px !important;
+}
+
+.ribbon-dgfetch{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -303px -47px !important;
+}
+
+.ribbon-bankstatement{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -249px -47px !important;
+}
+
+.ribbon-billreceive{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -227px -47px !important;
+}
+
+.ribbon-singleLink{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -46px -47px !important;
+}
+
+.ribbon-generateOtherDg{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -387px -46px !important;
+}
+
+.ribbon-bankHzFetch{
+	background-image: url(../images/bdospreadicon.png);
+    background-position: -227px -47px !important;
+}
+
+.ribbon-bankHzResultCheck{
+	background-image: url(../images/bdospreadicon.png);
+    background-position: -387px -46px !important;
+}
+
+.ribbon-accountAge{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -172px -46px !important;
+}
+
+.ribbon-billReceivable{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -227px -47px !important;
+}
+
+.ribbon-depreciation{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -227px -47px !important;
+}
+
+.ribbon-amortization{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -227px -47px !important;
+}
+
+.ribbon-rowmaterialValuation{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -227px -47px !important;
+}
+
+.ribbon-stockgoodsValuation{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -227px -47px !important;
+}
+
+.ribbon-statementBalance{
+    background-image: url(../images/bdospreadicon.png);
+    background-position: -249px -47px !important;
+}
+
+.single-link-dialog {
+    margin: 5px;
+    height: 440px;
+}
+
+.single-link-dialog fieldset {
+    height: 290px;
+    margin-left: 4px;
+}
+
+.single-link-dialog select {
+    border-color: darkgrey;
+    width: 200px;
+}
+
+.single-link-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.single-link-dialog .items {
+    width: 100%;
+}
+
+.single-link-dialog input {
+    width: 200px;
+}
+
+.single-link-dialog button {
+    margin-left: 8px;
+}
+
+.single-link-dialog td {
+    vertical-align: top;
+    width: 160px;
+}
+
+.custom-label-dialog {
+    margin: 5px;
+    height: 150px;
+}
+
+.custom-label-dialog button {
+    margin-right: 5px;
+    width: 120px;
+    height: 25px;
+}
+
+.custom-label-dialog input {
+    width: 200px;
+}
+
+.custom-label-dialog td {
+    vertical-align: top;
+    height: 30px;
+}
+
+.dg-fetch-dialog {
+    margin: 5px;
+    height: 280px;
+}
+
+.dg-fetch-dialog input {
+    width: 200px;
+}
+
+.dg-fetch-dialog select {
+    border-color: darkgrey;
+    width: 200px;
+}
+
+.dg-fetch-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.dg-fetch-dialog button {
+    margin-right: 5px;
+    height: 25px;
+}
+
+.audit-sampling-dialog {
+    margin: 5px;
+    height: 270px;
+}
+
+.audit-sampling-dialog fieldset {
+    height: 190px;
+    margin-left: 4px;
+}
+
+.audit-sampling-dialog select {
+    border-color: darkgrey;
+    width: 200px;
+    height: 28px;
+}
+
+.audit-sampling-dialog input {
+    width: 200px;
+    height: 28px;
+}
+
+.audit-sampling-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.audit-sampling-dialog .items {
+    width: 100%;
+}
+
+.audit-sampling-dialog button {
+    margin-left: 8px;
+}
+
+.audit-sampling-dialog td {
+    vertical-align: top;
+    width: 160px;
+}
+
+.mutual-index-dialog fieldset {
+    margin-left: 8px;
+}
+.mutual-index-dialog legend {
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+.mutual-index-dialog input {
+    border-width: 0px;
+    border-bottom-width: 1px;
+    border-color: rgb(169, 169, 169);
+    width: 230px;
+    height: 28px;
+}
+
+.mutual-index-dialog input:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.mutual-index-dialog select {
+	border-width: 0px;
+    border-bottom-width: 1px;
+    border-color: rgb(169, 169, 169);
+    width: 230px;
+}
+
+.mutual-index-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.note-feature-dialog {
+    margin: 5px;
+    height: 380px;
+}
+
+.note-feature-dialog input {
+    width: 200px;
+}
+
+.note-feature-dialog select {
+    border-color: darkgrey;
+    width: 200px;
+}
+
+.note-feature-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.note-feature-dialog button {
+    margin-right: 5px;
+    height: 25px;
+}
+
+.cashflow-feature-dialog td {
+    vertical-align: top;
+}
+
+.cashflow-feature-dialog input {
+    width: 200px;
+}
+
+.cashflow-feature-dialog select {
+    border-width: 0px;
+    border-bottom-width: 1px;
+    border-color: rgb(169, 169, 169);
+    width: 200px;
+}
+
+.cashflow-feature-dialog select:disabled {
+    background-color: rgb(235, 235, 228);
+}
+
+.cashflow-feature-dialog button:disabled {
+    background-color: rgb(235, 235, 228);
+}
+

@@ -1,0 +1,8 @@
+import cn.com.bdo.cusBase.service.UserCustomerProjectService;
+
+public class BdoProWebService {
+
+    public String getCustomer(String userId, String pwd) {
+        return UserCustomerProjectService.getCustomer(userId, pwd);
+    }
+}

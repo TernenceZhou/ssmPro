@@ -1,0 +1,79 @@
+<div class="block block-themed">
+	<div class="block-header bg-primary">
+		<label style="width: 120px">集团重要性水平</label>
+		<input  id="settingTypeValue1Total"  style="text-align:right"  disabled>
+		<label style="width: 200px">剩余可分配的集团重要性水平</label>
+		<input  id="surplusSettingTypeValue1Total"  style="text-align:right"  disabled><br>
+		<label style="width: 120px">集团明显微小错报</label>
+		<input  id="settingTypeValue2Total"  style="text-align:right" disabled>
+		<label style="width: 200px">剩余可分配的集团明显微小错报</label>
+		<input  id="surplusSettingTypeValue2Total"  style="text-align:right" disabled>
+	</div>
+	<div class="block-content">
+		<div class="row">
+			<table id="mergeMaterialityTable" class="table table-bordered table-striped table-hover"></table>
+		</div>
+	</div>
+	<div class="modal fade" id="distributionMaterialityModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button class="btn btn-md btn-primary" type="button" id="materiality_save">
+									<i class="fa fa-save"></i><span>&nbsp;保存</span>
+								</button>
+								</li>
+							<li>
+								<button type="button" data-dismiss="modal" id="constitute_close">
+									<i class="si si-close"></i>
+								</button>
+							</li>
+						</ul>
+						<h4 class="block-title">重要性水平设置</h4>
+					</div>
+				</div>
+				<input style="display : none" id="mergeAutoId" >
+				<div class="modal-body" >
+					<div class="form-material ">
+						<input class="form-control" type="text" data-toggle="tooltip" data-placement="top" title="" id="shortName" disabled>
+						<label>项目简称</label>
+					</div>
+				</div>
+				<div class="modal-body" >
+					<div class="form-material ">
+						<input class="form-control" type="text" data-toggle="tooltip" data-placement="top" title="" id="stockBreakRate" disabled>
+						<label>股权比例</label>
+					</div>
+				</div>
+				<div class="modal-body" >
+					<div class="form-material ">
+						<input class="form-control" name='distributionMaterialityValue' type="text" data-toggle="tooltip" data-placement="top"  id="distributionMaterialityValue1">
+						<label>集团分配的重要性水平<span class="necessary">*</span></label>
+					</div>
+				</div>
+				<div class="modal-body" >
+					<div class="form-material ">
+						<input class="form-control" name='distributionMaterialityValue' type="text" data-toggle="tooltip" data-placement="top"  id="distributionMaterialityValue2" >
+						<label>集团分配的明显微小错报<span class="necessary">*</span></label>
+					</div>
+				</div>
+
+				<div class="modal-body" >
+					<div class="form-material ">
+						<input class="form-control" type="text" data-toggle="tooltip" data-placement="top"  id="settingTypeValue1" disabled>
+						<label>集团重要性水平</label>
+					</div>
+				</div>
+				<div class="modal-body" >
+					<div class="form-material ">
+						<input class="form-control" type="text" data-toggle="tooltip" data-placement="top"  id="settingTypeValue2" disabled>
+						<label>集团明显微小错报</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,90 @@
+<style>
+@media ( min-width : 1200px) {
+	.col-lg-2.n5 {
+		width: 20%;
+	}
+}
+</style>
+<div class="content remove-padding push-10-l push-10-r push-10-t">
+	<div class="row">
+		<div class="col-md-6 col-lg-6" id="contentChild">
+			<div class="block block-themed">
+				<div class="block-header bg-primary">
+					<h3 class="block-title">选择项目</h3>
+				</div>
+				<div class="block-content" id="tab_tbList_content">
+					<div class="block ">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="block-content">
+									<div class="form-group"></div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<div class="form-material ">
+												<select class="form-control" id="set_projectId">
+													<option></option>
+												</select> <label for="set_projectId">项目选择</label>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<div class="form-material input-group">
+												<input class="form-control" type="text"
+													id="set_auditStartDate" size=10 disabled> <span
+													id="search_dateAddon" class="input-group-addon">-</span> <input
+													class="form-control" type="text" id="set_auditEndDate"
+													size=10 disabled> <label for="set_auditStartDate">审计期间</label>
+											</div>
+										</div>
+										<div class="col-sm-14 block-options-simple">
+											<button class="btn btn-primary" type="submit" id="set_save">
+												<i class="fa fa-check"></i> 确定
+											</button>
+											<button class="btn btn-warning" type="reset" id="set_clear">
+												<i class="fa fa-repeat"></i> 重置
+											</button>
+											<button class="btn btn-success" type="button"
+												id="set_refresh">
+												<i class="fa fa-refresh"></i> 同步客户项目
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6 col-lg-6" id="settingProjectWarning">
+			<div class="block block-themed">
+				<div class="block-header bg-warning">
+					<h3 class="block-title">客户和项目的选择说明</h3>
+				</div>
+				<div class="block-content">
+					<div class="block ">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="block-content">
+									<p>1.必须针对该项目导入财务数据</p>
+
+									<p>2.必须是税务云项目：税务项目管理系统-项目维护-是否税务云项目选择是</p>
+
+									<p>3.必须是该项目的组员（排班）或者审核人</p>
+
+									<p>4.必须项目负责人在税务云平台项目设置页面设置并保存后，其他人员才可以查看</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="content remove-padding push-10-l push-10-r push-10-t">
+	<div class="col-md-12">
+		<div id="projectSetChangeHistory" class="content-grid push-50"></div>
+	</div>
+</div>

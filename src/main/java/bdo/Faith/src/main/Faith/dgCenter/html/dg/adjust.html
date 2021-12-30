@@ -1,0 +1,702 @@
+<div class="block block-themed" id="adjust_show">
+	<div class="block-header bg-primary">
+		<ul class="block-options">
+			<li>
+				<button class="bdoexport-btn" type="button"
+						data-bdoexport-table-id="adjustTable"
+						data-bdoexport-title="调整分录"
+				>
+					<i class="si si-cloud-download"> 导出</i>
+				</button>
+			</li>
+			<li>
+				<button id="addAdjustBtn" type="button"
+						style="display: inline-block">
+					<i class="fa fa-plus"> 调整</i>
+				</button>
+				<button id="refreshGuideTableBtn" type="button"
+						style="display: inline-block">
+					<i class="fa fa-refresh"> 刷新</i>
+				</button>
+			</li>
+		</ul>
+		<h3 id="adjustTableTitle" class="block-title">调整一览</h3>
+	</div>
+	<div class="block-content">
+		<div class="row">
+			<table id="adjustTable"
+				   class="table table-bordered table-striped table-hover"></table>
+		</div>
+	</div>
+</div>
+
+<div
+	style="/*width: 65%; height: auto; overflow: auto;*/ position: absolute; top: 20%; left: 13%;z-index: 1050;
+	background: white;display: none;"
+	id="modal_jnadjustform2">
+	<div style="
+		position: fixed;
+		top: 0px;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+		z-index: -1;
+	"></div>
+	<div style="width: 100%;height: 35px;background: #70b9eb;" onmousedown="mouseDown()" onmouseup="mouseUp()">
+		<h5 class="block-title" style="float: left; margin-left: 20px; color: white; margin-top: 9px;">调整分录</h5>
+		<button type="button"
+				style="float: right;background:#70b9eb;;color: white;border: 0;position: relative; top: 8px; "
+				id="adjust_close">
+			<i class="si si-close"></i>
+		</button>
+	</div>
+	<div style="height:375px;position: relative;top: 3px;overflow: auto; min-width: 1200px" id="adjust_div_modal">
+		<div style="width: 98%;height: 42px; position: relative; top: 10px; margin-left: 17px;background: #5c90d2;" id="adjust_title">
+			<h5 class="block-title" style="color:white;position: relative; top: 10px; left: 10px;width: 49px;">分录项</h5>
+			<div style="color: white; width: 450px; margin-left: 83px; margin-top: -7px;">
+				<label for="jnadjust_dgName2" id="adjust_name">底稿名称:</label>
+				【<span id="jnadjust_dgName2"></span>】
+			</div>
+			<div style="color: white; width: 130px; margin-left: 570px; margin-top: -22px;">
+				<label for="jnadjust_dgYear2">调整年份:</label>
+				【<span id="jnadjust_dgYear2"></span>】
+			</div>
+			<div style="color: white; margin-left: 882px; margin-top: -21px; width: 105px;display: none">
+				<label for="jnadjust_type2">调整类型:</label>
+				<span id="jnadjust_type2"></span>
+				<span id="jnadjust_type3" style="display: none"></span>
+			</div>
+			<span style="float:right;position: relative; left: -10px; top: -31px;">
+				<!--<button id="heavy_classification" type="button" class="btn btn-md btn-primary" style="border: 0">
+					<i class="fa fa-plus" style="color: white;">&nbsp;负值重分类</i>
+				  </button>-->
+				<button class="btn btn-md btn-primary" type="button"
+						id="add_customer_assItem" style="border: 0;">
+				    <i class="fa fa-address-card"></i><span>&nbsp;添加核算</span>
+				</button>
+				<button id="heavy_classification" type="button" class="btn btn-md btn-primary dropdown-toggle" data-toggle="dropdown" style="border: 0">
+					<i class="fa fa-plus" style="color: white;">&nbsp</i><span>重分类 </span><span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#" data-value="1" id="btn_negative" >负值重分类</a></li>
+					<li><a href="#" data-value="2" id="btn_customize" >自定义重分类</a></li>
+				</ul>
+				<button class="btn btn-md btn-primary" type="button"
+						id="jnadjust_save2" style="border: 0;">
+				    <i class="fa fa-save"></i><span>&nbsp;保存</span>
+				</button>
+<!--
+一次增加多笔调整分录前端有问题
+ 						-李开
+<button id="jnadjust_plus2" type="button" class="btn btn-md btn-primary" style="border: 0;">
+					<i class="fa fa-plus" style="color: white;">&nbsp;添加</i>
+				  </button>-->
+			</span>
+		</div>
+		<div class="block-content" id="allTableContent2" style="width:1165px;">
+			<div class="row">
+				<div class="col-sm-4 nCol"
+					 style="font-size: 14px;position: absolute;left: 100px;">
+					差额(借-贷) : <br/><span data-name="jnadjust_balance2">0</span>
+				</div>
+				<div class="col-sm-4 nCol" style="font-size: 14px;position: absolute;left: 210px;">
+					贷方金额(合计) :<br/> <span data-name="jnadjust_credit2">0</span>
+				</div>
+				<div class="col-sm-4 nCol" style="font-size: 14px;position: absolute;left: 320px;">
+					借方金额(合计) :<br/> <span data-name="jnadjust_debit2">0</span>
+				</div>
+				<div class="col-sm-4 nCol" style="font-size: 14px;position: relative;height: 40px;">
+					<br> <span ></span>
+				</div>
+			</div>
+			<div class="row">
+				<table id="jnadjust_table_id"
+					   class="table table-bordered table-striped table-hover"></table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal_subjectid" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:400px;max-height:400px">
+				<div id="adsubject_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput2" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_subject_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_subject_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_assitem" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择辅助核算 (默认展示20个 超出部分可以使用搜索科目选择)</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:400px;max-height:400px">
+				<div id="assitem_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput3" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_assitem_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_assitem_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal_invalid" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="invalid_save" data-dismiss="modal" >
+								<i class="fa fa-save"></i>
+							</button>
+						</li>
+						<li>
+							<button type="button" id="invalid_close" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">不调整信息</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:300px;max-height:300px">
+				
+				<form  id="invalid_form" class="js-validation-bootstrap form-horizontal" action="" method="post" onsubmit="return false;">
+
+					<div class="form-group">
+						<div class="col-xs-6" id="radio-div-id">
+							<label class="css-input css-radio css-radio-success push-10-r">
+								<span></span> 税务影响：
+							</label>
+							<label class="css-input css-radio css-radio-success push-10-r">
+								<input type="radio" name="radio-group4" value="1" checked=""><span></span> 是
+							</label>
+							<label class="css-input css-radio css-radio-success">
+								<input type="radio" name="radio-group4" value="0"><span></span> 否
+							</label>
+						</div>
+						<div class="col-xs-6">
+							<div class="form-material">
+								<select class="form-control" id="invalid-select" name="material-select" size="1">
+								</select>
+								<label for="invalid-select">错报类型</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 control-label" for="disabledReason">不调整原因 <span class="text-danger">*</span></label>
+						<div class="col-xs-6">
+							<textarea class="" id="disabledReason" name="val-suggestions"  maxlength="50" rows="18"
+									  placeholder="" style="height: 159px; width: 399px; margin: 0;"></textarea>
+						</div>
+					</div>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="account_subject_table" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="
+    min-width: 870px;
+    max-height: 700px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="ast_save" data-dismiss="modal" >
+								<i class="fa fa-save"></i>
+							</button>
+						</li>
+						<li>
+							<button type="button" id="ast_close" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择对方科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="max-width: 870px;height: auto;max-height: 700px;">
+				<table id="ast_account_table" class="table table-bordered table-striped table-hover">
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="vch_adjust_modal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="
+    min-width: 870px;
+    min-height: 700px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="vch_save" data-dismiss="modal">
+								<i class="fa fa-save"></i>
+							</button>
+						</li>
+						<li>
+							<button type="button" id="vch_close" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title"><span id="rearrangeSubjectTitle">选择负值重分类科目 </span><a id="go_to_contacts" style="color: white">（<u>数据来源：根据往来客户功能中客商列表期末余额<0 Go！</u>）</a></h3>
+				</div>
+			</div>
+			<div class="block-header  ui-draggable-handle"
+				 style="padding-bottom: 20px;padding-top: 0px;padding-left: 0px;">
+				<label class="form-material col-xs-8 col-sm-8 col-lg-8" for="vch_filter_subject"
+					   style="width: 100px;padding-top: 16px;"></label>
+				<div class="block-options form-group has-info" style="float: left;">
+					<label class="form-material col-xs-8 col-sm-8 col-lg-8" for="vch_filter_subject"
+						   style="width: 100px;padding-top: 12px;">选择科目:</label>
+					<div class="form-material col-xs-8 col-sm-8 col-lg-8" style="width: 110px;height: 35px;">
+						<input class="form-control" id="vch_filter_subject" name="vch_filter_subject" style=""></div>
+				</div>
+				<div class="block-options form-group has-info" style="float: left;">
+					<label class="form-material col-xs-8 col-sm-8 col-lg-8" for="vch_filter_accItem"
+						   style="width: 100px;padding-top: 12px;">选择核算:</label>
+					<div class="form-material col-xs-8 col-sm-8 col-lg-8" style="width: 110px;height: 35px;">
+						<input class="form-control" id="vch_filter_accItem" name="vch_filter_accItem" style=""></div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<table id="vch_account_table" class="table table-bordered table-striped table-hover" style="max-width: 870px;height: auto;max-height: 700px;">
+					<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="vch_info_table" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md" style="
+    min-width: 870px;
+    max-height: 630px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="vch_info_close" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title" id="vch_view_info_title">凭证明细</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<table id="vch_info_view_table" class="table table-bordered table-striped table-hover"
+					   style="max-width: 870px;height: auto;max-height: 630px;">
+				<tbody></tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal_vch_subjectid" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false" style="top: 40px; z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height: 500px; max-height: 500px">
+				<div id="subject_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput1" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_vch_subjectid_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_vch_subjectid_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal_assitemid" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择核算</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:500px;max-height:500px">
+				<div id="modal_vch_assItem"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInputVchAcc" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_assitemid_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_assitemid_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="modal fade" id="modal_vch_opp_subjectid" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top: 40px; z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height: 500px; max-height: 500px">
+				<div id="opp_subject_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="opp_searchInput" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_vch_opp_subjectid_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_vch_opp_subjectid_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="modal_cunstomer_assItem" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false"
+	 style="top:40px; z-index: 1060;">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button class="btn btn-md btn-primary" type="button"
+									id="modal_cunstomer_assItem_init">
+								<i class="fa fa-undo"></i><span>&nbsp;初始化核算</span>
+							</button>
+						</li>
+						<li>
+							<button class="btn btn-md btn-primary" type="button"
+									id="modal_cunstomer_assItem_sure">
+								<i class="fa fa-send"></i><span>&nbsp;确定</span>
+							</button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">添加核算</h3>
+				</div>
+			</div>
+			<div class="modal-body"
+				 style="max-height: 500px; padding-bottom: 0px; overflow-y: auto; overflow-x: hidden;">
+				<div class="row" style="margin-top: 10px;">
+					<div class="form-group has-info">
+						<div class="col-sm-6">
+							<div class="form-material">
+								<input class="form-control" type="text" id="cunstomer_subjectid_source">
+								<label for="cunstomer_subjectid_source">源科目</label>
+							</div>
+						</div>
+						<div class="col-sm-6">
+							<div class="form-material">
+								<input class="form-control" type="text" id="cunstomer_subjectid_target">
+								<label for="cunstomer_subjectid_target">目标科目</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--源科目-->
+<div class="modal fade" id="modal_subjectid_source" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:400px;max-height:400px">
+				<div id="adsubject_tree_source"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput_source" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_subject_source_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_subject_source_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--目标科目-->
+<div class="modal fade" id="modal_subjectid_target" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false" style="top:40px;z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height:400px;max-height:400px">
+				<div id="adsubject_tree_target"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInput_target" placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button" id="modal_subject_target_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button" id="modal_subject_target_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<link rel="stylesheet" href="/Faith/dgCenter/js/dg/adjust.css">
+<script>
+	var startX;
+	var startY;
+	var moveSwitch = false;
+	var currentLeft;
+	var currentTop;
+	var loginTag = document.getElementById('modal_jnadjustform2');
+
+	//定义一个方法，用来捕捉鼠标的坐标位置
+	document.onmousemove = function(e) {
+		if (moveSwitch) {
+			//e.clientX是一个触摸事件，即是鼠标点击时的X轴上的坐标
+			var x = e.clientX;
+			//e.clientY是一个触摸事件，即是鼠标点击时的Y轴上的坐标
+			var y = e.clientY;
+			//X轴上获得移动的实际距离
+			var distanceX = x - startX;
+			//Y轴上获得移动的实际距离
+			var distanceY = y - startY;
+			//currentLeft下面的方法会有解释，需要注意最后要添加PX单位，如果给left赋值会破坏文档流，不加单位就会无效
+			loginTag.style.left = (distanceX + currentLeft) + 'px';
+			loginTag.style.top = (distanceY + currentTop) + 'px';
+		}
+	};
+
+	//鼠标按下事件
+	function mouseDown(e) {
+		//因为兼容问题，event可能在隐藏参数中，如果隐藏参数没有event事件，则可以使用全局的事件window.event
+		e = e ? e : window.event;
+		if ($(e.target).parent().attr('id') === 'modal_jnadjustform2') {
+			moveSwitch = true;
+			startX = e.clientX;
+			startY = e.clientY;
+			//通过对象获取对象的坐标
+			currentLeft = loginTag.offsetLeft;
+			currentTop = loginTag.offsetTop;
+		}
+	}
+
+	//鼠标松开事件
+	function mouseUp() {
+		moveSwitch = false;
+	}
+</script>
+<script type="text/javascript">
+	var dataTable;
+	$(function () {
+
+	});
+
+	//添加
+	function add(menuId) {
+		var url = ctx + 'system/menu/add?menuId=' + menuId;
+		openLayer("添加下级", url, "600px", "550px");
+	}
+
+	//编辑
+	function edit(menuId) {
+		var url = ctx + "system/menu/edit/" + menuId;
+		openLayer("编辑", url, "600px", "550px");
+	}
+
+	//更新状态
+	function updateStatus(menuId, status) {
+		var title = "是否启用";
+		if (status == "false") {
+			title = "是否禁用";
+		}
+		var url = ctx + "system/menu/updateStatus?menuId=" + menuId + "&menuStatus=" + status;
+		confirmLayer(title, url);
+	}
+
+	//删除菜单操作
+	//删除单条
+	function deleteObject(menuId) {
+		confirmLayer('要删除该数据么？', ctx + 'system/menu/delete/' + menuId);
+	}
+
+	//更新排序操作
+	function updateSort() {
+		var checkID = $("#editable tbody tr td input[name='menuSortId'],input[name='menuSort']").serialize();
+		if (checkID == "") {
+			top.layer.alert('请至少选择一条数据!', {icon: 0, title: '警告'});
+			return;
+		}
+		commonHandleAll(ctx + "system/menu/updateSort", checkID, "要更新该菜单排序吗？");
+	}
+</script>

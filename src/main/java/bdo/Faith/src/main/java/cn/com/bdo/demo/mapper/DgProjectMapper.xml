@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.bdo.demo.mapper.DgProjectDao">
+	<resultMap id="projectRMap" type="java.util.Map">
+		<result property="financeReportTypeStr" column="financeReportTypeStr"/>
+		<result property="projectStartDate" column="projectStartDate"/>
+		<result property="projectEndDate" column="projectEndDate"/>
+		<result property="projectIndustry" column="projectIndustry"/>
+		<result property="industry" column="industry"/>
+	</resultMap>
+    <select id="query" parameterType="cn.com.bdo.demo.dto.DgProjectDto" resultMap="projectRMap">
+		select
+			b.tbTemplateName,
+			b.mergeType,
+			b.endMonth,
+			a.autoId,
+			a.projectIdMerge,
+			a.projectIdMergeText,
+			a.financeReportType,
+			case
+				when a.financeReportType = '0' then '单体'
+				when a.financeReportType = '1' then '合并'
+				end as financeReportTypeStr,
+			a.audit1,
+			a.audit2,
+			a.auditTimeBegin,
+			a.auditTimeEnd,
+			a.customerId,
+			a.customerName,
+			a.identifiedAuditUser,
+			a.identifiedState,
+			a.identifiedStateWeight,
+			a.isResetNow,
+			a.manager,
+			a.materialityAuditUser,
+			a.materialityState,
+			a.materialityStateWeight,
+			a.members,
+			a.membersId,
+			a.programAuditUser,
+			a.programPlanAuditUser,
+			a.programPlanState,
+			a.programPlanStateWeight,
+			a.programState,
+			a.programStateWeight,
+			a.projectId,
+			a.projectName,
+			a.reportFormat,
+			a.signUser,
+			a.tbTemplate,
+			a.tbReportTemplate,
+			a.trialBalanceAuditUser,
+			a.trialBalanceState,
+			a.trialBalanceStateWeight,
+			a.unauditedAuditUser,
+			a.unauditedState,
+			a.unauditedStateWeight,
+			a.year,
+			a.preCustomerId,
+			a.preProjectId,
+			a.preProjectName,
+			a.preId,
+			a.preYear,
+			a.manager as __umanager,
+			a.audit1 as __uaudit1,
+			a.audit2 as __uaudit2,
+			a.signUser as __usignUser,
+			a.auditStatu,
+			b.quoteReport,
+			b.quoteTb,
+			b.quoteIdentified,
+			b.quoteProgram,
+			a.finalResults,
+			a.signAccountant2,
+			a.signAccountant3,
+			a.reviewPartner,
+			a.reaReviewer,
+			a.issuedPeople,
+			a.signAccountant2 as __usignAccountant2,
+			a.signAccountant3 as __usignAccountant3,
+			a.reviewPartner as __ureviewPartner,
+			a.reaReviewer as __ureaReviewer,
+			a.issuedPeople as __uissuedPeople,
+			DATE_FORMAT( b.projectStartDate, '%Y-%m-%d' ) as projectStartDate,
+			DATE_FORMAT( b.projectEndDate, '%Y-%m-%d' ) as projectEndDate,
+			b.auditPolicyFileId,
+			b.projectUserablePlate,
+			(
+				case
+					when ( ISNULL(b.industrycategory) = 1 ) || ( length(trim(b.industrycategory)) = 0 ) then b.industryclassification
+					else b.industrycategory
+					end ) as projectIndustry,
+			(
+				case
+					when ( ISNULL(b.industrycategorycode) = 1 ) || ( length( trim(b.industrycategorycode) ) = 0 ) then CONCAT( upper(b.industryclassificationcode), '-GB' )
+					else CONCAT( UPPER(b.industryclassificationcode), b.industrycategorycode, '-GB' )
+					end ) as industry
+		from
+			bdo_dg.dg_project a
+				left join bdo_dg.dg_projectext b on
+					a.customerId = b.customerId
+					and a.projectId = b.projectId
+		WHERE a.projectId = #{param.projectId}
+		  AND a.customerId = #{param.customerId}
+    </select>
+</mapper>

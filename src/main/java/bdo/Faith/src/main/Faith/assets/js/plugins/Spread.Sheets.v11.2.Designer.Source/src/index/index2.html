@@ -1,0 +1,299 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>上下标公式渲染</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="spreadjs culture" content="zh-cn"/>
+	<link media="all" rel="stylesheet" type="text/css" href="../lib/spread/gc.spread.sheets.excel2013white.11.2.2.css">
+    <script src="../lib/jquery-2.0.2.min.js" type="text/javascript"></script>
+	<script src="../lib/FileSaver.min.js" type="text/javascript"></script>
+	<script src="../lib/spread/gc.spread.sheets.all.11.2.2.min.js" type="text/javascript"></script>
+	<script src="../lib/spread/resources/zh/gc.spread.sheets.resources.zh.11.2.2.min.js" type="text/javascript"></script>
+
+	<script src="../lib/spread/interop/gc.spread.excelio.11.2.2.min.js" type="text/javascript"></script>
+
+	<script src="../lib/spread/plugins/gc.spread.sheets.print.11.2.2.min.js" type="text/javascript"></script>
+	<script src="../lib/spread/plugins/gc.spread.sheets.pdf.11.2.2.min.js" type="text/javascript"></script>
+	<script src="../lib/spread/plugins/gc.spread.sheets.charts.11.2.2.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+
+		var spreadNS = GC.Spread.Sheets;
+		var spread;
+		$(document).ready(function () {
+			spread = new GC.Spread.Sheets.Workbook(document.getElementById("ss"), { sheetCount: 2 });
+			initSpread(spread);
+		});
+
+		//自定义单元格
+		function ShowTagCellType() {
+			this.typeName = "ShowTagCellType";
+			this._cellTagStartCache = undefined;
+			this._cellTagEndCache = undefined;
+			this._textWidth = undefined;
+		}
+
+		ShowTagCellType.prototype = new GC.Spread.Sheets.CellTypes.Text();
+		ShowTagCellType.prototype.paintContent = function (ctx, value, x, y, w, h, style, context) {
+			var tag = context.sheet.getTag(context.row, context.col);
+			if (tag == '' || tag == null || tag === undefined) {
+				this._cellTagStartCache = undefined;
+				this._cellTagEndCache = undefined;
+				this._textWidth = undefined;
+				GC.Spread.Sheets.CellTypes.Text.prototype.paintContent.call(this, ctx, value, x, y, w, h, style, context);
+				return;
+			}
+			this._cellTagStartCache = [], this._cellTagEndCache = [], this._textWidth = 0;
+			var startTextWidth = 0, endTextWidth = 0;
+			var sheet = context.sheet, zoomFactor = sheet.zoom();
+			var foreColor = style.foreColor, textDecoration = style.textDecoration;
+
+			//为了实现简单，单元格垂直居中，如果有其他需求，绘制文字位置重新计算
+			style.vAlign = GC.Spread.Sheets.VerticalAlign.center;
+
+			for (var i = 0; i < tag.cellTagStart.length; i++) {
+				var node = tag.cellTagStart[i];
+
+				if (node.type === 'link') {
+					style.foreColor = "blue";
+					style.textDecoration = GC.Spread.Sheets.TextDecorationType.underline;
+					var linkText = node.link;
+					GC.Spread.Sheets.CellTypes.Text.prototype.paintContent.call(this, ctx, linkText, x + startTextWidth + 2, y, w - startTextWidth, h, style, context);
+					var textWidth = GC.Spread.Sheets.CellTypes.Text.prototype.getAutoFitWidth.call(this, linkText, linkText, style, zoomFactor, context);
+
+					this._cellTagStartCache[i] = {
+						startX: x + startTextWidth,
+						textWidth: textWidth + 3,
+						formula: linkText
+					};
+					startTextWidth += (textWidth + 3)
+				}
+			}
+			this._textWidth += startTextWidth;
+
+			// Set Font to default
+			style.foreColor = foreColor;
+			style.textDecoration = textDecoration;
+
+			if (tag.cellTagEnd) {
+				var node = tag.cellTagEnd[0];
+				if (node.type === 'link') {
+					style.foreColor = "blue";
+					style.textDecoration = GC.Spread.Sheets.TextDecorationType.underline;
+					var linkText = node.link;
+					var textWidth = GC.Spread.Sheets.CellTypes.Text.prototype.getAutoFitWidth.call(this, linkText, linkText, style, zoomFactor, context);
+
+					this._cellTagEndCache[i] = {
+						startX: x + endTextWidth,
+						textWidth: textWidth + 3,
+						formula: linkText
+					};
+					endTextWidth += (textWidth + 3);
+					GC.Spread.Sheets.CellTypes.Text.prototype.paintContent.call(this, ctx, linkText, x + w - endTextWidth - 5, y, endTextWidth + 5, h, style, context);
+				}
+			}
+			this._textWidth += endTextWidth;
+
+			//Paint Value
+			style.font = "bold " + style.font;
+			style.hAlign = GC.Spread.Sheets.HorizontalAlign.right;
+			style.vAlign = GC.Spread.Sheets.VerticalAlign.middle;
+			GC.Spread.Sheets.CellTypes.Text.prototype.paintContent.call(this, ctx, value, x, y, w - endTextWidth - 3, h, style, context)
+		};
+
+		ShowTagCellType.prototype.getHitInfo = function (x, y, cellStyle, cellRect, context) {
+			var info = { x: x, y: y, row: context.row, col: context.col, cellRect: cellRect, sheetArea: context.sheetArea, isReservedLocation: false, reservedLocation: -1 };
+			for (var i = 0; i < this._cellTagStartCache.length; i++) {
+				var item = this._cellTagStartCache[i];
+				if (item) {
+					var startX = item.startX;
+					if (x - startX > 0 && x < startX + item.textWidth) {
+						info.isReservedLocation = true;
+						info.reservedLocation = i;
+						break;
+					}
+				}
+			}
+			return info;
+		};
+		ShowTagCellType.prototype.processMouseUp = function (hitInfo) {
+			var sheet = hitInfo.sheet, self = this;
+			if (sheet && hitInfo.isReservedLocation && hitInfo.reservedLocation >= 0) {
+				setTimeout(function () {
+					var expStr = self._cellTagStartCache[hitInfo.reservedLocation].formula;
+					var range;
+					if (expStr.indexOf(":") != -1) {
+						var index = spread.getSheetIndex(expStr.substring(0,expStr.indexOf(":")));
+						spread.setActiveSheetIndex(index);
+						expStr = expStr.substring(expStr.indexOf(":") + 1);
+						range = GC.Spread.Sheets.CalcEngine.formulaToRange(sheet, expStr, 0, 0);
+						spread.getActiveSheet().setActiveCell(range.row, range.col);
+					} else {
+						range = GC.Spread.Sheets.CalcEngine.formulaToRange(sheet, expStr, 0, 0);
+						sheet.setActiveCell(range.row, range.col);
+					}
+					
+					var rec = sheet.getCellRect(range.row, range.col);
+					if (rec.x === undefined) {
+						sheet.showCell(range.row, range.col, GC.Spread.Sheets.VerticalPosition.top, GC.Spread.Sheets.HorizontalPosition.left);
+					}
+				}, 10);
+				return true;
+			}
+			return false;
+		};
+		ShowTagCellType.prototype.processMouseMove = function (hitInfo) {
+			if (!this._toolTipElement) {
+				var div1 = document.createElement("div");
+				$(div1).css("position", "absolute")
+					.css("border", "1px #C0C0C0 solid")
+					.css("box-shadow", "1px 2px 5px rgba(0,0,0,0.4)")
+					.css("font", "9pt Arial")
+					.css("background", "white")
+					.css("padding", 5);
+				this._toolTipElement = div1;
+			}
+			$(this._toolTipElement).text("Cell [R:" + hitInfo.row + "] : [C:" + hitInfo.col + "]").css("top", hitInfo.y + 15).css("left", hitInfo.x + 15);
+			$(this._toolTipElement).hide();
+			document.body.insertBefore(this._toolTipElement, null);
+			$(this._toolTipElement).show("fast");
+			var sheet = hitInfo.sheet;
+			var div = sheet.getParent().getHost();
+			var canvasId = div.id + "vp_vp";
+			var canvas = $("#" + canvasId)[0];
+			if (sheet && hitInfo.isReservedLocation) {
+				canvas.style.cursor = 'pointer';
+				return true;
+			} else {
+				canvas.style.cursor = 'default';
+			}
+			return false;
+		};
+		
+		ShowTagCellType.prototype.processMouseLeave = function (hitInfo) {
+			if (this._toolTipElement) {
+				document.body.removeChild(this._toolTipElement);
+				this._toolTipElement = null;
+			}
+		};
+		ShowTagCellType.prototype.getAutoFitWidth = function (value, text, cellStyle, zoomFactor, context) {
+			if (this._textWidth) {
+				cellStyle.font = "bold " + cellStyle.font;
+				return 5 + this._textWidth + GC.Spread.Sheets.CellTypes.Text.prototype.getAutoFitWidth.call(this, value, text, cellStyle, zoomFactor, context);
+			} else
+				return GC.Spread.Sheets.CellTypes.Text.prototype.getAutoFitWidth.call(this, value, text, cellStyle, zoomFactor, context)
+		};
+
+		function getFormulaFromRowCol(row, col) {
+			var range = new GC.Spread.Sheets.Range(row, col, 1, 1);
+			return GC.Spread.Sheets.CalcEngine.rangeToFormula(range, 0, 0, GC.Spread.Sheets.CalcEngine.RangeReferenceRelative.allAbsolute, false)
+		}
+
+		function initSpread(spread) {
+
+
+			var sheet = spread.getSheet(0);
+			var a1 = getFormulaFromRowCol(0, 0);
+			sheet.addCustomName('SourceCell', a1, 0, 0);
+
+			sheet.suspendPaint();
+
+			var style = new GC.Spread.Sheets.Style();
+
+			style.font = "14px simkai";
+			sheet.setStyle(-1, -1, style, GC.Spread.Sheets.SheetArea.viewport);
+
+			var cell = sheet.getCell(1, 1);
+			cell.cellType(new ShowTagCellType());
+			//cell.formatter('"$USA"#,##0.00_);("$USA"#,##0.00)');
+			// cell.value(-5000.02);
+			cell.formula("SourceCell");
+			sheet.setValue(0, 0, -5000.02);
+
+			var cellTagStart = [
+				{
+					type: 'text',
+					text: '(Text Mark)'
+				},
+				{
+					type: 'text',
+					text: '(Text)'
+				},
+				{
+					type: 'link',
+					link: 'B22'
+				},
+				{
+					type: 'link',
+					link: 'S1'
+				},
+			];
+
+			cell.tag({
+				cellTagStart: cellTagStart
+			});
+
+			var cell2 = sheet.getCell(2, 1);
+			cell2.cellType(new ShowTagCellType());
+			//cell2.formatter('"$USA"#,##0.00_);("$USA"#,##0.00)');
+			cell2.value(1000.03);
+
+			var cellTagStart2 = [
+				{
+					type: 'text',
+					text: '{Mark}'
+				},
+				{
+					type: 'text',
+					text: '{Text}'
+				},
+				{
+					type: 'text',
+					text: '{Text}'
+				},
+				{
+					type: 'link',
+					link: 'B22'
+				},
+			];
+			cell2.tag({
+				cellTagStart: cellTagStart2
+			});
+			var h1 = new spreadNS.CellTypes.HyperLink();
+			sheet.resumePaint();
+			sheet.autoFitColumn(1);
+			sheet.autoFitRow(1);
+			sheet.autoFitRow(2);
+			
+			sheet.addSpan(2, 3, 1, 2);
+			sheet.setValue(2, 3, 'ID');
+			sheet.setValue(3, 3, 'T');
+			$("#changeProperty").click(function(){
+				sheet.addRows(3, 3);
+				sheet.copyTo(2, 0, 4, 0, 2, sheet.getColumnCount(), spreadNS.CopyToOptions.all);
+			});
+		}
+		/*code_end*/
+		
+		function propertyChange(sheet,isSet){
+			
+		}
+		
+	</script>
+
+</head>
+
+<body>
+<div class="sample-turtorial">
+	<div id="ss" style="width:100%; height: 420px;border: 1px solid gray;"></div>
+	<br>
+	<div>
+		<div>
+			<input type="button" id="changeProperty" value="测试" />
+		</div>
+	</div>
+</div>
+</body>
+
+</html>

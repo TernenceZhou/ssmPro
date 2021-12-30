@@ -1,0 +1,47 @@
+import com.matech.framework.websvr.WebSvrImp;
+
+
+/**
+ * 外部调用类
+ * 
+ * @author Administrator
+ * 
+ */
+public class WebSvr {
+
+	public static byte[] OpenSQL(String sSQL, String sGUID) {
+		return WebSvrImp.OpenSQL(sSQL, sGUID);
+	}
+
+	public static String ExecSQL(String sSQL, String sGUID) {
+		return WebSvrImp.ExecSQL(sSQL, sGUID);
+	}
+	
+	public static String ExecSQLZip(byte[] zipSql, String sGUID) {
+		return WebSvrImp.ExecSQLZip(zipSql, sGUID);
+	}
+	
+	public static byte[] OpenSQLEx(String sSQL, String sGUID) {
+		return WebSvrImp.OpenSQLEx(sSQL, sGUID);
+	}
+
+	public static byte[] CallFunc(String className, String funcName, String para,
+			String sGUID) {
+		return WebSvrImp.CallFunc(className, funcName, para, sGUID);
+	}
+
+	public static String SetData(String className, String funcName, String para,
+			byte[] vData, String sGUID) {
+		return WebSvrImp.SetData(className, funcName, para, vData, sGUID);
+	}
+
+	public static byte[] GetData(String className, String funcName, String para,
+			String sGUID) {
+		return WebSvrImp.GetData(className, funcName, para, sGUID);
+	}
+
+	public static String ExecFunc(String className, String funcName, String para,
+			String sGUID) {
+		return WebSvrImp.ExecFunc(className, funcName, para, sGUID);
+	}
+}

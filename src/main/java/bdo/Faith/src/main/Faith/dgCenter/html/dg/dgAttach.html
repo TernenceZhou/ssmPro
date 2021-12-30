@@ -1,0 +1,30 @@
+<div class="block block-themed">
+	<div class="block-header bg-primary">
+		<ul class="block-options">
+			<li>
+				<button id="uploadDgAttachBtn" type="button">
+					<i class="fa fa-upload"> 上传文件</i>
+				</button>
+			</li>
+			<li>
+				<button class="bdoexport-btn" type="button"
+						data-bdoexport-table-id="dgAttachTable"
+						data-bdoexport-title="javascript:$('#dgtitle').text()+'附件一览';"
+				>
+					<i class="si si-cloud-download"> 导出</i>
+				</button>
+			</li>
+			<li>
+				<button id="refreshDgAttachTableBtn" type="button">
+					<i class="fa fa-refresh"> 刷新</i>
+				</button>
+			</li>
+		</ul>
+		<h3 id="dgAttachTableTitle" class="block-title"></h3>
+	</div>
+	<div class="block-content">
+		<div class="row">
+			<table id="dgAttachTable" class="table table-bordered table-striped table-hover"></table>
+		</div>
+	</div>
+</div>

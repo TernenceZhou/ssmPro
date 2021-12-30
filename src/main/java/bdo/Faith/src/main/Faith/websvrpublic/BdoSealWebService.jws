@@ -1,0 +1,14 @@
+import java.util.Map;
+import cn.com.bdo.cpBase.service.SealService;
+
+public class BdoSealWebService {
+	
+	public boolean receiveSeal(String refId,String strXml,String userId,String system){
+		return SealService.receiveSeal(refId,strXml,userId,system);
+	}
+
+	public String getSealPath(String refId,String system){
+		return SealService.getSealPath(refId,system);
+	}
+       
+}

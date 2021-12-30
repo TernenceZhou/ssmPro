@@ -1,0 +1,214 @@
+<div data-toggle="slimscroll"
+	 data-always-visible="true"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%"
+	 data-size="10px">
+	<div class="block block-bordered " id="contentBlock" style="position: relative;margin-bottom: 0px;">
+		<div class="block-header" style="padding-right: 0px;">
+			<div class="block-options block-options-left">
+				<button id="exportExcelBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="导出">
+					<i class="si si-cloud-download">&nbsp;导出</i>
+				</button>
+				<button id="coverBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="获取最新版本">
+					<i class="fa fa-refresh">&nbsp;获取最新版本</i>
+				</button>
+				<button id="postilBtn" type="button"
+					class="btn btn-xs btn-danger push-5-r" title="批注">
+					<i class="fa fa-bookmark-o">&nbsp;批注</i>
+				</button>
+				<button id="openFormulaModalBtn" type="button"
+					class="btn btn-xs btn-success push-5-r" title="校验公式">
+					<i class="fa fa-sticky-note-o">&nbsp;校验公式</i>
+				</button>
+				<button id="openDgAttachBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="底稿附件">
+					<i class="fa fa-file">&nbsp;底稿附件</i>
+				</button>
+				<button id="openSamplingAttachBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="抽凭附件">
+					<i class="fa fa-file">&nbsp;抽凭附件</i>
+				</button>
+			</div>
+			<div class="block-options block-options-right push-10-r">
+				<button id="logoutBtn" type="button" class="btn btn-xs push-5-r red-light" title="安全退出">
+					安全退出&nbsp;<i class="si si-logout pull-right"></i>
+				</button>
+			</div>
+		</div>
+		<div id="spreadContainerRoot">
+			<div class="" id="spreadContainer"></div>
+		</div>
+		<div class="progress-mark">
+			<div class="progress active progress-display progress-mini">
+				<div class="progress-bar progress-bar-success progress-bar-striped progress-bar-cus" role="progressbar"
+					 aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+			</div>
+		</div>
+		<div class="modal fade" id="formulaModal" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content"
+					style="width: 1100px; border: 1px solid #D3D3D3;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info"
+							style="height: 40px; padding: 10px 20px 10px 20px;">
+							<ul class="block-options">
+								<li>
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal" aria-hidden="true">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h4 class="block-title">校验公式</h4>
+						</div>
+					</div>
+					<div class="modal-body" style="padding: 10px 20px 10px 20px;">
+						<div class="block" style="margin-bottom: 0px;">
+							<div>
+								<ul class="nav nav-tabs " data-toggle="tabs">
+									<li><a href="#tagMainTab"
+										style="height: 30px;"><h3 class="block-title">标签</h3></a></li>
+									<li class="active"><a href="#formulaMainTab" style="height: 30px;"><h3
+												class="block-title">公式</h3> </a></li>
+								</ul>
+							</div>
+							<div class="block-content block-content-full" style="padding: 0px;">
+								<div class="tab-content">
+									<div class="postil-content-wrap tab-pane" id="tagMainTab">
+										<div class="block-header bg-primary"
+											style="height: 30px; padding: 5px 20px;">
+											<div class="row">
+												<div class="form-group has-info">
+													<div class="col-sm-8">
+														<h4 class="block-title">标签一览</h4>
+													</div>
+													<div class="col-sm-2">
+														<div style="float: right;">
+															<label>标签分类</label> <select id="tagSortMain"
+																style="color: #0000009e; border: 1px solid #e9e9e9;">
+																<option value=""></option>
+																<option value="dg" selected>本底稿</option>
+																<option value="subject">本科目</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-sm-2">
+														<div style="float: right;">
+															<label>标签类型</label> <select id="tagTypeMain"
+																style="color: #0000009e; border: 1px solid #e9e9e9;">
+																<option value=""></option>
+																<option value="db">TB</option>
+																<option value="function">导引表</option>
+																<option value="dg">底稿</option>
+																<option value="note">附注</option>
+																<option value="report">报表</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<input type="text" id="formulaSubjectId" style="display: none;"> <input type="text"
+											id="formulaSubjectName" style="display: none;">
+										<div class="block-content" style="min-height: 40px;max-height: 450px;padding-top: 5px;">
+											<table id="tagsMainTable"
+												class="table table-bordered table-striped table-hover"></table>
+										</div>
+									</div>
+									<div class="postil-content-wrap tab-pane active" id="formulaMainTab">
+										<div class="block-header bg-primary"
+											style="height: 30px; padding: 5px 20px;">
+											<div class="col-sm-2" style="padding-left: 0px;">
+												<label> 校验数据公式一览</label>
+											</div>
+											<div class="col-sm-2" style="text-align: right; padding-right: 0px;">
+											</div>
+											<div class="col-sm-4">
+												<label>公式校验类型</label> <select id="formulaTypeMain"
+													style="color: #0000009e; border: 1px solid #e9e9e9;">
+													<option value=""></option>
+													<option value="0">导引表与底稿校验</option>
+													<option value="1">底稿与附注校验</option>
+													<option value="2">附注与报表校验</option>
+													<option value="4">报表与报表校验</option>
+													<option value="3">其他</option>
+												</select>
+											</div>
+											<div class="col-sm-4" style="text-align: right;">
+												<label>正确数/总数:</label>&nbsp; <label id="rightNumMain"></label><span>&nbsp;/&nbsp;</span><label
+													id="totalNumMain"></label>
+											</div>
+										</div>
+										<div class="block-content">
+											<table id="formulaTable" class="table table-bordered table-striped table-hover"></table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="dgAttachModal" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog"
+				style="margin-top: 50px; margin-left: 80px;">
+				<div class="modal-content" style="width: 1100px;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal" aria-hidden="true" title="关闭">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h4 class="block-title">底稿附件</h4>
+						</div>
+					</div>
+					<div class="modal-body" style="min-height: 40px;max-height: 480px;padding: 10px;">
+						<div class="block-content block-content-full"
+							style="padding: 0px 5px 0px 5px;">
+							<table id="dgPageAttachTable"
+								class="table table-bordered table-striped table-hover"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="samplingAttachModal" tabindex="-1"
+			role="dialog" aria-hidden="true" data-backdrop="static"
+			data-keyboard="false">
+			<div class="modal-dialog"
+				style="margin-top: 50px; margin-left: 80px;">
+				<div class="modal-content" style="width: 600px;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal" aria-hidden="true">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h4 class="block-title">抽凭附件</h4>
+						</div>
+					</div>
+					<div class="modal-body" style="min-height: 40px;max-height: 480px;padding: 10px;">
+						<div class="block-content block-content-full"
+							style="padding: 0px 5px 0px 5px;">
+							<table id="samplingAttachTable"
+								class="table table-bordered table-striped table-hover"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

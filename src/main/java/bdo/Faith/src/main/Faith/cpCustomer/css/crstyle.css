@@ -1,0 +1,29 @@
+.list-group-item:last-child {
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+.list-group-item:first-child {
+	border-top-left-radius: 0px; 
+	border-top-right-radius: 0px; 
+}
+.note-editor.note-frame {
+	border: none !important;
+}
+.note-editor.note-frame .panel-body {
+	border: none !important;
+}
+.file-drop-zone-title{
+	padding: 5px 10px !important;
+}
+.commentFormTrans-enter-active, .commentFormTrans-leave-active {
+	transition: opacity 2s;
+}
+.commentFormTrans-enter, .commentFormTrans-leave-to, .commentFormTrans-leave-active {
+	opacity: 0;
+}
+.task-list-trans-enter-active, .task-list-trans-leave-active {
+	transition: opacity 2s;
+}
+.task-list-trans-enter, .task-list-trans-leave-to, .task-list-trans-leave-active {
+	opacity: 0;
+}

@@ -1,0 +1,3111 @@
+<div data-toggle="slimscroll" data-always-visible="true"
+	data-rail-visible="true" data-rail-color="#777" data-rail-opacity=".0"
+	data-height="100%" data-size="10px">
+	<div class="block block-bordered " id="contentBlock"
+		style="position: relative; margin-bottom: 0px;">
+		<div class="block-header">
+			<div class="block-options block-options-left">
+				<!-- <button id="toggleDir" type="button" class="btn btn-xs btn-primary push-5-r">
+					<i class="toggle-dir-icon si si-arrow-left"></i>
+				</button> -->
+				<button id="saveExcelBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="保存">
+					<i class="fa fa-save">&nbsp;保存</i>
+				</button>
+				<button id="saveExcelStorageBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="临时保存">
+					<i class="fa fa-save">&nbsp;临时保存</i>
+				</button>
+				<button id="exportExcelBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="导出">
+					<i class="si si-cloud-download">&nbsp;导出</i>
+				</button>
+				<button id="coverBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="获取最新版本">
+					<i class="fa fa-refresh">&nbsp;获取最新版本</i>
+				</button>
+				<button id="refreshDgCoverBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="刷新封面">
+					<i class="fa fa-file-excel-o">&nbsp;刷新封面</i>
+				</button>
+				<button id="postilBtn" type="button"
+					class="btn btn-xs btn-danger push-5-r" title="批注">
+					<i class="fa fa-bookmark-o">&nbsp;批注</i>
+				</button>
+				<button id="adjustBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="调整">
+					<i class="fa fa-plus">&nbsp;调整</i>
+				</button>
+				<!-- <button id="newWindowBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="">
+					<i class="si si-size-fullscreen">&nbsp;在新窗口打开</i>
+				</button> -->
+				<button id="openDgModalBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="打开底稿或附注">
+					<i class="fa fa-file">&nbsp;底稿附注</i>
+				</button>
+				<button id="openFormulaModalBtn" type="button"
+					class="btn btn-xs btn-success push-5-r" title="校验公式">
+					<i class="fa fa-sticky-note-o">&nbsp;校验公式</i>
+				</button>
+				<button id="adjustDataBtn" type="button"
+					class="btn btn-xs btn-warning push-5-r" title="获取审计数据">
+					<i class="fa fa-balance-scale">&nbsp;底稿取数</i>
+				</button>
+				<button id="openDgAttachBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="底稿附件">
+					<i class="fa fa-file">&nbsp;底稿附件</i>
+				</button>
+				<button id="openSamplingAttachBtn" type="button"
+					class="btn btn-xs btn-primary push-5-r" title="抽凭附件">
+					<i class="fa fa-file">&nbsp;抽凭附件</i>
+				</button>
+			</div>
+			<div class="block-options block-options-right push-10-r">
+				<button id="positionAdjustDataBtn" type="button"
+					class="btn btn-xs push-5-r red-light" title="定位审计调整位置">
+					<i class="fa fa-crosshairs"></i>&nbsp;<span
+						id="adjust_warning_text"></span>
+				</button>
+			</div>
+			<h3 class="block-title">
+				<span id="fileFullPath"></span>
+			</h3>
+		</div>
+		<div id="spreadContainerRoot">
+			<div class="" id="spreadContainer"></div>
+		</div>
+		<div id="adjustment"></div>
+		<div id="functionsment"></div>
+		<div id="designerment"></div>
+		<div class="progress-mark">
+			<div class="progress active progress-display progress-mini">
+				<div
+					class="progress-bar progress-bar-success progress-bar-striped progress-bar-cus"
+					role="progressbar" aria-valuenow="10" aria-valuemin="0"
+					aria-valuemax="100"></div>
+			</div>
+		</div>
+		<div id="adjustDataDiv"
+			style="position: absolute; width: 900px; top: -30px; right: 175px; z-index: 1000; display: none;">
+			<div class="modal-dialog" style="width: 100%;">
+				<div class="modal-content" style="border: 1px solid skyblue;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button class="btn btn-primary" type="button"
+										id="voucherTestBtn" title="凭证测试">
+										<i class="fa fa-hand-paper-o"></i>&nbsp;
+									</button>
+								</li>
+								<li>
+									<button class="btn btn-primary" type="button" id="interestBtn"
+										title="获取利息收入数据">
+										<i class="fa fa-jpy"></i>&nbsp;
+									</button>
+								</li>
+								<li>
+									<button class="btn btn-primary" type="button"
+										id="substituteTestBtn" title="替代测试">
+										<i class="fa fa-recycle"></i>&nbsp;
+									</button>
+								</li>
+								<li>
+									<button class="btn btn-primary" type="button" id="samplingBtn"
+										title="获取抽凭数据">
+										<i class="si si-bag"></i>&nbsp;
+									</button>
+								</li>
+								<li>
+									<button class="btn btn-primary" style="display: none"
+										type="button" id="accountAgeBtn" title="获取账龄数据">
+										<i class="si si-book-open"></i>&nbsp;
+									</button>
+								</li>
+								<li>
+									<button class="btn btn-primary" type="button"
+										id="accountDataBtn" title="重新获取财务数据">
+										<i class="fa fa-newspaper-o"></i>&nbsp;
+									</button>
+								</li>
+								<li>
+									<button class="btn btn-primary" type="button"
+										id="modal_adjust_sure" title="设置所有调整数据">
+										<i class="fa fa-balance-scale"></i>&nbsp;
+									</button>
+								</li>
+								<li>
+									<button class="btn btn-primary" type="button"
+										id="modal_adjust_cancel">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h3 class="block-title" id="modalTitleId">底稿取数</h3>
+						</div>
+					</div>
+					<div class="modal-body"
+						style="max-height: 500px; padding-bottom: 0px; overflow-y: auto; overflow-x: hidden;">
+						<div class="row">
+							<div class="form-group has-info">
+								<div class="col-sm-3">
+									<div class="form-material">
+										<select class="form-control" id="adjustData_type">
+											<option value="1" data-result="">本期数</option>
+											<option value="2" data-result="">上年数</option>
+										</select> <label for="adjustData_type">数据类型</label>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-material">
+										<select class="form-control" id="adjustData_adjustType">
+											<option value="1">客户调整</option>
+											<option value="2" selected>审计调整</option>
+										</select> <label for="adjustData_adjustType">调整类型</label>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-material">
+										<input id="adjustData_itemStartRow_index" class="form-control"
+											type="text" placeholder="输入行号，如1、2..."
+											oninput="value=value.replace(/[^\d]/g,'')"> <label
+											for="adjustData_itemStartRow_index">项目开始行</label>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-material">
+										<input id="adjustData_itemEndRow_index" class="form-control"
+											type="text" placeholder="输入行号，如1、2..."
+											oninput="value=value.replace(/[^\d]/g,'')"> <label
+											for="adjustData_itemEndRow_index">项目结束行</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="display: none;">
+							<div class="form-group has-info">
+								<div class="col-sm-3">
+									<div class="form-material">
+										<input id="adjustData_subjectIdP" class="form-control"
+											type="text" placeholder="输入列号，如B、C..."
+											onkeyup="this.value=this.value.toUpperCase()"> <label
+											for="adjustData_subjectIdP">科目编号列</label>
+										<button class="btn btn-default"
+											style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 35px; top: -18px;"
+											type="button" name="modal_adjust_location" title="获取科目编号列">
+											<i class="fa fa-location-arrow"></i>
+										</button>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-material">
+										<input id="adjustData_subjectNameP" class="form-control"
+											type="text" placeholder="输入列号，如B、C..."
+											onkeyup="this.value=this.value.toUpperCase()"> <label
+											for="adjustData_subjectNameP">科目名称列</label>
+										<button class="btn btn-default"
+											style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 35px; top: -18px;"
+											type="button" name="modal_adjust_location" title="获取科目名称列">
+											<i class="fa fa-location-arrow"></i>
+										</button>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-material">
+										<input id="adjustData_assItemIdP" class="form-control"
+											type="text" placeholder="输入列号，如B、C..."
+											onkeyup="this.value=this.value.toUpperCase()"> <label
+											for="adjustData_assItemIdP">核算编号列</label>
+										<button class="btn btn-default"
+											style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 35px; top: -18px;"
+											type="button" name="modal_adjust_location" title="获取核算编号列">
+											<i class="fa fa-location-arrow"></i>
+										</button>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-material">
+										<input id="adjustData_assItemNameP" class="form-control"
+											type="text" placeholder="输入列号，如B、C..."
+											onkeyup="this.value=this.value.toUpperCase()"> <label
+											for="adjustData_assItemNameP">核算名称列</label>
+										<button class="btn btn-default"
+											style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 35px; top: -18px;"
+											type="button" name="modal_adjust_location" title="获取核算名称列">
+											<i class="fa fa-location-arrow"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="display: none;">
+							<div class="form-group has-info">
+								<div class="col-sm-3">
+									<div class="form-material">
+										<input id="adjustData_adjustP" class="form-control"
+											type="text" placeholder="输入列号，如B、C..."
+											onkeyup="this.value=this.value.toUpperCase()"> <label
+											for="adjustData_adjustP">调整数列</label>
+										<button class="btn btn-default"
+											style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 35px; top: -18px;"
+											type="button" name="modal_adjust_location" title="获取调整数列">
+											<i class="fa fa-location-arrow"></i>
+										</button>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-material">
+										<input id="adjustData_adjustP_debit" class="form-control"
+											type="text" placeholder="输入列号，如B、C..."
+											onkeyup="this.value=this.value.toUpperCase()"> <label
+											for="adjustData_adjustP_debit">调整数(借)列</label>
+										<button class="btn btn-default"
+											style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 10px; top: -18px;"
+											type="button" name="modal_adjust_location" title="获取调整数(借)列">
+											<i class="fa fa-location-arrow"></i>
+										</button>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-material">
+										<input id="adjustData_adjustP_credit" class="form-control"
+											type="text" placeholder="输入列号，如B、C..."
+											onkeyup="this.value=this.value.toUpperCase()"> <label
+											for="adjustData_adjustP_credit">调整数(贷)列</label>
+										<button class="btn btn-default"
+											style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 10px; top: -18px;"
+											type="button" name="modal_adjust_location" title="获取调整数(贷)列">
+											<i class="fa fa-location-arrow"></i>
+										</button>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-material">
+										<input id="adjustData_adjustP_index" class="form-control"
+											type="text" placeholder="输入列号，如B、C..."
+											onkeyup="this.value=this.value.toUpperCase()"> <label
+											for="adjustData_adjustP_index">调整数(索引)列</label>
+										<button class="btn btn-default"
+											style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -18px;"
+											type="button" name="modal_adjust_location" title="获取调整数(索引)列">
+											<i class="fa fa-location-arrow"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row" style="text-align: center;">
+							<button type="button" name="retractDivBtn" class="btn btn-link">展开</button>
+						</div>
+						<div class="row">
+							<table id="adjustData_table"
+								class="table table-bordered table-striped table-hover"
+								style="width: 100%;"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="dgModal" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog" style="margin-top: 50px;">
+				<div class="modal-content" style="width: 800px;">
+					<!--  style="width: 600px;" -->
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal" aria-hidden="true">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h4 class="block-title">底稿附注</h4>
+						</div>
+					</div>
+					<div class="modal-body"
+						style="height: 505px; padding-top: 10px; padding-bottom: 10px;">
+						<div class="block" style="height: 90%;">
+							<div>
+								<ul class="nav nav-tabs " data-toggle="tabs">
+									<li class="active"><a href="#dgTab"><h3
+												class="block-title">底稿</h3></a></li>
+									<li><a href="#noteTab"><h3 class="block-title">附注</h3></a>
+									</li>
+									<li><a href="#otherTab"><h3 class="block-title">其他</h3></a>
+									</li>
+									<li><a href="#referredOtherDgTab"><h3
+												class="block-title">关联文件</h3></a></li>
+									<li><a href="#otherDgReferredTab"><h3
+												class="block-title">被关联文件</h3></a></li>
+								</ul>
+							</div>
+							<div class="block-content block-content-full"
+								style="height: 90%; padding: 0px;">
+								<div class="tab-content">
+									<div class="postil-content-wrap tab-pane active" id="dgTab">
+										<div class="block-content">
+											<table id="dgTable"
+												class="table table-bordered table-striped table-hover"></table>
+										</div>
+									</div>
+									<div class="postil-content-wrap tab-pane" id="noteTab">
+										<div class="block-content">
+											<table id="noteTable"
+												class="table table-bordered table-striped table-hover"></table>
+										</div>
+									</div>
+									<div class="postil-content-wrap tab-pane" id="otherTab">
+										<div class="block-content">
+											<table id="otherTable"
+												class="table table-bordered table-striped table-hover"></table>
+										</div>
+									</div>
+									<div class="postil-content-wrap tab-pane"
+										id="referredOtherDgTab">
+										<div class="block-content">
+											<table id="referredDgTable"
+												class="table table-bordered table-striped table-hover"></table>
+										</div>
+									</div>
+									<div class="postil-content-wrap tab-pane"
+										id="otherDgReferredTab">
+										<div class="block-content">
+											<table id="dgReferredTable"
+												class="table table-bordered table-striped table-hover"></table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="formulaModal" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content"
+					style="width: 1100px; border: 1px solid #D3D3D3;">
+					<!--  style="width: 600px;" -->
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info"
+							style="height: 40px; padding: 10px 20px 10px 20px;">
+							<ul class="block-options">
+								<li>
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal" aria-hidden="true">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h4 class="block-title">校验公式</h4>
+						</div>
+					</div>
+					<div class="modal-body"
+						style="height: 500px; padding: 10px 20px 10px 20px;">
+						<div class="block" style="height: 390px;">
+							<div>
+								<ul class="nav nav-tabs " data-toggle="tabs">
+									<li class="active"><a href="#tagMainTab"
+										style="height: 30px;"><h3 class="block-title">标签</h3></a></li>
+									<li><a href="#formulaMainTab" style="height: 30px;"><h3
+												class="block-title">公式</h3> </a></li>
+								</ul>
+							</div>
+							<div class="block-content block-content-full"
+								style="padding: 0px;">
+								<div class="tab-content">
+									<div class="postil-content-wrap tab-pane active"
+										id="tagMainTab">
+										<div class="block-header bg-primary"
+											style="height: 30px; padding: 5px 20px;">
+											<div class="row">
+												<div class="form-group has-info">
+													<div class="col-sm-8">
+														<h4 class="block-title">标签一览</h4>
+													</div>
+													<div class="col-sm-2">
+														<div style="float: right;">
+															<label>标签分类</label> <select id="tagSortMain"
+																style="color: #0000009e; border: 1px solid #e9e9e9;">
+																<option value=""></option>
+																<option value="dg" selected>本底稿</option>
+																<option value="subject">本科目</option>
+															</select>
+														</div>
+													</div>
+													<div class="col-sm-2">
+														<div style="float: right;">
+															<label>标签类型</label> <select id="tagTypeMain"
+																style="color: #0000009e; border: 1px solid #e9e9e9;">
+																<option value=""></option>
+																<option value="db">TB</option>
+																<option value="function">导引表</option>
+																<option value="dg">底稿</option>
+																<option value="note">附注</option>
+																<option value="report">报表</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<input type="text" id="formulaSubjectId"
+											style="display: none;"> <input type="text"
+											id="formulaSubjectName" style="display: none;">
+										<div class="block-content" style="padding-top: 5px;">
+											<table id="tagsMainTable"
+												class="table table-bordered table-striped table-hover"></table>
+										</div>
+										<div class="block-header bg-primary"
+											style="height: 30px; padding: 5px 20px;">
+											<ul class="block-options">
+												<li><span style="color: white">校验公式类型: <select
+														id="formulaType" style="color: #0000009e; border: 0;">
+															<option value="0" selected>导引表与底稿校验</option>
+															<option value="1">底稿与附注校验</option>
+															<option value="2">附注与报表校验</option>
+															<option value="4">报表与报表校验</option>
+															<option value="3">其他</option>
+													</select>
+												</span></li>
+												<li>
+													<button type="button" class="btn btn-default"
+														style="color: aliceblue;" id="ensureBtn" title="设置公式">
+														<i class="fa fa-send"></i>
+													</button>
+												</li>
+												<li>
+													<button type="button" class="btn btn-default"
+														style="color: aliceblue;" id="uodoTagMainBtn" title="撤销">
+														<i class="fa fa-undo"></i>
+													</button>
+												</li>
+											</ul>
+											<h4 class="block-title">计算公式</h4>
+										</div>
+										<div class="block-content" style="padding: 0px 20px 1px 20px;">
+											<div class="form-material" id="tagMainGroup"></div>
+										</div>
+									</div>
+									<div class="postil-content-wrap tab-pane" id="formulaMainTab">
+										<div class="block-header bg-primary"
+											style="height: 30px; padding: 5px 20px;">
+											<div class="col-sm-2" style="padding-left: 0px;">
+												<label> 校验数据公式一览</label>
+											</div>
+											<div class="col-sm-4">
+												<label>公式校验类型</label> <select id="formulaTypeMain"
+													style="color: #0000009e; border: 1px solid #e9e9e9;">
+													<option value=""></option>
+													<option value="0">导引表与底稿校验</option>
+													<option value="1">底稿与附注校验</option>
+													<option value="2">附注与报表校验</option>
+													<option value="4">报表与报表校验</option>
+													<option value="3">其他</option>
+												</select>
+											</div>
+											<div class="col-sm-4" style="text-align: right;">
+												<label>正确数/总数:</label>&nbsp; <label id="rightNumMain"></label><span>&nbsp;/&nbsp;</span><label
+													id="totalNumMain"></label>
+											</div>
+											<div class="col-sm-2"
+												style="text-align: right; padding-right: 0px;">
+												<button id="checkFormulaBtn" class="btn btn-primary"
+													style="height: 23px; padding-top: 1px;" type="button"
+													title="公式校验">
+													<i class="fa fa-check" style="color: white;"> 校验</i>
+												</button>
+											</div>
+										</div>
+										<div class="block-content">
+											<table id="formulaTable"
+												class="table table-bordered table-striped table-hover"></table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="tagDeleteModal" tabindex="-1"
+			role="dialog" aria-hidden="true" data-backdrop="static"
+			data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content" style="border: 1px solid #D3D3D3;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="block-title" id="formulaModalLabel">确认删除该单元格标签所涉及到公式吗？</h4>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="block" style="height: 150px;" id="referredFormualList">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary" id="confirmBtn">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="otherDgModal" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content" style="border: 1px solid #D3D3D3;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="block-title" id="formulaModalLabel">生成其他底稿</h4>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="row" style="margin-top: 10px;">
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="form-material">
+										<select class="js-select2 form-control" id="otherDgName"
+											style="width: 100%;">
+											<option value=""></option>
+											<!-- <option value="银行存款余额调节表">1002-0003-0001-银行存款余额调节表</option>
+											<option value="受限银行存款查验记录">1002-0007-0001-受限银行存款查验记录</option>
+											<option value="银行存款函证程序">1002-0009-0001-银行存款函证程序</option> -->
+										</select> <label for="otherDgName">生成底稿</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary"
+							id="otherDgConfirmBtn">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="showGenDgModal" tabindex="-1"
+			role="dialog" aria-hidden="true" data-backdrop="static"
+			data-keyboard="false">
+			<div class="modal-dialog" style="margin-top: 150px;">
+				<div class="modal-content">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+                                <li>
+                                	<div id="diaplayAmount">
+	                                    <label class="css-input switch switch-sm switch-success"><input type="checkbox" id="show_hasAmount" value="" checked><span></span></label>仅显示有发生额余额
+                                	</div>
+                                </li>
+								<li>
+									<button type="button" data-dismiss="modal">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h3 class="block-title">可生成的底稿行：</h3>
+						</div>
+					</div>
+					<div class="modal-body" style="min-height:500px;max-height:500px">
+						<div id="showGenDgList" style="height: 450px"></div>
+						<div id="otherDgNameText" style="height: 1px"
+							style="display: none;"></div>
+					</div>
+					<div class="modal-footer">
+						<div class="col-sm-3">
+							<input class="form-control" type="text" id="screenItem" placeholder="搜索" style="width: 200px" />
+						</div>
+						<div class="col-sm-9">
+							<button type="button" class="btn btn-primary" id="controlCheckbox">
+								<i class="fa fa-check"></i> 全选
+							</button>
+							<button type="button" class="btn btn-primary"
+								id="otherDgBatchGenBtn">
+								<i class="fa fa-send"></i> 批量生成
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="accountDataParamModal" tabindex="-1"
+			role="dialog" aria-hidden="true" data-backdrop="static"
+			data-keyboard="false">
+			<div class="modal-dialog">
+				<div class="modal-content" style="border: 1px solid #D3D3D3;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="block-title">参数</h4>
+						</div>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="form-group">
+								<div class="col-sm-4">
+									<div class="form-material">
+										<input type="text" id="startRow_detail" class="form-control"
+											oninput="value=value.replace(/[^\d]/g,'')"> <label
+											for="startRow_detail">明细项开始行</label>
+									</div>
+								</div>
+								<div class="col-sm-2"></div>
+								<div class="col-sm-4">
+									<div class="form-material">
+										<input type="text" id="startRow_sum" class="form-control"
+											oninput="value=value.replace(/[^\d]/g,'')"> <label
+											for="startRow_sum">小计项开始行</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+						<button type="button" class="btn btn-primary"
+							id="accountDataParamBtn">确定</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="dgAttachModal" tabindex="-1" role="dialog"
+			aria-hidden="true" data-backdrop="static" data-keyboard="false">
+			<div class="modal-dialog"
+				style="margin-top: 50px; margin-left: 80px;">
+				<div class="modal-content" style="width: 1200px;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button type="button" class="btn btn-primary"
+										id="transferDgAttachBtn" title="客户门户">
+										<img src="./bdolx/img/whiteclientPortal.png"
+											style="width: 128px; transform: translateY(-2px);" />
+									</button>
+								</li>
+								<li>
+									<button type="button" class="btn btn-primary"
+										id="uploadDgAttachBtn" title="上传文件">
+										<i class="fa fa-upload" style="color: white;"></i>
+									</button>
+								</li>
+								<li>
+									<button class="btn btn-primary bdoexport-btn" type="button"
+										data-bdoexport-table-id="dgPageAttachTable"
+										data-bdoexport-title="底稿附件一览" title="导出">
+										<i class="si si-cloud-download" style="color: white;"></i>
+									</button>
+								</li>
+								<li>
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal" aria-hidden="true" title="关闭">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h4 class="block-title">底稿附件</h4>
+						</div>
+					</div>
+					<div class="modal-body" style="height: 480px; padding: 10px;">
+						<div class="block-content block-content-full"
+							style="padding: 0px 5px 0px 5px;">
+							<table id="dgPageAttachTable"
+								class="table table-bordered table-striped table-hover"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="samplingAttachModal" tabindex="-1"
+			role="dialog" aria-hidden="true" data-backdrop="static"
+			data-keyboard="false">
+			<div class="modal-dialog"
+				style="margin-top: 50px; margin-left: 80px;">
+				<div class="modal-content" style="width: 600px;">
+					<div class="block block-themed block-transparent remove-margin-b">
+						<div class="block-header bg-info">
+							<ul class="block-options">
+								<li>
+									<button type="button" class="btn btn-primary"
+										data-dismiss="modal" aria-hidden="true">
+										<i class="si si-close"></i>
+									</button>
+								</li>
+							</ul>
+							<h4 class="block-title">抽凭附件</h4>
+						</div>
+					</div>
+					<div class="modal-body" style="height: 480px; padding: 10px;">
+						<div class="block-content block-content-full"
+							style="padding: 0px 5px 0px 5px;">
+							<table id="samplingAttachTable"
+								class="table table-bordered table-striped table-hover"></table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- 对话框：批量上传底稿附件 -->
+<div class="modal fade" id="batchUploadWPAttachFormModal" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false">
+	<div class="modal-dialog modal-md" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">上传文件</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal" id="batchUploadWPAttachForm"></form>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="accoutAgeDataDiv" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false"
+	style="position: absolute; width: 800px; top: -30px; left: 175px; z-index: 1000;">
+	<div class="modal-dialog" style="width: 100%;">
+		<div class="modal-content" style="border: 1px solid skyblue;">
+			<!--  style="width: 600px;" -->
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button class="btn btn-primary" type="button"
+								id="modal_accountAge_cancel">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title" id="modalAccountAgeTitleId">账龄取数</h3>
+				</div>
+			</div>
+			<div class="modal-body"
+				style="min-height: 500px; max-height: 500px; padding-bottom: 0px;">
+				<div class="row">
+					<div class="form-group has-info">
+						<div class="col-sm-8">
+							<div class="form-material">
+								<label class="css-input css-radio css-radio-primary">设置账龄方式</label><br>
+								<input type="radio" name="accoutAge_type" data-result="1"
+									checked=""><span></span> 设置全部账龄 <input type="radio"
+									name="accoutAge_type" data-result="2"><span></span>
+								设置单项账龄
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none"
+					id="accountAgeName">
+					<div class="form-group has-info">
+						<div class="col-sm-4">
+							<div class="form-material">
+								<input type="text" id="accoutAge_name" class="form-control">
+								<label for="accoutAge_name">名称</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="accoutAge_nameP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="accoutAge_nameP">债务人编号列</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="accountAge_title_index" class="form-control"
+									type="text" placeholder="输入行号，如1.2.."
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="accountAge_title_index">账龄标题行</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="accountAge_itemColumn_index" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="accountAge_itemColumn_index">未审账龄开始列</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="accountAge_adjustColumn_index" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="accountAge_adjustColumn_index">审定账龄开始列</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="accountAge_itemRow_index" class="form-control"
+									type="text" placeholder="输入行号，如1.2.."
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="accountAge_itemRow_index">账龄开始行</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="form-group has-info">
+						<div class="col-sm-8">
+							<div class="form-material">
+								<input type="text" id="accoutAge_range" class="form-control">
+								<label for="accoutAge_range">账龄</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<button class="btn btn-xs btn-primary push-5-r" type="button"
+									id="modal_cal_age" title="计算未审账龄">
+									<i class="fa fa-location-arrow">计算未审账龄</i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<button class="btn btn-xs btn-primary push-5-r" type="button"
+									id="modal_set_age" title="设置单项未审账龄">
+									<i class="fa fa-location-arrow">设置单项未审账龄</i>
+								</button>
+								<button class="btn btn-xs btn-primary push-5-r" type="button"
+									id="modal_setall_age" title="设置未审账龄">
+									<i class="fa fa-location-arrow">设置未审账龄</i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<button class="btn btn-xs btn-primary push-5-r" type="button"
+									id="modal_cal_adjustAge" title="计算审定账龄">
+									<i class="fa fa-location-arrow">计算审定账龄</i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<button class="btn btn-xs btn-primary push-5-r" type="button"
+									id="modal_set_adjustAge" title="设置单项审定账龄">
+									<i class="fa fa-location-arrow">设置单项审定账龄</i>
+								</button>
+								<button class="btn btn-xs btn-primary push-5-r" type="button"
+									id="modal_setall_adjustAge" title="设置审定账龄">
+									<i class="fa fa-location-arrow">设置审定账龄</i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<button class="btn btn-xs btn-primary push-5-r" type="button"
+									id="modal_show_age" title="账龄结果展示">
+									<i class="fa fa-location-arrow">账龄结果展示</i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<button class="btn btn-xs btn-primary push-5-r" type="button"
+									id="modal_save_age" title="保存账龄结果">
+									<i class="fa fa-location-arrow">保存账龄结果</i>
+								</button>
+							</div>
+						</div>
+						<!--	<div class="col-sm-2">
+							<div class="form-material">
+								<button class="btn btn-xs btn-primary push-5-r"
+										type="button" id="modal_show_age_sum" title="账龄结果展示(按客户合并)">
+									<i class="fa fa-location-arrow">账龄结果展示(按客户合并)</i>
+								</button>
+							</div>
+						</div>-->
+
+
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="col-sm-2">
+						<div class="form-material">
+							<button class="btn btn-xs btn-primary push-5-r" type="button"
+								id="modal_import_last_year_age" title="导入去年审定账龄">
+								<i class="fa fa-location-arrow">导入去年审定账龄</i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<table id="accoutAgeData_table"
+						class="table table-bordered table-striped table-hover"></table>
+				</div>
+				<p class="text-muted"
+					style="float: left; letter-spacing: 2px; font-size: 15px;">
+					注:<span class="text-danger" style="margin: 0 5px;">未审账龄开始列</span>从“错误原因”开始
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_age" tabindex="-1" role="dialog"
+	aria-hidden="true" data-backdrop="static" data-keyboard="false"
+	style="top: 40px;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择账龄</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height: 500px; max-height: 500px">
+				<div id="assitem_tree_age"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button"
+						id="modal_age_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button"
+						id="modal_age_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button"
+						data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="accountAgeDataShow" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false"
+	style="position: absolute; left: 175px; z-index: 1000;">
+	<div class="modal-dialog">
+		<div class="modal-content"
+			style="width: 1100px; border: 1px solid #D3D3D3;">
+			<!--  style="width: 600px;" -->
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info"
+					style="height: 40px; padding: 10px 20px 10px 20px;">
+					<ul class="block-options">
+						<li>
+							<button type="button" class="btn btn-primary"
+								data-dismiss="modal" aria-hidden="true">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h4 class="block-title">账龄结果</h4>
+				</div>
+				<div class="modal-body"
+					style="height: 500px; padding: 10px 20px 10px 20px;">
+					<div class="block" style="height: 390px;">
+						<div class="block-content block-content-full"
+							style="padding: 0px;">
+							<div class="tab-content">
+								<div class="postil-content-wrap tab-pane active"
+									id="tagAccountAgeMainTab">
+									<div class="block-header bg-primary"
+										style="height: 30px; padding: 5px 20px;">
+										<ul class="block-options">
+											<li>
+												<button id="btn_accountAgeData_export" type="button">
+													<i class="si si-cloud-download" style="color: white;"
+														title="导出"></i>
+												</button>
+											</li>
+											<li>
+												<!-- <div style="float: right;"> --> <label>数据插入状态</label> <select
+												id="tagAccountAgeTypeMain"
+												style="color: #0000009e; border: 1px solid #e9e9e9;">
+													<option value=""></option>
+													<option value="0">成功</option>
+													<option value="1">失败</option>
+											</select> <!-- </div> -->
+											</li>
+											<h3 class="block-title">
+												查询结果<span></span>
+											</h3>
+										</ul>
+										<!-- <div class="row">
+											<div class="form-group has-info">
+												<div class="col-sm-8">
+													<h4 class="block-title">账龄结果一览</h4>
+												</div>
+												<div class="col-sm-4">
+													<div style="float: right;">
+														<label>数据插入状态</label>
+														<select id="tagAccountAgeTypeMain" style="color: #0000009e;border: 1px solid #e9e9e9;">
+															<option value=""></option>
+															<option value="0">成功</option>
+															<option value="1">失败</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div> -->
+									</div>
+									<div class="block-content" style="padding-top: 5px;">
+										<table id="tagsAccountAgeMainTable"
+											class="table table-bordered table-striped table-hover"></table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="accoutAgeSaveDiv" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false"
+	style="position: absolute; width: 800px; top: -30px; left: 175px; z-index: 1000;">
+	<div class="modal-dialog" style="width: 100%;">
+		<div class="modal-content" style="border: 1px solid skyblue;">
+			<!--  style="width: 600px;" -->
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">保存账龄</h3>
+				</div>
+			</div>
+			<div class="modal-body"
+				style="min-height: 500px; max-height: 500px; padding-bottom: 0px;">
+				<div class="row" style="margin-top: 10px;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="accoutAge_save_nameP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="accoutAge_save_nameP">债务人编号列</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="accountAge_save_itemColumn_index"
+									class="form-control" type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="accountAge_save_itemColumn_index">未审账龄开始列</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="accountAge_save_adjustColumn_index"
+									class="form-control" type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="accountAge_save_adjustColumn_index">审定账龄开始列</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="accountAge_save_itemRow_index" class="form-control"
+									type="text" placeholder="输入行号，如1.2.."
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="accountAge_save_itemRow_index">账龄开始行</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="accountAge_save_endRow_index" class="form-control"
+									type="text" placeholder="输入行号，如1.2.."
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="accountAge_save_endRow_index">账龄结束行</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="form-group has-info">
+						<div class="col-sm-8">
+							<div class="form-material">
+								<input type="text" id="accoutAge_save_range"
+									class="form-control"> <label for="accoutAge_save_range">账龄</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<button class="btn btn-xs btn-primary push-5-r" type="button"
+									id="btn_save_age" title="保存账龄结果">
+									<i class="fa fa-location-arrow">保存账龄结果</i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<p class="text-muted"
+					style="float: left; letter-spacing: 2px; font-size: 15px;">
+					注:<span class="text-danger" style="margin: 0 5px;">未审账龄开始列</span>从“错误原因”开始
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_account_age_import" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">导入去年审定账龄</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height: auto; overflow: visible;">
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-12" for="fileinput">模板</label>
+						<div class="col-xs-12">
+							<input id="account_age_fileinput" class="file" type="file"
+								data-preview-file-type="any" multiple accept=".xlsx">
+							<div id="account_age_errorBlock" class="help-block"></div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-md btn-primary" type="button"
+					id="account_age_downtemp">
+					<i class="fa fa-download"></i><span>&nbsp;下载模板</span>
+				</button>
+				<button class="btn btn-md btn-primary" type="button"
+					id="account_age_submit">
+					<i class="si si-cloud-upload"></i><span>&nbsp;导入并计算</span>
+				</button>
+				<button class="btn btn-md btn-warning" type="button"
+					data-dismiss="modal">
+					<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="samplingDataDiv" tabindex="-1" role="dialog"
+	aria-hidden="true" data-backdrop="static" data-keyboard="false"
+	style="position: absolute; width: 850px; top: -30px; left: 175px; z-index: 1000;">
+	<div class="modal-dialog" style="width: 100%;">
+		<div class="modal-content" style="border: 1px solid skyblue;">
+			<!--  style="width: 600px;" -->
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button id="btn_sampling_search" type="button" title="查询">
+								<i class="fa fa-search" style="color: white;"></i>
+							</button>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button"
+								id="modal_sampling_save" title="获取抽凭数据">
+								<i class="fa fa-save"></i>&nbsp;
+							</button>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button"
+								id="modal_sampling_cancel">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">抽凭数据</h3>
+				</div>
+			</div>
+			<div class="modal-body"
+				style="max-height: 500px; padding-bottom: 0px; overflow-y: auto; overflow-x: hidden;">
+				<div class="row">
+					<div class="form-group has-info">
+						<div class="col-sm-3">
+							<div class="form-material">
+								<input class="form-control" type="text" id="sampling_subjectid">
+								<label for="sampling_subjectid">科目编号</label>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-material">
+								<select class="js-select2 form-control"
+									id="sampling_sampleMethod" style="width: 100%;">
+									<option></option>
+								</select> <label for="sampling_sampleMethod">抽凭方式</label>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-material">
+								<input class="form-control" type="text" id="sampling_sampleName">
+								<label for="sampling_sampleName">抽凭名称</label>
+							</div>
+						</div>
+						<!-- <div class="col-sm-6">
+							<div class="form-material input-group">
+								<select class="form-control" id="sampling_amountType">
+									<option value='1'>借方发生额</option>
+									<option value='-1'>贷方发生额</option>
+								</select>
+								<span class="input-group-addon"> </span>
+								<input class="form-control" type="text" id="sampling_amountStart">
+								<span id="sampling_dateAddon" class="input-group-addon">-</span>
+								<input class="form-control" type="text" id="sampling_amountEnd">
+								<label for="sampling_amountType">金额</label>
+							</div>
+						</div> -->
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_vchDateP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_vchDateP">日期列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取日期列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_oldVoucherIdP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_oldVoucherIdP">凭证编号列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取凭证编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_summaryP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_summaryP">摘要列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取摘要列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_oppositeAccountLastP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_oppositeAccountLastP">对方科目列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取对方科目列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<!-- <div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_subjectnameP" class="form-control" type="text"
+									   placeholder="输入列号，如B..." onkeyup="this.value=this.value.toUpperCase()">
+								<label for="sampling_subjectnameP">科目名称列</label>
+								<button class="btn btn-default" style="background-color: white;padding: 0px;position:absolute;z-index:1;border: none;right: 0px;top: -20px;"
+										type="button" name="modal_sampling_location" title="获取科目名称列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div> -->
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_debitValueP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_debitValueP">借方金额列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取借方金额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_crebitValueP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_crebitValueP">贷方金额列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取贷方金额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_contentCompleteP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_contentCompleteP">原始凭证内容完整列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location"
+									title="获取原始凭证内容完整列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_authorizeP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_authorizeP">有授权批准列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取有授权批准列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_handleCorrectP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_handleCorrectP">账务处理正确列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取账务处理正确列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_contentMatchP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_contentMatchP">账证的内容相符列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取账证的内容相符列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_amountMatchP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_amountMatchP">账证的金额相符列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取账证的金额相符列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_cutoffCorrectP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_cutoffCorrectP">截止测试正确列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取截止测试正确列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_customizeResult1P" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_customizeResult1P">核对内容7列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取核对内容7列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_customizeResult2P" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_customizeResult2P">核对内容8列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取核对内容8列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_customizeResult3P" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_customizeResult3P">核对内容9列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取核对内容9列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_customizeResult4P" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_customizeResult4P">核对内容10列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取核对内容10列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_fileIndexIdP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_fileIndexIdP">附件索引列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取附件索引列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_contentP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_contentP">附件内容列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取附件内容列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_remarkP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_remarkP">备注列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取备注列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_auditResultP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_auditResultP">审计结论列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取审计结论列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_sampleNameP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_sampleNameP">抽凭名称列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取抽凭名称列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_relateSampleNameP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_relateSampleNameP">关联抽凭名称列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取关联抽凭名称列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_sortNoP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="sampling_sortNoP">编号列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="sampling_itemRow_index" class="form-control"
+									type="text" placeholder="输入行号，如1.2.."
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="sampling_itemRow_index">项目开始行</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="text-align: center;">
+					<button type="button" name="retractDivBtn" class="btn btn-link">展开</button>
+				</div>
+				<div class="row">
+					<table id="sampling_table"
+						class="table table-bordered table-striped table-hover"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_subjectid_sampling" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false" style="top: 40px;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height: 500px; max-height: 500px">
+				<div id="subject_tree_sampling"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInputSampling"
+						placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button"
+						id="modal_subjectid_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button"
+						id="modal_subjectid_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button"
+						data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="substituteDataDiv" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false"
+	style="position: absolute; width: 1000px; top: -30px; left: 175px; z-index: 1000;">
+	<div class="modal-dialog" style="width: 100%;">
+		<div class="modal-content" style="border: 1px solid skyblue;">
+			<!--  style="width: 600px;" -->
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button id="btn_substitute_search" type="button" title="查询">
+								<i class="fa fa-search" style="color: white;"></i>
+							</button>
+						</li>
+						<!-- <li>
+							<button class="btn btn-primary" type="button" id="modal_substitute_save" title="获取替代测试数据">
+								<i class="fa fa-save"></i>&nbsp;
+							</button> -->
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button"
+								id="modal_substitute_cancel">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">替代测试</h3>
+				</div>
+			</div>
+			<div class="modal-body"
+				style="min-height: 500px; max-height: 500px; padding-bottom: 0px;">
+				<div class="row">
+					<div class="form-group has-info">
+						<div class="col-sm-3">
+							<div class="form-material">
+								<input class="form-control" type="text"
+									id="substitute_subjectid" disabled="true"> <label
+									for="substitute_subjectid">科目编号</label>
+							</div>
+						</div>
+						<!-- <div class="col-sm-3">
+							<div class="form-material">
+								<input class="form-control" type="text" id="substitute_balance" disabled="true">
+								<label for="substitute_balance">余额</label>
+							</div>
+						</div> -->
+						<!-- <div class="col-sm-3">
+							<div class="form-material">
+								<select class="js-select2 form-control" id="substitute_method"
+										style="width: 100%;">
+									<option></option>
+								</select> <label for="substitute_method">辅助核算选择方式</label>
+							</div>
+						</div> -->
+						<div class="col-sm-3">
+							<div class="form-material">
+								<input class="form-control" type="text" id="substitute_balance">
+								<label for="substitute_balance">期末余额</label>
+							</div>
+						</div>
+						<div class="col-sm-3" id="substitute_rate_div">
+							<div class="form-material">
+								<input class="form-control" type="text" id="substitute_rate">
+								<label for="substitute_rate">构成期末余额占比（%）</label>
+							</div>
+						</div>
+						<div class="col-sm-3" id="substitute_amount_div">
+							<div class="form-material">
+								<input class="form-control" type="text" id="substitute_amount">
+								<label for="substitute_amount">期末余额大于等于</label>
+							</div>
+						</div>
+						<div class="col-sm-3" id="substitute_rank_div">
+							<div class="form-material">
+								<input class="form-control" type="text" id="substitute_rank_1">
+								<label for="substitute_rank_1">期末余额前几名</label>
+							</div>
+						</div>
+						<div class="col-sm-3" id="substitute_rank_div">
+							<div class="form-material">
+								<input class="form-control" type="text" id="substitute_rank_2">
+								<label for="substitute_rank_2">期末余额末几名</label>
+							</div>
+						</div>
+						<div class="col-sm-3" id="substitute_assitemid_div">
+							<div class="form-material">
+								<input class="form-control" type="text"
+									id="substitute_assitemid"> <label
+									for="substitute_assitemid">自定义辅助核算</label>
+							</div>
+						</div>
+						<!-- <div class="col-sm-3">
+							<div class="form-material">
+								<select class="js-select2 form-control" id="substitute_direction"
+										style="width: 100%;">
+									<option></option>
+								</select> <label for="substitute_direction">方向</label>
+							</div>
+						</div> -->
+						<!-- <div class="col-sm-3">
+							<div class="form-material">
+								<select class="js-select2 form-control" id="substitute_type"
+										style="width: 100%;">
+									<option></option>
+								</select> <label for="substitute_type">类型</label>
+							</div>
+						</div> -->
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_vchDateP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_vchDateP">日期列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取日期列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_oldVoucherIdP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_oldVoucherIdP">凭证编号列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取凭证编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_summaryP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_summaryP">摘要列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取摘要列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_oppositeAccountLastP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_oppositeAccountLastP">对方科目列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取对方科目列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_occurValueP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_occurValueP">发生额列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取发生额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<!-- <div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_confirmValueP" class="form-control" type="text"
+									   placeholder="输入列号，如B..." onkeyup="this.value=this.value.toUpperCase()">
+								<label for="substitute_confirmValueP">可以确认的金额列</label>
+								<button class="btn btn-default" style="background-color: white;padding: 0px;position:absolute;z-index:1;border: none;right: 0px;top: -20px;"
+										type="button" name="modal_sampling_location" title="获取可以确认的金额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div> -->
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_sortNoP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_sortNoP">编号列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<!-- <div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_oppositeAccountLastP" class="form-control" type="text"
+									   placeholder="输入列号，如B..." onkeyup="this.value=this.value.toUpperCase()">
+								<label for="substitute_oppositeAccountLastP">对方科目列</label>
+								<button class="btn btn-default" style="background-color: white;padding: 0px;position:absolute;z-index:1;border: none;right: 0px;top: -20px;"
+										type="button" name="modal_sampling_location" title="获取对方科目列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_debitValueP" class="form-control" type="text"
+									   placeholder="输入列号，如B..." onkeyup="this.value=this.value.toUpperCase()">
+								<label for="substitute_debitValueP">借方金额列</label>
+								<button class="btn btn-default" style="background-color: white;padding: 0px;position:absolute;z-index:1;border: none;right: 0px;top: -20px;"
+										type="button" name="modal_sampling_location" title="获取借方金额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_crebitValueP" class="form-control" type="text" placeholder="输入列号，如B..." onkeyup="this.value=this.value.toUpperCase()">
+								<label for="substitute_crebitValueP">贷方金额列</label>
+								<button class="btn btn-default"
+										style="background-color: white;padding: 0px;position:absolute;z-index:1;border: none;right: 0px;top: -20px;"
+										type="button" name="modal_sampling_location" title="获取贷方金额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div> -->
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_vchDateNextP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_vchDateNextP">期后日期列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取日期列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_oldVoucherIdNextP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_oldVoucherIdNextP">期后凭证编号列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取凭证编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_summaryNextP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_summaryNextP">期后摘要列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取摘要列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_oppositeAccountLastNextP"
+									class="form-control" type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_oppositeAccountLastNextP">期后对方科目列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取对方科目列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_occurValueNextP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_occurValueNextP">期后发生额列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取发生额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_sortNoNextP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_sortNoNextP">期后编号列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_itemRow_index" class="form-control"
+									type="text" placeholder="输入行号，如1.2.."
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="substitute_itemRow_index">项目开始行</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_itemRow_indexNext" class="form-control"
+									type="text" placeholder="输入行号，如1.2.."
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="substitute_itemRow_indexNext">期后项目开始行</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_assItemNameP" class="form-control"
+									type="text" placeholder="输入单元格，如B1..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_assItemNameP">债务人名称</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_remainP" class="form-control" type="text"
+									placeholder="输入单元格，如B1..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_remainP">期初数</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_debitTotalP" class="form-control"
+									type="text" placeholder="输入单元格，如B1..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_debitTotalP">本期增加</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_creditTotalP" class="form-control"
+									type="text" placeholder="输入单元格，如B1"
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_creditTotalP">本期减少</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_debitTotalCutOffP" class="form-control"
+									type="text" placeholder="输入单元格，如B1..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_debitTotalCutOffP">审计日止增加</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_creditTotalCutOffP" class="form-control"
+									type="text" placeholder="输入单元格，如B1"
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_creditTotalCutOffP">审计日止减少</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="substitute_endDateP" class="form-control" type="text"
+									placeholder="输入单元格，如B1"
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="substitute_endDateP">截止日</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="text-align: center;">
+					<button type="button" name="retractDivBtn" class="btn btn-link">展开</button>
+				</div>
+				<!-- <div class="row" style="margin-top: 10px;">
+					<table id="substitute_table" class="table table-bordered table-striped table-hover"></table>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="substituteTableDiv" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false"
+	style="position: absolute; width: 1000px; top: -30px; left: 175px; z-index: 1010;">
+	<div class="modal-dialog" style="width: 100%;">
+		<div class="modal-content" style="border: 1px solid skyblue;">
+			<!--  style="width: 600px;" -->
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button class="btn btn-primary" type="button"
+								id="modal_substitute_save" title="获取替代测试数据">
+								<i class="fa fa-save"></i>&nbsp;
+							</button>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button"
+								id="modal_substituteTable_cancel">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">替代测试客户</h3>
+				</div>
+			</div>
+			<div class="modal-body"
+				style="min-height: 500px; max-height: 500px; padding-bottom: 0px;">
+				<div class="row" style="margin-top: 10px;">
+					<table id="substitute_table"
+						class="table table-bordered table-striped table-hover"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_assitemid_substitute" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false" style="top: 40px; z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height: 500px; max-height: 500px">
+				<div id="substitute_assitem_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInputSubstitute"
+						placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button"
+						id="modal_assitemid_substitute_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button"
+						id="modal_assitemid_substitute_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button"
+						data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="voucherTestDataDiv" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false"
+	style="position: absolute; width: 1000px; top: -30px; left: 175px; z-index: 1000;">
+	<div class="modal-dialog" style="width: 100%;">
+		<div class="modal-content" style="border: 1px solid skyblue;">
+			<!--  style="width: 600px;" -->
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button id="btn_voucherTest_search" type="button" title="查询">
+								<i class="fa fa-search" style="color: white;"></i>
+							</button>
+						</li>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button"
+								id="modal_voucherTest_cancel">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">凭证测试</h3>
+				</div>
+			</div>
+			<div class="modal-body"
+				style="min-height: 500px; max-height: 500px; padding-bottom: 0px;">
+				<div class="row">
+					<div class="form-group has-info">
+						<div class="col-sm-3">
+							<div class="form-material">
+								<input class="form-control" type="text"
+									id="voucherTest_subjectid" disabled="true"> <label
+									for="voucherTest_subjectid">科目编号</label>
+							</div>
+						</div>
+						<div class="col-sm-2" id="voucherTest_balance_rank_div">
+							<div class="form-material">
+								<input class="form-control" type="text"
+									id="voucherTest_balance_rank"> <label
+									for="voucherTest_balance_rank">期末余额前几名</label>
+							</div>
+						</div>
+						<div class="col-sm-2" id="voucherTest_credit_rank_div">
+							<div class="form-material">
+								<input class="form-control" type="text"
+									id="voucherTest_credit_rank"> <label
+									for="voucherTest_credit_rank">贷方发生额前几名</label>
+							</div>
+						</div>
+						<div class="col-sm-2" id="voucherTest_debit_rank_div">
+							<div class="form-material">
+								<input class="form-control" type="text"
+									id="voucherTest_debit_rank"> <label
+									for="voucherTest_debit_rank">借方发生额前几名</label>
+							</div>
+						</div>
+						<div class="col-sm-3" id="voucherTest_assitemid_div">
+							<div class="form-material">
+								<input class="form-control" type="text"
+									id="voucherTest_assitemid"> <label
+									for="voucherTest_assitemid">自定义辅助核算</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-10">
+							<div class="form-material">
+								<select class="js-select2 form-control"
+									id="voucherTest_summary_sheet" style="width: 100%;">
+								</select> <label for="voucherTest_summary_sheet">选择汇总表sheet</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_sortNoP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_sortNoP">序号列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取日期列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_rangeP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_rangeP">样本选择条件列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取凭证编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_companyNameP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_companyNameP">单位名称列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取摘要列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_remainP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_remainP">期初余额列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取对方科目列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_debitOccP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_debitOccP">本期增加列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取发生额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_creditOccP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_creditOccP">本期减少列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_balanceP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_balanceP">期末余额列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_resultP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_resultP">结论列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_summaryRow_index" class="form-control"
+									type="text" placeholder="输入行号，如1.2.."
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="voucherTest_countRow_index">汇总表开始行</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-10">
+							<div class="form-material">
+								<select class="js-select2 form-control"
+									id="voucherTest_detail_sheet" style="width: 100%;">
+								</select> <label for="voucherTest_detail_sheet">选择凭证测试表sheet</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_assItemNameP" class="form-control"
+									type="text" placeholder="输入单元格，如B1..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_assItemNameP">公司名称</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_remainDetailP" class="form-control"
+									type="text" placeholder="输入单元格，如B1..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_remainDetailP">期初数</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_debitDetailP" class="form-control"
+									type="text" placeholder="输入单元格，如B1..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_debitDetailP">本期增加</label>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_creditDetailP" class="form-control"
+									type="text" placeholder="输入单元格，如B1"
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_creditDetailP">本期减少</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_sampleMethodP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_sampleMethodP">抽凭方式列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_numberP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_numberP">样本数量列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取日期列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_numberRateP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_numberRateP">样本数量占发生额总数量的比例列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取凭证编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_debitSumP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_debitSumP">借方抽样金额列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取摘要列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_debitRateP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_debitRateP">借方抽样金额占借方总发生额比例列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取对方科目列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_creditSumP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_creditSumP">贷方抽样金额列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取借方金额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_creditRateP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_creditRateP">贷方抽样金额占贷方总发生额比例列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_sampleNameP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_sampleNameP">抽凭名称列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取日期列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_countRow_index" class="form-control"
+									type="text" placeholder="输入行号，如1.2.."
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="voucherTest_countRow_index">抽凭统计表开始行</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_NoP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_NoP">编号列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_vchDateP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_vchDateP">日期列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取日期列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_oldVoucherIdP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_oldVoucherIdP">凭证编号列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取凭证编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_summaryP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_summaryP">摘要列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取摘要列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_oppositeAccountLastP"
+									class="form-control" type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_oppositeAccountLastP">对方科目列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取对方科目列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_debitValueP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_debitValueP">借方金额列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取借方金额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row" style="margin-top: 10px; display: none;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_creditValueP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_creditValueP">贷方金额列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取贷方金额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_fileIndexIdP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_fileIndexIdP">附件索引列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取附件索引列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_contentP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_contentP">附件内容列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取附件内容列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_remarkP" class="form-control" type="text"
+									placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_remarkP">备注列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取备注列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_auditResultP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_auditResultP">审计结论列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取审计结论列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_samplingNameP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_samplingNameP">抽凭名称列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取抽凭名称列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_relateSampleNameP" class="form-control"
+									type="text" placeholder="输入列号，如B..."
+									onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="voucherTest_relateSampleNameP">关联抽凭名称列</label>
+								<button class="btn btn-default"
+									style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+									type="button" name="modal_sampling_location" title="获取关联抽凭名称列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="voucherTest_itemRow_index" class="form-control"
+									type="text" placeholder="输入行号，如1.2.."
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="voucherTest_itemRow_index">凭证查验明细开始行</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row" style="text-align: center;">
+					<button type="button" name="retractDivBtn" class="btn btn-link">展开</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="voucherTestTableDiv" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false"
+	style="position: absolute; width: 1000px; top: -30px; left: 175px; z-index: 1010;">
+	<div class="modal-dialog" style="width: 100%;">
+		<div class="modal-content" style="border: 1px solid skyblue;">
+			<!--  style="width: 600px;" -->
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button class="btn btn-primary" type="button"
+								id="modal_voucherTest_save" title="获取凭证测试数据">
+								<i class="fa fa-save"></i>&nbsp;
+							</button>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button"
+								id="modal_voucherTestTable_cancel">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">凭证测试客户</h3>
+				</div>
+			</div>
+			<div class="modal-body"
+				style="min-height: 500px; max-height: 500px; padding-bottom: 0px;">
+				<div class="row" style="margin-top: 10px;">
+					<table id="voucherTest_table"
+						class="table table-bordered table-striped table-hover"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_assitemid_voucherTest" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false" style="top: 40px; z-index: 1070;">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">选择科目</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="min-height: 500px; max-height: 500px">
+				<div id="voucherTest_assitem_tree"></div>
+			</div>
+			<div class="modal-footer">
+				<div class="col-sm-3">
+					<input class="form-control" type="text" id="searchInputVoucherTest"
+						placeholder="搜索科目">
+				</div>
+				<div class="col-sm-9">
+					<button class="btn btn-md btn-primary" type="button"
+						id="modal_assitemid_voucherTest_reset">
+						<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+					</button>
+					<button class="btn btn-md btn-primary" type="button"
+						id="modal_assitemid_voucherTest_sure">
+						<i class="fa fa-send"></i><span>&nbsp;确定</span>
+					</button>
+					<button class="btn btn-md btn-warning" type="button"
+						data-dismiss="modal">
+						<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_voucherTest_samplistResult"
+	tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false">
+	<div class="modal-dialog modal-lg" style="width: 1200px"
+		id="voucherTestSamplistResultPage"></div>
+</div>
+<div class="modal fade" id="uploadCpFileModal" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 50px;">
+		<div class="modal-content" style="width: 1100px">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">客户门户上传文件</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div id="selectFile"></div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="accountsToCollectParamModal" tabindex="-1"
+	role="dialog" aria-hidden="true" data-backdrop="static"
+	data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button id="accountsToCollectSureBtn" type="button">
+								<i class="fa fa-check">&nbsp;确定</i>
+							</button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">审定金额账龄所在行列</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" id="otherRedirectId_accountsToCollect">
+				<div class="row">
+					<div class="form-group has-info">
+						<div class="col-sm-4">
+							<div class="form-material">
+								<input type="text" id="titleRow_accountsToCollect" class="form-control" value="4"
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="startRow_accountsToCollect">账龄表头行</label>
+							</div>
+						</div>
+						<div class="col-sm-2"></div>
+						<div class="col-sm-4">
+							<div class="form-material">
+								<input type="text" id="detailRow_accountsToCollect" class="form-control" value="5"
+									oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="startRow_accountsToCollect">账龄数值行</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group has-info">
+						<div class="col-sm-4">
+							<div class="form-material">
+								<input type="text" id="startCol_accountsToCollect" class="form-control" value="AL"> <label
+									for="startCol_accountsToCollect">账龄开始列</label>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_statement_balance" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false"
+	 style="position: absolute; width: 850px; top: -30px; left: 175px; z-index: 1000;">
+	<div class="modal-dialog" style="width: 100%;">
+		<div class="modal-content" style="border: 1px solid skyblue;">
+			<!--  style="width: 600px;" -->
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button class="btn btn-md btn-primary" type="button"
+									id="modal_statement_sure">
+								<i class="fa fa-send"></i><span>&nbsp;确定</span>
+							</button>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button"
+									id="modal_statement_balance_cancel">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">获取银行对账单余额</h3>
+				</div>
+			</div>
+			<div class="modal-body"
+				 style="max-height: 500px; padding-bottom: 0px; overflow-y: auto; overflow-x: hidden;">
+				<div class="row" style="margin-top: 10px;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="statement_balanceP" class="form-control" type="text"
+									   placeholder="输入列号，如B..."
+									   onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="statement_balanceP">对账单余额列</label>
+								<button class="btn btn-default"
+										style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+										type="button" name="modal_sampling_location" title="获取对账单余额列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="statement_subjectIdP" class="form-control"
+									   type="text" placeholder="输入列号，如B..."
+									   onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="statement_subjectIdP">开户银行编号列</label>
+								<button class="btn btn-default"
+										style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+										type="button" name="modal_sampling_location" title="获取开户银行编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="statement_assItemIdP" class="form-control"
+									   type="text" placeholder="输入列号，如B..."
+									   onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="statement_assItemIdP">辅助核算编号列</label>
+								<button class="btn btn-default"
+										style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+										type="button" name="modal_sampling_location" title="获取辅助核算编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="statement_itemRow_index" class="form-control"
+									   type="text" placeholder="输入行号，如1.2.."
+									   oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="statement_itemRow_index">数据开始行</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="modal_correspondence_amount" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false"
+	 style="position: absolute; width: 850px; top: -30px; left: 175px; z-index: 1000;">
+	<div class="modal-dialog" style="width: 100%;">
+		<div class="modal-content" style="border: 1px solid skyblue;">
+			<!--  style="width: 600px;" -->
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button class="btn btn-md btn-primary" type="button"
+									id="modal_correspondence_amount_sure">
+								<i class="fa fa-send"></i><span>&nbsp;确定</span>
+							</button>
+						</li>
+						<li>
+							<button class="btn btn-primary" type="button"
+									id="modal_correspondence_amount_cancel">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">获取函证金额</h3>
+				</div>
+			</div>
+			<div class="modal-body"
+				 style="max-height: 500px; padding-bottom: 0px; overflow-y: auto; overflow-x: hidden;">
+				<div class="row" style="margin-top: 10px;">
+					<div class="form-group has-info">
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="correspondence_amount_bankAccountP" class="form-control" type="text"
+									   placeholder="输入列号，如B..."
+									   onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="correspondence_amount_bankAccountP">银行账号列</label>
+								<button class="btn btn-default"
+										style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+										type="button" name="modal_sampling_location" title="获取银行账号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="correspondence_amount_requestAmountP" class="form-control"
+									   type="text" placeholder="输入列号，如B..."
+									   onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="correspondence_amount_requestAmountP">发函金额原币列</label>
+								<button class="btn btn-default"
+										style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+										type="button" name="modal_sampling_location" title="获取发函金额原币列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="correspondence_amount_requestAmountCnyP" class="form-control"
+									   type="text" placeholder="输入列号，如B..."
+									   onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="correspondence_amount_requestAmountCnyP">发函金额折合人民币列</label>
+								<button class="btn btn-default"
+										style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+										type="button" name="modal_sampling_location" title="获取发函金额折合人民币列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="correspondence_amount_confirmationNumberP" class="form-control" type="text"
+									   placeholder="输入列号，如B..."
+									   onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="correspondence_amount_confirmationNumberP">函证编号列</label>
+								<button class="btn btn-default"
+										style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+										type="button" name="modal_sampling_location" title="获取函证编号列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="correspondence_amount_replyAmountP" class="form-control"
+									   type="text" placeholder="输入列号，如B..."
+									   onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="correspondence_amount_replyAmountP">可确认金额原币列</label>
+								<button class="btn btn-default"
+										style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+										type="button" name="modal_sampling_location" title="获取可确认金额原币列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="correspondence_amount_replyAmountCnyP" class="form-control"
+									   type="text" placeholder="输入列号，如B..."
+									   onkeyup="this.value=this.value.toUpperCase()"> <label
+									for="correspondence_amount_replyAmountCnyP">可确认金额折合人民币列</label>
+								<button class="btn btn-default"
+										style="background-color: white; padding: 0px; position: absolute; z-index: 1; border: none; right: 0px; top: -20px;"
+										type="button" name="modal_sampling_location" title="获取可确认金额折合人民币列">
+									<i class="fa fa-location-arrow"></i>
+								</button>
+							</div>
+						</div>
+						<div class="col-sm-2">
+							<div class="form-material">
+								<input id="correspondence_amount_itemRow_index" class="form-control"
+									   type="text" placeholder="输入行号，如1.2.."
+									   oninput="value=value.replace(/[^\d]/g,'')"> <label
+									for="correspondence_amount_itemRow_index">数据开始行</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

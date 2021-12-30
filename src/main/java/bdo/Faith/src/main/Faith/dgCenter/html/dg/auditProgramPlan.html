@@ -1,0 +1,270 @@
+
+<div class="block block-themed" style="height: 100%;">
+	<div class="block-header bg-primary">
+		<div style="float:right">
+			<!--<button id="saveECAVPBtn" style="border: 0px;background-color: #5c90d2;"><i class="fa fa-save"
+																						title="保存"> </i></button>-->
+			<button id="initScheduleControl" style="border: 0px;background-color: #5c90d2;display: none "><i class="si si-shuffle" title="初始化合并计划控制表"></i></button>
+			<button id="editButtonAll" style="border: 0px;background-color: #5c90d2;"><i class="fa fa-send" title="批量生成审计程序"></i></button>
+			<button id="resetButtonAll" style="border: 0px;background-color: #5c90d2;"><i class="fa fa-power-off red-light" title="批量重置"></i></button>
+			<button id="exportAuditProgramPlan" style="border: 0px;background-color: #5c90d2;"><i class="si si-cloud-download" title="导出"></i></button>
+			<button id="setIdentifiedEcavpRecommendValue" style="border: 0px;background-color: #5c90d2;"><i class="si si-magic-wand" title="设置推荐的认定分值"></i></button>
+			<button id="exchangeSetSubjectors" style="border: 0px;background-color: #5c90d2;"><i class="si si-settings" title="批量设置编制人"></i></button>
+			<div class="block-options form-group has-info" style="width: 185px;float: left;">
+				<label class="control-label" for="filter"
+					   style="text-align: left; color: #fff; position: relative; left: -50px;">显示方式:</label>
+				<div class="form-material col-xs-8 col-sm-8 col-lg-8" style="margin: 0px;">
+					<select class="form-control"
+							value="all"
+							id="filter"
+							name="filter" size="1"
+							style="color: #fff;padding:0px;width: 113px;position: relative; left: 121px;">
+						<option value="all" style="color: #000">全部</option>
+						<option value="std" style="color: #000">借贷方不为0</option>
+						<option value="sub" style="color: #000">借贷方为0</option>
+					</select>
+				</div>
+			</div>
+			<div class="block-options form-group has-info" style="width: 220px;float: left;">
+				<label class="control-label" for="filter"
+					   style="text-align: right;color: #fff;position: relative; left: -93px;">科目编制人:</label>
+				<div class="form-material col-xs-8 col-sm-8 col-lg-8">
+					<select class="form-control"
+							value="all"
+							id="filterEditor"
+							name="filterEditor" size="1"
+							style="color: #fff; padding: 0px; width: 80px;position: relative; left: 118px; top: -10px;">
+					</select>
+				</div>
+			</div>
+		</div>
+		<h3 class="block-title" style="margin-top:6px">科目认定表 <span id="subjectIndex"></span></h3>
+	</div>
+	<div class="block-content-close">
+		<div class="row bdo-app-value">
+			<div class="col-sm-6 col-lg-4">
+				<div class="alert alert-success alert-dismissable">
+					<div>
+						选择的重要性水平<input style="border: 0px;" id="rateA" readonly>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-lg-4">
+				<div class="alert alert-warning alert-dismissable">
+					<div>
+						实际执行的重要性<input style="border: 0px;" id="rateB" readonly>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-6 col-lg-4">
+				<div class="alert alert-danger alert-dismissable">
+					<div>
+						明显微小错报<input style="border: 0px;" id="rateC" readonly>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" id="data_check_charts"></div>
+	</div>
+	<div class="block-content">
+		<table id="subjectPlanTable" class="table table-bordered table-striped table-hover"></table>
+	</div>
+</div>
+
+<div class="modal fade" id="selectSubjectUpdateEditor" tabindex="-1" role="dialog"aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content" style="width: 100%">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="checkSubjectPlan"><i class="fa fa-check">确定</i></button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">科目编制人:</h3>
+					<div class="form-material" style="width: 160px; margin-left: 92px; margin-top: -25px; ">
+						<select class="form-control"
+								value="all"
+								id="filterSubjectEditor"
+								name="filterSubjectEditor" size="1"
+								style="color: #fff; padding: 0px;">
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="modal-body">
+				<table id="selectSubjectPlanTable" class="table table-bordered table-striped table-hover"></table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="notAuditReasonsModal" tabindex="-1" role="dialog"aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content" style="width: 100%">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="notAuditReasonsBtn"><i class="fa fa-check">确定</i></button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">不编制理由</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" id="notAuditReasonsModal_autoId">
+				<input type="hidden" id="notAuditReasonsModal_isNeedToAudit">
+				<textarea class="form-control" rows="4" id="notAuditReasonsText"></textarea>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="auditProgramPlanModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">未对照的客户科目：</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div id="auditProgramList" style="height: 150px"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="projectProgram"><i class="fa fa-send"></i> 可选项目</button>
+				<button type="button" class="btn btn-primary" id="createDgAllButton"><i class="fa fa-send"></i> 批量生成</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="deleteDgAllButton">关闭</button>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="mergeAuditProgramPlanModal" tabindex="-1" role="dialog"
+	 aria-hidden="true" data-backdrop="static" data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">未对照的客户科目：</h3>
+				</div>
+			</div>
+			<div class="modal-body">
+				<div id="mergeAuditProgramList" style="height: 150px"></div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" id="createMergeDgAllButton"><i class="fa fa-send"></i> 批量生成</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="closeMergeAuditProgramPlanButton">关闭</button>
+			</div>
+		
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="selectAllBaseSubjectModal" tabindex="-2" role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog" style="margin-top: 150px;">
+		<div class="modal-content" style="width: 100%">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" id="submitSelect"><i class="fa fa-check">确定</i></button>
+						</li>
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="modal-body">
+				<table id="selectAllBaseSubjectTable" class="table table-bordered table-striped table-hover" tabindex="-3"></table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="" id="1">
+	<div id="selectProjectProgramSider" class="bdo-side" tabindex="-0">
+		<div class="bdo-side-block block block-themed">
+			<div class="block-header bg-info">
+				<ul class="block-options">
+					<li>
+						<button id="insertProjectProgram" type="button"><i class="fa fa-check">&nbsp;确定</i></button>
+					</li>
+					<li>
+						<button data-close="true" type="button">
+							<i class="si si-close"></i>
+						</button>
+					</li>
+				</ul>
+				<h3 class="block-title">添加可选项目审计程序</h3>
+			</div>
+			<div class="block-content bdo-side-content">
+				<div data-toggle="slimscroll" data-always-visible="false"
+					 data-rail-visible="true" data-rail-color="#777"
+					 data-rail-opacity=".0" data-height="93%">
+					<div class="block block-themed block-opt-hidden">
+						<div class="block-header bg-primary">
+							<ul class="block-options">
+								<li>
+									<button id="searchProjectBtn" type="button"><i class="fa fa-search">&nbsp;搜索</i>
+									</button>
+								</li>
+								<li>
+									<button id="searchResetProjectBtn" type="button"><i class="fa fa-repeat">&nbsp;重置</i>
+									</button>
+								</li>
+								<li>
+									<button type="button" data-toggle="block-option" data-action="content_toggle"><i
+										class="si si-arrow-up"></i></button>
+								</li>
+							</ul>
+							<h3 class="block-title">搜索条件</h3>
+						</div>
+						<div class="block-search">
+							<div class="row" data-form="search">
+								<form id="searchProjectForm"></form>
+							</div>
+						</div>
+					</div>
+					<table id="selectProjectProgramTable" class="table table-bordered table-striped table-hover"
+						   tabindex="1"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

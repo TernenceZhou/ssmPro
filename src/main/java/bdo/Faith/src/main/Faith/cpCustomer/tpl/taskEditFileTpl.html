@@ -1,0 +1,15 @@
+<div class="form-material">
+	<div id="files" name="files">
+		<a class="" href="javascript:void(0)" v-for="file in jsonData.files">
+			<div class="">
+				<i class="fa fa-file text-primary "> </i> 
+				<span class="text-muted">
+					{{ file.label }} 
+				</span> 
+				<i @click="$emit('del-edit-file', file)"
+					class="fa fa-close text-primary pull-right" title="删除" style="margin-top: .3em;"></i>
+			</div>
+		</a>
+	</div>
+	<label for="files">附件</label>
+</div>

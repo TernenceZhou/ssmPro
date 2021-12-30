@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+	<div class="modal fade" id="modal_customTag" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 400px;border:1px solid #D3D3D3;">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_customTag_ensure" title="确定"><i class="fa fa-check"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+							</li>
+						</ul>
+						<h3 class="block-title">自定义标签</label></h3>
+					</div>
+				</div>
+				<div class="modal-body" style="min-height: 150px;max-height: 280px;padding-top: 5px;padding-bottom: 5px;">
+					<div class="custom-label-dialog">
+						<table style="border-collapse: separate; border-spacing: 0px 10px;">
+							<tr>
+								<td style="width: 160px;">
+									<label for="cell_alias">请输入单元格标签名:</label>
+								</td>
+								<td>
+									<input type="text" id="cell_alias" name="cell_alias" class="cellAlias" autocomplete="off" maxlength="100"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="cell_position">单元格位置:</label>
+								</td>
+								<td>
+									<input type="text" id="cell_position" name="cell_position" class="cellPosition" style="background-color: rgb(235, 235, 228)" readonly/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal_singleLink" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 620px;border:1px solid #D3D3D3;">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_singleLink_ensure" title="确定"><i class="fa fa-check"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_singleLink_clear" title="清除"><i class="fa fa-times"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+							</li>
+						</ul>
+						<h3 class="block-title">单向链接</label></h3>
+					</div>
+				</div>
+				<div class="modal-body" style="height: 505px;padding-top: 5px;padding-bottom: 5px;">
+					<div class="single-link-dialog">
+						<table>
+							<tr>
+								<td style="height: 445px;">
+									<fieldset style="width: 220px;">
+										<legend>链接:</legend>
+										<select class="items" size="10" style="height: 390px;"/>
+									</fieldset>
+								</td>
+								<td>
+									<fieldset style="width: 340px;">
+										<legend>链接属性:</legend>
+										<table style="border-collapse:separate; border-spacing:0px 10px;">
+											<tr>
+												<td>
+													<input type="radio" name="linktype" value="0" style="width: 13px;" checked="checked"/>
+													<label>单元格</label>
+												</td>
+												<td>
+													<button class="refershPaper-button" type="button" style="width: 40px;">
+														<span>刷新</span>
+													</button>
+													<button class="openDgBtn-button" type="button" style="width: 65px;">
+														<span>打开底稿</span>
+													</button>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="display-text">要显示的文字:</label>
+												</td>
+												<td>
+													<input type="text" id="display-text" class="displayText" autocomplete="off"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="paper-cell-right">请选择底稿:</label>
+													<button class="clearPaper-button" type="button" style="width: 40px;">
+														<span>重置</span>
+													</button>
+												</td>
+												<td>
+													<input type="text" id="paper-text-cell" name="paper-text-cell" class="paperTextCell" autocomplete="off"/>
+													<select id="paper-list-cell" class="paperListCell" style="display: none;position: absolute;height: 70px;" size="4"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="sheet_list">请选择Sheet:</label>
+												</td>
+												<td>
+													<select id="sheet_list" class="sheetText" style="height: 28px;"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="custom-text">请键入单元格引用:</label>
+												</td>
+												<td>
+													<input type="text" id="custom-text" class="text" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="linktype" value="1" style="width: 13px;"/>
+													<label>文件</label>
+												</td>
+												<td>
+													<button class="refreshDg-button" type="button" style="width: 40px;">
+														<span>刷新</span>
+													</button>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="paper_list">请选择底稿:</label>
+													<button class="clearDg-button" type="button" style="width: 40px;">
+														<span>重置</span>
+													</button>
+												</td>
+												<td>
+													<input type="text" id="paper-text" name="paper-text" class="paperInput" autocomplete="off"/>
+													<select id="paper_list" class="paperText" style="display: none;position: absolute;height: 70px;" size="4"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="attachment_list">请选择底稿附件:</label>
+												</td>
+												<td>
+													<!-- <select id="attachment_list" class="attachmentText" multiple size="4"></select> -->
+													<select class="attachmentText js-select2 form-control" id="attachment_list" multiple size="3"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="linktype" value="2" style="width: 13px;" checked="checked"/>
+													<label>外部链接</label>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="external-display-text">要显示的文字:</label>
+												</td>
+												<td>
+													<input type="text" id="external-display-text" class="externalDisplayText" autocomplete="off"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label for="external-url">链接地址:</label>
+												</td>
+												<td>
+													<input type="text" id="external-url" class="externalURL" autocomplete="off"/>
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</td>
+							</tr>
+						</table>
+						<button class="add-button" role="button" aria-disabled="false" type="button">
+							<span>添加</span>
+						</button>
+						<button class="remove-button" role="button" aria-disabled="false" type="button">
+							<span>删除</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal_mutualIndex" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 680px;border:1px solid #D3D3D3;">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_mutualIndex_ensure" title="确定"><i class="fa fa-check"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_mutualIndex_exchange" title="切换"><i class="fa fa-exchange"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_mutualIndex_clear" title="清除"><i class="fa fa-times"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+							</li>
+						</ul>
+						<h3 class="block-title">交叉索引</label></h3>
+					</div>
+				</div>
+				<div class="modal-body" style="min-height: 350px;max-height: 580px;padding-top: 5px;padding-bottom: 5px;">
+					<div class="mutual-index-dialog">
+						<table style="border-collapse:separate;" id="indexTable">
+							<tr>
+								<td id="leftTd">
+									<fieldset>
+										<legend><label id="leftLabel">左交叉索引</label></legend>
+										<table style="border-collapse:separate; border-spacing:0px 5px;">
+											<tr>
+												<td style="width: 70px;">
+													<table style="border-collapse:separate; border-spacing:0px 0px;">
+														<tr>
+															<td>
+																<input type="radio" name="leftIndexType" value="0" style="width: 13px;" checked/>
+															</td>
+															<td style="vertical-align: middle;">
+																&nbsp;<label style="margin-top: 6px;">TB</label>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>TB科目:</label>
+												</td>
+												<td>
+													<input type="text" id="tb-list-text" class="tbListText" autocomplete="off"/>
+													<select id="tb-list" class="tbList" style="display: none;position: absolute;height: 70px;" size="4"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>科目项:</label>
+												</td>
+												<td>
+													<select id="tbColumn-list" class="tbColumnList" style="height: 28px;">
+														<option value="0">未审数</option>
+														<option value="1">审计调整数</option>
+														<option value="2">审定数</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<table style="border-collapse:separate; border-spacing:0px 0px;">
+														<tr>
+															<td>
+																<input type="radio" name="leftIndexType" value="1" style="width: 13px;" checked/>
+															</td>
+															<td style="vertical-align: middle;">
+																&nbsp;<label style="margin-top: 6px;">导引表</label>
+															</td>
+														</tr>
+													</table>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>财务科目:</label>
+												</td>
+												<td>
+													<input type="text" id="guide-list-text" class="guideListText" autocomplete="off"/>
+													<select id="guide-list" class="guideList" style="display: none;position: absolute;height: 70px;" size="4"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>科目项:</label>
+												</td>
+												<td>
+													<select id="guideColumn-list" class="guideColumnList" style="height: 28px;"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<table style="border-collapse:separate; border-spacing:0px 0px;">
+														<tr>
+															<td>
+																<input type="radio" name="leftIndexType" value="2" style="width: 13px;" checked/>
+															</td>
+															<td style="vertical-align: middle;">
+																&nbsp;<label style="margin-top: 6px;">底稿</label>
+															</td>
+														</tr>
+													</table>
+												</td>
+												<td>
+													<button class="openDg-button" type="button" style="width: 64px;">
+														<span>打开底稿</span>
+													</button>
+													<button class="refreshDg-button" type="button" style="width: 64px;">
+														<span>刷新</span>
+													</button>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>底稿:</label>
+												</td>
+												<td>
+													<input type="text" id="dg-list-text" class="dgListText" autocomplete="off"/>
+													<select id="dg-list" class="dgList" style="display: none;position: absolute;height: 70px;" size="4"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>Sheet:</label>
+												</td>
+												<td>
+													<select id="dg-sheet" class="dgSheet" style="height: 28px;"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>单元格:</label>
+												</td>
+												<td>
+													<input type="text" id="dgCell-input" name="dgCell-input" class="dgCellInput" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<table style="border-collapse:separate; border-spacing:0px 0px;">
+														<tr>
+															<td>
+																<input type="radio" name="leftIndexType" value="3" style="width: 13px;" checked/>
+															</td>
+															<td style="vertical-align: middle;">
+																&nbsp;<label style="margin-top: 6px;">附注</label>
+															</td>
+														</tr>
+													</table>
+												</td>
+												<td>
+													<button class="openNote-button" type="button" style="width: 64px;">
+														<span>打开附注</span>
+													</button>
+													<button class="refreshNote-button" type="button" style="width: 64px;">
+														<span>刷新</span>
+													</button>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>附注:</label>
+												</td>
+												<td>
+													<input type="text" id="note-list-text" class="noteListText" autocomplete="off"/>
+													<select id="note-list" class="noteList" style="display: none;position: absolute;height: 70px;" size="4"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>Sheet:</label>
+												</td>
+												<td>
+													<select id="note-sheet" class="noteSheet" style="height: 28px;"></select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<label>单元格:</label>
+												</td>
+												<td>
+													<input type="text" id="noteCell-input" name="noteCell-input" class="noteCellInput" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</td>
+								<td id="rightTd" style="vertical-align: baseline;">
+									<fieldset>
+										<legend><label id="rightLabel">右交叉索引</label></legend>
+										<table style="border-collapse:separate; border-spacing:0px 5px;">
+											<tr>
+												<td style="width: 80px;">
+													<label>当前单元格:</label>
+												</td>
+												<td>
+													<input type="text" id="activeCell-input" name="activeCell-input" class="activeCellInput" style="width: 230px;" disabled/>
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</td>
+							<tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal_auditSampling" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 610px;border:1px solid #D3D3D3;">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_auditSampling_ensure" title="确定"><i class="fa fa-check"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_auditSampling_clear" title="清除"><i class="fa fa-times"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+							</li>
+						</ul>
+						<h3 class="block-title">抽凭链接</label></h3>
+					</div>
+				</div>
+				<div class="modal-body" style="min-height: 280px;max-height: 380px;padding-top: 5px;padding-bottom: 5px;">
+					<div class="audit-sampling-dialog">
+						<table>
+							<tr>
+								<td style="height: 230px;">
+									<fieldset style="width: 220px;">
+										<legend>链接:</legend>
+										<select class="items" size="10" style="height: 210px;"/>
+									</fieldset>
+								</td>
+								<td>
+									<fieldset style="width: 340px;">
+										<legend>链接属性:</legend>
+										<table style="border-collapse:separate; border-spacing:0px 10px;">
+											<tr>
+												<td style="width: 240px;">
+													<label>科目:</label>
+												</td>
+												<td>
+													<input class="samplingAttach-file-subjectid" type="text" id="sampling_file_subjectid" style="width:100%">
+												</td>
+											</tr>
+											<tr>
+												<td style="width: 240px;">
+													<label>抽凭附件:</label>
+													<button class="refreshSamplingAttach-button" type="button" style="width: 64px;">
+														<span>刷新</span>
+													</button>
+												</td>
+												<td>
+													<select id="sampling-attach" class="samplingAttach"></select>
+												</td>
+											</tr>
+										</table>
+									</fieldset>
+								</td>
+							</tr>
+						</table>
+						<button class="add-button" role="button" aria-disabled="false" type="button">
+							<span>添加</span>
+						</button>
+						<button class="remove-button" role="button" aria-disabled="false" type="button">
+							<span>删除</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal_dgFetch" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 555px;border:1px solid #D3D3D3;">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_dgFetch_ensure" title="确定"><i class="fa fa-check"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_dgFetch_clear" title="清除"><i class="fa fa-times"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+							</li>
+						</ul>
+						<h3 class="block-title">底稿取值</label></h3>
+					</div>
+				</div>
+				<div class="modal-body" style="min-height: 350px;max-height: 580px;padding-top: 5px;padding-bottom: 5px;">
+					<div class="dg-fetch-dialog">
+						<table style="border-collapse:separate; border-spacing:0px 10px;">
+							<tr>
+								<td style="width: 100px;vertical-align: bottom;">
+									<label for="cur-sheet">当前sheet:</label>
+								</td>
+								<td style="width: 300px;">
+									<input type="text" id="cur-sheet" name="cur-sheet" class="curSheet" autocomplete="off"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: bottom;">
+									<label for="cur-position">当前位置:</label>
+								</td>
+								<td style="width: 300px;">
+									<input type="text" id="cur-position" name="cur-sheet" class="curPosition" autocomplete="off"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: bottom;">
+									<label for="dg-file">底稿:</label>
+								</td>
+								<td style="width: 395px;">
+									<input type="text" id="dg-file-input" name="dg-file-input" class="dgFileInput" autocomplete="off"/>
+									<select id="dg-file-select" class="dgFileSelect" style="display: none;position: absolute;height: 70px;" size="4"></select>
+									<button class="clearDg-button" type="button" style="width: 40px;">
+										<span>重置</span>
+									</button>
+									<button class="openDg-button" role="button" aria-disabled="false" type="button" style="width: 64px;">
+										<span>打开底稿</span>
+									</button>
+									<button class="refreshDg-button" role="button" aria-disabled="false" type="button" style="width: 64px;">
+										<span>刷新</span>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: bottom;">
+									<label for="dg-sheet-select">Sheet:</label>
+								</td>
+								<td>
+									<select id="dg-sheet-select" class="dgSheetSelect" style="height: 23px;"></select>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: bottom;">
+									<label for="dg-range-start">单元格位置:</label>
+								</td>
+								<td>
+									<input type="text" id="dg-range" name="dg-range" class="dgRange" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal_noteFeature" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 555px;border:1px solid #D3D3D3;">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_noteFeature_ensure" title="确定"><i class="fa fa-check"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_noteFeature_clear" title="清除"><i class="fa fa-times"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+							</li>
+						</ul>
+						<h3 class="block-title">附注取值</label></h3>
+					</div>
+				</div>
+				<div class="modal-body" style="min-height: 230px;max-height: 580px;padding-top: 5px;padding-bottom: 5px;">
+					<div class="note-feature-dialog">
+						<table style="border-collapse:separate; border-spacing:0px 10px;">
+							<tr>
+								<td style="width: 100px;vertical-align: bottom;">
+									<label for="cur-sheet-note">当前Sheet:</label>
+								</td>
+								<td style="width: 300px;">
+									<input type="text" id="cur-sheet-note" name="cur-sheet-note" class="curSheetNote" autocomplete="off"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: bottom;">
+									<label for="cur-position-note">当前位置:</label>
+								</td>
+								<td style="width: 300px;">
+									<input type="text" id="cur-position-note" name="cur-sheet-note" class="curPositionNote" autocomplete="off"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: bottom;">
+									<label for="dg-file">底稿:</label>
+								</td>
+								<td style="width: 395px;">
+									<input type="text" id="dg-file-input-note" name="dg-file-input-note" class="dgFileInputNote" autocomplete="off"/>
+									<select id="dg-file-select-note" class="dgFileSelectNote" style="display: none;position: absolute;height: 70px;" size="4"></select>
+									<button class="clearDg-button-note" role="button" aria-disabled="false" type="button" style="width: 40px;">
+										<span>重置</span>
+									</button>
+									<button class="openDg-button-note" role="button" aria-disabled="false" type="button" style="width: 64px;">
+										<span>打开底稿</span>
+									</button>
+									<button class="refreshDg-button-note" role="button" aria-disabled="false" type="button" style="width: 64px;">
+										<span>刷新</span>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: bottom;">
+									<label for="dg-sheet-select-note">Sheet:</label>
+								</td>
+								<td>
+									<select id="dg-sheet-select-note" class="dgSheetSelectNote" style="height: 23px;"></select>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: bottom;">
+									<label for="dg-range-start-note">区域起始位置:</label>
+								</td>
+								<td>
+									<input type="text" id="dg-range-start-note" name="dg-range-start-note" class="dgRangeStartNote" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: bottom;">
+									<label for="dg-range-end-note">区域结束位置:</label>
+								</td>
+								<td>
+									<input type="text" id="dg-range-end-note" name="dg-range-end-note" class="dgRangeEndNote" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal_cashflowFeature" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 555px;border:1px solid #D3D3D3;">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_cashflowFeature_ensure" title="确定"><i class="fa fa-check"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_cashflowFeature_clear" title="清除"><i class="fa fa-times"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+							</li>
+						</ul>
+						<h3 class="block-title">数据取值</label></h3>
+					</div>
+				</div>
+				<div class="modal-body" style="min-height: 350px;max-height: 580px;padding-top: 5px;padding-bottom: 5px;">
+					<div class="cashflow-feature-dialog">
+						<table style="border-collapse:separate; border-spacing:0px 10px;">
+							<tr>
+								<td style="width: 100px;vertical-align: bottom;">
+									<label for="cur-sheet-cashflow">当前Sheet:</label>
+								</td>
+								<td style="width: 300px;">
+									<input type="text" id="cur-sheet-cashflow" name="cur-sheet-cashflow" class="curSheetCashflow" autocomplete="off"/>
+								</td>
+							</tr>
+							<tr>
+								<td style="vertical-align: bottom;">
+									<label for="cur-position-cashflow">当前位置:</label>
+								</td>
+								<td style="width: 300px;">
+									<input type="text" id="cur-position-cashflow" name="cur-position-cashflow" class="curPositionCashflow" autocomplete="off"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>
+										<input type="radio" name="indexTypeCashflow" value="1" style="width: 13px;" checked/>&nbsp;报表
+									</label>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>报表科目:</label>
+								</td>
+								<td>
+									<input type="text" id="report-list-text-cashflow" class="reportListTextCashflow" autocomplete="off"/>
+									<select id="report-list-cashflow" class="reportListCashflow" style="display: none;position: absolute;height: 70px;" size="4"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>报表科目名称:</label>
+								</td>
+								<td>
+									<input type="text" id="reportDisp-input-cashflow" name="reportDisp-input-cashflow" class="reportDispInputCashflow" disabled/>
+								</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<label>
+										<input type="radio" name="reportValueTypeCashflow" value="1" style="width: 13px;" checked/>&nbsp;本年审定数&nbsp;
+									</label>
+									<label>
+										<input type="radio" name="reportValueTypeCashflow" value="2" style="width: 13px;"/>&nbsp;上年审定数
+									</label>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>
+										<input type="radio" name="indexTypeCashflow" value="2" style="width: 13px;"/>&nbsp;底稿
+									</label>
+								</td>
+								<td>
+									<button class="openDg-button-cashflow" type="button" style="width: 64px;">
+										<span>打开底稿</span>
+									</button>
+									<button class="refreshDg-button-cashflow" type="button" style="width: 64px;">
+										<span>刷新</span>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>底稿:</label>
+								</td>
+								<td>
+									<input type="text" id="dg-list-text-cashflow" class="dgListTextCashflow" autocomplete="off"/>
+									<select id="dg-list-cashflow" class="dgListCashflow" style="display: none;position: absolute;height: 70px;" size="4"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>Sheet:</label>
+								</td>
+								<td>
+									<select id="dg-sheet-cashflow" class="dgSheetCashflow"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>单元格:</label>
+								</td>
+								<td>
+									<input type="text" id="dgCell-input-cashflow" name="dgCell-input-cashflow" class="dgCellInputCashflow" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>
+										<input type="radio" name="indexTypeCashflow" value="3" style="width: 13px;"/>&nbsp;附注
+									</label>
+								</td>
+								<td>
+									<button class="openNote-button-cashflow" type="button" style="width: 64px;">
+										<span>打开附注</span>
+									</button>
+									<button class="refreshNote-button-cashflow" type="button" style="width: 64px;">
+										<span>刷新</span>
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>附注:</label>
+								</td>
+								<td>
+									<input type="text" id="note-list-text-cashflow" class="noteListTextCashflow" autocomplete="off"/>
+									<select id="note-list-cashflow" class="noteListCashflow" style="display: none;position: absolute;height: 70px;" size="4"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>Sheet:</label>
+								</td>
+								<td>
+									<select id="note-sheet-cashflow" class="noteSheetCashflow"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label>单元格:</label>
+								</td>
+								<td>
+									<input type="text" id="noteCell-input-cashflow" name="noteCell-input-cashflow" class="noteCellInputCashflow" placeholder="输入单元格位置,如:A1" onkeyup="this.value=this.value.toUpperCase()" autocomplete="off"/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal_customTagMerge" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 400px;border:1px solid #D3D3D3;">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" class="btn btn-primary" id="btn_customTagMerge_ensure" title="确定"><i class="fa fa-check"></i></button>
+							</li>
+							<li>
+								<button type="button" class="btn btn-primary" data-dismiss="modal" aria-hidden="true"><i class="si si-close"></i></button>
+							</li>
+						</ul>
+						<h3 class="block-title">自定义标签</label></h3>
+					</div>
+				</div>
+				<div class="modal-body" style="min-height: 150px;max-height: 280px;padding-top: 5px;padding-bottom: 5px;">
+					<div class="custom-label-dialog">
+						<table style="border-collapse: separate; border-spacing: 0px 10px;">
+							<tr>
+								<td style="width: 160px;">
+									<label for="cell_alias_merge">请输入单元格标签名:</label>
+								</td>
+								<td>
+									<input type="text" id="cell_alias_merge" name="cell_alias_merge" class="cellAliasMerge" autocomplete="off" maxlength="100"/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<label for="cell_position_merge">单元格位置:</label>
+								</td>
+								<td>
+									<input type="text" id="cell_position_merge" name="cell_position_merge" class="cellPositionMerge" style="background-color: rgb(235, 235, 228)" readonly/>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="modal_subjectid_sampling_file" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+		 data-keyboard="false" style="top:40px;z-index: 1070;">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" data-dismiss="modal">
+									<i class="si si-close"></i>
+								</button>
+							</li>
+						</ul>
+						<h3 class="block-title">选择科目</h3>
+					</div>
+				</div>
+				<div class="modal-body" style="min-height:500px;max-height:500px">
+					<div id="subject_tree_sampling_file"></div>
+				</div>
+				<div class="modal-footer">
+					<div class="col-sm-3">
+						<input class="form-control" type="text" id="searchInput_sampling_file" placeholder="搜索科目">
+					</div>
+					<div class="col-sm-9">
+						<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_reset_sampling_file">
+							<i class="fa fa-repeat"></i><span>&nbsp;重置</span>
+						</button>
+						<button class="btn btn-md btn-primary" type="button" id="modal_subjectid_sure_sampling_file">
+							<i class="fa fa-send"></i><span>&nbsp;确定</span>
+						</button>
+						<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+							<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

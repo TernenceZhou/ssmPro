@@ -1,0 +1,34 @@
+@CHARSET "UTF-8";
+
+.adjust-row-text {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden
+}
+
+#tb_tbcheck_wrapper .row {
+	padding-right: 10px;
+}
+
+.font-s12 {
+	width: 53%;
+}
+
+.nCol {
+	width: 13%;
+	float: right;
+}
+
+.node-selected {
+	background-color: lightskyblue
+}
+
+#adsubject_tree .glyphicon.glyphicon-unchecked {
+	float: right;
+	display: none;
+}
+
+#assitem_tree .glyphicon.glyphicon-unchecked {
+	float: right;
+	display: none;
+}

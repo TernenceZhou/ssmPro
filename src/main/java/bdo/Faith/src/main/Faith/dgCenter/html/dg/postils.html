@@ -1,0 +1,119 @@
+<div class="block block-themed" style="margin-bottom: 10px;">
+	<div class="block-header bg-primary">
+		<ul class="block-options">
+			<li>
+				<button id="btn_search" type="button">
+					<i class="fa fa-search" style="color: white;">&nbsp;查询</i>
+				</button>
+			</li>
+			<li>
+				<button id="btn_clear" type="button">
+					<i class="fa fa-repeat" style="color: white;">&nbsp;清空</i>
+				</button>
+			</li>
+			<li>
+				<button id="toggleBtn" type="button" data-toggle="block-option" data-action="content_toggle"><i
+					class="si si-arrow-up" style="color: white;"></i>
+				</button>
+			</li>
+
+		</ul>
+		<h3 class="block-title">查询条件设定</h3>
+	</div>
+	<div id="search-condition" class="block-search">
+		<div class="row">
+			<div class="form-group"></div>
+			<div class="form-group has-info">
+                <div class="col-sm-2">
+                    <div class="form-material input-group">
+                        <input class="form-control" type="text" id="detail_subjectName">
+                        <label for="detail_subjectName">科目名称</label>
+                    </div>
+                </div>
+            </div>
+			<div class="form-group has-info">
+				<div class="col-sm-2">
+					<div class="form-material input-group">
+						<input class="form-control" type="text" id="detail_fileName">
+						<label for="detail_fileName">节点名称</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group has-info">
+				<div class="col-sm-2">
+					<div class="form-material input-group">
+						<input class="form-control" type="text" id="detail_content">
+						<label for="detail_content">批注</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group has-info">
+				<div class="col-sm-2">
+					<div class="form-material input-group">
+						<input class="form-control" type="text" id="detail_indexId">
+						<label for="detail_indexId">索引号</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group has-info">
+				<div class="col-sm-2">
+					<div class="form-material">
+						<select class="form-control" id="detail_auditState" style="width: 100%;">
+							<option value="" selected="selected"></option>
+							<option value="100">一审</option>
+							<option value="200">二审</option>
+							<option value="300">三审</option>
+							<option value="400">注会</option>
+							<option value="500">外派</option>
+							<option value="600">签字</option>
+							<option value="700">签发</option>
+						</select>
+						<label for="detail_auditState">质控阶段</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group has-info">
+				<div class="col-sm-2">
+					<div class="form-material">
+						<select class="form-control" id="detail_activeFlag" style="width: 100%;">
+							<option value="" selected="selected"></option>
+							<option value="1">开启</option>
+							<option value="0">关闭</option>
+						</select>
+						<label for="detail_activeFlag">状态</label>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="block block-bordered" id="postillist_block" style="margin-bottom: 0px;">
+	<div class="block block-themed" style="margin-bottom: 0px;">
+		<div class="block-header bg-primary">
+			<ul class="block-options">
+				<li>
+					<button class="bdoexport-btn" type="button"
+							data-bdoexport-table-id="postilsTable"
+							data-bdoexport-title="批注汇总一览"
+					>
+						<i class="si si-cloud-download" title="导出"> </i>
+					</button>
+				</li>
+				<li>
+					<button id="postilsExportBtn" type="button" style="display: none;">
+						<i class="fa fa-download" style="color: white;" title="导出批注详情">&nbsp;</i>
+					</button>
+				</li>
+				<li>
+					<button type="button" data-toggle="block-option" data-action="fullscreen_toggle"><i
+						class="si si-size-fullscreen" style="color: white;"></i>
+					</button>
+				</li>
+			</ul>
+			<h3 class="block-title">批注汇总一览</h3>
+		</div>
+		<div class="block-content">
+			<table id="postilsTable" class="table table-bordered table-striped table-hover"></table>
+		</div>
+	</div>
+</div>

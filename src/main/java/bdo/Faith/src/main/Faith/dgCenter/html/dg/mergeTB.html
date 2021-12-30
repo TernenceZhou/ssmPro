@@ -1,0 +1,320 @@
+<style>
+	
+	/* Table Head */
+	#subtable thead th {
+		background-color: rgb(81, 130, 187);
+		color: #fff;
+		border-bottom-width: 0;
+		padding: 5px 10px;
+	}
+	
+	/* Column Style */
+	#subtable td {
+		color: #000;
+		
+	}
+	
+	/* Heading and Column Style */
+	#subtable tr, #table-7 th {
+		border-width: 1px;
+		border-style: solid;
+		border-color: rgb(81, 130, 187);
+	}
+	
+	/* Padding and font style */
+	#subtable td, #table-7 th {
+		padding: 5px 10px;
+		font-size: 12px;
+		font-family: Verdana;
+	}
+	
+	.width-jyx {
+		min-width: 372px;
+		max-width: 372px;
+	}
+	
+	.width-je {
+		/*min-width: 120px;*/
+		/*max-width: 120px;*/
+		word-break: keep-all;
+		white-space: nowrap;
+	}
+	
+	.width-seq {
+		height: 35px;
+		min-width: 30px;
+		max-width: 30px;
+		word-break: keep-all;
+		white-space: nowrap;
+	}
+	
+	.width-code {
+		min-width: 60px;
+		max-width: 60px;
+	}
+	
+	.width-subject-id {
+		min-width: 100px;
+		max-width: 100px;
+		word-break: keep-all;
+		white-space: nowrap;
+	}
+	
+	.width-subject-name {
+		min-width: 200px;
+		max-width: 200px;
+		/*word-break: keep-all;*/
+		/*white-space: nowrap;*/
+	}
+	
+	.width-calfun {
+		min-width: 260px;
+		max-width: 260px;
+		word-wrap: break-word;
+	}
+</style>
+
+<div data-toggle="slimscroll" data-always-visible="false"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%">
+	<div class="block">
+		<div class="block-heade">
+			<ul class="nav nav-tabs" data-toggle="tabs" id="tab_contract">
+				<li id="tab2" class="active"><a href="#tab_tbList">合并试算平衡表</a></li>
+				<li id="tab3"><a href="#tab_tb_options">TB科目维护</a></li>
+				<li id="li_tb_offset"><a href="#tab_tb_offset">抵消明细</a></li>
+				
+				<li class="pull-right">
+					<ul class="block-options push-10-t push-10-r">
+						<li>
+							<button type="button" data-toggle="block-option" data-action="fullscreen_toggle"></button>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!--		tab-content-->
+		<div class="block-content " id="tab_contract_content">
+			<div class="tab-pane active" id="tab_tbList">
+				<div class="block block-themed">
+					<div class="block-header bg-primary">
+						<ul class="block-options">
+<!--							<li style="width: 230px">
+								<div class="block-options form-group has-info" style="width: 280px;float: left;">
+									<label class="col-xs-4 col-sm-4 col-lg-4 control-label" for="tb_editer"
+										   style="text-align: right;padding-top:4px;color: #fff;">TB编制人:</label>
+									<div class="form-material col-xs-8 col-sm-8 col-lg-8" style="margin: 0;width: 110px">
+										<select class="form-control" value="2" id="tb_editer" name="filter" size="1"
+												style="color: #fff;padding:0px;">
+										</select>
+									</div>
+								</div>
+							</li>-->
+<!--							<li style="width: 120px;">
+								<div class="block-options form-group has-info" style="width: 150px;float: left;">
+									
+									<div class="form-material col-xs-8 col-sm-8 col-lg-8" style="margin: 0px;">
+										<select class="form-control" value="2" id="showContract" name="filter"
+												size="1"
+												style="color: #fff;padding:0px;">
+											<option value="2" style="color: #000;" selected>全部</option>
+											<option value="1" style="color: #000;">已对照</option>
+											<option value="0" style="color: #000;">未对照</option>
+										</select>
+									</div>
+								</div>
+							</li>-->
+							<li>
+								<button id="tb_search" type="button">
+									<i class="fa fa-refresh" style="color: white;" title="刷新"></i>
+								</button>
+							</li>
+							<!--<li>
+								<button id="tb-init-merge-template" type="button">
+									<i class="si si-settings" style="color: white;" title="合并报表初始化"></i>
+								</button>
+							</li>
+							<li>
+								<button id="tb_createReport" type="button">
+									<i class="fa fa-table" style="color: white;" title="生成试算平衡表"></i>
+								</button>
+							</li>-->
+	<!--						<li>
+								<button id="tb_export" type="button">
+									<i class="si si-cloud-download" style="color: white;" title="导出"></i>
+								</button>
+							</li>-->
+<!--							<li>
+								<button id="tb-import-offset" type="button">
+									<i class="fa fa-balance-scale" style="color: white;" title="抵消分录"></i>
+								</button>
+							</li>-->
+<!--							<li>-->
+<!--								<button type="button" data-toggle="block-option"-->
+<!--										data-action="fullscreen_toggle" style="color: white;" title="放大">-->
+<!--								</button>-->
+<!--							</li>-->
+						</ul>
+						<h3 class="block-title"><span id="title_name">合并试算平衡表</span> <span id="title_index"></span></h3>
+					</div>
+					<div class="block-content">
+						<table id="tb_tbcheck" class="table table-bordered table-striped table-hover">
+						</table>
+						<ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" id="tb_type">
+							<li class="active">
+								<a id="cur_tb" href="#tb_tab">
+									<i class="fa fa-file-text-o"> 合并试算平衡表-本期</i>
+								</a>
+							</li>
+							<li>
+								<a id="pre_tb" href="#tb_tab">
+									<i class="fa fa-file-text-o"> 合并试算平衡表-上期</i>
+								</a>
+							</li>
+						</ul>
+						<table id="tb_tab" class="table table-bordered table-striped table-hover">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="tab_tb_options">
+				<div class="block block-themed">
+					<div class="block-header bg-primary">
+						<ul class="block-options">
+							<li>
+								<button type="button" data-dismiss="modal" id="user_tb_change" data-item-index="0">
+									<i class="fa fa-exchange" title="切换"></i>
+								</button>
+							</li>
+							<li>
+								<button id="btn_tb_search" type="button">
+									<i class="fa fa-refresh" style="color: white;" title="刷新"></i>
+								</button>
+							</li>
+							<li>
+								<button id="comsubject_addtotemplate" type="button">
+									<i class="si si-cloud-download" style="color: white;" title="另存为模板"></i>
+								</button>
+							</li>
+							<li>
+								<button type="button" data-dismiss="modal" id="user_tb_add">
+									<i class="fa fa-plus" title="新增"></i>
+								</button>
+							</li>
+							<li>
+								<button type="button" data-dismiss="modal" id="tbSubject_sort">
+									<i class="fa fa-list-ol" title="保存排序"></i>
+								</button>
+							</li>
+<!--							<li>-->
+<!--								<button type="button" data-toggle="block-option"-->
+<!--										data-action="fullscreen_toggle" style="color: white;" title="放大">-->
+<!--								</button>-->
+<!--							</li>-->
+						</ul>
+						<h3 class="block-title">TB科目映射</h3>
+					</div>
+					<div class="block-content">
+						<table id="user_tb_table" class="table table-bordered table-striped table-hover">
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="tab_tb_offset">
+				<div class="block block-themed">
+					<div class="block-header bg-primary">
+						<ul class="block-options">
+							<li>
+								<button id="btn_offset_search" type="button">
+									<i class="fa fa-refresh" style="color: white;" title="刷新"/>
+								</button>
+							</li>
+<!--							<li>-->
+<!--								<button type="button" data-toggle="block-option"-->
+<!--										data-action="fullscreen_toggle" style="color: white;" title="放大">-->
+<!--								</button>-->
+<!--							</li>-->
+						</ul>
+						<h3 class="block-title">抵消明细</h3>
+					</div>
+					<div class="block-content">
+						<table id="tb_offset_table" class="table table-bordered table-striped table-hover">
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="modal fade" id="user_tb_detail" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+		 data-keyboard="false">
+		<div class="modal-dialog modal-md">
+			<div class="modal-content">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<ul class="block-options">
+							<li>
+								<button type="button" data-dismiss="modal">
+									<i class="si si-close"></i>
+								</button>
+							</li>
+						</ul>
+						<h3 class="block-title">添加TB科目</h3>
+					</div>
+				</div>
+				<div class="modal-body">
+					<form class="form-horizontal" id="user_tb_form"></form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+
+<!--抵消汇总文件上传-->
+<!--
+<div class="modal fade" id="modal-import-offset" tabindex="-1"
+	 role="dialog" aria-hidden="true" data-backdrop="static"
+	 data-keyboard="false">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="block block-themed block-transparent remove-margin-b">
+				<div class="block-header bg-info">
+					<ul class="block-options">
+						<li>
+							<button type="button" data-dismiss="modal">
+								<i class="si si-close"></i>
+							</button>
+						</li>
+					</ul>
+					<h3 class="block-title">导入抵消汇总数据</h3>
+				</div>
+			</div>
+			<div class="modal-body" style="height: auto; overflow: visible;">
+				<div class="row">
+					<div class="form-group">
+						<label class="col-xs-12" for="fileinput">抵消汇总</label>
+						<div class="col-xs-12">
+							<input id="fileinput" class="file" type="file" multiple
+								   data-preview-file-type="any">
+							<div id="errorBlock" class="help-block"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-md btn-primary" type="button" id="download-offset-template">
+					<i class="fa fa-download"></i><span>&nbsp;下载模板</span>
+				</button>
+				<button class="btn btn-md btn-primary" type="button" id="import_submit">
+					<i class="si si-cloud-upload"></i><span>&nbsp;导入</span>
+				</button>
+				<button class="btn btn-md btn-warning" type="button" data-dismiss="modal">
+					<i class="fa fa-sign-out"></i><span>&nbsp;关闭</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+-->
+

@@ -1,0 +1,70 @@
+<div class="block block-themed">
+	<div class="block-header bg-primary">
+		<ul class="block-options">
+			<li>
+				<button id="exportGuideTableBtn" type="button" style="display: none;">
+					<i class="si si-cloud-download" title="导出"> </i>
+				</button>
+			</li>
+			<li>
+				<button id="refreshGuideTableBtn" type="button">
+					<i class="fa fa-refresh" title="刷新"></i>
+				</button>
+			</li>
+		</ul>
+		<h3 id="guideTableTitle" class="block-title">导引表</h3>
+	</div>
+	<div class="block-content">
+		<div class="row">
+			<table id="guideTable" class="table table-bordered table-striped table-hover"></table>
+		</div>
+	</div>
+	<!--  模态框（Modal） -->
+	<div class="modal fade" id="tagSetModal" data-backdrop="false" tabindex="-1" role="dialog"
+		 aria-labelledby="projectTagModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" style="width: 400px;border:1px solid #D3D3D3;">
+				<div class="block block-themed block-transparent remove-margin-b">
+					<div class="block-header bg-info">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="block-title" id="tagSetModalLabel">设置标签</h4>
+					</div>
+				</div>
+				<div class="modal-body">
+					<div class="block block-themed">
+						<div class="row">
+							<div class="form-group has-info">
+								<div class="col-sm-8">
+									<div class="form-material">
+										<input class="form-control" type="text" id="customAlias">
+										<label for="customAlias">标签名</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="form-group has-info">
+								<div class="col-sm-8">
+									<div class="form-material">
+										<input class="form-control" type="text" id="aliasPosition" readonly="readonly">
+										<label for="aliasPosition">标签位置</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<input class="form-control" type="hidden" id="aliasValue">
+						<input class="form-control" type="hidden" id="subjectId">
+						<input class="form-control" type="hidden" id="subjectName">
+						<input class="form-control" type="hidden" id="baseSubjectId">
+						<input class="form-control" type="hidden" id="tagType">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary" id="setTagBtn">确定</button>
+				</div>
+			</div><!--  /.modal-content -->
+		</div><!--  /.modal -->
+	</div>
+</div>

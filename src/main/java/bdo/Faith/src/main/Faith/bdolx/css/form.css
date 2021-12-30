@@ -1,0 +1,154 @@
+form[data-vrole=form] .form-material > .form-control[readonly] {
+	border-bottom: 1px dashed #ccc;
+}
+
+.addo-edit-btn {
+	display: inline-block;
+	width: 1%;
+	white-space: nowrap;
+	vertical-align: middle;
+	padding: 6px 12px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1;
+	color: #555;
+	text-align: center;
+	border-color: #e6e6e6;
+	border: none;
+	background-color: transparent;
+	border-radius: 0 !important;
+	transition: all 0.15s ease-out;
+	z-index: 2;
+	top: 0px;
+	position: absolute;
+	right: 0px;
+	cursor: pointer;
+	transform: translateX(-50%) translateY(10%) translateZ(0);
+}
+
+.addo-edit-btn .show {
+	display: inline-block;
+}
+
+.addo-edit-btn i.fa-edit {
+	font-size: 20px;
+}
+
+.combo-caret {
+	top: 0px;
+	right: 0px;
+	position: absolute;
+	cursor: pointer;
+	transform: translateX(0) translateY(300%);
+}
+
+.combo-options-ul {
+	padding: 5px 3px;
+	border: 1px solid #e9e9e9;
+}
+
+.combo-options-ul li {
+	display: block;
+	padding: 3px 3px;
+	cursor: pointer;
+}
+
+.combo-options-ul li:hover {
+	background-color: #e9e9e9;
+}
+
+.block.treecombo {
+	margin-bottom: 0px;
+}
+
+.block.treecombo.top {
+	transform: translateY(-100%);
+	margin-top: 40px;
+}
+
+.treecombo .treecombo-content {
+	padding: 7px 7px;
+	max-height: 212px;
+	overflow-y: auto;
+}
+
+.treecombo .treecombo-content ul.list-group {
+	margin-bottom: 5px;
+}
+
+.treecombo .treecombo-footer .row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.treecombo .treecombo-footer {
+	padding: 0px 0px;
+}
+
+.table.form-table > tbody > tr > td {
+	border-top: 0px solid #f0f0f0
+}
+
+.vm-form {
+
+}
+
+.vm-form,.bdo-form-view {
+	margin-top: 0.3em;
+	max-height: 700px;
+	min-height: 100%;
+	height: 100%;
+	position: relative;
+}
+.vm-form .table.vm-form-tools-bar,
+.bdo-form-view .table.bdo-form-view-tools-bar-wrap{
+	margin-bottom: 0px;
+	top: 1rem;
+	position: relative;
+	z-index: 2050;
+}
+.bdo-form-view .table.bdo-form-view-tools-bar-wrap .table {
+	margin-bottom: 0px;
+}
+.vm-form .vm-form-table-wrapper,
+.bdo-form-view .bdo-form-view-wrap{
+	overflow: auto;
+	overflow-x: hidden;
+	padding-top: 0.5rem;
+}
+.vm-form .vm-form-table-wrapper.vm-form-table-wrapper-tools-bar,
+.bdo-form-view .bdo-form-view-wrap.bdo-form-view-wrap-tools-bar{
+	position: inherit;
+	padding-top: 0.5rem;
+	top: 1rem;
+	bottom: 1rem;
+	z-index: 2000;
+}
+
+.modal .vm-form .table.vm-form-tools-bar,
+.modal .bdo-form-view .table.bdo-form-view-tools-bar-wrap
+{
+	top: -1rem;
+}
+
+.modal .vm-form .vm-form-table-wrapper.vm-form-table-wrapper-tools-bar,
+.modal .modal-body .bdo-form-view .bdo-form-view-wrap.bdo-form-view-wrap-tools-bar {
+	position: inherit;
+	padding-top: 0.5rem;
+	top: -1rem;
+	bottom: 1rem;
+	z-index: 2000;
+}
+
+.bdo-form-view-wrap .bdo-form-view-tools-bar-wrap table td {
+	border-top: none;
+}
+
+.bdo-form-view > .bdo-form-view-tools-bar-wrap > .table > tbody > tr > td,
+.bdo-form-view > .bdo-form-view-wrap > .table > tbody > tr > td {
+	border-top: none;
+}
+
+#postilFormBlock .note-editable {
+	min-height: 300px !important;
+}

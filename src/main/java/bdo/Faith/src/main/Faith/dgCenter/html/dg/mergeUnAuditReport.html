@@ -1,0 +1,163 @@
+<style>
+	.block-opt-refresh-i {
+		opacity: .25;
+		color: rgb(100, 100, 100);
+		position: absolute;
+	}
+	
+	.tab_temp > .block > .nav-tabs > li.active > a,
+	.tab_temp > .block > .nav-tabs > li.active > a:hover,
+	.tab_temp > .block > .nav-tabs > li.active > a:focus {
+		color: black;
+		background-color: white;
+	}
+	
+	.width-jyx {
+		min-width: 370px;
+		max-width: 370px;
+		word-break: keep-all;
+		white-space: nowrap;;
+	}
+	
+	.width-je {
+		/*min-width: 120px;*/
+		/*max-width: 120px;*/
+		word-break: keep-all;
+		white-space: nowrap;
+	}
+	
+	.width-seq {
+		height: 35px;
+		min-width: 30px;
+		max-width: 30px;
+	}
+	
+	.width-code {
+		min-width: 60px;
+		max-width: 60px;
+	}
+	
+	.width-subject-id {
+		min-width: 100px;
+		max-width: 100px;
+	}
+	
+	.width-subject-name {
+		/*min-width: 200px;*/
+		/*max-width: 200px;*/
+		word-break: keep-all;
+		white-space: nowrap;;
+	}
+	
+	.width-calfun {
+		min-width: 260px;
+		max-width: 260px;
+		word-wrap: break-word;
+	}
+</style>
+<div data-toggle="slimscroll" data-always-visible="false"
+	 data-rail-visible="true" data-rail-color="#777"
+	 data-rail-opacity=".0" data-height="100%">
+	<div class="block">
+		<div class="block-heade">
+			<ul class="nav nav-tabs" data-toggle="tabs" id="tab_unAuditReport">
+				<li id="tab1" class="active">
+					<a href="#tab_unAuditReportser" data-result="report1_type" data-content="1">合并现金流量表</a>
+				</li>
+				<!--				<li id="tab2"><a href="#tab_adjustGather">客户调整汇总</a></li>-->
+				<li id="li_report_offset"><a href="#tab_report_offset">抵消明细</a></li>
+				
+				<li class="pull-right">
+					<ul class="block-options push-10-t push-10-r">
+						<li>
+							<button type="button" data-toggle="block-option"
+									data-action="fullscreen_toggle"></button>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class="block-content tab-content" id="tab_unAuditReport_content" style="padding-bottom: 20px">
+			<div class="tab-pane active" id="tab_unAuditReportser">
+				<div class="block block-themed" id="tab_head_rpt">
+					<div class="block-header bg-primary">
+						<div style="height:18px;">
+							<h3 class="block-title" style="float:left;">
+								<span id="unReportName">合并现金流量表</span>
+								<span id="unReportIndex"></span>
+							</h3>
+							<ul class="block-options">
+								<li>
+									<button id="rpt_search" type="button">
+										<i class="fa fa-refresh" style="color: white;" title="刷新"/>
+									</button>
+								</li>
+			<!--					<li>
+									<button id="rpt_create" type="button">
+										<i class="fa fa-table" style="color: white;" title="生成现金流量表"/>
+									</button>
+								</li>-->
+<!--								<li>
+									<button id="cash_offset"  type="button">
+										<i class="fa fa-balance-scale" style="color: white;" title="抵消分录"></i>
+									</button>
+								</li>-->
+							</ul>
+						</div>
+					</div>
+				
+				</div>
+				<div class="tab_temp">
+					<div class="block" style="margin: 10px 0px -20px 0px">
+						<ul class="nav nav-tabs nav-tabs-alt" data-toggle="tabs" id="report1_type">
+							<li class="active">
+								<a href="#xj_report1" data-result="xj_report_table_1" data-content="1">
+									<i class="fa fa-file-text-o"> 合并现金流量表-本期</i>
+								</a>
+							</li>
+							<li>
+								<a href="#xj_report2" data-result="xj_report_table_2" data-content="3">
+									<i class="fa fa-file-text-o"> 合并现金流量表-上期</i>
+								</a>
+							</li>
+						
+						</ul>
+						<div class="block-content tab-content" id="four_report">
+							<div class="tab-pane fade in active" id="xj_report1" data-result="3">
+								<table id="xj_report_table_1" class="table table-bordered table-striped table-hover"></table>
+							</div>
+							<div class="tab-pane fade" id="xj_report2" data-result="4">
+								<table id="xj_report_table_2" class="table table-bordered table-striped"></table>
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="tab-pane" id="tab_report_offset">
+				<div class="block block-themed">
+					<div class="block-header bg-primary">
+						<ul class="block-options">
+							<li>
+								<button id="btn_rpt_offset_search" type="button">
+									<i class="fa fa-refresh" style="color: white;" title="刷新"/>
+								</button>
+							</li>
+<!--							<li>
+								<button type="button" data-toggle="block-option"
+										data-action="fullscreen_toggle" style="color: white;" title="放大">
+								</button>
+							</li>-->
+						</ul>
+						<h3 class="block-title">抵消明细</h3>
+					</div>
+					<div class="block-content">
+						<table id="report_offset_table" class="table table-bordered table-striped table-hover">
+						</table>
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	</div>
+</div>
